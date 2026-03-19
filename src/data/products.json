@@ -1,0 +1,192 @@
+[
+  {
+    "name": "Curly Wondertip – Crystal Clear",
+    "price": "8.98",
+    "category": "Glasfilter",
+    "series": "Curly Wondertip",
+    "description": "Wiederverwendbar! Nur 8mm Durchmesser, perfekt für smoothes Rauchen. 8mm x 30mm, 7 Löcher, Handgefertigt.",
+    "image": "/products/cannaworlds-curly-wondertip-crystalclear.jpg",
+    "color": "#E8E8E8",
+    "badge": null
+  },
+  {
+    "name": "Curly Wondertip – Blue",
+    "price": "8.98",
+    "category": "Glasfilter",
+    "series": "Curly Wondertip",
+    "description": "Spiralförmiger Glasfilter in tiefem Blau. Premium-Borosilikatglas, wiederverwendbar.",
+    "image": "/products/cannaworlds-curly-wondertip-blue.jpg",
+    "color": "#3B82F6",
+    "badge": null
+  },
+  {
+    "name": "Curly Wondertip – Green",
+    "price": "8.98",
+    "category": "Glasfilter",
+    "series": "Curly Wondertip",
+    "description": "Spiralförmiger Glasfilter in frischem Grün. Premium-Borosilikatglas, wiederverwendbar.",
+    "image": "/products/cannaworlds-curly-wondertip-green.jpg",
+    "color": "#22C55E",
+    "badge": null
+  },
+  {
+    "name": "Curly Wondertip – Grey",
+    "price": "8.98",
+    "category": "Glasfilter",
+    "series": "Curly Wondertip",
+    "description": "Spiralförmiger Glasfilter in elegantem Grau. Premium-Borosilikatglas, wiederverwendbar.",
+    "image": "/products/cannaworlds-curly-wondertip-grey.jpg",
+    "color": "#6B7280",
+    "badge": null
+  },
+  {
+    "name": "Curly Wondertip – Petrol",
+    "price": "8.98",
+    "category": "Glasfilter",
+    "series": "Curly Wondertip",
+    "description": "Spiralförmiger Glasfilter in dunklem Petrol. Premium-Borosilikatglas, wiederverwendbar.",
+    "image": "/products/cannaworlds-curly-wondertip-petrol.jpg",
+    "color": "#0E7490",
+    "badge": null
+  },
+  {
+    "name": "Curly Wondertip – Illumination",
+    "price": "9.98",
+    "category": "Glasfilter",
+    "series": "Curly Wondertip",
+    "description": "Glow-in-the-Dark Edition! Leuchtet im Dunkeln. Phosphoreszierende Beschichtung auf Borosilikatglas.",
+    "image": "/products/cannaworlds-curly-wondertip-illumination.jpg",
+    "color": "#A3E635",
+    "badge": "Glow"
+  },
+  {
+    "name": "Special Twister – Black",
+    "price": "9.98",
+    "category": "Glasfilter",
+    "series": "Special Twister",
+    "description": "Gedrehter Glasfilter in elegantem Schwarz. Maximale Kühlung durch Spiraldesign.",
+    "image": "/products/cannaworlds-special-twister-black.jpg",
+    "color": "#1F2937",
+    "badge": null
+  },
+  {
+    "name": "Special Twister – Dark Blue",
+    "price": "9.98",
+    "category": "Glasfilter",
+    "series": "Special Twister",
+    "description": "Gedrehter Glasfilter in dunklem Blau. Premium-Spiraldesign für maximale Kühlung.",
+    "image": "/products/cannaworlds-special-twister-tip-dark-blue.jpg",
+    "color": "#1E3A5F",
+    "badge": null
+  },
+  {
+    "name": "Special Twister – Light Blue",
+    "price": "9.98",
+    "category": "Glasfilter",
+    "series": "Special Twister",
+    "description": "Gedrehter Glasfilter in hellem Blau. Premium-Spiraldesign für maximale Kühlung.",
+    "image": "/products/cannaworlds-special-twister-tip-light-blue.jpg",
+    "color": "#38BDF8",
+    "badge": null
+  },
+  {
+    "name": "Unique – Arctic Vibe",
+    "price": "12.98",
+    "category": "Glasfilter",
+    "series": "Unique Collection",
+    "description": "Exklusive Arctic-Optik. Jedes Stück ein Unikat aus handgefertigtem Borosilikatglas.",
+    "image": "/products/cannaworlds-unique-arctic-vibe.jpg",
+    "color": "#67E8F9",
+    "badge": "Unique"
+  },
+  {
+    "name": "Unique – Celest Pure",
+    "price": "12.98",
+    "category": "Glasfilter",
+    "series": "Unique Collection",
+    "description": "Himmlisch klares Design. Jedes Stück ein Unikat aus handgefertigtem Borosilikatglas.",
+    "image": "/products/cannaworlds-unique-celest-pure.jpg",
+    "color": "#C4B5FD",
+    "badge": "Unique"
+  },
+  {
+    "name": "Unique – Frozen Halo",
+    "price": "12.98",
+    "category": "Glasfilter",
+    "series": "Unique Collection",
+    "description": "Gefrosteter Halo-Effekt. Jedes Stück ein Unikat aus handgefertigtem Borosilikatglas.",
+    "image": "/products/cannaworlds-unique-frozen-halo.jpg",
+    "color": "#E0F2FE",
+    "badge": "Unique"
+  },
+  {
+    "name": "Unique – Nova Flux",
+    "price": "12.98",
+    "category": "Glasfilter",
+    "series": "Unique Collection",
+    "description": "Kosmischer Nova-Effekt. Jedes Stück ein Unikat aus handgefertigtem Borosilikatglas.",
+    "image": "/products/cannaworlds-unique-nova-flux.jpg",
+    "color": "#F472B6",
+    "badge": "Unique"
+  },
+  {
+    "name": "Unique – Prismora (Glitter Infused)",
+    "price": "14.98",
+    "category": "Glasfilter",
+    "series": "Unique Collection",
+    "description": "Glitter-infundiertes Prisma-Design. Funkelt im Licht. Jedes Stück ein Unikat.",
+    "image": "/products/cannaworlds-unique-prismora-glitter-infused.jpg",
+    "color": "#F59E0B",
+    "badge": "Limited"
+  },
+  {
+    "name": "Unique – Red & Black",
+    "price": "12.98",
+    "category": "Glasfilter",
+    "series": "Unique Collection",
+    "description": "Kräftiges Rot auf Schwarz. Jedes Stück ein Unikat aus handgefertigtem Borosilikatglas.",
+    "image": "/products/cannaworlds-unique-red-and-black.jpg",
+    "color": "#EF4444",
+    "badge": "Unique"
+  },
+  {
+    "name": "Unique – Triolux",
+    "price": "12.98",
+    "category": "Glasfilter",
+    "series": "Unique Collection",
+    "description": "Dreifarbiger Lux-Effekt. Jedes Stück ein Unikat aus handgefertigtem Borosilikatglas.",
+    "image": "/products/cannaworlds-unique-triolux.jpg",
+    "color": "#818CF8",
+    "badge": "Unique"
+  },
+  {
+    "name": "Everybody's Darling – The People's Tip",
+    "price": "6.98",
+    "category": "Glasfilter",
+    "series": "Classic",
+    "description": "Der Volksfilter. Klassisch, zuverlässig, für jeden Tag. Premium-Borosilikatglas.",
+    "image": "/products/cannaworld-everybodys-darling-the-peoples-tip.jpg",
+    "color": "#22C55E",
+    "badge": "Bestseller"
+  },
+  {
+    "name": "Tip Kombo – Curly Wondertip 3er Set",
+    "price": "21.99",
+    "category": "Glasfilter",
+    "series": "Kombo",
+    "description": "3er Set: Crystal Clear + Green + Blue. Spare beim Bundle!",
+    "image": "/products/tip-kombo-cannaworld-curly-wondertip-crystalclear-green-blue.jpg",
+    "color": "#22C55E",
+    "badge": "Bundle"
+  },
+  {
+    "name": "Tip Kombo – Special Twister 3er Set",
+    "price": "24.99",
+    "category": "Glasfilter",
+    "series": "Kombo",
+    "description": "3 Special Twister Tips nach Wahl. Wähle deine Lieblingsfarben!",
+    "image": "/products/tip-kombo-special-twister-tip-3-of-your-choice.jpg",
+    "color": "#818CF8",
+    "badge": "Bundle"
+  }
+]
