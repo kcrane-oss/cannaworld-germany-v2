@@ -40,9 +40,15 @@ import {
   Warehouse,
   X,
 } from "lucide-react";
-import { supabase } from "./integrations/supabase/client";
 
 const logo = "/cannaworld-logo-new.webp";
+
+type SupabaseClient = typeof import("./integrations/supabase/client")["supabase"];
+
+async function loadSupabase(): Promise<SupabaseClient> {
+  const module = await import("./integrations/supabase/client");
+  return module.supabase;
+} 
 
 const stats = [
   ["DE", "B2B Intake"],
@@ -502,13 +508,20 @@ function LoginPage() {
     event.preventDefault();
     setLoading(true);
     setError(null);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    setLoading(false);
-    if (error) {
-      setError(error.message);
-      return;
+    try {
+      const supabase = await loadSupabase();
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      setLoading(false);
+      if (error) {
+        setError(error.message);
+        return;
+      }
+      navigate(from, { replace: true });
+    } catch (error) {
+      setLoading(false);
+      setError("Login ist noch nicht konfiguriert. Bitte Zugang manuell über CannaWorld freischalten lassen.");
+      console.error("Supabase login unavailable", error);
     }
-    navigate(from, { replace: true });
   }
 
   return (
@@ -560,16 +573,25 @@ function ProtectedDashboard() {
 
   useEffect(() => {
     let mounted = true;
-    supabase.auth.getSession().then(({ data }) => {
-      if (mounted) setAllowed(Boolean(data.session));
-    });
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (mounted) setAllowed(Boolean(session));
-    });
+    let unsubscribe: (() => void) | undefined;
+    loadSupabase()
+      .then((supabase) => {
+        supabase.auth.getSession().then(({ data }) => {
+          if (mounted) setAllowed(Boolean(data.session));
+        });
+        const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+          if (mounted) setAllowed(Boolean(session));
+        });
+        unsubscribe = () => listener.subscription.unsubscribe();
+      })
+      .catch((error) => {
+        console.error("Supabase auth unavailable", error);
+        if (mounted) setAllowed(false);
+      });
     return () => {
       mounted = false;
-      listener.subscription.unsubscribe();
-    };
+      unsubscribe?.();
+    }; 
   }, []);
 
   if (allowed === null) {
@@ -589,8 +611,12 @@ function DashboardLayout() {
   const [open, setOpen] = useState(false);
 
   async function handleSignOut() {
-    await supabase.auth.signOut();
-    window.location.href = "/login";
+    try {
+      const supabase = await loadSupabase();
+      await supabase.auth.signOut();
+    } finally {
+      window.location.href = "/login";
+    }
   }
 
   return (
