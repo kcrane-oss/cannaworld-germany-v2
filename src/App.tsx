@@ -50,6 +50,13 @@ async function loadSupabase(): Promise<SupabaseClient> {
   return module.supabase;
 } 
 
+const networkLinks = [
+  ["Gateway", "https://cannaworld-thailand.com"],
+  ["Europe", "https://cannaworld-europe.com"],
+  ["Marketplace", "https://cannaworld-marketplace.com"],
+  ["AICert", "https://gmp-aicert.com"],
+] as const;
+
 const stats = [
   ["DE", "B2B Intake"],
   ["EU-GMP", "Dokumentenpfad"],
@@ -292,11 +299,14 @@ function LandingPage() {
           <Link to="/" className="flex items-center gap-3">
             <img src={logo} alt="CannaWorld" className="h-12 w-auto object-contain" />
           </Link>
-          <div className="hidden items-center gap-8 text-sm font-medium text-white/60 md:flex">
+          <div className="hidden items-center gap-5 text-sm font-medium text-white/60 md:flex">
             <a href="#proof" className="transition hover:text-white">Proof</a>
             <a href="#dashboard-preview" className="transition hover:text-white">Dashboard</a>
             <a href="#prozess" className="transition hover:text-white">Prozess</a>
-            <a href="#kontakt" className="transition hover:text-white">Kontakt</a>
+            <div className="h-5 w-px bg-white/10" />
+            {networkLinks.map(([label, href]) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="text-xs transition hover:text-cyan-200">{label}</a>
+            ))}
           </div>
           <Link to="/login" className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-5 py-2.5 text-sm font-semibold text-cyan-200 transition hover:border-cyan-300/70 hover:bg-cyan-400/20">
             Partner Login
