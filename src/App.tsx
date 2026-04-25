@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import {
   BrowserRouter,
   Link,
@@ -7,6 +7,8 @@ import {
   Outlet,
   Route,
   Routes,
+  useLocation,
+  useNavigate,
 } from "react-router-dom";
 import {
   ArrowRight,
@@ -38,6 +40,7 @@ import {
   Warehouse,
   X,
 } from "lucide-react";
+import { supabase } from "./integrations/supabase/client";
 
 const logo = "/cannaworld-logo-new.webp";
 
@@ -485,8 +488,109 @@ function GatewayServicesPreview() {
   );
 }
 
+function LoginPage() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const from = (location.state as { from?: { pathname?: string } } | null)?.from?.pathname || "/dashboard";
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setLoading(true);
+    setError(null);
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    setLoading(false);
+    if (error) {
+      setError(error.message);
+      return;
+    }
+    navigate(from, { replace: true });
+  }
+
+  return (
+    <div className="min-h-screen bg-[#071016] px-5 py-10 text-white">
+      <Link to="/" className="inline-flex items-center gap-3 text-sm font-semibold text-white/60 hover:text-white">
+        <img src={logo} alt="CannaWorld" className="h-8 w-auto" /> Zurück zur Landing
+      </Link>
+      <main className="mx-auto flex min-h-[calc(100vh-7rem)] max-w-md items-center">
+        <form onSubmit={handleSubmit} className="w-full rounded-[2rem] border border-cyan-300/20 bg-white/[0.055] p-7 shadow-[0_0_44px_rgba(34,211,238,0.11)] backdrop-blur-xl">
+          <Badge>Protected Dashboard</Badge>
+          <h1 className="mt-5 text-3xl font-black tracking-tight">CannaWorld Germany Login</h1>
+          <p className="mt-3 text-sm leading-6 text-white/56">Das Dashboard ist nur für qualifizierte B2B-Partner, Import-/QA-Rollen und interne CannaWorld-Operatoren sichtbar.</p>
+          <label className="mt-7 block text-sm font-bold text-white/70">
+            E-Mail
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition placeholder:text-white/30 focus:border-cyan-300/60"
+              placeholder="name@company.com"
+            />
+          </label>
+          <label className="mt-4 block text-sm font-bold text-white/70">
+            Passwort
+            <input
+              type="password"
+              required
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition placeholder:text-white/30 focus:border-cyan-300/60"
+              placeholder="••••••••"
+            />
+          </label>
+          {error && <div className="mt-4 rounded-xl border border-red-300/20 bg-red-400/10 p-3 text-sm text-red-100">{error}</div>}
+          <button disabled={loading} className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-cyan-300 px-5 py-3 font-black text-[#061016] transition hover:bg-cyan-200 disabled:cursor-not-allowed disabled:opacity-60">
+            {loading ? "Prüfe Login…" : "Dashboard öffnen"} <ArrowRight className="h-4 w-4" />
+          </button>
+          <p className="mt-5 text-xs leading-5 text-white/38">Kein Account? Zugang wird manuell nach B2B-Qualifizierung freigeschaltet.</p>
+        </form>
+      </main>
+    </div>
+  );
+}
+
+function ProtectedDashboard() {
+  const location = useLocation();
+  const [allowed, setAllowed] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    supabase.auth.getSession().then(({ data }) => {
+      if (mounted) setAllowed(Boolean(data.session));
+    });
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (mounted) setAllowed(Boolean(session));
+    });
+    return () => {
+      mounted = false;
+      listener.subscription.unsubscribe();
+    };
+  }, []);
+
+  if (allowed === null) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-[#071016] text-sm font-semibold text-cyan-200">
+        Prüfe Dashboard-Zugang…
+      </div>
+    );
+  }
+
+  if (!allowed) return <Navigate to="/login" replace state={{ from: location }} />;
+
+  return <DashboardLayout />;
+}
+
 function DashboardLayout() {
   const [open, setOpen] = useState(false);
+
+  async function handleSignOut() {
+    await supabase.auth.signOut();
+    window.location.href = "/login";
+  }
 
   return (
     <div className="min-h-screen bg-[#071016] text-white">
@@ -533,6 +637,7 @@ function DashboardLayout() {
           </div>
           <div className="ml-auto hidden items-center gap-3 md:flex">
             <Link to="/" className="rounded-xl border border-white/10 px-4 py-2 text-sm font-semibold text-white/70 hover:bg-white/10">Landing</Link>
+            <button onClick={handleSignOut} className="rounded-xl border border-white/10 px-4 py-2 text-sm font-semibold text-white/70 hover:bg-white/10">Logout</button>
             <a href="mailto:info@cannaworld-germany.de?subject=CannaWorld Germany Import-Anfrage" className="rounded-xl bg-cyan-300 px-4 py-2 text-sm font-bold text-[#061016] hover:bg-cyan-200">Import-Anfrage</a>
           </div>
         </header>
@@ -620,7 +725,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/dashboard" element={<DashboardLayout />}>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/dashboard" element={<ProtectedDashboard />}>
           <Route index element={<DashboardModule moduleKey="overview" />} />
           {dashboardNav.slice(1).map((item) => (
             <Route
