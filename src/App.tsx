@@ -1,19 +1,42 @@
+import { useState } from "react";
+import {
+  BrowserRouter,
+  Link,
+  NavLink,
+  Navigate,
+  Outlet,
+  Route,
+  Routes,
+} from "react-router-dom";
 import {
   ArrowRight,
   BadgeCheck,
+  BarChart3,
   Building2,
   CheckCircle2,
   ClipboardCheck,
   Database,
   FileCheck,
+  Fingerprint,
+  FolderOpen,
   Globe2,
+  LayoutDashboard,
   Mail,
+  Menu,
   Network,
+  Package,
   PackageCheck,
+  Scale,
+  Settings,
+  Shield,
   ShieldCheck,
+  ShoppingBag,
   Sparkles,
   Stethoscope,
   Truck,
+  User,
+  Warehouse,
+  X,
 } from "lucide-react";
 
 const logo = "/cannaworld-logo-new.webp";
@@ -57,13 +80,137 @@ const steps = [
   [ClipboardCheck, "Qualifizierung", "Prüfen, ob Apotheke, Großhandel, Importeur oder Herstellbetrieb in den Prozess fällt."],
   [ShieldCheck, "Dokumentenprüfung", "EU-GMP/GDP/GACP, CoA, Batch-Dokumentation, QP-/Release-Pfad einordnen."],
   [PackageCheck, "Supply Matching", "Geeignete geprüfte Lieferpartner und Chargen über das CannaWorld-Ökosystem vorbereiten."],
+] as const;
+
+const dashboardNav = [
+  { key: "overview", label: "Overview", icon: LayoutDashboard, path: "/dashboard" },
+  { key: "marketplace", label: "Marketplace", icon: ShoppingBag, path: "/dashboard/marketplace" },
+  { key: "trade-cases", label: "Trade Cases", icon: FileCheck, path: "/dashboard/trade-cases" },
+  { key: "batches", label: "Batches", icon: Package, path: "/dashboard/batches" },
+  { key: "qp-release", label: "QP Release", icon: ClipboardCheck, path: "/dashboard/qp-release" },
+  { key: "compliance", label: "Compliance", icon: Shield, path: "/dashboard/compliance" },
+  { key: "logistics", label: "Logistics", icon: Truck, path: "/dashboard/logistics" },
+  { key: "suppliers", label: "Suppliers", icon: Building2, path: "/dashboard/suppliers" },
+  { key: "documents", label: "Documents", icon: FolderOpen, path: "/dashboard/documents" },
+  { key: "regulatory", label: "Regulatory", icon: Scale, path: "/dashboard/regulatory" },
+  { key: "warehouse", label: "Warehouse", icon: Warehouse, path: "/dashboard/warehouse" },
+  { key: "audit-passport", label: "Audit Passport", icon: Fingerprint, path: "/dashboard/audit-passport" },
+  { key: "analytics", label: "Analytics", icon: BarChart3, path: "/dashboard/analytics" },
 ];
+
+const moduleData: Record<string, { title: string; eyebrow: string; description: string; stats: string[]; actions: string[] }> = {
+  overview: {
+    eyebrow: "Germany Command Center",
+    title: "Importer Dashboard",
+    description: "Kontrollraum für deutsche Importqualifizierung: Nachfrage, Supply, Dokumente, Auditstatus und regulatorischer Fortschritt in einer Oberfläche.",
+    stats: ["12 aktive Trade Cases", "7 Chargen in Prüfung", "94% Dokumentenabdeckung", "3 QP-Reviews offen"],
+    actions: ["Neue Import-Anfrage anlegen", "Dokumente prüfen", "Compliance-Gap starten"],
+  },
+  marketplace: {
+    eyebrow: "Qualified Supply",
+    title: "Marketplace",
+    description: "Vorgeprüfte internationale Batches, Supplier-Profile und Dokumentenstände für deutsche B2B-Abnehmer.",
+    stats: ["EU-ready Batch Pool", "CoA / Batch Records", "Supplier Trust Score", "Sample Request Flow"],
+    actions: ["Batch anfragen", "Supplier vergleichen", "Sample Request vorbereiten"],
+  },
+  "trade-cases": {
+    eyebrow: "Deal Desk",
+    title: "Trade Cases",
+    description: "Jeder Importvorgang als strukturierter Case mit Rollen, Mengen, Dokumenten, Release-Pfad und Statushistorie.",
+    stats: ["Importer Intake", "QA/QP Status", "Commercial Terms", "Decision Log"],
+    actions: ["Case öffnen", "Milestone setzen", "Stakeholder einladen"],
+  },
+  batches: {
+    eyebrow: "Batch Intelligence",
+    title: "Batches",
+    description: "Chargenübersicht für Potenz, CoA, Stabilität, Verpackung, Herkunft und Release-Fähigkeit.",
+    stats: ["CoA vorhanden", "EU Pharmacopeia Check", "Stability Window", "Batch Traceability"],
+    actions: ["Batch prüfen", "CoA importieren", "Release Risiko bewerten"],
+  },
+  "qp-release": {
+    eyebrow: "Release Control",
+    title: "QP Release",
+    description: "QP-nahe Freigabelogik mit Dokumentenpaket, Abweichungen, Verantwortlichkeiten und finalem Release-Readiness Signal.",
+    stats: ["QP Checklist", "Deviation Flags", "Release Evidence", "Final Sign-off"],
+    actions: ["QP Pack erstellen", "Abweichung markieren", "Freigabe vorbereiten"],
+  },
+  compliance: {
+    eyebrow: "AICert / ShinrAi",
+    title: "Compliance Dashboard",
+    description: "EU-GMP/GDP/GACP-Abdeckung als prüfbare Matrix. Ideal für schnelle Gap-Analyse vor Importgesprächen.",
+    stats: ["GACP Proof", "GDP Chain", "EU-GMP Evidence", "CAPA Status"],
+    actions: ["Pre-Audit starten", "Gap Report exportieren", "CAPA prüfen"],
+  },
+  logistics: {
+    eyebrow: "Thailand → Germany",
+    title: "Logistics",
+    description: "Transportkette, GDP-Anforderungen, Export-/Importdokumente, Temperaturführung und Zollpunkte in einem Flow.",
+    stats: ["GDP Lane", "Temp Control", "Export Docs", "Customs Pack"],
+    actions: ["Lane planen", "Dokumente bündeln", "ETA aktualisieren"],
+  },
+  suppliers: {
+    eyebrow: "Verified Network",
+    title: "Suppliers",
+    description: "Supplier-Profile mit Lizenzstatus, Auditdaten, Cultivation Proof, Batch-Historie und Trust Layer.",
+    stats: ["Supplier Score", "Audit Passport", "License Evidence", "Batch History"],
+    actions: ["Supplier prüfen", "Auditdaten öffnen", "Shortlist bauen"],
+  },
+  documents: {
+    eyebrow: "Document Vault",
+    title: "Documents",
+    description: "Zentrale Ablage für CoA, Batch Records, SOPs, Lizenznachweise, Importdokumente und QP-Pakete.",
+    stats: ["CoA", "Batch Records", "Licenses", "SOP Evidence"],
+    actions: ["Upload starten", "Dokument klassifizieren", "Pack exportieren"],
+  },
+  regulatory: {
+    eyebrow: "German / EU Rules",
+    title: "Regulatory",
+    description: "Regulatorische Checkpoints für Deutschland und EU: Rollen, Verantwortlichkeiten, Nachweise und Entscheidungspunkte.",
+    stats: ["BfArM Path", "AMG/Betäubungsmittel", "GDP Scope", "Import License Fit"],
+    actions: ["Pfad prüfen", "Regulatory Memo erstellen", "Risiko markieren"],
+  },
+  warehouse: {
+    eyebrow: "Inventory Control",
+    title: "Warehouse",
+    description: "Bestands-, Quarantäne- und Release-Status für medizinische Cannabis-Chargen in der Lieferkette.",
+    stats: ["Quarantine", "Released", "Reserved", "Rejected"],
+    actions: ["Bestand ansehen", "Charge reservieren", "Status ändern"],
+  },
+  "audit-passport": {
+    eyebrow: "Proof Layer",
+    title: "Audit Passport",
+    description: "Prüfbarer Vertrauenspass für Supplier, Facility, Batch und Dokumentenstand — anschlussfähig an AICert/ShinrAi.",
+    stats: ["Facility Proof", "Batch Proof", "Document Proof", "Decision Trail"],
+    actions: ["Passport öffnen", "Nachweise prüfen", "PDF vorbereiten"],
+  },
+  analytics: {
+    eyebrow: "Performance Intelligence",
+    title: "Analytics",
+    description: "Pipeline-, Compliance-, Dokumenten- und Supplier-Metriken für schnelle Management-Entscheidungen.",
+    stats: ["Pipeline Value", "Case Velocity", "Gap Density", "Supplier Quality"],
+    actions: ["Report ansehen", "Filter setzen", "Management Snapshot"],
+  },
+  settings: {
+    eyebrow: "Workspace",
+    title: "Settings",
+    description: "Organisation, Rollen, Benachrichtigungen und Integrationen für den deutschen CannaWorld-Arbeitsbereich.",
+    stats: ["Roles", "Notifications", "Integrations", "Language"],
+    actions: ["Rolle ändern", "Benachrichtigung setzen", "Integration prüfen"],
+  },
+  profile: {
+    eyebrow: "Account",
+    title: "Profile",
+    description: "Kontakt-, Rollen- und Organisationsdaten für die deutsche B2B-Qualifizierung.",
+    stats: ["Company", "Role", "License Status", "Contact"],
+    actions: ["Profil aktualisieren", "Rolle bestätigen", "Lizenzstatus ergänzen"],
+  },
+};
 
 function Badge({ children }: { children: React.ReactNode }) {
   return <span className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-1.5 text-xs font-semibold text-cyan-300 shadow-[0_0_24px_rgba(34,211,238,0.12)]">{children}</span>;
 }
 
-export default function App() {
+function LandingPage() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#070b10] text-[#f4f8fb] selection:bg-cyan-400/25">
       <div className="pointer-events-none fixed inset-0 opacity-60">
@@ -73,17 +220,18 @@ export default function App() {
 
       <nav className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#070b10]/78 backdrop-blur-2xl">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 md:px-8">
-          <a href="#top" className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3">
             <img src={logo} alt="CannaWorld" className="h-12 w-auto object-contain" />
-          </a>
+          </Link>
           <div className="hidden items-center gap-8 text-sm font-medium text-white/60 md:flex">
             <a href="#proof" className="transition hover:text-white">Proof</a>
+            <a href="#dashboard-preview" className="transition hover:text-white">Dashboard</a>
             <a href="#prozess" className="transition hover:text-white">Prozess</a>
             <a href="#kontakt" className="transition hover:text-white">Kontakt</a>
           </div>
-          <a href="mailto:info@cannaworld-germany.de?subject=CannaWorld Germany Import-Anfrage" className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-5 py-2.5 text-sm font-semibold text-cyan-200 transition hover:border-cyan-300/70 hover:bg-cyan-400/20">
-            Anfrage
-          </a>
+          <Link to="/dashboard" className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-5 py-2.5 text-sm font-semibold text-cyan-200 transition hover:border-cyan-300/70 hover:bg-cyan-400/20">
+            Dashboard
+          </Link>
         </div>
       </nav>
 
@@ -108,11 +256,11 @@ export default function App() {
             </div>
 
             <div className="flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
-              <a href="mailto:info@cannaworld-germany.de?subject=CannaWorld Germany Import-Anfrage" className="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-300 px-8 py-4 font-bold text-[#061016] shadow-[0_0_34px_rgba(34,211,238,0.25)] transition hover:-translate-y-0.5 hover:bg-cyan-200">
-                Import-Anfrage stellen <ArrowRight className="h-5 w-5" />
-              </a>
-              <a href="#proof" className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-8 py-4 font-semibold text-white transition hover:border-cyan-300/50 hover:bg-white/10">
-                Proof-of-Trust ansehen
+              <Link to="/dashboard" className="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-300 px-8 py-4 font-bold text-[#061016] shadow-[0_0_34px_rgba(34,211,238,0.25)] transition hover:-translate-y-0.5 hover:bg-cyan-200">
+                Dashboard öffnen <ArrowRight className="h-5 w-5" />
+              </Link>
+              <a href="mailto:info@cannaworld-germany.de?subject=CannaWorld Germany Import-Anfrage" className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-8 py-4 font-semibold text-white transition hover:border-cyan-300/50 hover:bg-white/10">
+                Import-Anfrage stellen
               </a>
             </div>
 
@@ -181,22 +329,39 @@ export default function App() {
           </div>
         </section>
 
-        <section id="prozess" className="relative border-y border-white/10 bg-white/[0.03] py-24">
+        <section id="dashboard-preview" className="relative border-y border-white/10 bg-white/[0.03] py-24">
           <div className="mx-auto max-w-7xl px-5 md:px-8">
             <div className="mx-auto mb-12 max-w-3xl text-center">
-              <Badge>Ablauf</Badge>
-              <h2 className="mt-5 text-3xl font-extrabold tracking-tight md:text-5xl">Vom Erstkontakt zur qualifizierten Importprüfung.</h2>
+              <Badge>Dashboard wie CannaWorld Europe</Badge>
+              <h2 className="mt-5 text-3xl font-extrabold tracking-tight md:text-5xl">Alle Europe-Module jetzt auch für Germany sichtbar.</h2>
+              <p className="mt-4 text-white/58">Marketplace, Trade Cases, Batches, QP Release, Compliance, Logistics, Suppliers, Documents, Regulatory, Warehouse, Audit Passport und Analytics.</p>
             </div>
-            <div className="grid gap-5 md:grid-cols-4">
-              {steps.map(([Icon, title, text], index) => (
-                <div key={String(title)} className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#0b121b]/80 p-6 backdrop-blur">
-                  <div className="absolute right-5 top-4 text-5xl font-black text-cyan-300/10">0{index + 1}</div>
-                  <Icon className="mb-5 h-8 w-8 text-cyan-300" />
-                  <h3 className="font-bold">{String(title)}</h3>
-                  <p className="mt-3 text-sm leading-6 text-white/54">{String(text)}</p>
-                </div>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              {dashboardNav.slice(1).map((item) => (
+                <Link key={item.key} to={item.path} className="group rounded-3xl border border-white/10 bg-[#0b121b]/80 p-5 backdrop-blur transition hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-cyan-300/10">
+                  <item.icon className="mb-4 h-7 w-7 text-cyan-300" />
+                  <div className="font-bold">{item.label}</div>
+                  <div className="mt-2 text-sm leading-6 text-white/48">Zum Germany-Modul öffnen</div>
+                </Link>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section id="prozess" className="relative mx-auto max-w-7xl px-5 py-24 md:px-8">
+          <div className="mx-auto mb-12 max-w-3xl text-center">
+            <Badge>Ablauf</Badge>
+            <h2 className="mt-5 text-3xl font-extrabold tracking-tight md:text-5xl">Vom Erstkontakt zur qualifizierten Importprüfung.</h2>
+          </div>
+          <div className="grid gap-5 md:grid-cols-4">
+            {steps.map(([Icon, title, text], index) => (
+              <div key={title} className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#0b121b]/80 p-6 backdrop-blur">
+                <div className="absolute right-5 top-4 text-5xl font-black text-cyan-300/10">0{index + 1}</div>
+                <Icon className="mb-5 h-8 w-8 text-cyan-300" />
+                <h3 className="font-bold">{title}</h3>
+                <p className="mt-3 text-sm leading-6 text-white/54">{text}</p>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -225,3 +390,154 @@ export default function App() {
     </div>
   );
 }
+
+function DashboardLayout() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="min-h-screen bg-[#071016] text-white">
+      {open && <button aria-label="Close sidebar" className="fixed inset-0 z-40 bg-black/60 lg:hidden" onClick={() => setOpen(false)} />}
+      <aside className={`fixed inset-y-0 left-0 z-50 w-72 border-r border-white/10 bg-[#09131d]/95 backdrop-blur-xl transition-transform lg:translate-x-0 ${open ? "translate-x-0" : "-translate-x-full"}`}>
+        <div className="flex h-20 items-center gap-3 border-b border-white/10 px-5">
+          <img src={logo} alt="CannaWorld" className="h-10 w-auto" />
+          <div className="leading-none">
+            <div className="text-sm font-black tracking-wide">CANNAWORLD</div>
+            <div className="text-[10px] font-bold tracking-[0.28em] text-cyan-300">GERMANY</div>
+          </div>
+          <button className="ml-auto rounded-lg p-2 text-white/60 hover:bg-white/10 lg:hidden" onClick={() => setOpen(false)}>
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+        <nav className="h-[calc(100vh-5rem)] space-y-1 overflow-y-auto p-3">
+          {dashboardNav.map((item) => (
+            <NavLink
+              key={item.key}
+              to={item.path}
+              end={item.path === "/dashboard"}
+              onClick={() => setOpen(false)}
+              className={({ isActive }) =>
+                `flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition ${
+                  isActive ? "bg-cyan-300/15 text-cyan-200 ring-1 ring-cyan-300/20" : "text-white/58 hover:bg-white/7 hover:text-white"
+                }`
+              }
+            >
+              <item.icon className="h-4 w-4 shrink-0" />
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
+      </aside>
+
+      <div className="lg:pl-72">
+        <header className="sticky top-0 z-30 flex h-20 items-center gap-4 border-b border-white/10 bg-[#071016]/82 px-5 backdrop-blur-xl lg:px-8">
+          <button className="rounded-xl border border-white/10 p-2 text-white/70 hover:bg-white/10 lg:hidden" onClick={() => setOpen(true)}>
+            <Menu className="h-5 w-5" />
+          </button>
+          <div>
+            <div className="text-xs font-bold uppercase tracking-[0.24em] text-cyan-300">CannaWorld Germany</div>
+            <div className="text-lg font-bold">B2B Import Command Center</div>
+          </div>
+          <div className="ml-auto hidden items-center gap-3 md:flex">
+            <Link to="/" className="rounded-xl border border-white/10 px-4 py-2 text-sm font-semibold text-white/70 hover:bg-white/10">Landing</Link>
+            <a href="mailto:info@cannaworld-germany.de?subject=CannaWorld Germany Import-Anfrage" className="rounded-xl bg-cyan-300 px-4 py-2 text-sm font-bold text-[#061016] hover:bg-cyan-200">Import-Anfrage</a>
+          </div>
+        </header>
+        <main className="p-5 lg:p-8">
+          <Outlet />
+        </main>
+      </div>
+    </div>
+  );
+}
+
+function DashboardModule({ moduleKey }: { moduleKey: string }) {
+  const data = moduleData[moduleKey] ?? moduleData.overview;
+  const current = dashboardNav.find((item) => item.key === moduleKey) ?? dashboardNav[0];
+  const Icon = current.icon;
+
+  return (
+    <div className="space-y-7">
+      <section className="relative overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-gradient-to-br from-cyan-300/12 via-white/[0.045] to-emerald-300/10 p-6 shadow-[0_0_42px_rgba(34,211,238,0.08)] md:p-8">
+        <div className="absolute right-0 top-0 h-52 w-52 rounded-full bg-cyan-300/10 blur-3xl" />
+        <div className="relative flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-3xl">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">
+              <Icon className="h-4 w-4" /> {data.eyebrow}
+            </div>
+            <h1 className="text-3xl font-black tracking-tight md:text-5xl">{data.title}</h1>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-white/60">{data.description}</p>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-black/20 p-4 text-sm text-white/60">
+            Germany scope · B2B · Compliance-first
+          </div>
+        </div>
+      </section>
+
+      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {data.stats.map((stat, index) => (
+          <div key={stat} className="rounded-3xl border border-white/10 bg-white/[0.045] p-5">
+            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-300 ring-1 ring-cyan-300/20">
+              <span className="text-sm font-black">0{index + 1}</span>
+            </div>
+            <div className="font-bold">{stat}</div>
+            <div className="mt-2 text-sm leading-6 text-white/45">Live-Daten-Anschluss vorbereitet; aktuell als Germany-Control-Surface abgebildet.</div>
+          </div>
+        ))}
+      </section>
+
+      <section className="grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="rounded-3xl border border-white/10 bg-white/[0.045] p-6">
+          <h2 className="text-xl font-bold">Operational Flow</h2>
+          <div className="mt-5 space-y-4">
+            {steps.map(([StepIcon, title, text], index) => (
+              <div key={title} className="flex gap-4 rounded-2xl border border-white/10 bg-black/20 p-4">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-300 ring-1 ring-cyan-300/20">
+                  <StepIcon className="h-5 w-5" />
+                </div>
+                <div>
+                  <div className="text-sm font-bold text-white">{index + 1}. {title}</div>
+                  <div className="mt-1 text-sm leading-6 text-white/50">{text}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="rounded-3xl border border-white/10 bg-white/[0.045] p-6">
+          <h2 className="text-xl font-bold">Quick Actions</h2>
+          <div className="mt-5 space-y-3">
+            {data.actions.map((action) => (
+              <button key={action} className="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-left text-sm font-semibold text-white/72 transition hover:border-cyan-300/30 hover:bg-cyan-300/10 hover:text-white">
+                {action}
+                <ArrowRight className="h-4 w-4 text-cyan-300" />
+              </button>
+            ))}
+          </div>
+          <div className="mt-6 rounded-2xl border border-amber-300/20 bg-amber-300/10 p-4 text-sm leading-6 text-amber-100/80">
+            Modul ist als Germany-Dashboard-Oberfläche integriert. Backend-Transaktionen bleiben bewusst kontrolliert, bis Rollen, Auth und Datenquellen final bestätigt sind.
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route index element={<DashboardModule moduleKey="overview" />} />
+          {dashboardNav.slice(1).map((item) => (
+            <Route key={item.key} path={item.key} element={<DashboardModule moduleKey={item.key} />} />
+          ))}
+          <Route path="settings" element={<DashboardModule moduleKey="settings" />} />
+          <Route path="profile" element={<DashboardModule moduleKey="profile" />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
