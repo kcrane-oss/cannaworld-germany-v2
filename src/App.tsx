@@ -395,9 +395,9 @@ function LandingPage() {
         <section id="dashboard-preview" className="relative border-y border-white/10 bg-white/[0.03] py-24">
           <div className="mx-auto max-w-7xl px-5 md:px-8">
             <div className="mx-auto mb-12 max-w-3xl text-center">
-              <Badge>Dashboard wie CannaWorld Europe</Badge>
-              <h2 className="mt-5 text-3xl font-extrabold tracking-tight md:text-5xl">Alle Europe-Module jetzt auch für Germany sichtbar.</h2>
-              <p className="mt-4 text-white/58">Marketplace, Trade Cases, Batches, QP Release, Compliance, Logistics, Suppliers, Documents, Regulatory, Warehouse, Audit Passport und Analytics.</p>
+              <Badge>Protected Partner Cockpit</Badge>
+              <h2 className="mt-5 text-3xl font-extrabold tracking-tight md:text-5xl">Geschützter B2B-Bereich für deutsche Importfähigkeit.</h2>
+              <p className="mt-4 text-white/58">Die öffentliche Seite qualifiziert Interesse. Das Dashboard bleibt hinter Login: Marketplace, Trade Cases, Batches, QP Release, Compliance, Logistics, Suppliers, Documents, Regulatory, Warehouse, Audit Passport und Analytics für freigeschaltete Partner.</p>
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               {dashboardNav.slice(1).map((item) => (
