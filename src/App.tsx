@@ -58,12 +58,12 @@ export default function App() {
             <span className="font-bold text-lg">Canna<span className="text-accent">World</span> <span className="text-muted text-sm font-normal">Germany</span></span>
           </a>
           <div className="hidden md:flex items-center gap-8 text-sm text-muted">
-            <a href="#glasfilter" className="hover:text-text transition-colors">Glasfilter</a>
             <a href="#import" className="hover:text-text transition-colors">Import Services</a>
+            <a href="#onboarding" className="hover:text-text transition-colors">Onboarding</a>
             <a href="#contact" className="hover:text-text transition-colors">Kontakt</a>
           </div>
-          <a href="#glasfilter" className="px-5 py-2 rounded-xl text-white text-sm font-semibold transition-all hover:scale-[1.03]" style={{ background: 'linear-gradient(135deg, #22C55E, #16A34A)' }}>
-            Shop
+          <a href="#onboarding" className="px-5 py-2 rounded-xl text-white text-sm font-semibold transition-all hover:scale-[1.03]" style={{ background: 'linear-gradient(135deg, #22C55E, #16A34A)' }}>
+            Start Onboarding
           </a>
         </div>
       </nav>
@@ -85,25 +85,25 @@ export default function App() {
                   🇩🇪 Made for Germany
                 </span>
                 <span className="px-3 py-1 rounded-full text-[11px] font-semibold" style={{ background: 'rgba(201,169,110,0.1)', color: '#C9A96E', border: '1px solid rgba(201,169,110,0.2)' }}>
-                  {products.length} Produkte
+                  Enterprise Ready
                 </span>
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.08] tracking-tight mb-6">
-                <span className="block text-text">Premium Glasfilter.</span>
+                <span className="block text-text">Apotheken Netzwerk.</span>
                 <span className="block text-accent">Cannabis Import.</span>
               </h1>
 
               <p className="text-muted text-base md:text-lg max-w-md mb-3 leading-relaxed">
-                Handgefertigte Borosilikat-Glasfilter und professionelle Import-Services für den deutschen Markt.
+                Professionelle Import-Services und direktes Onboarding für den deutschen Apothekenmarkt. EU-GMP & GACP Excellence.
               </p>
               <p className="text-muted/30 text-sm italic mb-8">
                 Von Berlin bis Bangkok — Innovation trifft Compliance.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 mb-10">
-                <a href="#glasfilter" className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-white font-semibold text-sm transition-all hover:scale-[1.03]" style={{ background: 'linear-gradient(135deg, #22C55E, #16A34A)' }}>
-                  Kollektion ansehen <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform"/>
+                <a href="#onboarding" className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-white font-semibold text-sm transition-all hover:scale-[1.03]" style={{ background: 'linear-gradient(135deg, #22C55E, #16A34A)' }}>
+                  Jetzt Onboarding starten <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform"/>
                 </a>
                 <a href="#import" className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-muted hover:text-text transition-all text-sm" style={{ border: '1px solid rgba(255,255,255,0.08)' }}>
                   Import Services
@@ -112,7 +112,7 @@ export default function App() {
 
               <div className="flex gap-6">
                 {[
-                  { icon: <Sparkles size={13}/>, text: 'Handgefertigt' },
+                  { icon: <Sparkles size={13}/>, text: 'Enterprise Modul' },
                   { icon: <Shield size={13}/>, text: 'EU-GMP Partner' },
                   { icon: <Globe size={13}/>, text: 'Thailand → DE' },
                 ].map((b, i) => (
@@ -122,86 +122,7 @@ export default function App() {
                 ))}
               </div>
             </div>
-
-            {/* Right: Product preview grid */}
-            <div className="hidden lg:grid grid-cols-3 gap-3">
-              {products.slice(0, 6).map((p, i) => (
-                <a href="#glasfilter" key={i} className="group rounded-2xl overflow-hidden aspect-square" style={{ background: `${p.color}08`, border: `1px solid ${p.color}12` }}>
-                  <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
-                </a>
-              ))}
-            </div>
           </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════════════
-          GLASFILTER — Real Products with Images
-      ══════════════════════════════════════════════════════════════ */}
-      <section id="glasfilter" className="py-32 border-t border-white/5">
-        <div className="max-w-6xl mx-auto px-4">
-          <Reveal>
-            <div className="text-center mb-10">
-              <p className="text-accent text-xs font-semibold tracking-[0.25em] uppercase mb-4">Glasfilter Kollektion</p>
-              <h2 className="text-4xl md:text-5xl font-semibold tracking-tight">Jeder Zug. Perfektioniert.</h2>
-              <p className="text-muted text-lg mt-4 max-w-lg mx-auto">Premium-Borosilikatglas. Handgefertigt. Wiederverwendbar.</p>
-            </div>
-          </Reveal>
-
-          {/* Series Filter */}
-          <Reveal delay={80}>
-            <div className="flex gap-2 justify-center mb-12 flex-wrap">
-              {SERIES_LIST.map(s => (
-                <button key={s} onClick={() => setFilter(s)}
-                  className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${filter === s ? 'text-dark' : 'text-muted hover:text-text'}`}
-                  style={filter === s
-                    ? { background: 'linear-gradient(135deg, #22C55E, #16A34A)' }
-                    : { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }
-                  }>
-                  {s === 'all' ? `Alle (${products.length})` : `${s} (${products.filter(p => p.series === s).length})`}
-                </button>
-              ))}
-            </div>
-          </Reveal>
-
-          {/* Product Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {filtered.map((p, i) => (
-              <Reveal key={p.name} delay={i * 40}>
-                <div className="group rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(34,197,94,0.1)]" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
-                  {/* Image */}
-                  <div className="relative aspect-square overflow-hidden" style={{ background: `${p.color}06` }}>
-                    <img src={p.image} alt={p.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      loading="lazy"/>
-                    {p.badge && (
-                      <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider text-white"
-                        style={{ background: p.color }}>
-                        {p.badge}
-                      </span>
-                    )}
-                  </div>
-                  {/* Info */}
-                  <div className="p-4">
-                    <div className="text-[10px] text-muted/50 uppercase tracking-wider mb-1">{p.series}</div>
-                    <h3 className="font-semibold text-sm mb-1.5 leading-snug group-hover:text-accent transition-colors">{p.name}</h3>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-accent font-bold text-lg">€{p.price}</span>
-                    </div>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={200}>
-            <div className="text-center mt-14">
-              <a href="mailto:info@cannaworld-germany.de?subject=Glasfilter Bestellung" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-white font-semibold transition-all hover:scale-[1.03]" style={{ background: 'linear-gradient(135deg, #22C55E, #16A34A)' }}>
-                <Package size={16}/> Jetzt bestellen
-              </a>
-              <p className="text-muted/40 text-xs mt-3">B2B & Retail · Versand innerhalb Deutschlands</p>
-            </div>
-          </Reveal>
         </div>
       </section>
 
@@ -282,7 +203,7 @@ export default function App() {
             <Leaf size={32} className="text-accent mx-auto mb-4"/>
             <p className="text-accent text-xs font-semibold tracking-[0.25em] uppercase mb-4">Kontakt</p>
             <h2 className="text-4xl md:text-5xl font-semibold mb-5">Bereit für die nächste Stufe?</h2>
-            <p className="text-muted text-lg mb-10 max-w-xl mx-auto">Ob Glasfilter oder Import-Partnerschaft — schreib uns.</p>
+            <p className="text-muted text-lg mb-10 max-w-xl mx-auto">Starte jetzt dein Onboarding oder kontaktiere uns für Import-Partnerschaften.</p>
             <a href="mailto:info@cannaworld-germany.de?subject=Anfrage"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-white font-semibold transition-all hover:scale-[1.03]" style={{ background: 'linear-gradient(135deg, #22C55E, #16A34A)' }}>
               <Mail size={16}/> info@cannaworld-germany.de
@@ -301,8 +222,8 @@ export default function App() {
           </div>
           <div>© {new Date().getFullYear()} CannaWorld Germany — Berlin · Bangkok</div>
           <div className="flex gap-4">
-            <a href="#glasfilter" className="hover:text-text transition-colors">Glasfilter</a>
             <a href="#import" className="hover:text-text transition-colors">Import</a>
+            <a href="#onboarding" className="hover:text-text transition-colors">Onboarding</a>
             <a href="#contact" className="hover:text-text transition-colors">Kontakt</a>
           </div>
         </div>
