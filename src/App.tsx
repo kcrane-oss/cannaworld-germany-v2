@@ -292,8 +292,8 @@ function LandingPage() {
             <a href="#prozess" className="transition hover:text-white">Prozess</a>
             <a href="#kontakt" className="transition hover:text-white">Kontakt</a>
           </div>
-          <Link to="/dashboard" className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-5 py-2.5 text-sm font-semibold text-cyan-200 transition hover:border-cyan-300/70 hover:bg-cyan-400/20">
-            Dashboard
+          <Link to="/login" className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-5 py-2.5 text-sm font-semibold text-cyan-200 transition hover:border-cyan-300/70 hover:bg-cyan-400/20">
+            Partner Login
           </Link>
         </div>
       </nav>
@@ -319,8 +319,8 @@ function LandingPage() {
             </div>
 
             <div className="flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
-              <Link to="/dashboard" className="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-300 px-8 py-4 font-bold text-[#061016] shadow-[0_0_34px_rgba(34,211,238,0.25)] transition hover:-translate-y-0.5 hover:bg-cyan-200">
-                Dashboard öffnen <ArrowRight className="h-5 w-5" />
+              <Link to="/login" className="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-300 px-8 py-4 font-bold text-[#061016] shadow-[0_0_34px_rgba(34,211,238,0.25)] transition hover:-translate-y-0.5 hover:bg-cyan-200">
+                Partnerzugang öffnen <ArrowRight className="h-5 w-5" />
               </Link>
               <a href="mailto:info@cannaworld-germany.de?subject=CannaWorld Germany Import-Anfrage" className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-8 py-4 font-semibold text-white transition hover:border-cyan-300/50 hover:bg-white/10">
                 Import-Anfrage stellen
@@ -474,10 +474,11 @@ function GatewayServicesPreview() {
             </div>
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {group.items.map(([Icon, title, text]) => (
-                <Link key={title} to="/dashboard/services" className="rounded-2xl border border-white/10 bg-black/20 p-4 transition hover:-translate-y-0.5 hover:border-cyan-300/40 hover:bg-cyan-300/10">
+                <Link key={title} to="/login" className="rounded-2xl border border-white/10 bg-black/20 p-4 transition hover:-translate-y-0.5 hover:border-cyan-300/40 hover:bg-cyan-300/10">
                   <Icon className="mb-3 h-6 w-6 text-cyan-300" />
                   <div className="font-bold">{title}</div>
                   <div className="mt-2 text-sm leading-6 text-white/52">{text}</div>
+                  <div className="mt-4 text-xs font-bold uppercase tracking-[0.18em] text-cyan-300/75">Partner Login erforderlich</div>
                 </Link>
               ))}
             </div>
@@ -546,7 +547,7 @@ function LoginPage() {
           <button disabled={loading} className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-cyan-300 px-5 py-3 font-black text-[#061016] transition hover:bg-cyan-200 disabled:cursor-not-allowed disabled:opacity-60">
             {loading ? "Prüfe Login…" : "Dashboard öffnen"} <ArrowRight className="h-4 w-4" />
           </button>
-          <p className="mt-5 text-xs leading-5 text-white/38">Kein Account? Zugang wird manuell nach B2B-Qualifizierung freigeschaltet.</p>
+          <p className="mt-5 text-xs leading-5 text-white/38">Kein Account? Zugang wird manuell nach B2B-Qualifizierung freigeschaltet. Sensible Supplier-, Batch-, Dokumenten- und Trade-Case-Daten bleiben geschützt.</p>
         </form>
       </main>
     </div>
