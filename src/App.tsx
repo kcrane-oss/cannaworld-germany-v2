@@ -270,6 +270,11 @@ export default function App() {
       {/* ══════════════════════════════════════════════════════════════
           CONTACT
       ══════════════════════════════════════════════════════════════ */}
+      <section id="onboarding" className="py-20">
+        <div className="max-w-4xl mx-auto px-4">
+          <RoleOnboardingWizard />
+        </div>
+      </section>
       <section id="contact" className="py-32 border-t border-white/5" style={{ background: 'rgba(34,197,94,0.015)' }}>
         <div className="max-w-3xl mx-auto px-4 text-center">
           <Reveal>
