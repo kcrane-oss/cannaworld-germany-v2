@@ -1,232 +1,226 @@
-import { useState, useEffect, useRef } from 'react';
 import {
-  Leaf, Shield, Truck, FileCheck, FlaskConical, Building2,
-  ArrowRight, Mail, Globe, Sparkles, Package
-} from 'lucide-react';
-import { RoleOnboardingWizard } from './components/onboarding/RoleOnboardingWizard';
-import products from './data/products.json';
+  ArrowRight,
+  BadgeCheck,
+  Building2,
+  CheckCircle2,
+  ClipboardCheck,
+  Database,
+  FileCheck,
+  Globe2,
+  Mail,
+  Network,
+  PackageCheck,
+  ShieldCheck,
+  Sparkles,
+  Stethoscope,
+  Truck,
+} from "lucide-react";
 
-function Reveal({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [vis, setVis] = useState(false);
-  useEffect(() => {
-    const el = ref.current; if (!el) return;
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVis(true); obs.disconnect(); } }, { threshold: 0.05 });
-    obs.observe(el); return () => obs.disconnect();
-  }, []);
-  return (
-    <div ref={ref} className={className} style={{
-      opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateY(32px)',
-      transition: `opacity 0.8s ease ${delay}ms, transform 0.8s cubic-bezier(.16,1,.3,1) ${delay}ms`
-    }}>{children}</div>
-  );
-}
+const logo = "/cannaworld-logo-new.webp";
 
-type Series = 'all' | string;
-
-const IMPORT_SERVICES = [
-  { icon: <Shield size={22}/>, title: 'EU-GMP Zertifizierung', desc: 'Kompletter GMP-Zertifizierungsprozess — AI-gestützt über unsere AICert-Plattform.', color: '#22C55E' },
-  { icon: <Leaf size={22}/>, title: 'GACP Compliance', desc: 'Qualifizierung thailändischer Anbauflächen nach EU-Standards.', color: '#4ADE80' },
-  { icon: <FlaskConical size={22}/>, title: 'Laboranalyse & QC', desc: 'EU-Pharmakopöe konforme Prüfung: Potenz, Pestizide, Schwermetalle.', color: '#818CF8' },
-  { icon: <FileCheck size={22}/>, title: 'Export-Dokumentation', desc: 'Thai FDA Exportlizenz, Phytosanitärzertifikate, Zolldokumentation.', color: '#F59E0B' },
-  { icon: <Truck size={22}/>, title: 'Import & Logistik', desc: 'BfArM-Importgenehmigungen, EU-Zollabwicklung, GDP-Transport.', color: '#06B6D4' },
-  { icon: <Building2 size={22}/>, title: 'Distribution', desc: 'QP-Chargenfreigabe, Marktzulassung, Apotheken-Vertriebsnetzwerk.', color: '#EC4899' },
+const stats = [
+  ["DE", "B2B Intake"],
+  ["EU-GMP", "Dokumentenpfad"],
+  ["GDP", "Lieferkette"],
+  ["GACP", "Cultivation Proof"],
+  ["ShinrAi", "Trust Layer"],
+  ["AICert", "Pre-Audit"],
 ];
 
-const SERIES_LIST = ['all', ...Array.from(new Set(products.map(p => p.series)))];
+const groups = [
+  "Apotheken mit Import- oder Versorgungsinteresse",
+  "Pharma-Großhändler und GDP-Strukturen",
+  "Cannabis-Importeure und Herstellbetriebe",
+  "Einkauf, QA/QP, Regulatory Affairs und Geschäftsführung",
+];
+
+const cards = [
+  {
+    icon: Building2,
+    title: "Deutscher Intake",
+    text: "Rolle, Lizenzstatus, Bedarf und regulatorischer Pfad werden strukturiert vorqualifiziert.",
+  },
+  {
+    icon: FileCheck,
+    title: "Dokumente zuerst",
+    text: "CoA, Batch Records, EU-GMP/GDP/GACP-Nachweise und Release-Pfad vor kommerzieller Diskussion.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Proof of Trust",
+    text: "AICert, ShinrAi und Auditdaten bilden die prüfbare Vertrauensebene zwischen Supply und deutschem Markt.",
+  },
+];
+
+const steps = [
+  [Mail, "Import-Anfrage", "Bedarf, Rolle, Zielmenge, Zeithorizont und Ausgangslage erfassen."],
+  [ClipboardCheck, "Qualifizierung", "Prüfen, ob Apotheke, Großhandel, Importeur oder Herstellbetrieb in den Prozess fällt."],
+  [ShieldCheck, "Dokumentenprüfung", "EU-GMP/GDP/GACP, CoA, Batch-Dokumentation, QP-/Release-Pfad einordnen."],
+  [PackageCheck, "Supply Matching", "Geeignete geprüfte Lieferpartner und Chargen über das CannaWorld-Ökosystem vorbereiten."],
+];
+
+function Badge({ children }: { children: React.ReactNode }) {
+  return <span className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-1.5 text-xs font-semibold text-cyan-300 shadow-[0_0_24px_rgba(34,211,238,0.12)]">{children}</span>;
+}
 
 export default function App() {
-  const [scrolled, setScrolled] = useState(false);
-  const [filter, setFilter] = useState<Series>('all');
-
-  useEffect(() => {
-    const h = () => setScrolled(window.scrollY > 60);
-    window.addEventListener('scroll', h, { passive: true });
-    return () => window.removeEventListener('scroll', h);
-  }, []);
-
-  const filtered = filter === 'all' ? products : products.filter(p => p.series === filter);
-
   return (
-    <div className="min-h-screen bg-dark text-text overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden bg-[#070b10] text-[#f4f8fb] selection:bg-cyan-400/25">
+      <div className="pointer-events-none fixed inset-0 opacity-60">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.18),transparent_34%),radial-gradient(circle_at_75%_10%,rgba(34,197,94,0.14),transparent_28%),linear-gradient(180deg,#070b10,#091018_48%,#070b10)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_80%)]" />
+      </div>
 
-      {/* ── NAV ── */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass' : ''}`}>
-        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2">
-            <Leaf size={20} className="text-accent"/>
-            <span className="font-bold text-lg">Canna<span className="text-accent">World</span> <span className="text-muted text-sm font-normal">Germany</span></span>
+      <nav className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#070b10]/78 backdrop-blur-2xl">
+        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 md:px-8">
+          <a href="#top" className="flex items-center gap-3">
+            <img src={logo} alt="CannaWorld" className="h-12 w-auto object-contain" />
           </a>
-          <div className="hidden md:flex items-center gap-8 text-sm text-muted">
-            <a href="#import" className="hover:text-text transition-colors">Import Services</a>
-            <a href="#onboarding" className="hover:text-text transition-colors">Onboarding</a>
-            <a href="#contact" className="hover:text-text transition-colors">Kontakt</a>
+          <div className="hidden items-center gap-8 text-sm font-medium text-white/60 md:flex">
+            <a href="#proof" className="transition hover:text-white">Proof</a>
+            <a href="#prozess" className="transition hover:text-white">Prozess</a>
+            <a href="#kontakt" className="transition hover:text-white">Kontakt</a>
           </div>
-          <a href="#onboarding" className="px-5 py-2 rounded-xl text-white text-sm font-semibold transition-all hover:scale-[1.03]" style={{ background: 'linear-gradient(135deg, #22C55E, #16A34A)' }}>
-            Start Onboarding
+          <a href="mailto:info@cannaworld-germany.de?subject=CannaWorld Germany Import-Anfrage" className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-5 py-2.5 text-sm font-semibold text-cyan-200 transition hover:border-cyan-300/70 hover:bg-cyan-400/20">
+            Anfrage
           </a>
         </div>
       </nav>
 
-      {/* ══════════════════════════════════════════════════════════════
-          HERO
-      ══════════════════════════════════════════════════════════════ */}
-      <section className="relative min-h-screen overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] rounded-full opacity-10 blur-[120px]" style={{ background: '#22C55E' }}/>
-          <div className="absolute bottom-1/3 left-1/3 w-[300px] h-[300px] rounded-full opacity-6 blur-[100px]" style={{ background: '#4ADE80' }}/>
-        </div>
+      <main id="top" className="relative">
+        <section className="relative mx-auto grid min-h-[92vh] max-w-7xl items-center gap-14 px-5 pb-20 pt-32 md:px-8 lg:grid-cols-[1.04fr_0.96fr]">
+          <div className="space-y-8 text-center lg:text-left">
+            <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
+              <Badge>CannaWorld Germany</Badge>
+              <span className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-1.5 text-xs font-semibold text-emerald-300">B2B · Medizinisch · Reguliert</span>
+            </div>
 
-        <div className="max-w-6xl mx-auto px-4 pt-28 md:pt-36 pb-20 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[70vh]">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <span className="px-3 py-1 rounded-full text-[11px] font-semibold" style={{ background: 'rgba(34,197,94,0.1)', color: '#4ADE80', border: '1px solid rgba(34,197,94,0.2)' }}>
-                  🇩🇪 Made for Germany
+            <div className="space-y-5">
+              <h1 className="text-4xl font-extrabold leading-[0.95] tracking-[-0.045em] md:text-6xl xl:text-7xl">
+                Deutscher Ansprechpartner für
+                <span className="block bg-gradient-to-r from-cyan-300 via-sky-300 to-emerald-300 bg-clip-text text-transparent drop-shadow-[0_0_24px_rgba(34,211,238,0.28)]">
+                  medizinischen Cannabis-Import.
                 </span>
-                <span className="px-3 py-1 rounded-full text-[11px] font-semibold" style={{ background: 'rgba(201,169,110,0.1)', color: '#C9A96E', border: '1px solid rgba(201,169,110,0.2)' }}>
-                  Enterprise Ready
-                </span>
-              </div>
-
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.08] tracking-tight mb-6">
-                <span className="block text-text">Apotheken Netzwerk.</span>
-                <span className="block text-accent">Cannabis Import.</span>
               </h1>
-
-              <p className="text-muted text-base md:text-lg max-w-md mb-3 leading-relaxed">
-                Professionelle Import-Services und direktes Onboarding für den deutschen Apothekenmarkt. EU-GMP & GACP Excellence.
+              <p className="mx-auto max-w-2xl text-lg leading-8 text-white/62 md:text-xl lg:mx-0">
+                Für Apotheken, Großhandel, Importeure und Herstellbetriebe, die geprüfte internationale Supply, belastbare Dokumentation und einen klaren EU-GMP/GDP/GACP-Pfad benötigen.
               </p>
-              <p className="text-muted/30 text-sm italic mb-8">
-                Von Berlin bis Bangkok — Innovation trifft Compliance.
-              </p>
+            </div>
 
-              <div className="flex flex-col sm:flex-row gap-3 mb-10">
-                <a href="#onboarding" className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-white font-semibold text-sm transition-all hover:scale-[1.03]" style={{ background: 'linear-gradient(135deg, #22C55E, #16A34A)' }}>
-                  Jetzt Onboarding starten <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform"/>
-                </a>
-                <a href="#import" className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-muted hover:text-text transition-all text-sm" style={{ border: '1px solid rgba(255,255,255,0.08)' }}>
-                  Import Services
-                </a>
+            <div className="flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
+              <a href="mailto:info@cannaworld-germany.de?subject=CannaWorld Germany Import-Anfrage" className="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-300 px-8 py-4 font-bold text-[#061016] shadow-[0_0_34px_rgba(34,211,238,0.25)] transition hover:-translate-y-0.5 hover:bg-cyan-200">
+                Import-Anfrage stellen <ArrowRight className="h-5 w-5" />
+              </a>
+              <a href="#proof" className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-8 py-4 font-semibold text-white transition hover:border-cyan-300/50 hover:bg-white/10">
+                Proof-of-Trust ansehen
+              </a>
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
+              {[[ShieldCheck, "EU-GMP/GDP Dokumentenpfad"], [Truck, "Import- & Lieferketten-Koordination"], [Globe2, "Thailand → Deutschland/EU"]].map(([Icon, label]) => (
+                <div key={String(label)} className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-white/65">
+                  <Icon className="h-3.5 w-3.5 text-cyan-300" /> {String(label)}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="absolute -inset-8 rounded-[2rem] bg-cyan-400/10 blur-3xl" />
+            <div className="relative overflow-hidden rounded-3xl border border-cyan-300/20 bg-white/[0.055] p-6 shadow-2xl shadow-cyan-500/10 backdrop-blur-xl md:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
+              <div className="mb-8 flex items-center gap-4">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-300 ring-1 ring-cyan-300/25">
+                  <Stethoscope className="h-7 w-7" />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-300">Proof-of-Trust Intake</p>
+                  <h2 className="text-2xl font-bold">Für regulierte Marktteilnehmer</h2>
+                </div>
               </div>
-
-              <div className="flex gap-6">
-                {[
-                  { icon: <Sparkles size={13}/>, text: 'Enterprise Modul' },
-                  { icon: <Shield size={13}/>, text: 'EU-GMP Partner' },
-                  { icon: <Globe size={13}/>, text: 'Thailand → DE' },
-                ].map((b, i) => (
-                  <div key={i} className="flex items-center gap-1.5 text-muted text-xs">
-                    <span className="text-accent">{b.icon}</span>{b.text}
+              <div className="space-y-3">
+                {groups.map((item) => (
+                  <div key={item} className="flex gap-3 rounded-2xl border border-white/10 bg-black/20 p-4">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-300" />
+                    <p className="text-sm leading-6 text-white/68">{item}</p>
                   </div>
                 ))}
               </div>
+              <div className="mt-6 rounded-2xl border border-amber-300/20 bg-amber-300/10 p-4 text-sm leading-6 text-amber-100/85">
+                Keine Abgabe an Endkunden. Keine Sortenwerbung. Keine Therapie- oder Heilversprechen. Reiner B2B-/Compliance-/Import-Intake.
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ══════════════════════════════════════════════════════════════
-          IMPORT SERVICES
-      ══════════════════════════════════════════════════════════════ */}
-      <section id="import" className="py-32 border-t border-white/5" style={{ background: 'rgba(34,197,94,0.015)' }}>
-        <div className="max-w-6xl mx-auto px-4">
-          <Reveal>
-            <div className="text-center mb-6">
-              <p className="text-accent text-xs font-semibold tracking-[0.25em] uppercase mb-4">Import Services</p>
-              <h2 className="text-4xl md:text-5xl font-semibold tracking-tight">Cannabis-Import.<br/>Komplett abgedeckt.</h2>
+        <section className="relative border-y border-white/10 bg-white/[0.035] py-10">
+          <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-5 text-center md:grid-cols-3 lg:grid-cols-6">
+            {stats.map(([value, label]) => (
+              <div key={label}>
+                <div className="text-2xl font-bold text-cyan-300 drop-shadow-[0_0_12px_rgba(34,211,238,0.24)] md:text-3xl">{value}</div>
+                <div className="mt-1 text-sm text-white/45">{label}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="proof" className="relative mx-auto max-w-7xl px-5 py-24 md:px-8">
+          <div className="mx-auto mb-12 max-w-3xl text-center">
+            <Badge>Warum .de?</Badge>
+            <h2 className="mt-5 text-3xl font-extrabold tracking-tight md:text-5xl">Vertrauensanker für deutsche Apotheken und Importeure.</h2>
+            <p className="mt-4 text-white/58">CannaWorld Germany ist die deutsche Eintrittsstelle: klare Ansprechpartner, regulatorische Sprache und saubere Weiterleitung in AICert, Marketplace oder Europe.</p>
+          </div>
+          <div className="grid gap-5 md:grid-cols-3">
+            {cards.map((card) => (
+              <div key={card.title} className="rounded-3xl border border-white/10 bg-white/[0.045] p-7 shadow-[0_0_30px_rgba(34,211,238,0.06)] backdrop-blur transition hover:border-cyan-300/30">
+                <card.icon className="mb-5 h-9 w-9 text-cyan-300" />
+                <h3 className="text-xl font-bold">{card.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-white/56">{card.text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="prozess" className="relative border-y border-white/10 bg-white/[0.03] py-24">
+          <div className="mx-auto max-w-7xl px-5 md:px-8">
+            <div className="mx-auto mb-12 max-w-3xl text-center">
+              <Badge>Ablauf</Badge>
+              <h2 className="mt-5 text-3xl font-extrabold tracking-tight md:text-5xl">Vom Erstkontakt zur qualifizierten Importprüfung.</h2>
             </div>
-          </Reveal>
-          <Reveal delay={80}>
-            <p className="text-center text-muted text-lg max-w-2xl mx-auto mb-20 leading-relaxed">
-              Von der thailändischen Farm bis zur deutschen Apotheke — mit AI-gestützter Compliance.
-            </p>
-          </Reveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {IMPORT_SERVICES.map((s, i) => (
-              <Reveal key={i} delay={i * 60}>
-                <div className="rounded-2xl p-6 h-full transition-all hover:scale-[1.02]" style={{ background: `${s.color}04`, border: `1px solid ${s.color}10` }}>
-                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4" style={{ background: `${s.color}12` }}>
-                    <span style={{ color: s.color }}>{s.icon}</span>
-                  </div>
-                  <h3 className="font-bold text-base mb-2">{s.title}</h3>
-                  <p className="text-muted text-sm leading-relaxed">{s.desc}</p>
+            <div className="grid gap-5 md:grid-cols-4">
+              {steps.map(([Icon, title, text], index) => (
+                <div key={String(title)} className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#0b121b]/80 p-6 backdrop-blur">
+                  <div className="absolute right-5 top-4 text-5xl font-black text-cyan-300/10">0{index + 1}</div>
+                  <Icon className="mb-5 h-8 w-8 text-cyan-300" />
+                  <h3 className="font-bold">{String(title)}</h3>
+                  <p className="mt-3 text-sm leading-6 text-white/54">{String(text)}</p>
                 </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════════════
-          ECOSYSTEM
-      ══════════════════════════════════════════════════════════════ */}
-      <section className="py-24 border-t border-white/5">
-        <div className="max-w-6xl mx-auto px-4">
-          <Reveal>
-            <div className="text-center mb-12">
-              <p className="text-accent text-xs font-semibold tracking-[0.25em] uppercase mb-4">Das Ökosystem</p>
-              <h2 className="text-3xl font-semibold tracking-tight">Teil von etwas Größerem.</h2>
+              ))}
             </div>
-          </Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { name: 'CannaWorld Europe', desc: 'EU-Importinfrastruktur. Farm-to-Pharmacy.', url: 'https://cannaworld-europe.com', color: '#22C55E' },
-              { name: 'GMP-AICert', desc: 'AI-gestützte GMP-Audits und Compliance.', url: 'https://gmp-aicert.com', color: '#818CF8' },
-              { name: 'Marketplace', desc: 'B2B-Marktplatz für verifizierten Handel.', url: 'https://cannaworld-marketplace.com', color: '#F59E0B' },
-            ].map((p, i) => (
-              <Reveal key={i} delay={i * 80}>
-                <a href={p.url} target="_blank" rel="noopener noreferrer" className="group block rounded-2xl p-6 h-full transition-all hover:scale-[1.02]" style={{ background: `${p.color}04`, border: `1px solid ${p.color}10` }}>
-                  <div className="w-3 h-3 rounded-full mb-4" style={{ background: p.color, boxShadow: `0 0 20px ${p.color}40` }}/>
-                  <h3 className="font-bold text-base mb-2 group-hover:text-accent transition-colors">{p.name}</h3>
-                  <p className="text-muted text-sm mb-3">{p.desc}</p>
-                  <span className="text-xs font-semibold flex items-center gap-1" style={{ color: p.color }}>Besuchen <ArrowRight size={12}/></span>
-                </a>
-              </Reveal>
-            ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ══════════════════════════════════════════════════════════════
-          CONTACT
-      ══════════════════════════════════════════════════════════════ */}
-      <section id="onboarding" className="py-20">
-        <div className="max-w-4xl mx-auto px-4">
-          <RoleOnboardingWizard role="farm" />
-        </div>
-      </section>
-      <section id="contact" className="py-32 border-t border-white/5" style={{ background: 'rgba(34,197,94,0.015)' }}>
-        <div className="max-w-3xl mx-auto px-4 text-center">
-          <Reveal>
-            <Leaf size={32} className="text-accent mx-auto mb-4"/>
-            <p className="text-accent text-xs font-semibold tracking-[0.25em] uppercase mb-4">Kontakt</p>
-            <h2 className="text-4xl md:text-5xl font-semibold mb-5">Bereit für die nächste Stufe?</h2>
-            <p className="text-muted text-lg mb-10 max-w-xl mx-auto">Starte jetzt dein Onboarding oder kontaktiere uns für Import-Partnerschaften.</p>
-            <a href="mailto:info@cannaworld-germany.de?subject=Anfrage"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-white font-semibold transition-all hover:scale-[1.03]" style={{ background: 'linear-gradient(135deg, #22C55E, #16A34A)' }}>
-              <Mail size={16}/> info@cannaworld-germany.de
+        <section id="kontakt" className="relative mx-auto max-w-5xl px-5 py-24 text-center md:px-8">
+          <div className="rounded-[2rem] border border-cyan-300/20 bg-white/[0.055] p-8 shadow-[0_0_40px_rgba(34,211,238,0.1)] backdrop-blur-xl md:p-12">
+            <Sparkles className="mx-auto mb-5 h-10 w-10 text-cyan-300" />
+            <h2 className="text-3xl font-extrabold md:text-5xl">Import-Anfrage stellen.</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-white/58">Kurze Qualifizierung für Apotheken, Großhändler, Importeure und QA-/QP-nahe Entscheider mit realem medizinischem Bedarf.</p>
+            <div className="mx-auto mt-8 grid max-w-2xl gap-3 text-left text-sm text-white/62 sm:grid-cols-2">
+              {[[Database, "Geprüfte internationale Supply"], [BadgeCheck, "EU-GMP/GDP/GACP-Dokumentation"], [Network, "Importfähigkeit & Release-Pfad"], [Sparkles, "AICert/ShinrAi Vorprüfung"]].map(([Icon, label]) => (
+                <div key={String(label)} className="flex gap-2 rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <Icon className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" /> {String(label)}
+                </div>
+              ))}
+            </div>
+            <a href="mailto:info@cannaworld-germany.de?subject=CannaWorld Germany Import-Anfrage" className="mt-9 inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-300 px-8 py-4 font-bold text-[#061016] shadow-[0_0_34px_rgba(34,211,238,0.24)] transition hover:bg-cyan-200">
+              info@cannaworld-germany.de <ArrowRight className="h-5 w-5" />
             </a>
-            <p className="text-muted/40 text-sm mt-4">Berlin · Bangkok · Schnelle Antwort garantiert</p>
-          </Reveal>
-        </div>
-      </section>
+          </div>
+        </section>
+      </main>
 
-      {/* ── FOOTER ── */}
-      <footer className="border-t border-white/5 py-10">
-        <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-muted/40 text-xs">
-          <div className="flex items-center gap-2">
-            <Leaf size={14} className="text-accent"/>
-            <span className="font-semibold text-text">Canna<span className="text-accent">World</span> Germany</span>
-          </div>
-          <div>© {new Date().getFullYear()} CannaWorld Germany — Berlin · Bangkok</div>
-          <div className="flex gap-4">
-            <a href="#import" className="hover:text-text transition-colors">Import</a>
-            <a href="#onboarding" className="hover:text-text transition-colors">Onboarding</a>
-            <a href="#contact" className="hover:text-text transition-colors">Kontakt</a>
-          </div>
-        </div>
+      <footer className="relative border-t border-white/10 py-10 text-center text-xs text-white/35">
+        © 2026 CannaWorld Germany · Berlin · Bangkok · B2B Compliance Intake
       </footer>
     </div>
   );
