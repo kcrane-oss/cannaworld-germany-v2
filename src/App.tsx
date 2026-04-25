@@ -95,6 +95,7 @@ const dashboardNav = [
   { key: "regulatory", label: "Regulatory", icon: Scale, path: "/dashboard/regulatory" },
   { key: "warehouse", label: "Warehouse", icon: Warehouse, path: "/dashboard/warehouse" },
   { key: "audit-passport", label: "Audit Passport", icon: Fingerprint, path: "/dashboard/audit-passport" },
+  { key: "services", label: "Gateway Services", icon: Sparkles, path: "/dashboard/services" },
   { key: "analytics", label: "Analytics", icon: BarChart3, path: "/dashboard/analytics" },
 ];
 
@@ -190,6 +191,13 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     stats: ["Pipeline Value", "Case Velocity", "Gap Density", "Supplier Quality"],
     actions: ["Report ansehen", "Filter setzen", "Management Snapshot"],
   },
+  services: {
+    eyebrow: "Gateway Service Transfer",
+    title: "Gateway Services for Germany",
+    description: "Alle Gateway-Angebote logisch auf die deutsche B2B-Rolle übersetzt: Intake, Qualifizierung, Dokumentenprüfung, Trade Matching und Trust Layer.",
+    stats: ["24 Service-Bausteine", "4 Service-Layer", "DE Intake", "Gateway Handoff"],
+    actions: ["Service auswählen", "Import-Fit prüfen", "Gateway-Handoff vorbereiten"],
+  },
   settings: {
     eyebrow: "Workspace",
     title: "Settings",
@@ -205,6 +213,58 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     actions: ["Profil aktualisieren", "Rolle bestätigen", "Lizenzstatus ergänzen"],
   },
 };
+
+
+const serviceGroups = [
+  {
+    title: "Digital Platform",
+    subtitle: "Gateway-Software als deutscher Intake- und Prüfpfad.",
+    items: [
+      [Shield, "Compliance Gateway", "BfArM/GDP/GMP-Fit vor kommerzieller Weiterleitung prüfen."],
+      [Globe2, "Regulatory Gateway", "Deutsche Rollen, Lizenzstatus und Importfähigkeit strukturiert einordnen."],
+      [Package, "Batch Tracking", "Nur dokumentierte, release-nahe Chargen in die deutsche Pipeline lassen."],
+      [Database, "Document Intelligence", "CoA, Batch Records, SOPs und Lizenzen zu buyer-ready Packs bündeln."],
+      [Sparkles, "ShinrAi Risk Scoring", "Supplier-, Facility-, Batch- und Dokumentenrisiken früh markieren."],
+      [FileCheck, "AI Video Audit", "Remote-Facility-Proof als Vorfilter für deutsche Abnehmer."],
+    ],
+  },
+  {
+    title: "Compliance & Advisory",
+    subtitle: "Service-Schicht für Vertrauen, nicht nur Software-Demo.",
+    items: [
+      [ClipboardCheck, "Pre-Audit Gap Analysis", "Schnelle Lückenanalyse bevor Zeit in ungeeignete Supplier fließt."],
+      [ShieldCheck, "QMS / SOP Readiness", "Qualitätssystem und SOP-Reife für deutsche Käufer erklärbar machen."],
+      [BadgeCheck, "Certification Roadmap", "GACP/EU-GMP-nahe Nachweise in einen belastbaren Plan übersetzen."],
+      [Scale, "Regulatory Positioning", "B2B-konforme Claims, Rollen und Marktpfad sauber halten."],
+      [FolderOpen, "Due Diligence Packs", "Supplier-, Facility- und Batch-Dossiers für Entscheider erstellen."],
+      [Fingerprint, "Audit Trail", "ALCOA+, Evidence Chain und Trust Passport als Prüfschicht."],
+    ],
+  },
+  {
+    title: "Trade & Logistics",
+    subtitle: "Von qualifizierter Nachfrage zu qualifizierter Supply.",
+    items: [
+      [Building2, "Supplier Qualification", "Nur vorgeprüfte Farmen, Hersteller und Partner in den DE-Funnel."],
+      [Stethoscope, "Lab / CoA Review", "Potenz, Kontamination, Methodik und Plausibilität verständlich prüfen."],
+      [Truck, "GDP Logistics", "Transport-, Zoll- und Cold-Chain-Readiness für Deutschland abbilden."],
+      [ClipboardCheck, "QP Release Support", "Realistisch einschätzen, ob ein Batch QP-fähig ist."],
+      [Network, "Commercial Matching", "Deutsche Nachfrage mit compliance-gefilterter Supply verbinden."],
+      [Database, "Cross-Platform Sync", "Germany als Frontdoor, Gateway/AICert/Marketplace als Backend-Ökosystem."],
+    ],
+  },
+  {
+    title: "Trust & Intelligence",
+    subtitle: "Proof statt Marketing-Versprechen.",
+    items: [
+      [Fingerprint, "Audit Passport", "Prüfbarer Supplier-/Batch-/Facility-Pass für erste Käuferprüfung."],
+      [User, "Identity / KYC", "Seriöse lizenzierte Teilnehmer von Rauschen trennen."],
+      [FileCheck, "Remote Inspector Toolkit", "Video, Evidenz, Checklisten und Report als Remote-Prüfung."],
+      [BarChart3, "Analytics", "Pipeline, Gap Density und Supplier-Readiness sichtbar machen."],
+      [Warehouse, "Warehouse / Inventory", "Quarantäne, Reservierung, Release und Statuslogik abbilden."],
+      [LayoutDashboard, "Facility Planner", "Plausibilität von Facility-Zonen und Audit-Readiness darstellen."],
+    ],
+  },
+] as const;
 
 function Badge({ children }: { children: React.ReactNode }) {
   return <span className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-1.5 text-xs font-semibold text-cyan-300 shadow-[0_0_24px_rgba(34,211,238,0.12)]">{children}</span>;
@@ -348,6 +408,8 @@ function LandingPage() {
           </div>
         </section>
 
+        <GatewayServicesPreview />
+
         <section id="prozess" className="relative mx-auto max-w-7xl px-5 py-24 md:px-8">
           <div className="mx-auto mb-12 max-w-3xl text-center">
             <Badge>Ablauf</Badge>
@@ -388,6 +450,38 @@ function LandingPage() {
         © 2026 CannaWorld Germany · Berlin · Bangkok · B2B Compliance Intake
       </footer>
     </div>
+  );
+}
+
+
+function GatewayServicesPreview() {
+  return (
+    <section id="gateway-services" className="relative mx-auto max-w-7xl px-5 py-24 md:px-8">
+      <div className="mx-auto mb-12 max-w-3xl text-center">
+        <Badge>Gateway Services → Germany</Badge>
+        <h2 className="mt-5 text-3xl font-extrabold tracking-tight md:text-5xl">Gateway-Angebot logisch auf den deutschen Markt übertragen.</h2>
+        <p className="mt-4 text-white/58">Germany ist nicht die Operations-App. Germany ist der deutsche Frontdoor: Nachfrage qualifizieren, Compliance-Packs prüfen, Supplier filtern und sauber ins CannaWorld-Ökosystem übergeben.</p>
+      </div>
+      <div className="grid gap-6">
+        {serviceGroups.map((group) => (
+          <div key={group.title} className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-6 backdrop-blur">
+            <div className="mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+              <h3 className="text-2xl font-bold">{group.title}</h3>
+              <p className="text-sm text-white/48">{group.subtitle}</p>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {group.items.map(([Icon, title, text]) => (
+                <Link key={title} to="/dashboard/services" className="rounded-2xl border border-white/10 bg-black/20 p-4 transition hover:-translate-y-0.5 hover:border-cyan-300/40 hover:bg-cyan-300/10">
+                  <Icon className="mb-3 h-6 w-6 text-cyan-300" />
+                  <div className="font-bold">{title}</div>
+                  <div className="mt-2 text-sm leading-6 text-white/52">{text}</div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -529,7 +623,11 @@ function App() {
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<DashboardModule moduleKey="overview" />} />
           {dashboardNav.slice(1).map((item) => (
-            <Route key={item.key} path={item.key} element={<DashboardModule moduleKey={item.key} />} />
+            <Route
+              key={item.key}
+              path={item.key}
+              element={item.key === "services" ? <GatewayServicesPreview /> : <DashboardModule moduleKey={item.key} />}
+            />
           ))}
           <Route path="settings" element={<DashboardModule moduleKey="settings" />} />
           <Route path="profile" element={<DashboardModule moduleKey="profile" />} />
