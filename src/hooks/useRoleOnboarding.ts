@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
-import type { OnboardingRole } from "@/components/role-onboarding/config/role-configs";
+import type { OnboardingRole } from "@/components/onboarding/config/role-configs";
 
 export interface OnboardingData {
   id?: string;
@@ -60,6 +60,11 @@ export interface OnboardingData {
 
   // NDA
   nda_accepted_at: string | null;
+
+  // Meta
+  submitted_at?: string;
+  created_at?: string;
+  updated_at?: string;
 
   // Role-specific data (flexible JSONB)
   role_data: Record<string, any>;

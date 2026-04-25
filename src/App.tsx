@@ -3,6 +3,7 @@ import {
   Leaf, Shield, Truck, FileCheck, FlaskConical, Building2,
   ArrowRight, Mail, Globe, Sparkles, Package
 } from 'lucide-react';
+import { RoleOnboardingWizard } from './components/onboarding/RoleOnboardingWizard';
 import products from './data/products.json';
 
 function Reveal({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
@@ -272,7 +273,7 @@ export default function App() {
       ══════════════════════════════════════════════════════════════ */}
       <section id="onboarding" className="py-20">
         <div className="max-w-4xl mx-auto px-4">
-          <RoleOnboardingWizard />
+          <RoleOnboardingWizard role="farm" />
         </div>
       </section>
       <section id="contact" className="py-32 border-t border-white/5" style={{ background: 'rgba(34,197,94,0.015)' }}>

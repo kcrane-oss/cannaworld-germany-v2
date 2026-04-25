@@ -64,37 +64,101 @@ export type Database = {
       }
       audit_trail: {
         Row: {
+          id: string
+          user_id: string
+          changed_by: string | null
+          table_name: string | null
+          operation: string | null
           action: string
-          created_at: string
           details: Json | null
           entity_id: string | null
           entity_type: string
-          id: string
           ip_address: string | null
-          user_id: string
+          created_at: string
+          changed_at: string | null
         }
         Insert: {
+          id?: string
+          user_id: string
+          changed_by?: string | null
+          table_name?: string | null
+          operation?: string | null
           action: string
-          created_at?: string
           details?: Json | null
           entity_id?: string | null
           entity_type: string
-          id?: string
           ip_address?: string | null
-          user_id: string
+          created_at?: string
+          changed_at?: string | null
         }
         Update: {
+          id?: string
+          user_id?: string
+          changed_by?: string | null
+          table_name?: string | null
+          operation?: string | null
           action?: string
-          created_at?: string
           details?: Json | null
           entity_id?: string | null
           entity_type?: string
-          id?: string
           ip_address?: string | null
-          user_id?: string
+          created_at?: string
+          changed_at?: string | null
         }
         Relationships: []
       }
+      session_messages: {
+        Row: {
+          id: string
+          session_id: string
+          user_id: string
+          message: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          session_id: string
+          user_id: string
+          message: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          session_id?: string
+          user_id?: string
+          message?: string
+          created_at?: string
+        }
+        Relationships: []
+      }
+      session_notes: {
+        Row: {
+          id: string
+          session_id: string
+          user_id: string
+          content: string
+          note_type: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          session_id: string
+          user_id: string
+          content: string
+          note_type: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          session_id?: string
+          user_id?: string
+          content?: string
+          note_type?: string
+          created_at?: string
+        }
+        Relationships: []
+      }
+
       batches: {
         Row: {
           admin_notes: string | null
@@ -1840,6 +1904,447 @@ export type Database = {
         }
         Relationships: []
       }
+      facilities: {
+        Row: {
+          id: string
+          name: string
+          facility_type: string
+          address: string | null
+          city: string | null
+          country: string | null
+          contact_name: string | null
+          contact_email: string | null
+          contact_phone: string | null
+          license_number: string | null
+          gmp_status: string
+          notes: string | null
+          is_active: boolean
+          created_by: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          facility_type?: string
+          address?: string | null
+          city?: string | null
+          country?: string | null
+          contact_name?: string | null
+          contact_email?: string | null
+          contact_phone?: string | null
+          license_number?: string | null
+          gmp_status?: string
+          notes?: string | null
+          is_active?: boolean
+          created_by?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          facility_type?: string
+          address?: string | null
+          city?: string | null
+          country?: string | null
+          contact_name?: string | null
+          contact_email?: string | null
+          contact_phone?: string | null
+          license_number?: string | null
+          gmp_status?: string
+          notes?: string | null
+          is_active?: boolean
+          created_by?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      qp_release_decisions: {
+        Row: {
+          id: string
+          batch_id: string
+          qp_user_id: string
+          decision: string
+          notes: string | null
+          certificate_url: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          batch_id: string
+          qp_user_id: string
+          decision: string
+          notes?: string | null
+          certificate_url?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          batch_id?: string
+          qp_user_id?: string
+          decision?: string
+          notes?: string | null
+          certificate_url?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "qp_release_decisions_batch_id_fkey"
+            columns: ["batch_id"]
+            isOneToOne: false
+            referencedRelation: "batches"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      exporter_onboarding: {
+        Row: {
+          id: string
+          user_id: string
+          role: string
+          current_step: number
+          completed_steps: number[]
+          status: string
+          tier: string
+          company_name: string | null
+          legal_form: string | null
+          tax_id: string | null
+          country: string | null
+          address: Json | null
+          contact_person: Json | null
+          website: string | null
+          license_type: string[] | null
+          license_number: string | null
+          issuing_authority: string | null
+          license_valid_from: string | null
+          license_valid_until: string | null
+          licensed_activities: string[] | null
+          facility_name: string | null
+          facility_type: string | null
+          total_area_sqm: number | null
+          cultivation_area_sqm: number | null
+          employee_count: number | null
+          cleanroom_classes: string[] | null
+          product_catalog: Json | null
+          batch_tracking_method: string | null
+          traceability_level: string | null
+          shinrai_assessment: Json | null
+          shinrai_score: number | null
+          shinrai_rating: string | null
+          nda_accepted_at: string | null
+          reviewed_by: string | null
+          reviewed_at: string | null
+          review_notes: string | null
+          ai_review_result: Json | null
+          verification_expires_at: string | null
+          submitted_at: string | null
+          created_at: string
+          updated_at: string
+          role_data: Json | null
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          role?: string
+          current_step?: number
+          completed_steps?: number[]
+          status?: string
+          tier?: string
+          company_name?: string | null
+          legal_form?: string | null
+          tax_id?: string | null
+          country?: string | null
+          address?: Json | null
+          contact_person?: Json | null
+          website?: string | null
+          license_type?: string[] | null
+          license_number?: string | null
+          issuing_authority?: string | null
+          license_valid_from?: string | null
+          license_valid_until?: string | null
+          licensed_activities?: string[] | null
+          facility_name?: string | null
+          facility_type?: string | null
+          total_area_sqm?: number | null
+          cultivation_area_sqm?: number | null
+          employee_count?: number | null
+          cleanroom_classes?: string[] | null
+          product_catalog?: Json | null
+          batch_tracking_method?: string | null
+          traceability_level?: string | null
+          shinrai_assessment?: Json | null
+          shinrai_score?: number | null
+          shinrai_rating?: string | null
+          nda_accepted_at?: string | null
+          reviewed_by?: string | null
+          reviewed_at?: string | null
+          review_notes?: string | null
+          ai_review_result?: Json | null
+          verification_expires_at?: string | null
+          submitted_at?: string | null
+          created_at?: string
+          updated_at?: string
+          role_data?: Json | null
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          role?: string
+          current_step?: number
+          completed_steps?: number[]
+          status?: string
+          tier?: string
+          company_name?: string | null
+          legal_form?: string | null
+          tax_id?: string | null
+          country?: string | null
+          address?: Json | null
+          contact_person?: Json | null
+          website?: string | null
+          license_type?: string[] | null
+          license_number?: string | null
+          issuing_authority?: string | null
+          license_valid_from?: string | null
+          license_valid_until?: string | null
+          licensed_activities?: string[] | null
+          facility_name?: string | null
+          facility_type?: string | null
+          total_area_sqm?: number | null
+          cultivation_area_sqm?: number | null
+          employee_count?: number | null
+          cleanroom_classes?: string[] | null
+          product_catalog?: Json | null
+          batch_tracking_method?: string | null
+          traceability_level?: string | null
+          shinrai_assessment?: Json | null
+          shinrai_score?: number | null
+          shinrai_rating?: string | null
+          nda_accepted_at?: string | null
+          reviewed_by?: string | null
+          reviewed_at?: string | null
+          review_notes?: string | null
+          ai_review_result?: Json | null
+          verification_expires_at?: string | null
+          submitted_at?: string | null
+          created_at?: string
+          updated_at?: string
+          role_data?: Json | null
+        }
+        Relationships: []
+      }
+      onboarding_documents: {
+        Row: {
+          id: string
+          onboarding_id: string
+          user_id: string
+          step: number
+          document_type: string
+          file_path: string
+          file_name: string | null
+          file_size: number | null
+          mime_type: string | null
+          status: string
+          ai_validation: Json | null
+          admin_notes: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          onboarding_id: string
+          user_id: string
+          step: number
+          document_type: string
+          file_path: string
+          file_name?: string | null
+          file_size?: number | null
+          mime_type?: string | null
+          status?: string
+          ai_validation?: Json | null
+          admin_notes?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          onboarding_id?: string
+          user_id?: string
+          step?: number
+          document_type?: string
+          file_path?: string
+          file_name?: string | null
+          file_size?: number | null
+          mime_type?: string | null
+          status?: string
+          ai_validation?: Json | null
+          admin_notes?: string | null
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "onboarding_documents_onboarding_id_fkey"
+            columns: ["onboarding_id"]
+            isOneToOne: false
+            referencedRelation: "exporter_onboarding"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      digital_signatures: {
+        Row: {
+          id: string
+          token: string
+          signer_name: string
+          signer_role: string
+          signer_email: string | null
+          reason: string
+          signature_png: string
+          signature_hash: string
+          ip_address: string | null
+          user_agent: string | null
+          signed_at: string
+          created_at: string | null
+          facility_id: string | null
+          document_type: string
+          document_ref: string | null
+          metadata: Json | null
+          user_id: string | null
+          onboarding_id: string | null
+        }
+        Insert: {
+          id?: string
+          token: string
+          signer_name: string
+          signer_role: string
+          signer_email?: string | null
+          reason: string
+          signature_png: string
+          signature_hash: string
+          ip_address?: string | null
+          user_agent?: string | null
+          signed_at: string
+          created_at?: string | null
+          facility_id?: string | null
+          document_type: string
+          document_ref?: string | null
+          metadata?: Json | null
+          user_id?: string | null
+          onboarding_id?: string | null
+        }
+        Update: {
+          id?: string
+          token?: string
+          signer_name?: string
+          signer_role?: string
+          signer_email?: string | null
+          reason?: string
+          signature_png?: string
+          signature_hash?: string
+          ip_address?: string | null
+          user_agent?: string | null
+          signed_at?: string
+          created_at?: string | null
+          facility_id?: string | null
+          document_type?: string
+          document_ref?: string | null
+          metadata?: Json | null
+          user_id?: string | null
+          onboarding_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "digital_signatures_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "facilities"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      post_harvest_orders: {
+        Row: {
+          id: string
+          batch_id: string | null
+          requested_by: string | null
+          service_type: string | null
+          status: string | null
+          specifications: Json | null
+          notes: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          batch_id?: string | null
+          requested_by?: string | null
+          service_type?: string | null
+          status?: string | null
+          specifications?: Json | null
+          notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          batch_id?: string | null
+          requested_by?: string | null
+          service_type?: string | null
+          status?: string | null
+          specifications?: Json | null
+          notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_harvest_orders_batch_id_fkey"
+            columns: ["batch_id"]
+            isOneToOne: false
+            referencedRelation: "batches"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      terms_acceptances: {
+        Row: {
+          accepted_at: string
+          id: string
+          ip_address: string | null
+          metadata: Json | null
+          signee_name: string | null
+          term_type: string
+          user_agent: string | null
+          user_id: string
+          version: string
+        }
+        Insert: {
+          accepted_at?: string
+          id?: string
+          ip_address?: string | null
+          metadata?: Json | null
+          signee_name?: string | null
+          term_type: string
+          user_agent?: string | null
+          user_id: string
+          version?: string
+        }
+        Update: {
+          accepted_at?: string
+          id?: string
+          ip_address?: string | null
+          metadata?: Json | null
+          signee_name?: string | null
+          term_type?: string
+          user_agent?: string | null
+          user_id?: string
+          version?: string
+        }
+        Relationships: []
+      }
+
     }
     Views: {
       [_ in never]: never
