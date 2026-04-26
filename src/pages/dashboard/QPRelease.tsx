@@ -2,12 +2,23 @@ import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import type { Json } from "@/integrations/supabase/types";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { ClipboardCheck, CheckCircle2, XCircle, Clock, Loader2, Network } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+
+type WorkflowMilestone = { key?: string; status?: string; [key: string]: Json | undefined };
+type QpStatus = "pending" | "released" | "rejected";
+
+const getMilestones = (value: Json): WorkflowMilestone[] => {
+  if (!Array.isArray(value)) return [];
+  return value.filter((milestone): milestone is WorkflowMilestone =>
+    typeof milestone === "object" && milestone !== null && !Array.isArray(milestone)
+  );
+};
 
 export default function QPRelease() {
   const { t } = useTranslation();
@@ -22,16 +33,14 @@ export default function QPRelease() {
         .order("created_at", { ascending: false });
       if (error) throw error;
       // Filter for cases that have a QP milestone
-      return (data || []).filter(tc => {
-        const milestones = tc.workflow_milestones as any[];
-        if (!Array.isArray(milestones)) return false;
-        return milestones.some(m => m.key === "qp_release");
-      });
+      return (data || []).filter((tradeCase) =>
+        getMilestones(tradeCase.workflow_milestones).some((milestone) => milestone.key === "qp_release")
+      );
     },
     enabled: !!user,
   });
 
-  const getQpStatus = (milestones: any[]) => {
+  const getQpStatus = (milestones: WorkflowMilestone[]): QpStatus => {
     if (!Array.isArray(milestones)) return "pending";
     const m = milestones.find(m => m.key === "qp_release");
     if (!m) return "pending";
@@ -40,7 +49,7 @@ export default function QPRelease() {
     return "pending";
   };
 
-  const getStatusBadge = (status: string) => {
+  const getStatusBadge = (status: QpStatus) => {
     switch (status) {
       case 'released':
         return <Badge className="bg-green-500/10 text-green-500 hover:bg-green-500/20 border-green-500/20">{t("common.approved", "Released")}</Badge>;
@@ -53,22 +62,22 @@ export default function QPRelease() {
     }
   };
 
-  const markAsReleased = async (id: string, currentMilestones: any[]) => {
+  const markAsReleased = async (id: string, currentMilestones: WorkflowMilestone[]) => {
     try {
       const updated = currentMilestones.map(m => m.key === "qp_release" ? { ...m, status: "done" } : m);
       const { error } = await supabase.from("trade_cases").update({ workflow_milestones: updated }).eq("id", id);
       if (error) throw error;
       toast.success("Batch released by QP");
       refetch();
-    } catch (e: any) {
-      toast.error(e.message);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Unable to release batch");
     }
   };
 
   const stats = {
-    pending: cases?.filter(c => getQpStatus(c.workflow_milestones as any[]) === 'pending').length || 0,
-    released: cases?.filter(c => getQpStatus(c.workflow_milestones as any[]) === 'released').length || 0,
-    rejected: cases?.filter(c => getQpStatus(c.workflow_milestones as any[]) === 'rejected').length || 0
+    pending: cases?.filter((tradeCase) => getQpStatus(getMilestones(tradeCase.workflow_milestones)) === 'pending').length || 0,
+    released: cases?.filter((tradeCase) => getQpStatus(getMilestones(tradeCase.workflow_milestones)) === 'released').length || 0,
+    rejected: cases?.filter((tradeCase) => getQpStatus(getMilestones(tradeCase.workflow_milestones)) === 'rejected').length || 0
   };
 
   return (
@@ -138,7 +147,8 @@ export default function QPRelease() {
               </TableHeader>
               <TableBody>
                 {cases.map((tc) => {
-                  const qpStatus = getQpStatus(tc.workflow_milestones as any[]);
+                  const milestones = getMilestones(tc.workflow_milestones);
+                  const qpStatus = getQpStatus(milestones);
                   return (
                     <TableRow key={tc.id}>
                       <TableCell className="font-medium">
@@ -156,7 +166,7 @@ export default function QPRelease() {
                       <TableCell>{getStatusBadge(qpStatus)}</TableCell>
                       <TableCell className="text-right">
                         {qpStatus === "pending" && (
-                          <Button size="sm" variant="outline" className="h-7 text-xs border-green-500/30 text-green-600 hover:bg-green-50 dark:hover:bg-green-500/10" onClick={() => markAsReleased(tc.id, tc.workflow_milestones as any[])}>
+                          <Button size="sm" variant="outline" className="h-7 text-xs border-green-500/30 text-green-600 hover:bg-green-50 dark:hover:bg-green-500/10" onClick={() => markAsReleased(tc.id, milestones)}>
                             Mark Released
                           </Button>
                         )}

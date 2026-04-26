@@ -2,10 +2,22 @@ import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import type { Json, Tables } from "@/integrations/supabase/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Plane, Truck, Anchor, Thermometer, MapPin, Clock, CheckCircle2, Package, Loader2, Network } from "lucide-react";
+
+type TradeCase = Tables<"trade_cases">;
+type WorkflowMilestone = { key?: string; status?: string; [key: string]: Json | undefined };
+type LogisticsStage = "pickup" | "transit" | "customs" | "delivered" | "pending";
+
+const getMilestones = (value: Json): WorkflowMilestone[] => {
+  if (!Array.isArray(value)) return [];
+  return value.filter((milestone): milestone is WorkflowMilestone =>
+    typeof milestone === "object" && milestone !== null && !Array.isArray(milestone)
+  );
+};
 
 export default function Logistics() {
   const { t } = useTranslation();
@@ -20,16 +32,14 @@ export default function Logistics() {
         .order("created_at", { ascending: false });
       if (error) throw error;
       // Filter for cases that have a GDP Logistics milestone or are in logistics-relevant status
-      return (data || []).filter(tc => {
-        const milestones = tc.workflow_milestones as any[];
-        if (!Array.isArray(milestones)) return false;
-        return milestones.some(m => m.key === "gdp_logistics");
-      });
+      return (data || []).filter((tradeCase) =>
+        getMilestones(tradeCase.workflow_milestones).some((milestone) => milestone.key === "gdp_logistics")
+      );
     },
     enabled: !!user,
   });
 
-  const getLogisticsStatus = (tc: any) => {
+  const getLogisticsStatus = (tc: TradeCase): { status: LogisticsStage; progress: number } => {
     // For MVP, we map Trade Case status directly to logistics visual stages
     const s = tc.status;
     if (s === "delivered" || s === "completed") return { status: "delivered", progress: 100 };
@@ -39,7 +49,7 @@ export default function Logistics() {
     return { status: "pending", progress: 10 };
   };
 
-  const getStatusIcon = (status: string) => {
+  const getStatusIcon = (status: LogisticsStage) => {
     switch (status) {
       case 'pickup': return <Package className="h-4 w-4" />;
       case 'transit': return <Plane className="h-4 w-4" />;
