@@ -222,11 +222,11 @@ export function useCommitFacilityPlanRevision() {
       changeSummary?: string;
     }) => {
       const snapshot: FacilityPlanSnapshot = buildFacilityPlanSnapshot(plan, zones, connections);
-      const { data, error } = await supabase.rpc("commit_facility_plan_revision", {
+      const { data, error } = await supabase.rpc("commit_facility_plan_revision" as any, {
         p_plan_id: plan.id,
         p_expected_version_major: plan.version_major,
         p_expected_version_minor: plan.version_minor,
-        p_snapshot: snapshot as unknown as Tables<"facility_plan_revisions">["snapshot"],
+        p_snapshot: snapshot as unknown as any["snapshot"],
         p_action: action,
         p_change_summary: changeSummary ?? undefined,
       });
@@ -263,7 +263,7 @@ export function useSaveFacilityPlanGraph() {
       action?: string;
       changeSummary?: string;
     }) => {
-      const { data, error } = await supabase.rpc("save_facility_plan_graph", {
+      const { data, error } = await supabase.rpc("save_facility_plan_graph" as any, {
         p_plan_id: plan.id,
         p_expected_version_major: plan.version_major,
         p_expected_version_minor: plan.version_minor,
@@ -340,7 +340,7 @@ export function useTransitionFacilityPlan() {
       comment?: string;
       signatureUrl?: string;
     }) => {
-      const { data, error } = await supabase.rpc("transition_facility_plan", {
+      const { data, error } = await supabase.rpc("transition_facility_plan" as any, {
         p_plan_id: planId,
         p_action: action,
         p_comment: comment ?? undefined,

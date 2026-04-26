@@ -76,7 +76,7 @@ export function useSessionParticipants(sessionId: string | undefined) {
             ? { display_name: profile.display_name || null, avatar_url: profile.avatar_url }
             : null,
         };
-      }) as ParticipantWithProfile[];
+      }) as unknown as ParticipantWithProfile[];
     },
   });
 }
@@ -160,7 +160,7 @@ export function useJoinSession() {
         .select()
         .single();
       if (error) throw error;
-      return data as SessionParticipant;
+      return data as unknown as SessionParticipant;
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["session-participants", data.session_id] });

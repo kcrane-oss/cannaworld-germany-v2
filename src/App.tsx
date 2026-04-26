@@ -67,7 +67,7 @@ const stats = [
 ];
 
 const groups = [
-  "Apotheken mit Import- oder Versorgungsinteresse",
+  "Apotheken (Direct Import vs. Managed Import)",
   "Pharma-Großhändler und GDP-Strukturen",
   "Cannabis-Importeure und Herstellbetriebe",
   "Einkauf, QA/QP, Regulatory Affairs und Geschäftsführung",
@@ -101,6 +101,7 @@ const steps = [
 const dashboardNav = [
   { key: "overview", label: "Overview", icon: LayoutDashboard, path: "/dashboard" },
   { key: "marketplace", label: "Marketplace", icon: ShoppingBag, path: "/dashboard/marketplace" },
+  { key: "pharmacy-import", label: "Apotheken-Import", icon: FileCheck, path: "/dashboard/pharmacy-import" },
   { key: "trade-cases", label: "Trade Cases", icon: FileCheck, path: "/dashboard/trade-cases" },
   { key: "batches", label: "Batches", icon: Package, path: "/dashboard/batches" },
   { key: "qp-release", label: "QP Release", icon: ClipboardCheck, path: "/dashboard/qp-release" },
@@ -129,6 +130,13 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     description: "Vorgeprüfte internationale Batches, Supplier-Profile und Dokumentenstände für deutsche B2B-Abnehmer.",
     stats: ["EU-ready Batch Pool", "CoA / Batch Records", "Supplier Trust Score", "Sample Request Flow"],
     actions: ["Batch anfragen", "Supplier vergleichen", "Sample Request vorbereiten"],
+  },
+  "pharmacy-import": {
+    eyebrow: "Apotheken-Workflow",
+    title: "Apotheken-Import",
+    description: "Zwei Pfade für den deutschen Markt: 'Managed Import' (Full-Service über das CannaWorld-Ökosystem) oder 'Direct Import' (Apotheke importiert selbst + QP Freigabe).",
+    stats: ["Managed Import Route", "Direct Import (Bester Deal)", "QP Release Integration", "GDP-konforme Lieferung"],
+    actions: ["Managed Import starten", "Direct Import Kalkulation", "QP-Freigabe anfragen"],
   },
   "trade-cases": {
     eyebrow: "Deal Desk",

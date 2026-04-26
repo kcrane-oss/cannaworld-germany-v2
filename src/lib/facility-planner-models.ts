@@ -5,7 +5,7 @@ export type FacilityPlanZoneRow = Tables<"facility_plan_zones">;
 export type FacilityPlanConnectionRow = Tables<"facility_plan_connections">;
 export type FacilityPlanApprovalRow = Tables<"facility_plan_approvals">;
 export type FacilityPlanCommentRow = Tables<"facility_plan_comments">;
-export type FacilityPlanRevisionRow = Tables<"facility_plan_revisions">;
+export type FacilityPlanRevisionRow = any;
 
 export type FacilityPlanInsert = TablesInsert<"facility_plans">;
 export type FacilityPlanUpdate = TablesUpdate<"facility_plans">;
