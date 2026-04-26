@@ -1,3 +1,6 @@
+import TradeCases from "./pages/dashboard/TradeCases";
+import QPRelease from "./pages/dashboard/QPRelease";
+import Logistics from "./pages/dashboard/Logistics";
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import {
@@ -771,15 +774,21 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/dashboard" element={<ProtectedDashboard />}>
+                <Route path="/dashboard" element={<ProtectedDashboard />}>
           <Route index element={<DashboardModule moduleKey="overview" />} />
-          {dashboardNav.slice(1).map((item) => (
-            <Route
-              key={item.key}
-              path={item.key}
-              element={item.key === "services" ? <GatewayServicesPreview /> : <DashboardModule moduleKey={item.key} />}
-            />
-          ))}
+          <Route path="trade-cases" element={<TradeCases />} />
+          <Route path="qp-release" element={<QPRelease />} />
+          <Route path="logistics" element={<Logistics />} />
+          {dashboardNav.slice(1).map((item) => {
+            if (["trade-cases", "qp-release", "logistics"].includes(item.key)) return null;
+            return (
+              <Route
+                key={item.key}
+                path={item.key}
+                element={item.key === "services" ? <GatewayServicesPreview /> : <DashboardModule moduleKey={item.key} />}
+              />
+            );
+          })}
           <Route path="settings" element={<DashboardModule moduleKey="settings" />} />
           <Route path="profile" element={<DashboardModule moduleKey="profile" />} />
         </Route>

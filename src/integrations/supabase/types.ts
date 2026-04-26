@@ -12,31 +12,6 @@ export type Database = {
   __InternalSupabase: {
     PostgrestVersion: "14.5"
   }
-  graphql_public: {
-    Tables: {
-      [_ in never]: never
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      graphql: {
-        Args: {
-          extensions?: Json
-          operationName?: string
-          query?: string
-          variables?: Json
-        }
-        Returns: Json
-      }
-    }
-    Enums: {
-      [_ in never]: never
-    }
-    CompositeTypes: {
-      [_ in never]: never
-    }
-  }
   public: {
     Tables: {
       activity_log: {
@@ -5510,78 +5485,6 @@ export type Database = {
           },
         ]
       }
-      export_cases: {
-        Row: {
-          batch_id: string | null
-          case_number: string
-          created_at: string
-          created_by: string | null
-          exporter_id: string | null
-          id: string
-          importer_id: string | null
-          importer_snapshot: Json
-          next_action: string | null
-          owner_user_id: string | null
-          qp_status: string
-          requester_user_id: string | null
-          status: Database["public"]["Enums"]["export_case_status"]
-          trade_case_id: string | null
-          trust_passport_snapshot: Json
-          updated_at: string
-        }
-        Insert: {
-          batch_id?: string | null
-          case_number: string
-          created_at?: string
-          created_by?: string | null
-          exporter_id?: string | null
-          id?: string
-          importer_id?: string | null
-          importer_snapshot?: Json
-          next_action?: string | null
-          owner_user_id?: string | null
-          qp_status?: string
-          requester_user_id?: string | null
-          status?: Database["public"]["Enums"]["export_case_status"]
-          trade_case_id?: string | null
-          trust_passport_snapshot?: Json
-          updated_at?: string
-        }
-        Update: {
-          batch_id?: string | null
-          case_number?: string
-          created_at?: string
-          created_by?: string | null
-          exporter_id?: string | null
-          id?: string
-          importer_id?: string | null
-          importer_snapshot?: Json
-          next_action?: string | null
-          owner_user_id?: string | null
-          qp_status?: string
-          requester_user_id?: string | null
-          status?: Database["public"]["Enums"]["export_case_status"]
-          trade_case_id?: string | null
-          trust_passport_snapshot?: Json
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "export_cases_batch_id_fkey"
-            columns: ["batch_id"]
-            isOneToOne: false
-            referencedRelation: "batches"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "export_cases_trade_case_id_fkey"
-            columns: ["trade_case_id"]
-            isOneToOne: false
-            referencedRelation: "trade_cases"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       export_document_bundles: {
         Row: {
           batch_id: string
@@ -7994,7 +7897,6 @@ export type Database = {
           description: string | null
           destination_country: string | null
           due_date: string | null
-          export_case_id: string | null
           fx_rates: Json
           id: string
           incoterms: string
@@ -8011,7 +7913,6 @@ export type Database = {
           post_harvest_order_id: string | null
           purchase_request_id: string | null
           recipient_id: string | null
-          service_request_id: string | null
           status: Database["public"]["Enums"]["invoice_status"]
           stripe_invoice_id: string | null
           stripe_payment_intent_id: string | null
@@ -8036,7 +7937,6 @@ export type Database = {
           description?: string | null
           destination_country?: string | null
           due_date?: string | null
-          export_case_id?: string | null
           fx_rates?: Json
           id?: string
           incoterms?: string
@@ -8053,7 +7953,6 @@ export type Database = {
           post_harvest_order_id?: string | null
           purchase_request_id?: string | null
           recipient_id?: string | null
-          service_request_id?: string | null
           status?: Database["public"]["Enums"]["invoice_status"]
           stripe_invoice_id?: string | null
           stripe_payment_intent_id?: string | null
@@ -8078,7 +7977,6 @@ export type Database = {
           description?: string | null
           destination_country?: string | null
           due_date?: string | null
-          export_case_id?: string | null
           fx_rates?: Json
           id?: string
           incoterms?: string
@@ -8095,7 +7993,6 @@ export type Database = {
           post_harvest_order_id?: string | null
           purchase_request_id?: string | null
           recipient_id?: string | null
-          service_request_id?: string | null
           status?: Database["public"]["Enums"]["invoice_status"]
           stripe_invoice_id?: string | null
           stripe_payment_intent_id?: string | null
@@ -8112,24 +8009,10 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "invoices_export_case_id_fkey"
-            columns: ["export_case_id"]
-            isOneToOne: false
-            referencedRelation: "export_cases"
-            referencedColumns: ["id"]
-          },
-          {
             foreignKeyName: "invoices_purchase_request_id_fkey"
             columns: ["purchase_request_id"]
             isOneToOne: false
             referencedRelation: "purchase_requests"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "invoices_service_request_id_fkey"
-            columns: ["service_request_id"]
-            isOneToOne: false
-            referencedRelation: "service_requests"
             referencedColumns: ["id"]
           },
         ]
@@ -13838,42 +13721,6 @@ export type Database = {
           },
         ]
       }
-      role_change_requests: {
-        Row: {
-          created_at: string
-          id: string
-          metadata: Json
-          requested_role: string
-          reviewed_at: string | null
-          reviewed_by: string | null
-          source: string
-          status: string
-          user_id: string
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          metadata?: Json
-          requested_role: string
-          reviewed_at?: string | null
-          reviewed_by?: string | null
-          source?: string
-          status?: string
-          user_id?: string
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          metadata?: Json
-          requested_role?: string
-          reviewed_at?: string | null
-          reviewed_by?: string | null
-          source?: string
-          status?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
       sap_export_log: {
         Row: {
           batch_id: string | null
@@ -14083,108 +13930,6 @@ export type Database = {
           service_type?: string
         }
         Relationships: []
-      }
-      service_requests: {
-        Row: {
-          assigned_partner_id: string | null
-          batch_id: string | null
-          created_at: string
-          created_by: string | null
-          currency: string
-          export_case_id: string | null
-          id: string
-          indicative_price_max_cents: number | null
-          indicative_price_min_cents: number | null
-          invoice_id: string | null
-          invoice_state: string
-          metadata: Json
-          request_number: string
-          requester_user_id: string
-          service_type: string
-          source_gap: string | null
-          status: Database["public"]["Enums"]["service_request_status"]
-          trade_case_id: string | null
-          updated_at: string
-        }
-        Insert: {
-          assigned_partner_id?: string | null
-          batch_id?: string | null
-          created_at?: string
-          created_by?: string | null
-          currency?: string
-          export_case_id?: string | null
-          id?: string
-          indicative_price_max_cents?: number | null
-          indicative_price_min_cents?: number | null
-          invoice_id?: string | null
-          invoice_state?: string
-          metadata?: Json
-          request_number: string
-          requester_user_id?: string
-          service_type?: string
-          source_gap?: string | null
-          status?: Database["public"]["Enums"]["service_request_status"]
-          trade_case_id?: string | null
-          updated_at?: string
-        }
-        Update: {
-          assigned_partner_id?: string | null
-          batch_id?: string | null
-          created_at?: string
-          created_by?: string | null
-          currency?: string
-          export_case_id?: string | null
-          id?: string
-          indicative_price_max_cents?: number | null
-          indicative_price_min_cents?: number | null
-          invoice_id?: string | null
-          invoice_state?: string
-          metadata?: Json
-          request_number?: string
-          requester_user_id?: string
-          service_type?: string
-          source_gap?: string | null
-          status?: Database["public"]["Enums"]["service_request_status"]
-          trade_case_id?: string | null
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "service_requests_assigned_partner_id_fkey"
-            columns: ["assigned_partner_id"]
-            isOneToOne: false
-            referencedRelation: "business_partners"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "service_requests_batch_id_fkey"
-            columns: ["batch_id"]
-            isOneToOne: false
-            referencedRelation: "batches"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "service_requests_export_case_id_fkey"
-            columns: ["export_case_id"]
-            isOneToOne: false
-            referencedRelation: "export_cases"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "service_requests_invoice_id_fkey"
-            columns: ["invoice_id"]
-            isOneToOne: false
-            referencedRelation: "invoices"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "service_requests_trade_case_id_fkey"
-            columns: ["trade_case_id"]
-            isOneToOne: false
-            referencedRelation: "trade_cases"
-            referencedColumns: ["id"]
-          },
-        ]
       }
       session_messages: {
         Row: {
@@ -16083,14 +15828,18 @@ export type Database = {
           batch_id: string | null
           batch_number: string | null
           case_number: string
+          compliance_route_key: Database["public"]["Enums"]["cw_route_key"] | null
+          compliance_route_request_id: string | null
           completion_percentage: number
           created_at: string
           created_by: string
+          customer_type: string | null
+          destination_country: string
           estimated_quantity: number | null
-          export_case_id: string | null
           exporter_country: string
           exporter_name: string
           id: string
+          import_type: string
           importer_country: string
           importer_id: string | null
           importer_name: string
@@ -16098,23 +15847,30 @@ export type Database = {
           product: string | null
           product_type: string
           quantity: number | null
+          route_snapshot: Json
+          stakeholders: Json
           status: string
           strain: string | null
           unit: string
           updated_at: string
+          workflow_milestones: Json
         }
         Insert: {
           batch_id?: string | null
           batch_number?: string | null
           case_number?: string
+          compliance_route_key?: Database["public"]["Enums"]["cw_route_key"] | null
+          compliance_route_request_id?: string | null
           completion_percentage?: number
           created_at?: string
           created_by: string
+          customer_type?: string | null
+          destination_country?: string
           estimated_quantity?: number | null
-          export_case_id?: string | null
           exporter_country?: string
           exporter_name: string
           id?: string
+          import_type?: string
           importer_country?: string
           importer_id?: string | null
           importer_name: string
@@ -16122,23 +15878,30 @@ export type Database = {
           product?: string | null
           product_type?: string
           quantity?: number | null
+          route_snapshot?: Json
+          stakeholders?: Json
           status?: string
           strain?: string | null
           unit?: string
           updated_at?: string
+          workflow_milestones?: Json
         }
         Update: {
           batch_id?: string | null
           batch_number?: string | null
           case_number?: string
+          compliance_route_key?: Database["public"]["Enums"]["cw_route_key"] | null
+          compliance_route_request_id?: string | null
           completion_percentage?: number
           created_at?: string
           created_by?: string
+          customer_type?: string | null
+          destination_country?: string
           estimated_quantity?: number | null
-          export_case_id?: string | null
           exporter_country?: string
           exporter_name?: string
           id?: string
+          import_type?: string
           importer_country?: string
           importer_id?: string | null
           importer_name?: string
@@ -16146,10 +15909,13 @@ export type Database = {
           product?: string | null
           product_type?: string
           quantity?: number | null
+          route_snapshot?: Json
+          stakeholders?: Json
           status?: string
           strain?: string | null
           unit?: string
           updated_at?: string
+          workflow_milestones?: Json
         }
         Relationships: [
           {
@@ -16160,10 +15926,17 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "trade_cases_export_case_id_fkey"
-            columns: ["export_case_id"]
+            foreignKeyName: "trade_cases_compliance_route_key_fkey"
+            columns: ["compliance_route_key"]
             isOneToOne: false
-            referencedRelation: "export_cases"
+            referencedRelation: "cw_compliance_route_catalog"
+            referencedColumns: ["route_key"]
+          },
+          {
+            foreignKeyName: "trade_cases_compliance_route_request_id_fkey"
+            columns: ["compliance_route_request_id"]
+            isOneToOne: false
+            referencedRelation: "cw_compliance_route_requests"
             referencedColumns: ["id"]
           },
         ]
@@ -17083,16 +16856,8 @@ export type Database = {
       }
       cw_can_access_batch: { Args: { _batch_id: string }; Returns: boolean }
       cw_can_access_logger: { Args: { _logger_id: string }; Returns: boolean }
-      cw_can_access_packaging_unit: {
-        Args: { _packaging_unit_id: string }
-        Returns: boolean
-      }
       cw_can_access_shipment: {
         Args: { _shipment_id: string }
-        Returns: boolean
-      }
-      cw_can_access_trade_case: {
-        Args: { _trade_case_id: string }
         Returns: boolean
       }
       cw_credit_balance: { Args: { _user_id: string }; Returns: number }
@@ -17123,7 +16888,6 @@ export type Database = {
         }
         Returns: boolean
       }
-      cw_try_uuid: { Args: { _value: string }; Returns: string }
       determine_trade_approval_tier: {
         Args: { p_trade_value: number; p_user_id: string }
         Returns: string
@@ -17403,15 +17167,6 @@ export type Database = {
         | "approved"
         | "archived"
         | "superseded"
-      export_case_status:
-        | "draft"
-        | "active"
-        | "importer_review"
-        | "qp_review"
-        | "blocked"
-        | "released"
-        | "closed"
-        | "cancelled"
       facility_plan_status:
         | "draft"
         | "in_review"
@@ -17602,14 +17357,6 @@ export type Database = {
       service_order_status:
         | "requested"
         | "in_progress"
-        | "completed"
-        | "cancelled"
-      service_request_status:
-        | "requested"
-        | "triage"
-        | "assigned"
-        | "in_progress"
-        | "waiting_on_customer"
         | "completed"
         | "cancelled"
       session_status: "scheduled" | "live" | "completed" | "cancelled"
@@ -17821,9 +17568,6 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
-  graphql_public: {
-    Enums: {},
-  },
   public: {
     Enums: {
       ampel_status: ["green", "yellow", "red"],
@@ -18019,16 +17763,6 @@ export const Constants = {
         "approved",
         "archived",
         "superseded",
-      ],
-      export_case_status: [
-        "draft",
-        "active",
-        "importer_review",
-        "qp_review",
-        "blocked",
-        "released",
-        "closed",
-        "cancelled",
       ],
       facility_plan_status: [
         "draft",
@@ -18242,15 +17976,6 @@ export const Constants = {
       service_order_status: [
         "requested",
         "in_progress",
-        "completed",
-        "cancelled",
-      ],
-      service_request_status: [
-        "requested",
-        "triage",
-        "assigned",
-        "in_progress",
-        "waiting_on_customer",
         "completed",
         "cancelled",
       ],
