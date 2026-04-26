@@ -1,5 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
-import { getPayloadError, toErrorMessage, type ApiResult, type JsonRecord } from "@cannaworld/sdk";
+import { getPayloadError, toErrorMessage, type ApiResult, type JsonRecord } from "./api-errors";
 
 export interface AuditStatusResult {
   source: string;

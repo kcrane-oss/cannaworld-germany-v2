@@ -1,5 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
-import { toErrorMessage } from "@cannaworld/sdk";
+import { toErrorMessage } from "./api-errors";
 
 interface CrossLoginResult {
   success: boolean;

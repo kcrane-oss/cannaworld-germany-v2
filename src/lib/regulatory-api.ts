@@ -1,6 +1,6 @@
 import { supabase } from "@/integrations/supabase/client";
 import type { RegulatoryUpdate } from "./target-market-api";
-import { getPayloadError, toErrorMessage, type ApiResult, type JsonRecord } from "@cannaworld/sdk";
+import { getPayloadError, toErrorMessage, type ApiResult, type JsonRecord } from "./api-errors";
 
 export interface AggregatedRegulatory {
   ai_cert: JsonRecord;

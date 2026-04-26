@@ -1,5 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
-import { getPayloadError, toErrorMessage, type JsonRecord } from "@cannaworld/sdk";
+import { getPayloadError, toErrorMessage, type JsonRecord } from "./api-errors";
 
 async function invokeLimsProxy<T>(body: JsonRecord) {
   try {
