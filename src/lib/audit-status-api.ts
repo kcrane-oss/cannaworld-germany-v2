@@ -65,9 +65,14 @@ export interface UniverseStats {
   };
 }
 
-const NEW_FUNCTIONS_URL = import.meta.env.VITE_SUPABASE_URL + "/functions/v1";
+const SUPABASE_URL = (import.meta.env.VITE_SUPABASE_URL || "").trim();
+const NEW_FUNCTIONS_URL = SUPABASE_URL ? `${SUPABASE_URL}/functions/v1` : "";
 
 async function invokeAuditProxy<T>(body: JsonRecord): Promise<ApiResult<T>> {
+  if (!NEW_FUNCTIONS_URL) {
+    return { data: null, error: "Supabase URL is not configured" };
+  }
+
   try {
     // Get current user's auth token for the request
     const { data: sessionData } = await supabase.auth.getSession();

@@ -1,5 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from "react";
-import { useNativeSpeech, type SpeechSegment } from "./use-native-speech";
+import { useState, useCallback, useRef } from "react";
 
 /**
  * Live transcription using native speech recognition (Capacitor) with Web Speech API fallback.
@@ -13,20 +12,54 @@ export interface TranscriptSegment {
   startMs: number;
 }
 
+type WebSpeechRecognitionResult = {
+  isFinal: boolean;
+  0: { transcript: string };
+};
+
+type WebSpeechRecognitionEvent = {
+  resultIndex: number;
+  results: ArrayLike<WebSpeechRecognitionResult>;
+};
+
+type WebSpeechRecognitionErrorEvent = {
+  error: string;
+};
+
+type WebSpeechRecognitionInstance = {
+  lang: string;
+  continuous: boolean;
+  interimResults: boolean;
+  maxAlternatives: number;
+  onstart: (() => void) | null;
+  onresult: ((event: WebSpeechRecognitionEvent) => void) | null;
+  onerror: ((event: WebSpeechRecognitionErrorEvent) => void) | null;
+  onend: (() => void) | null;
+  start: () => void;
+  stop: () => void;
+};
+
+type WebSpeechRecognitionConstructor = new () => WebSpeechRecognitionInstance;
+
+type SpeechRecognitionWindow = Window & {
+  SpeechRecognition?: WebSpeechRecognitionConstructor;
+  webkitSpeechRecognition?: WebSpeechRecognitionConstructor;
+};
+
+const getWebSpeechRecognition = (): WebSpeechRecognitionConstructor | undefined => {
+  const speechWindow = window as SpeechRecognitionWindow;
+  return speechWindow.SpeechRecognition ?? speechWindow.webkitSpeechRecognition;
+};
+
 export function useClassroomTranscription(opts?: { language?: string }) {
   const [isTranscribing, setIsTranscribing] = useState(false);
   const [segments, setSegments] = useState<TranscriptSegment[]>([]);
   const [currentInterim, setCurrentInterim] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [isSupported, setIsSupported] = useState(false);
-  const recognitionRef = useRef<any>(null);
+  const [isSupported] = useState(() => Boolean(getWebSpeechRecognition()));
+  const recognitionRef = useRef<WebSpeechRecognitionInstance | null>(null);
   const startTimeRef = useRef<number>(0);
   const segmentCountRef = useRef(0);
-
-  useEffect(() => {
-    const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    setIsSupported(!!SR);
-  }, []);
 
   const formatTime = (ms: number): string => {
     const totalSec = Math.floor(ms / 1000);
@@ -37,13 +70,13 @@ export function useClassroomTranscription(opts?: { language?: string }) {
   };
 
   const start = useCallback((speakerName = "Sprecher") => {
-    const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    if (!SR) {
+    const SpeechRecognitionCtor = getWebSpeechRecognition();
+    if (!SpeechRecognitionCtor) {
       setError("Spracherkennung wird von diesem Browser nicht unterstützt.");
       return;
     }
 
-    const recognition = new SR();
+    const recognition = new SpeechRecognitionCtor();
     recognition.lang = opts?.language || "de-DE";
     recognition.continuous = true;
     recognition.interimResults = true;
@@ -56,7 +89,7 @@ export function useClassroomTranscription(opts?: { language?: string }) {
       setError(null);
     };
 
-    recognition.onresult = (event: any) => {
+    recognition.onresult = (event) => {
       let finalText = "";
       let interimText = "";
 
@@ -88,7 +121,7 @@ export function useClassroomTranscription(opts?: { language?: string }) {
       }
     };
 
-    recognition.onerror = (event: any) => {
+    recognition.onerror = (event) => {
       if (event.error === "no-speech") return;
       if (event.error === "aborted") return;
       setError(`Sprachfehler: ${event.error}`);
@@ -172,6 +205,11 @@ export function useClassroomSummary() {
         const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
         const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
+        if (!supabaseUrl || !supabaseKey) {
+          setSummary(generateLocalSummary(transcript, sessionTitle));
+          return;
+        }
+
         // Try edge function first
         const response = await fetch(`${supabaseUrl}/functions/v1/classroom-ai`, {
           method: "POST",
@@ -196,7 +234,7 @@ export function useClassroomSummary() {
 
         const data = await response.json();
         setSummary(data.summary);
-      } catch (e: unknown) {
+      } catch {
         // Fallback to local summary
         const fallbackSummary = generateLocalSummary(transcript, sessionTitle);
         setSummary(fallbackSummary);

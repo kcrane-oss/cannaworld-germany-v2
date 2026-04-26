@@ -22,35 +22,69 @@ interface UseNativeSpeechOpts {
   onSegment?: (segment: SpeechSegment) => void;
 }
 
+type WebSpeechRecognitionResult = {
+  isFinal: boolean;
+  0: { transcript: string };
+};
+
+type WebSpeechRecognitionEvent = {
+  results: ArrayLike<WebSpeechRecognitionResult>;
+};
+
+type WebSpeechRecognitionErrorEvent = {
+  error: string;
+};
+
+type WebSpeechRecognitionInstance = {
+  lang: string;
+  continuous: boolean;
+  interimResults: boolean;
+  maxAlternatives: number;
+  onstart: (() => void) | null;
+  onresult: ((event: WebSpeechRecognitionEvent) => void) | null;
+  onerror: ((event: WebSpeechRecognitionErrorEvent) => void) | null;
+  onend: (() => void) | null;
+  start: () => void;
+  stop: () => void;
+};
+
+type WebSpeechRecognitionConstructor = new () => WebSpeechRecognitionInstance;
+
+type SpeechRecognitionWindow = Window & {
+  SpeechRecognition?: WebSpeechRecognitionConstructor;
+  webkitSpeechRecognition?: WebSpeechRecognitionConstructor;
+};
+
+const getWebSpeechRecognition = (): WebSpeechRecognitionConstructor | undefined => {
+  const speechWindow = window as SpeechRecognitionWindow;
+  return speechWindow.SpeechRecognition ?? speechWindow.webkitSpeechRecognition;
+};
+
+const isNativePlatform = () => Capacitor.isNativePlatform();
+
 export function useNativeSpeech(opts?: UseNativeSpeechOpts) {
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState("");
   const [interimTranscript, setInterimTranscript] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [isSupported, setIsSupported] = useState(false);
-  const [isNative, setIsNative] = useState(false);
+  const [isNative] = useState(isNativePlatform);
+  const [isSupported, setIsSupported] = useState(() => !isNativePlatform() && Boolean(getWebSpeechRecognition()));
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
 
-  const webRecognitionRef = useRef<any>(null);
+  const webRecognitionRef = useRef<WebSpeechRecognitionInstance | null>(null);
   const segmentCountRef = useRef(0);
   const language = opts?.language || "de-DE";
+  const continuous = opts?.continuous ?? true;
+  const onSegment = opts?.onSegment;
 
-  // Detect platform
+  // Detect native speech availability after mount.
   useEffect(() => {
-    const native = Capacitor.isNativePlatform();
-    setIsNative(native);
+    if (!isNative) return;
 
-    if (native) {
-      // Check native availability
-      SpeechRecognition.available().then(({ available }) => {
-        setIsSupported(available);
-      }).catch(() => setIsSupported(false));
-    } else {
-      // Check Web Speech API
-      const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-      setIsSupported(!!SR);
-    }
-  }, []);
+    SpeechRecognition.available().then(({ available }) => {
+      setIsSupported(available);
+    }).catch(() => setIsSupported(false));
+  }, [isNative]);
 
   // Request permission (native only)
   const requestPermission = useCallback(async (): Promise<boolean> => {
@@ -103,21 +137,21 @@ export function useNativeSpeech(opts?: UseNativeSpeechOpts) {
         // We get results from the resolved promise
         // For continuous mode, we restart in a loop
 
-      } catch (e: any) {
-        setError(e.message || "Spracherkennung fehlgeschlagen");
+      } catch (e: unknown) {
+        setError(e instanceof Error ? e.message : "Spracherkennung fehlgeschlagen");
         setIsListening(false);
       }
     } else {
       // ─── Web Speech API ───
-      const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-      if (!SR) {
+      const SpeechRecognitionCtor = getWebSpeechRecognition();
+      if (!SpeechRecognitionCtor) {
         setError("Spracherkennung nicht unterstützt");
         return;
       }
 
-      const recognition = new SR();
+      const recognition = new SpeechRecognitionCtor();
       recognition.lang = language;
-      recognition.continuous = opts?.continuous ?? true;
+      recognition.continuous = continuous;
       recognition.interimResults = true;
       recognition.maxAlternatives = 1;
 
@@ -126,7 +160,7 @@ export function useNativeSpeech(opts?: UseNativeSpeechOpts) {
         setError(null);
       };
 
-      recognition.onresult = (event: any) => {
+      recognition.onresult = (event) => {
         let interim = "";
         let finalText = "";
         for (let i = 0; i < event.results.length; i++) {
@@ -140,7 +174,7 @@ export function useNativeSpeech(opts?: UseNativeSpeechOpts) {
         if (finalText) {
           setTranscript((prev) => prev + finalText);
           segmentCountRef.current++;
-          opts?.onSegment?.({
+          onSegment?.({
             id: `web-${segmentCountRef.current}`,
             text: finalText.trim(),
             language,
@@ -151,7 +185,7 @@ export function useNativeSpeech(opts?: UseNativeSpeechOpts) {
         setInterimTranscript(interim);
       };
 
-      recognition.onerror = (event: any) => {
+      recognition.onerror = (event) => {
         if (event.error === "no-speech" || event.error === "aborted") return;
         setError(`Fehler: ${event.error}`);
         setIsListening(false);
@@ -159,7 +193,7 @@ export function useNativeSpeech(opts?: UseNativeSpeechOpts) {
 
       recognition.onend = () => {
         // Auto-restart for continuous mode
-        if (webRecognitionRef.current && opts?.continuous !== false) {
+        if (webRecognitionRef.current && continuous) {
           try {
             recognition.start();
           } catch {
@@ -173,18 +207,18 @@ export function useNativeSpeech(opts?: UseNativeSpeechOpts) {
       webRecognitionRef.current = recognition;
       recognition.start();
     }
-  }, [isNative, language, opts?.continuous, opts?.onSegment, requestPermission]);
+  }, [isNative, language, continuous, onSegment, requestPermission]);
 
   // Stop listening
   const stop = useCallback(async () => {
     if (isNative) {
       try {
-        const result = (await SpeechRecognition.stop()) as any;
+        const result = await SpeechRecognition.stop() as unknown as { matches?: string[] };
         if (result?.matches?.[0]) {
           const finalText = result.matches[0];
           setTranscript((prev) => prev + (prev ? " " : "") + finalText);
           segmentCountRef.current++;
-          opts?.onSegment?.({
+          onSegment?.({
             id: `native-${segmentCountRef.current}`,
             text: finalText,
             language,
@@ -193,7 +227,7 @@ export function useNativeSpeech(opts?: UseNativeSpeechOpts) {
           });
         }
         SpeechRecognition.removeAllListeners();
-      } catch { /* ignore */ }
+      } catch { /* Native stop may throw if recognition has already ended. */ }
     } else {
       const rec = webRecognitionRef.current;
       webRecognitionRef.current = null;
@@ -201,7 +235,7 @@ export function useNativeSpeech(opts?: UseNativeSpeechOpts) {
     }
     setIsListening(false);
     setInterimTranscript("");
-  }, [isNative, language, opts?.onSegment]);
+  }, [isNative, language, onSegment]);
 
   // Reset
   const reset = useCallback(() => {

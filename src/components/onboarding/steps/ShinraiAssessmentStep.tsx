@@ -1,7 +1,6 @@
 import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
 import { ArrowLeft, Send, Shield, Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { OnboardingData } from "@/hooks/useRoleOnboarding";

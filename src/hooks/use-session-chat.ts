@@ -67,7 +67,9 @@ export function useSessionChat(sessionId: string | undefined) {
           }
         )
         .subscribe();
-    } catch {}
+    } catch {
+      // Realtime chat table is optional in this deployment.
+    }
 
     return () => {
       if (channel) supabase.removeChannel(channel).catch(() => {});

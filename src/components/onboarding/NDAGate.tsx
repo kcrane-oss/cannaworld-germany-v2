@@ -54,7 +54,7 @@ CannaWorld Co., Ltd.
 140 One Pacific Place, Suite 1705, 17th Floor
 Sukhumvit Road, Khlong Toei, Bangkok 10110, Thailand`;
 
-export function NDAGate({ role, onAccept, onBack, saving }: Props) {
+export function NDAGate({ onAccept, onBack, saving }: Props) {
   const { t } = useTranslation();
   const [hasRead, setHasRead] = useState(false);
   const [signeeName, setSigneeName] = useState("");

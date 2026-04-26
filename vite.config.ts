@@ -5,7 +5,7 @@ import path from "path";
 import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
+export default defineConfig(() => ({
   server: {
     host: "::",
     port: 8080,
@@ -18,7 +18,7 @@ export default defineConfig(({ mode }) => ({
     VitePWA({
       injectRegister: null,
       registerType: "autoUpdate",
-      includeAssets: ["favicon.png", "cannaworld-vortex-logo.png"],
+      includeAssets: ["favicon.svg", "cannaworld-logo-new.webp"],
       workbox: {
         maximumFileSizeToCacheInBytes: 20 * 1024 * 1024,
         navigateFallback: "/offline.html",
@@ -47,16 +47,6 @@ export default defineConfig(({ mode }) => ({
             },
           },
           {
-            urlPattern: /^https:\/\/.*\.supabase\.co\/.*/i,
-            handler: "NetworkFirst",
-            options: {
-              cacheName: "api-cache",
-              networkTimeoutSeconds: 10,
-              expiration: { maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 },
-              cacheableResponse: { statuses: [0, 200] },
-            },
-          },
-          {
             urlPattern: ({ request }) => request.mode === "navigate",
             handler: "NetworkFirst",
             options: {
@@ -78,9 +68,9 @@ export default defineConfig(({ mode }) => ({
         start_url: "/",
         scope: "/",
         icons: [
-          { src: "/favicon.png", sizes: "64x64", type: "image/png" },
-          { src: "/cannaworld-vortex-logo.png", sizes: "192x192", type: "image/png" },
-          { src: "/cannaworld-vortex-logo.png", sizes: "512x512", type: "image/png", purpose: "any maskable" },
+          { src: "/favicon.svg", sizes: "64x64", type: "image/svg+xml" },
+          { src: "/cannaworld-logo-new.webp", sizes: "192x192", type: "image/webp" },
+          { src: "/cannaworld-logo-new.webp", sizes: "512x512", type: "image/webp", purpose: "any maskable" },
         ],
       },
     }),

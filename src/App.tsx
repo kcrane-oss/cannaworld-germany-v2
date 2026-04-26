@@ -1,4 +1,5 @@
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import type { FormEvent } from "react";
 import {
   BrowserRouter,
   Link,
@@ -29,7 +30,6 @@ import {
   Package,
   PackageCheck,
   Scale,
-  Settings,
   Shield,
   ShieldCheck,
   ShoppingBag,
@@ -210,7 +210,7 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
   services: {
     eyebrow: "Gateway Service Transfer",
     title: "Gateway Services for Germany",
-    description: "Alle Gateway-Angebote logisch auf die deutsche B2B-Rolle übersetzt: Intake, Qualifizierung, Dokumentenprüfung, Trade Matching und Trust Layer.",
+    description: "Gateway-Angebote für die deutsche B2B-Rolle übersetzt: Intake, Qualifizierung, Dokumentenprüfung, Trade Matching und Trust Layer — ohne eigenes Germany-Backend.",
     stats: ["24 Service-Bausteine", "4 Service-Layer", "DE Intake", "Gateway Handoff"],
     actions: ["Service auswählen", "Import-Fit prüfen", "Gateway-Handoff vorbereiten"],
   },
@@ -234,7 +234,7 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
 const serviceGroups = [
   {
     title: "Digital Platform",
-    subtitle: "Gateway-Software als deutscher Intake- und Prüfpfad.",
+    subtitle: "Germany als Intake- und Prüfoberfläche auf dem gemeinsamen Gateway/Supabase Backend.",
     items: [
       [Shield, "Compliance Gateway", "BfArM/GDP/GMP-Fit vor kommerzieller Weiterleitung prüfen."],
       [Globe2, "Regulatory Gateway", "Deutsche Rollen, Lizenzstatus und Importfähigkeit strukturiert einordnen."],
@@ -265,7 +265,7 @@ const serviceGroups = [
       [Truck, "GDP Logistics", "Transport-, Zoll- und Cold-Chain-Readiness für Deutschland abbilden."],
       [ClipboardCheck, "QP Release Support", "Realistisch einschätzen, ob ein Batch QP-fähig ist."],
       [Network, "Commercial Matching", "Deutsche Nachfrage mit compliance-gefilterter Supply verbinden."],
-      [Database, "Cross-Platform Sync", "Germany als Frontdoor, Gateway/AICert/Marketplace als Backend-Ökosystem."],
+      [Database, "Cross-Platform Sync", "Germany als Frontdoor; Backend läuft über das gemeinsame Gateway/Supabase-Ökosystem."],
     ],
   },
   {
@@ -749,7 +749,7 @@ function DashboardModule({ moduleKey }: { moduleKey: string }) {
             ))}
           </div>
           <div className="mt-6 rounded-2xl border border-amber-300/20 bg-amber-300/10 p-4 text-sm leading-6 text-amber-100/80">
-            Modul ist als Germany-Dashboard-Oberfläche integriert. Backend-Transaktionen bleiben bewusst kontrolliert, bis Rollen, Auth und Datenquellen final bestätigt sind.
+            Modul ist als Germany-Dashboard-Oberfläche integriert. Es gibt kein separates Germany-Backend; Transaktionen laufen erst nach Rollen-, Auth- und Datenquellen-Freigabe über das gemeinsame Gateway/Supabase Backend.
           </div>
         </div>
       </section>
