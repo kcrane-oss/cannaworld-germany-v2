@@ -1,13 +1,15 @@
 import { supabase } from "@/integrations/supabase/client";
+import { getPayloadError, toErrorMessage, type JsonRecord } from "@cannaworld/sdk";
 
-async function invokeLimsProxy<T>(body: Record<string, unknown>) {
+async function invokeLimsProxy<T>(body: JsonRecord) {
   try {
     const { data, error } = await supabase.functions.invoke("lims-proxy", { body });
     if (error) return { data: null as T | null, error: error.message };
-    if (data?.error) return { data: null as T | null, error: data.error };
+    const payloadError = getPayloadError(data);
+    if (payloadError) return { data: null, error: payloadError };
     return { data: data as T, error: null };
-  } catch (err: any) {
-    return { data: null as T | null, error: err.message || "Unknown error" };
+  } catch (err: unknown) {
+    return { data: null as T | null, error: toErrorMessage(err) };
   }
 }
 
@@ -15,7 +17,7 @@ export const parseCoA = (params: {
   coa_url: string;
   batch_id?: string;
   lab_name?: string;
-}) => invokeLimsProxy<{ success: boolean; lab_result: any; parsed_data: any }>({
+}) => invokeLimsProxy<{ success: boolean; lab_result: JsonRecord; parsed_data: JsonRecord }>({
   action: "parse_coa",
   ...params,
 });

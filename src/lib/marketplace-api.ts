@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { getPayloadError, toErrorMessage, type ApiResult, type JsonRecord } from "@cannaworld/sdk";
 
 export interface MarketplaceBatch {
   id: string;
@@ -28,12 +29,20 @@ export interface MarketplaceStats {
   certifications: Record<string, number>;
 }
 
-interface ProxyResponse<T> {
-  data: T | null;
-  error: string | null;
+export interface MarketplaceOrder {
+  id?: string;
+  order_id?: string;
+  status: string;
+  [key: string]: unknown;
 }
 
-async function invokeMarketplace<T>(body: Record<string, unknown>): Promise<ProxyResponse<T>> {
+export interface SyncEnvelope {
+  success: boolean;
+  ai_cert_sync?: JsonRecord;
+  audit_entry?: JsonRecord;
+}
+
+async function invokeMarketplace<T>(body: JsonRecord): Promise<ApiResult<T>> {
   try {
     const { data, error } = await supabase.functions.invoke("marketplace-proxy", { body });
 
@@ -41,13 +50,14 @@ async function invokeMarketplace<T>(body: Record<string, unknown>): Promise<Prox
       return { data: null, error: error.message || "Request failed" };
     }
 
-    if (data?.error) {
-      return { data: null, error: data.error };
+    const payloadError = getPayloadError(data);
+    if (payloadError) {
+      return { data: null, error: payloadError };
     }
 
     return { data: data as T, error: null };
-  } catch (err: any) {
-    return { data: null, error: err.message || "Unknown error" };
+  } catch (err: unknown) {
+    return { data: null, error: toErrorMessage(err) };
   }
 }
 
@@ -93,7 +103,7 @@ export async function createMarketplaceOrder(batchId: string, quantity: number, 
 
 /** Update order status */
 export async function updateMarketplaceOrder(orderId: string, status: string) {
-  return invokeMarketplace<{ order: any }>({
+  return invokeMarketplace<{ order: MarketplaceOrder }>({
     action: "update_order",
     order_id: orderId,
     status,
@@ -115,7 +125,7 @@ export async function auditSync(params: {
   new_status?: string;
   details?: string;
 }) {
-  return invokeMarketplace<{ success: boolean; audit_entry: any; ai_cert_sync: any }>({
+  return invokeMarketplace<SyncEnvelope>({
     action: "audit_sync",
     ...params,
   });
@@ -140,7 +150,7 @@ export async function checkConnectionStatus() {
   return invokeMarketplace<{
     platform: string;
     timestamp: string;
-    connections: Record<string, { status: string; [key: string]: any }>;
+    connections: Record<string, { status: string; [key: string]: unknown }>;
   }>({
     action: "connection_status",
   });
@@ -148,7 +158,7 @@ export async function checkConnectionStatus() {
 
 /** Verify certificate via marketplace → AI Cert */
 export async function verifyCertificateViaMarketplace(certificateNumber: string) {
-  return invokeMarketplace<{ verified: boolean; certificate: any }>({
+  return invokeMarketplace<{ verified: boolean; certificate: JsonRecord }>({
     action: "verify_certificate",
     certificate_number: certificateNumber,
   });
@@ -163,7 +173,7 @@ export async function regulatorySync(params: {
   change_type?: string;
   description?: string;
 }) {
-  return invokeMarketplace<{ success: boolean; ai_cert_sync: any }>({
+  return invokeMarketplace<SyncEnvelope>({
     action: "regulatory_sync",
     ...params,
   });
@@ -177,7 +187,7 @@ export async function complianceSync(params: {
   new_score: string;
   details?: string;
 }) {
-  return invokeMarketplace<{ success: boolean; ai_cert_sync: any }>({
+  return invokeMarketplace<SyncEnvelope>({
     action: "compliance_sync",
     ...params,
   });
@@ -185,7 +195,7 @@ export async function complianceSync(params: {
 
 /** Query audit data from AI Cert via marketplace */
 export async function auditQuery(subAction: string, params?: { audit_id?: string; company_id?: string }) {
-  return invokeMarketplace<any>({
+  return invokeMarketplace<JsonRecord>({
     action: "audit_query",
     sub_action: subAction,
     ...params,

@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { toErrorMessage } from "@cannaworld/sdk";
 
 interface CrossLoginResult {
   success: boolean;
@@ -15,7 +16,7 @@ export async function getCrossLoginUrl(target: "ai-cert" | "marketplace" = "ai-c
     if (error) return { data: null as CrossLoginResult | null, error: error.message };
     if (data?.error) return { data: null as CrossLoginResult | null, error: data.error };
     return { data: data as CrossLoginResult, error: null };
-  } catch (err: any) {
-    return { data: null as CrossLoginResult | null, error: err.message || "Unknown error" };
+  } catch (err: unknown) {
+    return { data: null as CrossLoginResult | null, error: toErrorMessage(err) };
   }
 }

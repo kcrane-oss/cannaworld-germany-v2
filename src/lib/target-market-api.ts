@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { getPayloadError, toErrorMessage, type ApiResult, type JsonRecord } from "@cannaworld/sdk";
 
 export interface MarketAnalysisResult {
   results?: Array<{
@@ -26,14 +27,15 @@ export interface RegulatoryUpdate {
   source_platform?: string;
 }
 
-async function invokeTargetMarket<T>(body: Record<string, unknown>) {
+async function invokeTargetMarket<T>(body: JsonRecord): Promise<ApiResult<T>> {
   try {
     const { data, error } = await supabase.functions.invoke("target-market-proxy", { body });
     if (error) return { data: null as T | null, error: error.message };
-    if (data?.error) return { data: null as T | null, error: data.error };
+    const payloadError = getPayloadError(data);
+    if (payloadError) return { data: null, error: payloadError };
     return { data: data as T, error: null };
-  } catch (err: any) {
-    return { data: null as T | null, error: err.message || "Unknown error" };
+  } catch (err: unknown) {
+    return { data: null, error: toErrorMessage(err) };
   }
 }
 
@@ -48,10 +50,10 @@ export const analyzeTargetMarkets = (batch: {
 }) => invokeTargetMarket<MarketAnalysisResult>({ action: "analyze", ...batch });
 
 export const getRegulations = () =>
-  invokeTargetMarket<{ regulations: Record<string, any> }>({ action: "get_regulations" });
+  invokeTargetMarket<{ regulations: Record<string, JsonRecord> }>({ action: "get_regulations" });
 
 export const runRegulatoryAiScan = () =>
-  invokeTargetMarket<{ alerts: any[] }>({ action: "ai_scan" });
+  invokeTargetMarket<{ alerts: RegulatoryUpdate[] }>({ action: "ai_scan" });
 
 export const getRegulatoryUpdates = () =>
   invokeTargetMarket<{ updates: RegulatoryUpdate[] }>({ action: "get_updates" });

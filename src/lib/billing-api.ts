@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { getPayloadError, toErrorMessage, type ApiResult, type JsonRecord } from "@cannaworld/sdk";
 
 export interface Invoice {
   id: string;
@@ -97,14 +98,15 @@ export const PLANS = {
   },
 } as const;
 
-async function invokeBilling<T>(body: Record<string, unknown>): Promise<{ data: T | null; error: string | null }> {
+async function invokeBilling<T>(body: JsonRecord): Promise<ApiResult<T>> {
   try {
     const { data, error } = await supabase.functions.invoke("billing", { body });
     if (error) return { data: null, error: error.message };
-    if (data?.error) return { data: null, error: data.error };
+    const payloadError = getPayloadError(data);
+    if (payloadError) return { data: null, error: payloadError };
     return { data: data as T, error: null };
-  } catch (err: any) {
-    return { data: null, error: err.message || "Unknown error" };
+  } catch (err: unknown) {
+    return { data: null, error: toErrorMessage(err) };
   }
 }
 
@@ -180,7 +182,7 @@ export async function downloadInvoicePdf(invoiceId: string): Promise<void> {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-  } catch (err: any) {
-    throw new Error(err.message || "PDF download failed");
+  } catch (err: unknown) {
+    throw new Error(toErrorMessage(err, "PDF download failed"));
   }
 }

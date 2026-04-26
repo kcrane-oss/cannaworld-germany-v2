@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { getPayloadError, toErrorMessage, type ApiResult, type JsonRecord } from "@cannaworld/sdk";
 
 export interface AuditStatusResult {
   source: string;
@@ -66,7 +67,7 @@ export interface UniverseStats {
 
 const NEW_FUNCTIONS_URL = import.meta.env.VITE_SUPABASE_URL + "/functions/v1";
 
-async function invokeAuditProxy<T>(body: Record<string, unknown>) {
+async function invokeAuditProxy<T>(body: JsonRecord): Promise<ApiResult<T>> {
   try {
     // Get current user's auth token for the request
     const { data: sessionData } = await supabase.auth.getSession();
@@ -87,10 +88,11 @@ async function invokeAuditProxy<T>(body: Record<string, unknown>) {
     }
 
     const data = await response.json();
-    if (data?.error) return { data: null as T | null, error: data.error };
+    const payloadError = getPayloadError(data);
+    if (payloadError) return { data: null, error: payloadError };
     return { data: data as T, error: null };
-  } catch (err: any) {
-    return { data: null as T | null, error: err.message || "Unknown error" };
+  } catch (err: unknown) {
+    return { data: null, error: toErrorMessage(err) };
   }
 }
 
@@ -104,7 +106,7 @@ export const verifyCertificate = (certificateNumber: string) =>
   invokeAuditProxy<CertificateVerification>({ action: "verify_certificate", certificate_number: certificateNumber });
 
 export const verifyReport = (reportNumber: string, hash?: string) =>
-  invokeAuditProxy<{ verified: boolean; report: any }>({ action: "verify_report", report_number: reportNumber, hash });
+  invokeAuditProxy<{ verified: boolean; report: JsonRecord }>({ action: "verify_report", report_number: reportNumber, hash });
 
 export const getUniverseStats = () =>
   invokeAuditProxy<UniverseStats>({ action: "universe_stats" });
