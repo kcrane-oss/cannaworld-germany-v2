@@ -118,6 +118,7 @@ export async function signWithDilithium(
   data: string,
   _privateKey?: string
 ): Promise<QuantumSignature> {
+  void _privateKey;
   const dataHash = await quantumHash(data);
   const timestamp = new Date().toISOString();
   // Simulated signature using HMAC-like construction

@@ -11,13 +11,10 @@ export const useUserRoles = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!user) {
-      setRoles([]);
-      setLoading(false);
-      return;
-    }
+    if (!user) return;
 
     const fetch = async () => {
+      setLoading(true);
       const { data } = await supabase
         .from("user_roles")
         .select("role")
@@ -29,5 +26,8 @@ export const useUserRoles = () => {
     fetch();
   }, [user]);
 
-  return { roles, loading, hasRole: (r: AppRole) => roles.includes(r) };
+  const effectiveRoles = user ? roles : [];
+  const effectiveLoading = user ? loading : false;
+
+  return { roles: effectiveRoles, loading: effectiveLoading, hasRole: (r: AppRole) => effectiveRoles.includes(r) };
 };

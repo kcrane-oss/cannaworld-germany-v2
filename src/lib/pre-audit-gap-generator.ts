@@ -102,7 +102,6 @@ export function generatePreAuditReport(
   // ─── Analyze each axis ───
 
   // CULTIVATION (fac_gacp)
-  const cultScore = assessment.cultivation?.score ?? 0;
   const gacpAnswer = assessment.cultivation?.answers?.fac_gacp ?? 0;
 
   if (gacpAnswer <= 1) {
@@ -116,7 +115,6 @@ export function generatePreAuditReport(
   }
 
   // POST-HARVEST (ph_drying, ph_storage)
-  const phScore = assessment.post_harvest?.score ?? 0;
   const dryingAnswer = assessment.post_harvest?.answers?.ph_drying ?? 0;
   const storageAnswer = assessment.post_harvest?.answers?.ph_storage ?? 0;
 
@@ -151,7 +149,6 @@ export function generatePreAuditReport(
   }
 
   // DOCUMENTATION (doc_batch_records)
-  const docScore = assessment.documentation?.score ?? 0;
   const batchAnswer = assessment.documentation?.answers?.doc_batch_records ?? 0;
 
   if (batchAnswer === 0) {
@@ -183,7 +180,6 @@ export function generatePreAuditReport(
   }
 
   // QUALITY TESTING (qa_lab_accredited)
-  const qaScore = assessment.quality_testing?.score ?? 0;
   const labAnswer = assessment.quality_testing?.answers?.qa_lab_accredited ?? 0;
 
   if (labAnswer === 0) {
@@ -215,7 +211,6 @@ export function generatePreAuditReport(
   }
 
   // PERSONNEL (staff_trained)
-  const staffScore = assessment.personnel?.score ?? 0;
   const trainedAnswer = assessment.personnel?.answers?.staff_trained ?? 0;
 
   if (trainedAnswer <= 1) {

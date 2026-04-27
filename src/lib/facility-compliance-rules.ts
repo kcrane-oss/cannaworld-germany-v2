@@ -65,10 +65,6 @@ const MIN_AIR_CHANGES: Record<string, number> = {
   eu_gmp_d: 6,
 };
 
-function isHighGrade(classification: string): boolean {
-  return (GRADE_ORDER[classification] ?? 0) >= 2;
-}
-
 function isAirlock(classification: string): boolean {
   return classification === "material_airlock" || classification === "personnel_airlock";
 }
