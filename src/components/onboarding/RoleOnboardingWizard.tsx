@@ -114,17 +114,11 @@ export function RoleOnboardingWizard({ role }: Props) {
 
   const handleSubmit = async () => {
     await save({ status: "submitted" });
-    // Assign role + mark profile onboarding complete
+    // Mark onboarding complete. Role grants are backend/admin-only; never write user_roles from the browser.
     if (user) {
       await (supabase as any)
-        .from("user_roles")
-        .upsert(
-          { user_id: user.id, role } as any,
-          { onConflict: "user_id,role" }
-        );
-      await (supabase as any)
         .from("profiles")
-        .update({ onboarding_completed: true, role })
+        .update({ onboarding_completed: true })
         .eq("user_id", user.id);
 
       // Phase 1 complete → generate contract signature token
