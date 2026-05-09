@@ -65,8 +65,8 @@ const stats = [
   ["EU-GMP", "Dokumentenpfad"],
   ["GDP", "Lieferkette"],
   ["GACP", "Cultivation Proof"],
-  ["ShinrAi", "Trust Layer"],
-  ["AICert", "Pre-Audit"],
+  ["QP", "Release Track"],
+  ["QA", "Review Layer"],
 ];
 
 const groups = [
@@ -89,8 +89,8 @@ const cards = [
   },
   {
     icon: ShieldCheck,
-    title: "Proof of Trust",
-    text: "AICert, ShinrAi und Auditdaten bilden die prüfbare Vertrauensebene zwischen Supply und deutschem Markt.",
+    title: "Document Proof",
+    text: "Dokumente, Auditdaten und Release-Signale bilden die prüfbare Vertrauensebene zwischen Supply und deutschem Markt.",
   },
 ];
 
@@ -163,11 +163,11 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     actions: ["QP Pack erstellen", "Abweichung markieren", "Freigabe vorbereiten"],
   },
   compliance: {
-    eyebrow: "AICert / ShinrAi",
+    eyebrow: "Compliance Readiness",
     title: "Compliance Dashboard",
     description: "EU-GMP/GDP/GACP-Abdeckung als prüfbare Matrix. Ideal für schnelle Gap-Analyse vor Importgesprächen.",
     stats: ["GACP Proof", "GDP Chain", "EU-GMP Evidence", "CAPA Status"],
-    actions: ["Pre-Audit starten", "Gap Report exportieren", "CAPA prüfen"],
+    actions: ["Gap Analyse starten", "Gap Report exportieren", "CAPA prüfen"],
   },
   logistics: {
     eyebrow: "Thailand → Germany",
@@ -179,7 +179,7 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
   suppliers: {
     eyebrow: "Verified Network",
     title: "Suppliers",
-    description: "Supplier-Profile mit Lizenzstatus, Auditdaten, Cultivation Proof, Batch-Historie und Trust Layer.",
+    description: "Supplier-Profile mit Lizenzstatus, Auditdaten, Cultivation Proof und Batch-Historie.",
     stats: ["Supplier Score", "Audit Passport", "License Evidence", "Batch History"],
     actions: ["Supplier prüfen", "Auditdaten öffnen", "Shortlist bauen"],
   },
@@ -207,7 +207,7 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
   "audit-passport": {
     eyebrow: "Proof Layer",
     title: "Audit Passport",
-    description: "Prüfbarer Vertrauenspass für Supplier, Facility, Batch und Dokumentenstand — anschlussfähig an AICert/ShinrAi.",
+    description: "Prüfbarer Vertrauenspass für Supplier, Facility, Batch und Dokumentenstand.",
     stats: ["Facility Proof", "Batch Proof", "Document Proof", "Decision Trail"],
     actions: ["Passport öffnen", "Nachweise prüfen", "PDF vorbereiten"],
   },
@@ -221,7 +221,7 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
   services: {
     eyebrow: "Gateway Service Transfer",
     title: "Gateway Services for Germany",
-    description: "Gateway-Angebote für die deutsche B2B-Rolle übersetzt: Intake, Qualifizierung, Dokumentenprüfung, Trade Matching und Trust Layer — ohne eigenes Germany-Backend.",
+    description: "Gateway-Angebote für die deutsche B2B-Rolle übersetzt: Intake, Qualifizierung, Dokumentenprüfung und Trade Matching — ohne eigenes Germany-Backend.",
     stats: ["24 Service-Bausteine", "4 Service-Layer", "DE Intake", "Gateway Handoff"],
     actions: ["Service auswählen", "Import-Fit prüfen", "Gateway-Handoff vorbereiten"],
   },
@@ -251,7 +251,7 @@ const serviceGroups = [
       [Globe2, "Regulatory Gateway", "Deutsche Rollen, Lizenzstatus und Importfähigkeit strukturiert einordnen."],
       [Package, "Batch Tracking", "Nur dokumentierte, release-nahe Chargen in die deutsche Pipeline lassen."],
       [Database, "Document Intelligence", "CoA, Batch Records, SOPs und Lizenzen zu buyer-ready Packs bündeln."],
-      [Sparkles, "ShinrAi Risk Scoring", "Supplier-, Facility-, Batch- und Dokumentenrisiken früh markieren."],
+      [Sparkles, "Regulatory Risk Scoring", "Supplier-, Facility-, Batch- und Dokumentenrisiken früh markieren."],
       [FileCheck, "AI Video Audit", "Remote-Facility-Proof als Vorfilter für deutsche Abnehmer."],
     ],
   },
@@ -259,7 +259,7 @@ const serviceGroups = [
     title: "Compliance & Advisory",
     subtitle: "Service-Schicht für Vertrauen, nicht nur Software-Demo.",
     items: [
-      [ClipboardCheck, "Pre-Audit Gap Analysis", "Schnelle Lückenanalyse bevor Zeit in ungeeignete Supplier fließt."],
+      [ClipboardCheck, "Import Gap Analysis", "Schnelle Lückenanalyse bevor Zeit in ungeeignete Supplier fließt."],
       [ShieldCheck, "QMS / SOP Readiness", "Qualitätssystem und SOP-Reife für deutsche Käufer erklärbar machen."],
       [BadgeCheck, "Certification Roadmap", "GACP/EU-GMP-nahe Nachweise in einen belastbaren Plan übersetzen."],
       [Scale, "Regulatory Positioning", "B2B-konforme Claims, Rollen und Marktpfad sauber halten."],
@@ -406,7 +406,7 @@ function LandingPage() {
           <div className="mx-auto mb-12 max-w-3xl text-center">
             <Badge>Warum .de?</Badge>
             <h2 className="mt-5 text-3xl font-extrabold tracking-tight md:text-5xl">Vertrauensanker für deutsche Apotheken und Importeure.</h2>
-            <p className="mt-4 text-white/58">CannaWorld Germany ist die deutsche Eintrittsstelle: klare Ansprechpartner, regulatorische Sprache und saubere Weiterleitung in AICert, Marketplace oder Europe.</p>
+            <p className="mt-4 text-white/58">CannaWorld Germany ist die deutsche Eintrittsstelle: klare Ansprechpartner, regulatorische Sprache und saubere Weiterleitung in passende Workstreams.</p>
           </div>
           <div className="grid gap-5 md:grid-cols-3">
             {cards.map((card) => (
@@ -463,7 +463,7 @@ function LandingPage() {
             <h2 className="text-3xl font-extrabold md:text-5xl">Import-Anfrage stellen.</h2>
             <p className="mx-auto mt-4 max-w-2xl text-white/58">Kurze Qualifizierung für Apotheken, Großhändler, Importeure und QA-/QP-nahe Entscheider mit realem medizinischem Bedarf.</p>
             <div className="mx-auto mt-8 grid max-w-2xl gap-3 text-left text-sm text-white/62 sm:grid-cols-2">
-              {[[Database, "Geprüfte internationale Supply"], [BadgeCheck, "EU-GMP/GDP/GACP-Dokumentation"], [Network, "Importfähigkeit & Release-Pfad"], [Sparkles, "AICert/ShinrAi Vorprüfung"]].map(([Icon, label]) => (
+              {[[Database, "Geprüfte internationale Supply"], [BadgeCheck, "EU-GMP/GDP/GACP-Dokumentation"], [Network, "Importfähigkeit & Release-Pfad"], [Sparkles, "Dokumenten-Vorprüfung"]].map(([Icon, label]) => (
                 <div key={String(label)} className="flex gap-2 rounded-2xl border border-white/10 bg-black/20 p-4">
                   <Icon className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" /> {String(label)}
                 </div>

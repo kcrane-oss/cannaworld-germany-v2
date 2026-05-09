@@ -1,0 +1,20 @@
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /login
+Disallow: /settings
+Disallow: /profile
+
+Sitemap: https://cannaworld-germany.de/sitemap.xml
