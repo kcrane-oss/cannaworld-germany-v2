@@ -1,6 +1,8 @@
 import TradeCases from "./pages/dashboard/TradeCases";
 import QPRelease from "./pages/dashboard/QPRelease";
 import Logistics from "./pages/dashboard/Logistics";
+import UniverseBar from "./components/UniverseBar";
+import CrossAppCTA from "./components/CrossAppCTA";
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import {
@@ -299,13 +301,14 @@ function Badge({ children }: { children: React.ReactNode }) {
 
 function LandingPage() {
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#070b10] text-[#f4f8fb] selection:bg-cyan-400/25">
+    <div className="min-h-screen overflow-x-hidden bg-[#070b10] pt-8 text-[#f4f8fb] selection:bg-cyan-400/25">
+      <UniverseBar current="germany" />
       <div className="pointer-events-none fixed inset-0 opacity-60">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.18),transparent_34%),radial-gradient(circle_at_75%_10%,rgba(34,197,94,0.14),transparent_28%),linear-gradient(180deg,#070b10,#091018_48%,#070b10)]" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_80%)]" />
       </div>
 
-      <nav className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#070b10]/78 backdrop-blur-2xl">
+      <nav className="fixed inset-x-0 top-8 z-50 border-b border-white/10 bg-[#070b10]/78 backdrop-blur-2xl">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 md:px-8">
           <Link to="/" className="flex items-center gap-3">
             <img src={logo} alt="CannaWorld" className="h-12 w-auto object-contain" />
@@ -546,7 +549,8 @@ function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#071016] px-5 py-10 text-white">
+    <div className="min-h-screen bg-[#071016] px-5 pb-10 pt-16 text-white">
+      <UniverseBar current="germany" />
       <Link to="/" className="inline-flex items-center gap-3 text-sm font-semibold text-white/60 hover:text-white">
         <img src={logo} alt="CannaWorld" className="h-8 w-auto" /> Zurück zur Landing
       </Link>
@@ -641,9 +645,10 @@ function DashboardLayout() {
   }
 
   return (
-    <div className="min-h-screen bg-[#071016] text-white">
+    <div className="min-h-screen bg-[#071016] pt-8 text-white">
+      <UniverseBar current="germany" />
       {open && <button aria-label="Close sidebar" className="fixed inset-0 z-40 bg-black/60 lg:hidden" onClick={() => setOpen(false)} />}
-      <aside className={`fixed inset-y-0 left-0 z-50 w-72 border-r border-white/10 bg-[#09131d]/95 backdrop-blur-xl transition-transform lg:translate-x-0 ${open ? "translate-x-0" : "-translate-x-full"}`}>
+      <aside className={`fixed bottom-0 left-0 top-8 z-50 w-72 border-r border-white/10 bg-[#09131d]/95 backdrop-blur-xl transition-transform lg:translate-x-0 ${open ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="flex h-20 items-center gap-3 border-b border-white/10 px-5">
           <img src={logo} alt="CannaWorld" className="h-10 w-auto" />
           <div className="leading-none">
@@ -675,7 +680,7 @@ function DashboardLayout() {
       </aside>
 
       <div className="lg:pl-72">
-        <header className="sticky top-0 z-30 flex h-20 items-center gap-4 border-b border-white/10 bg-[#071016]/82 px-5 backdrop-blur-xl lg:px-8">
+        <header className="sticky top-8 z-30 flex h-20 items-center gap-4 border-b border-white/10 bg-[#071016]/82 px-5 backdrop-blur-xl lg:px-8">
           <button className="rounded-xl border border-white/10 p-2 text-white/70 hover:bg-white/10 lg:hidden" onClick={() => setOpen(true)}>
             <Menu className="h-5 w-5" />
           </button>
@@ -776,16 +781,30 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
                 <Route path="/dashboard" element={<ProtectedDashboard />}>
           <Route index element={<DashboardModule moduleKey="overview" />} />
-          <Route path="trade-cases" element={<TradeCases />} />
+          <Route
+            path="trade-cases"
+            element={
+              <div className="space-y-7">
+                <TradeCases />
+                <CrossAppCTA moduleKey="trade-cases" />
+              </div>
+            }
+          />
           <Route path="qp-release" element={<QPRelease />} />
           <Route path="logistics" element={<Logistics />} />
           {dashboardNav.slice(1).map((item) => {
             if (["trade-cases", "qp-release", "logistics"].includes(item.key)) return null;
+            const Body = item.key === "services" ? <GatewayServicesPreview /> : <DashboardModule moduleKey={item.key} />;
             return (
               <Route
                 key={item.key}
                 path={item.key}
-                element={item.key === "services" ? <GatewayServicesPreview /> : <DashboardModule moduleKey={item.key} />}
+                element={
+                  <div className="space-y-7">
+                    {Body}
+                    <CrossAppCTA moduleKey={item.key} />
+                  </div>
+                }
               />
             );
           })}
