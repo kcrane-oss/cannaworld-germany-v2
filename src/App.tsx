@@ -6,6 +6,8 @@ import Compliance from "./pages/dashboard/Compliance";
 import Regulatory from "./pages/dashboard/Regulatory";
 import Suppliers from "./pages/dashboard/Suppliers";
 import Batches from "./pages/dashboard/Batches";
+import WarehousePage from "./pages/dashboard/Warehouse";
+import DocumentsPage from "./pages/dashboard/Documents";
 import UniverseBar from "./components/UniverseBar";
 import CrossAppCTA from "./components/CrossAppCTA";
 import RoleGuard from "./components/RoleGuard";
@@ -829,7 +831,7 @@ function App() {
             }
           />
           {dashboardNav.slice(1).map((item) => {
-            if (["trade-cases", "qp-release", "logistics", "compliance", "regulatory", "suppliers", "batches"].includes(item.key)) return null;
+            if (["trade-cases", "qp-release", "logistics", "compliance", "regulatory", "suppliers", "batches", "warehouse", "documents"].includes(item.key)) return null;
             const Body = item.key === "services" ? <GatewayServicesPreview /> : <DashboardModule moduleKey={item.key} />;
             return (
               <Route
@@ -882,6 +884,8 @@ function App() {
               </div>
             }
           />
+          <Route path="warehouse" element={<WarehousePage />} />
+          <Route path="documents" element={<DocumentsPage />} />
           <Route path="settings" element={<DashboardModule moduleKey="settings" />} />
           <Route path="profile" element={<DashboardModule moduleKey="profile" />} />
         </Route>
