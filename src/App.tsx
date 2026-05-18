@@ -3,6 +3,8 @@ import QPRelease from "./pages/dashboard/QPRelease";
 import Logistics from "./pages/dashboard/Logistics";
 import UniverseBar from "./components/UniverseBar";
 import CrossAppCTA from "./components/CrossAppCTA";
+import RoleGuard from "./components/RoleGuard";
+import { AuthProvider } from "./hooks/useAuth";
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import {
@@ -775,8 +777,9 @@ function DashboardModule({ moduleKey }: { moduleKey: string }) {
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
                 <Route path="/dashboard" element={<ProtectedDashboard />}>
@@ -784,14 +787,30 @@ function App() {
           <Route
             path="trade-cases"
             element={
-              <div className="space-y-7">
-                <TradeCases />
-                <CrossAppCTA moduleKey="trade-cases" />
-              </div>
+              <RoleGuard allowedRoles={["importer", "exporter", "compliance", "auditor"]}>
+                <div className="space-y-7">
+                  <TradeCases />
+                  <CrossAppCTA moduleKey="trade-cases" />
+                </div>
+              </RoleGuard>
             }
           />
-          <Route path="qp-release" element={<QPRelease />} />
-          <Route path="logistics" element={<Logistics />} />
+          <Route
+            path="qp-release"
+            element={
+              <RoleGuard allowedRoles={["compliance", "auditor"]}>
+                <QPRelease />
+              </RoleGuard>
+            }
+          />
+          <Route
+            path="logistics"
+            element={
+              <RoleGuard allowedRoles={["logistics", "exporter", "importer", "compliance"]}>
+                <Logistics />
+              </RoleGuard>
+            }
+          />
           {dashboardNav.slice(1).map((item) => {
             if (["trade-cases", "qp-release", "logistics"].includes(item.key)) return null;
             const Body = item.key === "services" ? <GatewayServicesPreview /> : <DashboardModule moduleKey={item.key} />;
@@ -811,9 +830,10 @@ function App() {
           <Route path="settings" element={<DashboardModule moduleKey="settings" />} />
           <Route path="profile" element={<DashboardModule moduleKey="profile" />} />
         </Route>
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </BrowserRouter>
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
