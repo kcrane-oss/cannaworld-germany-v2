@@ -66,7 +66,7 @@ import {
   X,
 } from "lucide-react";
 
-const logo = "/cannaworld-logo-new.webp";
+const logo = "/cannaworld-aicerttech-logo.webp";
 
 type SupabaseClient = typeof import("./integrations/supabase/client")["supabase"];
 

@@ -18,7 +18,7 @@ export default defineConfig(() => ({
     VitePWA({
       injectRegister: null,
       registerType: "autoUpdate",
-      includeAssets: ["favicon.svg", "cannaworld-logo-new.webp"],
+      includeAssets: ["favicon.svg", "cannaworld-aicerttech-logo.webp", "cannaworld-aicerttech-logo.png"],
       workbox: {
         maximumFileSizeToCacheInBytes: 20 * 1024 * 1024,
         navigateFallback: "/offline.html",
@@ -69,8 +69,8 @@ export default defineConfig(() => ({
         scope: "/",
         icons: [
           { src: "/favicon.svg", sizes: "64x64", type: "image/svg+xml" },
-          { src: "/cannaworld-logo-new.webp", sizes: "192x192", type: "image/webp" },
-          { src: "/cannaworld-logo-new.webp", sizes: "512x512", type: "image/webp", purpose: "any maskable" },
+          { src: "/cannaworld-aicerttech-logo.png", sizes: "192x192", type: "image/png" },
+          { src: "/cannaworld-aicerttech-logo.png", sizes: "512x512", type: "image/png", purpose: "any maskable" },
         ],
       },
     }),
