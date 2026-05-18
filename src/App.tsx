@@ -4,6 +4,8 @@ import Logistics from "./pages/dashboard/Logistics";
 import Overview from "./pages/dashboard/Overview";
 import Compliance from "./pages/dashboard/Compliance";
 import Regulatory from "./pages/dashboard/Regulatory";
+import Suppliers from "./pages/dashboard/Suppliers";
+import Batches from "./pages/dashboard/Batches";
 import UniverseBar from "./components/UniverseBar";
 import CrossAppCTA from "./components/CrossAppCTA";
 import RoleGuard from "./components/RoleGuard";
@@ -827,7 +829,7 @@ function App() {
             }
           />
           {dashboardNav.slice(1).map((item) => {
-            if (["trade-cases", "qp-release", "logistics", "compliance", "regulatory"].includes(item.key)) return null;
+            if (["trade-cases", "qp-release", "logistics", "compliance", "regulatory", "suppliers", "batches"].includes(item.key)) return null;
             const Body = item.key === "services" ? <GatewayServicesPreview /> : <DashboardModule moduleKey={item.key} />;
             return (
               <Route
@@ -859,6 +861,24 @@ function App() {
               <div className="space-y-7">
                 <Regulatory />
                 <CrossAppCTA moduleKey="regulatory" />
+              </div>
+            }
+          />
+          <Route
+            path="suppliers"
+            element={
+              <div className="space-y-7">
+                <Suppliers />
+                <CrossAppCTA moduleKey="suppliers" />
+              </div>
+            }
+          />
+          <Route
+            path="batches"
+            element={
+              <div className="space-y-7">
+                <Batches />
+                <CrossAppCTA moduleKey="batches" />
               </div>
             }
           />
