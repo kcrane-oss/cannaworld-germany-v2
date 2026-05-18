@@ -1,11 +1,25 @@
 import TradeCases from "./pages/dashboard/TradeCases";
 import QPRelease from "./pages/dashboard/QPRelease";
 import Logistics from "./pages/dashboard/Logistics";
+import Overview from "./pages/dashboard/Overview";
+import Compliance from "./pages/dashboard/Compliance";
+import Regulatory from "./pages/dashboard/Regulatory";
 import UniverseBar from "./components/UniverseBar";
 import CrossAppCTA from "./components/CrossAppCTA";
 import RoleGuard from "./components/RoleGuard";
 import { AuthProvider } from "./hooks/useAuth";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 30_000,
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
 import type { FormEvent } from "react";
 import {
   BrowserRouter,
@@ -777,13 +791,14 @@ function DashboardModule({ moduleKey }: { moduleKey: string }) {
 
 function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
                 <Route path="/dashboard" element={<ProtectedDashboard />}>
-          <Route index element={<DashboardModule moduleKey="overview" />} />
+          <Route index element={<Overview />} />
           <Route
             path="trade-cases"
             element={
@@ -812,7 +827,7 @@ function App() {
             }
           />
           {dashboardNav.slice(1).map((item) => {
-            if (["trade-cases", "qp-release", "logistics"].includes(item.key)) return null;
+            if (["trade-cases", "qp-release", "logistics", "compliance", "regulatory"].includes(item.key)) return null;
             const Body = item.key === "services" ? <GatewayServicesPreview /> : <DashboardModule moduleKey={item.key} />;
             return (
               <Route
@@ -827,13 +842,34 @@ function App() {
               />
             );
           })}
+          <Route
+            path="compliance"
+            element={
+              <RoleGuard allowedRoles={["compliance", "auditor", "importer", "exporter"]}>
+                <div className="space-y-7">
+                  <Compliance />
+                  <CrossAppCTA moduleKey="compliance" />
+                </div>
+              </RoleGuard>
+            }
+          />
+          <Route
+            path="regulatory"
+            element={
+              <div className="space-y-7">
+                <Regulatory />
+                <CrossAppCTA moduleKey="regulatory" />
+              </div>
+            }
+          />
           <Route path="settings" element={<DashboardModule moduleKey="settings" />} />
           <Route path="profile" element={<DashboardModule moduleKey="profile" />} />
         </Route>
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
+    </QueryClientProvider>
   );
 }
 

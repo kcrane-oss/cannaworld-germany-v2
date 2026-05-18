@@ -1,4 +1,4 @@
-import { ArrowUpRight, Building2, Globe, Network, Shield, ShoppingBag } from "lucide-react";
+import { ArrowUpRight, Globe, Network, Shield, ShoppingBag } from "lucide-react";
 
 // Maps each Germany dashboard module key to the canonical CannaWorld operations
 // app that actually executes the workflow. Germany is the DE frontdoor — most
