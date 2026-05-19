@@ -1,5 +1,15 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen, within } from "@testing-library/react";
+
+// Mock the Supabase client because UniverseBar's cross-login handler imports
+// it. We never invoke the click in these tests, so a stub is sufficient.
+vi.mock("@/integrations/supabase/client", () => ({
+  supabase: {
+    auth: { getSession: vi.fn().mockResolvedValue({ data: { session: null } }) },
+    functions: { invoke: vi.fn().mockResolvedValue({ data: null, error: null }) },
+  },
+}));
+
 import UniverseBar from "./UniverseBar";
 
 describe("UniverseBar", () => {
