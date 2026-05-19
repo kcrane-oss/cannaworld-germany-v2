@@ -1,7 +1,9 @@
+import { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useUserRoles } from "@/hooks/useUserRoles";
 import { useHasRole } from "@/hooks/useHasRole";
 import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
 
 type AppRole = Database["public"]["Enums"]["app_role"];
@@ -15,16 +17,49 @@ interface RoleGuardProps {
    * entirely from non-privileged users.
    */
   redirectOnDeny?: boolean;
+  /**
+   * When true, additionally requires the caller to have a valid (active +
+   * unexpired) entry in `germany_btm_licenses` linked via their email. Used
+   * for BtM-only routes (e.g. /dashboard/btm-prescriptions). Admins still
+   * bypass for ops.
+   */
+  requireBtMLicense?: boolean;
   children: React.ReactNode;
 }
 
-const RoleGuard = ({ allowedRoles, redirectOnDeny = false, children }: RoleGuardProps) => {
+const RoleGuard = ({ allowedRoles, redirectOnDeny = false, requireBtMLicense = false, children }: RoleGuardProps) => {
   const location = useLocation();
   const { user, loading: authLoading } = useAuth();
   const { roles, loading: rolesLoading } = useUserRoles();
   const { hasRole: isAdmin, loading: adminLoading } = useHasRole("admin");
 
-  if (authLoading || rolesLoading || adminLoading) {
+  const [btmFetched, setBtmFetched] = useState<"unknown" | "ok" | "missing">("unknown");
+
+  useEffect(() => {
+    // Skip when the gate doesn't apply (no BtM requirement, admin bypass, or no auth yet).
+    if (!requireBtMLicense || isAdmin || !user?.email) return;
+    let mounted = true;
+    (async () => {
+      const { data } = await supabase
+        .from("germany_btm_licenses" as never)
+        .select("status, expires_at")
+        .eq("contact_email", user.email!)
+        .eq("status", "active")
+        .maybeSingle();
+      if (!mounted) return;
+      const row = data as { status?: string; expires_at?: string } | null;
+      if (!row) return setBtmFetched("missing");
+      const stillValid = !row.expires_at || new Date(row.expires_at).getTime() > Date.now();
+      setBtmFetched(stillValid ? "ok" : "missing");
+    })().catch(() => { if (mounted) setBtmFetched("missing"); });
+    return () => { mounted = false; };
+  }, [requireBtMLicense, user?.email, isAdmin]);
+
+  // Effective BtM gate state
+  const btmEffective: "ok" | "missing" | "checking" =
+    !requireBtMLicense || isAdmin ? "ok" : btmFetched === "unknown" ? "checking" : btmFetched;
+
+  if (authLoading || rolesLoading || adminLoading || btmEffective === "checking") {
     return (
       <div className="flex items-center justify-center py-16">
         <div className="h-6 w-6 animate-spin rounded-full border-2 border-cyan-300 border-t-transparent" />
@@ -36,10 +71,27 @@ const RoleGuard = ({ allowedRoles, redirectOnDeny = false, children }: RoleGuard
     return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
-  // Admin always passes
+  // Admin always passes (also bypasses BtM check above via useEffect short-circuit)
   if (isAdmin) return <>{children}</>;
 
   const hasAccess = allowedRoles.some((r) => roles.includes(r));
+
+  if (btmEffective === "missing") {
+    return (
+      <div className="flex flex-col items-center justify-center gap-3 rounded-3xl border border-amber-300/30 bg-amber-400/5 py-16 text-center">
+        <div className="rounded-full bg-amber-400/10 p-3 ring-1 ring-amber-300/30">
+          <svg className="h-8 w-8 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+          </svg>
+        </div>
+        <p className="text-base font-semibold text-white">BtM-Lizenz erforderlich</p>
+        <p className="max-w-md text-sm leading-6 text-white/55">
+          Diese Sektion erfordert eine verifizierte BtM-Erlaubnis nach §3 BtMG. Bitte
+          Lizenznummer beim CannaWorld-Team registrieren lassen unter <a className="text-cyan-300 hover:text-cyan-200" href="mailto:info@cannaworld-germany.de">info@cannaworld-germany.de</a>.
+        </p>
+      </div>
+    );
+  }
 
   if (!hasAccess) {
     if (redirectOnDeny) {

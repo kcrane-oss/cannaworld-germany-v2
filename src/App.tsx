@@ -12,6 +12,8 @@ import Marketplace from "./pages/dashboard/Marketplace";
 import PharmacyImport from "./pages/dashboard/PharmacyImport";
 import AuditPassport from "./pages/dashboard/AuditPassport";
 import Analytics from "./pages/dashboard/Analytics";
+import BatchVerification from "./pages/dashboard/BatchVerification";
+import BtmPrescriptions from "./pages/dashboard/BtmPrescriptions";
 import UniverseBar from "./components/UniverseBar";
 import CrossAppCTA from "./components/CrossAppCTA";
 import RoleGuard from "./components/RoleGuard";
@@ -58,6 +60,7 @@ import {
   Network,
   Package,
   PackageCheck,
+  Pill,
   Scale,
   Shield,
   ShieldCheck,
@@ -133,6 +136,8 @@ const dashboardNav = [
   { key: "pharmacy-import", label: "Apotheken-Import", icon: FileCheck, path: "/dashboard/pharmacy-import" },
   { key: "trade-cases", label: "Trade Cases", icon: FileCheck, path: "/dashboard/trade-cases" },
   { key: "batches", label: "Batches", icon: Package, path: "/dashboard/batches" },
+  { key: "batch-verification", label: "Batch Verify", icon: ShieldCheck, path: "/dashboard/batch-verification" },
+  { key: "btm-prescriptions", label: "BtM-Rezepte", icon: Pill, path: "/dashboard/btm-prescriptions" },
   { key: "qp-release", label: "QP Release", icon: ClipboardCheck, path: "/dashboard/qp-release" },
   { key: "compliance", label: "Compliance", icon: Shield, path: "/dashboard/compliance" },
   { key: "logistics", label: "Logistics", icon: Truck, path: "/dashboard/logistics" },
@@ -835,7 +840,7 @@ function App() {
             }
           />
           {dashboardNav.slice(1).map((item) => {
-            if (["trade-cases", "qp-release", "logistics", "compliance", "regulatory", "suppliers", "batches", "warehouse", "documents", "marketplace", "pharmacy-import", "audit-passport", "analytics"].includes(item.key)) return null;
+            if (["trade-cases", "qp-release", "logistics", "compliance", "regulatory", "suppliers", "batches", "warehouse", "documents", "marketplace", "pharmacy-import", "audit-passport", "analytics", "batch-verification", "btm-prescriptions"].includes(item.key)) return null;
             const Body = item.key === "services" ? <GatewayServicesPreview /> : <DashboardModule moduleKey={item.key} />;
             return (
               <Route
@@ -894,6 +899,22 @@ function App() {
           <Route path="pharmacy-import" element={<PharmacyImport />} />
           <Route path="audit-passport" element={<AuditPassport />} />
           <Route path="analytics" element={<Analytics />} />
+          <Route
+            path="batch-verification"
+            element={
+              <RoleGuard allowedRoles={["pharmacy", "compliance"]}>
+                <BatchVerification />
+              </RoleGuard>
+            }
+          />
+          <Route
+            path="btm-prescriptions"
+            element={
+              <RoleGuard allowedRoles={["pharmacy"]} requireBtMLicense>
+                <BtmPrescriptions />
+              </RoleGuard>
+            }
+          />
           <Route path="settings" element={<DashboardModule moduleKey="settings" />} />
           <Route path="profile" element={<DashboardModule moduleKey="profile" />} />
         </Route>

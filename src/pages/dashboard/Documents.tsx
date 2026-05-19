@@ -1,6 +1,8 @@
 import { useState, useMemo } from "react";
 import { useDocuments, type DocumentRow } from "@/hooks/useDocuments";
-import { FolderOpen, FileText, Download, Loader2, AlertTriangle, Search, ExternalLink } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+import { FolderOpen, FileText, Download, Loader2, AlertTriangle, Search, ExternalLink, Sparkles } from "lucide-react";
 
 const TYPE_TINT: Record<string, string> = {
   coa: "bg-purple-400/10 text-purple-300 border-purple-300/30",
@@ -21,6 +23,38 @@ export default function Documents() {
   const { data: docs = [], isLoading, isError, error } = useDocuments();
   const [query, setQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState<string>("all");
+  const [parsingDocId, setParsingDocId] = useState<string | null>(null);
+
+  // Pasted-text CoA parser. The simplest production-safe baseline: the user
+  // copy-pastes the CoA text and we extract structured fields via the
+  // germany-coa-parse Edge Function (deterministic regex). Binary PDF → text
+  // OCR is the Phase 4b upgrade swap-in.
+  const parseCoA = async (doc: DocumentRow) => {
+    const text = window.prompt(
+      `Text aus dem CoA "${doc.document_number}" einfügen (Copy-Paste aus PDF). Lässt sich auch leer absenden, um einen Test-Run zu machen.`,
+      "",
+    );
+    if (text == null) return;
+    setParsingDocId(doc.id);
+    try {
+      const { data, error: invokeError } = await supabase.functions.invoke("germany-coa-parse", {
+        body: {
+          document_id: doc.id,
+          source_file_url: doc.file_url,
+          extracted_text: text || "THC 18.5% CBD 0.4% Lead 0.5 mg/kg E. coli 5 cfu/g",
+        },
+      });
+      if (invokeError) throw invokeError;
+      const d = data as { thc_percent?: number; cbd_percent?: number; confidence?: number };
+      toast.success("CoA geparst", {
+        description: `THC ${d.thc_percent ?? "—"}% · CBD ${d.cbd_percent ?? "—"}% · Konfidenz ${Math.round((d.confidence ?? 0) * 100)}%`,
+      });
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "CoA-Parser fehlgeschlagen");
+    } finally {
+      setParsingDocId(null);
+    }
+  };
 
   const docTypes = useMemo(() => {
     const set = new Set<string>();
@@ -148,18 +182,35 @@ export default function Documents() {
                     )}
                     <div className="mt-2 flex items-center justify-between text-[11px] text-white/40">
                       <span>{doc.file_name ?? "—"} · {formatBytes(doc.file_size_bytes)}</span>
-                      {doc.file_url ? (
-                        <a
-                          href={doc.file_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-cyan-300 hover:text-cyan-200"
-                        >
-                          <Download className="h-3 w-3" /> Download
-                        </a>
-                      ) : (
-                        <span className="text-white/30">Kein File</span>
-                      )}
+                      <div className="flex items-center gap-3">
+                        {doc.document_type?.toLowerCase() === "coa" && (
+                          <button
+                            type="button"
+                            onClick={() => parseCoA(doc)}
+                            disabled={parsingDocId === doc.id}
+                            className="inline-flex items-center gap-1 text-purple-300 hover:text-purple-200 disabled:opacity-50"
+                          >
+                            {parsingDocId === doc.id ? (
+                              <Loader2 className="h-3 w-3 animate-spin" />
+                            ) : (
+                              <Sparkles className="h-3 w-3" />
+                            )}
+                            CoA parsen
+                          </button>
+                        )}
+                        {doc.file_url ? (
+                          <a
+                            href={doc.file_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-cyan-300 hover:text-cyan-200"
+                          >
+                            <Download className="h-3 w-3" /> Download
+                          </a>
+                        ) : (
+                          <span className="text-white/30">Kein File</span>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>

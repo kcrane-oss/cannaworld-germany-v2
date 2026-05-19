@@ -1,0 +1,14 @@
+project_id = "twabuzdrwuactukamyed"
+
+# Germany-owned Edge Functions. The Supabase project itself is shared with
+# Gateway / AICert / Marketplace / Europe — only these germany-* functions
+# are owned by the apothekergateway repo.
+
+[functions.germany-batch-verify]
+verify_jwt = true
+
+[functions.germany-btm-license-verify]
+verify_jwt = true
+
+[functions.germany-coa-parse]
+verify_jwt = true
