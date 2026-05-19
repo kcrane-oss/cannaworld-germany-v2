@@ -360,6 +360,16 @@ function LandingPage() {
       <main id="top" className="relative">
         <section className="relative mx-auto grid min-h-[92vh] max-w-7xl items-center gap-14 px-5 pb-20 pt-32 md:px-8 lg:grid-cols-[1.04fr_0.96fr]">
           <div className="space-y-8 text-center lg:text-left">
+            <picture className="mx-auto block lg:mx-0">
+              <source srcSet="/cannaworld-lockup.webp" type="image/webp" />
+              <img
+                src="/cannaworld-lockup.png"
+                alt="CannaWorld AI Cert Tech"
+                className="h-20 w-auto object-contain md:h-24 [filter:drop-shadow(0_0_24px_rgba(34,211,238,0.18))_invert(1)]"
+                fetchPriority="high"
+                decoding="async"
+              />
+            </picture>
             <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
               <Badge>CannaWorld Germany</Badge>
               <span className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-1.5 text-xs font-semibold text-emerald-300">B2B · Medizinisch · Reguliert</span>
