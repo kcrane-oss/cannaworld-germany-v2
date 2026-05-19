@@ -8,6 +8,10 @@ import Suppliers from "./pages/dashboard/Suppliers";
 import Batches from "./pages/dashboard/Batches";
 import WarehousePage from "./pages/dashboard/Warehouse";
 import DocumentsPage from "./pages/dashboard/Documents";
+import Marketplace from "./pages/dashboard/Marketplace";
+import PharmacyImport from "./pages/dashboard/PharmacyImport";
+import AuditPassport from "./pages/dashboard/AuditPassport";
+import Analytics from "./pages/dashboard/Analytics";
 import UniverseBar from "./components/UniverseBar";
 import CrossAppCTA from "./components/CrossAppCTA";
 import RoleGuard from "./components/RoleGuard";
@@ -831,7 +835,7 @@ function App() {
             }
           />
           {dashboardNav.slice(1).map((item) => {
-            if (["trade-cases", "qp-release", "logistics", "compliance", "regulatory", "suppliers", "batches", "warehouse", "documents"].includes(item.key)) return null;
+            if (["trade-cases", "qp-release", "logistics", "compliance", "regulatory", "suppliers", "batches", "warehouse", "documents", "marketplace", "pharmacy-import", "audit-passport", "analytics"].includes(item.key)) return null;
             const Body = item.key === "services" ? <GatewayServicesPreview /> : <DashboardModule moduleKey={item.key} />;
             return (
               <Route
@@ -886,6 +890,10 @@ function App() {
           />
           <Route path="warehouse" element={<WarehousePage />} />
           <Route path="documents" element={<DocumentsPage />} />
+          <Route path="marketplace" element={<Marketplace />} />
+          <Route path="pharmacy-import" element={<PharmacyImport />} />
+          <Route path="audit-passport" element={<AuditPassport />} />
+          <Route path="analytics" element={<Analytics />} />
           <Route path="settings" element={<DashboardModule moduleKey="settings" />} />
           <Route path="profile" element={<DashboardModule moduleKey="profile" />} />
         </Route>
