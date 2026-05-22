@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useDashboardStats } from "@/hooks/useDashboardStats";
 import { useSuppliers, type Supplier } from "@/hooks/use-suppliers";
 import { useBatches } from "@/hooks/useBatches";
@@ -25,6 +26,7 @@ const BATCH_COLORS: Record<string, string> = {
 };
 
 export default function Analytics() {
+  const { t } = useTranslation();
   const { data: stats, isLoading: statsLoading } = useDashboardStats();
   const { data: suppliers = [], isLoading: suppliersLoading } = useSuppliers();
   const { data: batches = [], isLoading: batchesLoading } = useBatches();
@@ -57,9 +59,10 @@ export default function Analytics() {
             </div>
             <h1 className="text-3xl font-black tracking-tight md:text-5xl">Analytics</h1>
             <p className="mt-4 max-w-2xl text-base leading-7 text-white/60">
-              Snapshot der deutschen Pipeline: Trade-Cases, Chargen, Supplier-Qualität,
-              Inventar-Health. Tiefere Time-Series, Cohort-Analysen und ShinrAi-Scoring
-              im AICert Analytics-Layer.
+              {t(
+                "analytics.heroDescription",
+                "Snapshot der deutschen Pipeline: Trade-Cases, Chargen, Supplier-Qualität, Inventar-Health. Tiefere Time-Series, Cohort-Analysen und ShinrAi-Scoring im AICert Analytics-Layer.",
+              )}
             </p>
           </div>
           <a
@@ -68,17 +71,17 @@ export default function Analytics() {
             rel="noopener noreferrer"
             className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-purple-300 px-5 py-3 text-sm font-bold text-[#1a0533] transition hover:bg-purple-200"
           >
-            AICert Analytics öffnen <ExternalLink className="h-4 w-4" />
+            {t("analytics.openAicertAnalytics", "AICert Analytics öffnen")} <ExternalLink className="h-4 w-4" />
           </a>
         </div>
       </section>
 
       <section className="grid gap-4 md:grid-cols-4">
         {[
-          { icon: Activity, label: "Aktive Trade-Cases", value: stats?.activeTradeCases ?? 0, tint: "text-cyan-300" },
-          { icon: Package, label: "Chargen in Prüfung", value: stats?.batchesInProgress ?? 0, tint: "text-amber-300" },
+          { icon: Activity, label: t("analytics.kpiActiveTradeCases", "Aktive Trade-Cases"), value: stats?.activeTradeCases ?? 0, tint: "text-cyan-300" },
+          { icon: Package, label: t("analytics.kpiBatchesInReview", "Chargen in Prüfung"), value: stats?.batchesInProgress ?? 0, tint: "text-amber-300" },
           { icon: Building2, label: "Verified Suppliers", value: suppliers.filter((s: Supplier) => s.status === "qualified").length, tint: "text-emerald-300" },
-          { icon: BarChart3, label: "Sendungen aktiv", value: stats?.activeShipments ?? 0, tint: "text-purple-300" },
+          { icon: BarChart3, label: t("analytics.kpiActiveShipments", "Sendungen aktiv"), value: stats?.activeShipments ?? 0, tint: "text-purple-300" },
         ].map((m) => {
           const Icon = m.icon;
           return (
@@ -93,13 +96,13 @@ export default function Analytics() {
 
       <section className="grid gap-5 lg:grid-cols-2">
         <div className="rounded-3xl border border-white/10 bg-white/[0.045] p-6">
-          <h3 className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-white/75">Supplier-Verteilung nach Status</h3>
+          <h3 className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-white/75">{t("analytics.supplierDistributionTitle", "Supplier-Verteilung nach Status")}</h3>
           {isLoading ? (
             <div className="flex h-64 items-center justify-center">
               <Loader2 className="h-6 w-6 animate-spin text-cyan-300" />
             </div>
           ) : supplierBreakdown.length === 0 ? (
-            <div className="flex h-64 items-center justify-center text-sm text-white/40">Keine Supplier-Daten</div>
+            <div className="flex h-64 items-center justify-center text-sm text-white/40">{t("analytics.noSupplierData", "Keine Supplier-Daten")}</div>
           ) : (
             <ResponsiveContainer width="100%" height={260}>
               <PieChart>
@@ -128,13 +131,13 @@ export default function Analytics() {
         </div>
 
         <div className="rounded-3xl border border-white/10 bg-white/[0.045] p-6">
-          <h3 className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-white/75">Chargen-Verteilung nach Status</h3>
+          <h3 className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-white/75">{t("analytics.batchDistributionTitle", "Chargen-Verteilung nach Status")}</h3>
           {isLoading ? (
             <div className="flex h-64 items-center justify-center">
               <Loader2 className="h-6 w-6 animate-spin text-cyan-300" />
             </div>
           ) : batchBreakdown.length === 0 ? (
-            <div className="flex h-64 items-center justify-center text-sm text-white/40">Keine Batch-Daten</div>
+            <div className="flex h-64 items-center justify-center text-sm text-white/40">{t("analytics.noBatchData", "Keine Batch-Daten")}</div>
           ) : (
             <ResponsiveContainer width="100%" height={260}>
               <BarChart data={batchBreakdown}>
@@ -157,8 +160,10 @@ export default function Analytics() {
       </section>
 
       <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-xs text-white/45">
-        Hinweis: Daten kommen direkt aus dem geteilten CannaWorld Gateway / Supabase Backend (live, kein Cache).
-        Für historische Trends, Vorhersage-Modelle und Cohort-Analysen die AI-gestützte AICert Analytics-Engine nutzen.
+        {t(
+          "analytics.footerNote",
+          "Hinweis: Daten kommen direkt aus dem geteilten CannaWorld Gateway / Supabase Backend (live, kein Cache). Für historische Trends, Vorhersage-Modelle und Cohort-Analysen die AI-gestützte AICert Analytics-Engine nutzen.",
+        )}
       </section>
     </div>
   );

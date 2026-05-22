@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useBatches, type BatchRow } from "@/hooks/useBatches";
 import { Package, Loader2, AlertTriangle, Search, ExternalLink } from "lucide-react";
 
@@ -50,6 +51,7 @@ function BatchRow({ batch }: { batch: BatchRow }) {
 }
 
 export default function Batches() {
+  const { t } = useTranslation();
   const { data: batches = [], isLoading, isError, error } = useBatches();
   const [query, setQuery] = useState("");
 
@@ -75,8 +77,10 @@ export default function Batches() {
           </div>
           <h1 className="text-3xl font-black tracking-tight md:text-5xl">Batches</h1>
           <p className="mt-4 max-w-2xl text-base leading-7 text-white/60">
-            Letzte 50 Chargen aus der DE-Pipeline. Stammdaten + CoA + Release-State werden im
-            CannaWorld Marketplace gemastert — Germany zeigt den deutschen Auszug.
+            {t(
+              "batches.heroDescription",
+              "Letzte 50 Chargen aus der DE-Pipeline. Stammdaten + CoA + Release-State werden im CannaWorld Marketplace gemastert — Germany zeigt den deutschen Auszug.",
+            )}
           </p>
         </div>
       </section>
@@ -89,7 +93,7 @@ export default function Batches() {
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Charge suchen (Nummer, Produkt, Sorte, Herkunft)…"
+              placeholder={t("batches.searchPlaceholder", "Charge suchen (Nummer, Produkt, Sorte, Herkunft)…")}
               className="w-full rounded-xl border border-white/10 bg-black/30 py-2.5 pl-9 pr-3 text-sm text-white placeholder:text-white/30 focus:border-cyan-300/60 focus:outline-none"
             />
           </div>

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useSuppliers, type Supplier } from "@/hooks/use-suppliers";
 import { Fingerprint, ExternalLink, Loader2, AlertTriangle, Shield, FileText, ShieldCheck } from "lucide-react";
 
@@ -12,6 +13,7 @@ function passportSignals(s: Supplier) {
 }
 
 export default function AuditPassport() {
+  const { t } = useTranslation();
   const { data: suppliers = [], isLoading, isError, error } = useSuppliers();
   const ranked = suppliers
     .slice()
@@ -28,8 +30,10 @@ export default function AuditPassport() {
             </div>
             <h1 className="text-3xl font-black tracking-tight md:text-5xl">Audit Passport</h1>
             <p className="mt-4 max-w-2xl text-base leading-7 text-white/60">
-              Prüfbarer Vertrauenspass für Supplier, Facility, Batch und Dokumentenstand. Generiert
-              und live berechnet im GMP-AICert AI-Audit-Stack (ShinrAi 6-Achsen-Score).
+              {t(
+                "auditPassport.heroDescription",
+                "Prüfbarer Vertrauenspass für Supplier, Facility, Batch und Dokumentenstand. Generiert und live berechnet im GMP-AICert AI-Audit-Stack (ShinrAi 6-Achsen-Score).",
+              )}
             </p>
           </div>
           <a
@@ -38,7 +42,7 @@ export default function AuditPassport() {
             rel="noopener noreferrer"
             className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-purple-300 px-5 py-3 text-sm font-bold text-[#1a0533] transition hover:bg-purple-200"
           >
-            Vollständige Audits in AICert <ExternalLink className="h-4 w-4" />
+            {t("auditPassport.fullAuditsInAicert", "Vollständige Audits in AICert")} <ExternalLink className="h-4 w-4" />
           </a>
         </div>
       </section>
@@ -47,8 +51,8 @@ export default function AuditPassport() {
         {[
           { icon: Shield, label: "Facility Proof", hint: "GMP-Score ≥ 70" },
           { icon: FileText, label: "Document Proof", hint: "Doc-Score ≥ 70" },
-          { icon: ShieldCheck, label: "ISO Proof", hint: "ISO 9001 oder höher" },
-          { icon: Fingerprint, label: "Qualified Status", hint: "Qualified oder Conditional" },
+          { icon: ShieldCheck, label: "ISO Proof", hint: t("auditPassport.hintIsoOrHigher", "ISO 9001 oder höher") },
+          { icon: Fingerprint, label: "Qualified Status", hint: t("auditPassport.hintQualifiedOrConditional", "Qualified oder Conditional") },
         ].map((s) => {
           const Icon = s.icon;
           return (
@@ -65,7 +69,7 @@ export default function AuditPassport() {
 
       <section className="rounded-3xl border border-white/10 bg-white/[0.045] p-6">
         <h2 className="mb-5 text-sm font-bold uppercase tracking-[0.2em] text-white/75">
-          Supplier Passport-Status
+          {t("auditPassport.supplierPassportStatus", "Supplier Passport-Status")}
         </h2>
 
         {isLoading && (
@@ -78,14 +82,14 @@ export default function AuditPassport() {
           <div className="rounded-2xl border border-red-300/30 bg-red-400/5 p-4 text-sm text-red-200">
             <div className="flex items-start gap-3">
               <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
-              <div>{error instanceof Error ? error.message : "Unbekannter Fehler"}</div>
+              <div>{error instanceof Error ? error.message : t("auditPassport.unknownError", "Unbekannter Fehler")}</div>
             </div>
           </div>
         )}
 
         {!isLoading && !isError && ranked.length === 0 && (
           <div className="rounded-2xl border border-white/10 bg-black/20 p-10 text-center text-sm text-white/55">
-            Noch keine Supplier mit Passport-relevanten Scores erfasst.
+            {t("auditPassport.emptyState", "Noch keine Supplier mit Passport-relevanten Scores erfasst.")}
           </div>
         )}
 
@@ -133,7 +137,10 @@ export default function AuditPassport() {
                   </div>
                   <div className="mt-2 flex items-center justify-between text-[11px] text-white/45">
                     <span>
-                      {sig.met} von {sig.total} Passport-Signalen erfüllt
+                      {t("auditPassport.signalsMet", "{{met}} von {{total}} Passport-Signalen erfüllt", {
+                        met: sig.met,
+                        total: sig.total,
+                      })}
                     </span>
                     <a
                       href="https://gmp-aicert.com"
@@ -141,7 +148,7 @@ export default function AuditPassport() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 text-purple-300 hover:text-purple-200"
                     >
-                      Vollständiger Passport <ExternalLink className="h-3 w-3" />
+                      {t("auditPassport.fullPassport", "Vollständiger Passport")} <ExternalLink className="h-3 w-3" />
                     </a>
                   </div>
                 </div>

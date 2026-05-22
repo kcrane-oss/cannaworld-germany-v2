@@ -14,12 +14,18 @@ import AuditPassport from "./pages/dashboard/AuditPassport";
 import Analytics from "./pages/dashboard/Analytics";
 import BatchVerification from "./pages/dashboard/BatchVerification";
 import BtmPrescriptions from "./pages/dashboard/BtmPrescriptions";
+import PharmacyReceive from "./pages/dashboard/PharmacyReceive";
+import PharmacyDispense from "./pages/dashboard/PharmacyDispense";
+import OnboardingPage, { ONBOARDING_SKIP_KEY } from "./pages/dashboard/Onboarding";
 import UniverseBar from "./components/UniverseBar";
 import CrossAppCTA from "./components/CrossAppCTA";
 import RoleGuard from "./components/RoleGuard";
 import { AuthProvider } from "./hooks/useAuth";
+import { useOnboardingGate } from "./hooks/useOnboardingGate";
+import { Toaster } from "sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -90,44 +96,50 @@ const networkLinks = [
 ] as const;
 
 const stats = [
-  ["DE", "B2B Intake"],
-  ["EU-GMP", "Dokumentenpfad"],
-  ["GDP", "Lieferkette"],
-  ["GACP", "Cultivation Proof"],
-  ["QP", "Release Track"],
-  ["QA", "Review Layer"],
-];
+  ["DE", "B2B Intake", "app.statsB2bIntake"],
+  ["EU-GMP", "Dokumentenpfad", "app.statsDocumentPath"],
+  ["GDP", "Lieferkette", "app.statsSupplyChain"],
+  ["GACP", "Cultivation Proof", "app.statsCultivationProof"],
+  ["QP", "Release Track", "app.statsReleaseTrack"],
+  ["QA", "Review Layer", "app.statsReviewLayer"],
+] as const;
 
 const groups = [
-  "Apotheken (Direct Import vs. Managed Import)",
-  "Pharma-Großhändler und GDP-Strukturen",
-  "Cannabis-Importeure und Herstellbetriebe",
-  "Einkauf, QA/QP, Regulatory Affairs und Geschäftsführung",
-];
+  { i18nKey: "app.groupPharmacies", text: "Apotheken (Direct Import vs. Managed Import)" },
+  { i18nKey: "app.groupWholesalers", text: "Pharma-Großhändler und GDP-Strukturen" },
+  { i18nKey: "app.groupImporters", text: "Cannabis-Importeure und Herstellbetriebe" },
+  { i18nKey: "app.groupDecisionMakers", text: "Einkauf, QA/QP, Regulatory Affairs und Geschäftsführung" },
+] as const;
 
 const cards = [
   {
     icon: Building2,
+    titleKey: "app.cardGermanIntakeTitle",
     title: "Deutscher Intake",
+    textKey: "app.cardGermanIntakeText",
     text: "Rolle, Lizenzstatus, Bedarf und regulatorischer Pfad werden strukturiert vorqualifiziert.",
   },
   {
     icon: FileCheck,
+    titleKey: "app.cardDocumentsFirstTitle",
     title: "Dokumente zuerst",
+    textKey: "app.cardDocumentsFirstText",
     text: "CoA, Batch Records, EU-GMP/GDP/GACP-Nachweise und Release-Pfad vor kommerzieller Diskussion.",
   },
   {
     icon: ShieldCheck,
+    titleKey: "app.cardDocumentProofTitle",
     title: "Document Proof",
+    textKey: "app.cardDocumentProofText",
     text: "Dokumente, Auditdaten und Release-Signale bilden die prüfbare Vertrauensebene zwischen Supply und deutschem Markt.",
   },
 ];
 
 const steps = [
-  [Mail, "Import-Anfrage", "Bedarf, Rolle, Zielmenge, Zeithorizont und Ausgangslage erfassen."],
-  [ClipboardCheck, "Qualifizierung", "Prüfen, ob Apotheke, Großhandel, Importeur oder Herstellbetrieb in den Prozess fällt."],
-  [ShieldCheck, "Dokumentenprüfung", "EU-GMP/GDP/GACP, CoA, Batch-Dokumentation, QP-/Release-Pfad einordnen."],
-  [PackageCheck, "Supply Matching", "Geeignete geprüfte Lieferpartner und Chargen über das CannaWorld-Ökosystem vorbereiten."],
+  [Mail, "Import-Anfrage", "Bedarf, Rolle, Zielmenge, Zeithorizont und Ausgangslage erfassen.", "app.stepImportRequestTitle", "app.stepImportRequestText"],
+  [ClipboardCheck, "Qualifizierung", "Prüfen, ob Apotheke, Großhandel, Importeur oder Herstellbetrieb in den Prozess fällt.", "app.stepQualificationTitle", "app.stepQualificationText"],
+  [ShieldCheck, "Dokumentenprüfung", "EU-GMP/GDP/GACP, CoA, Batch-Dokumentation, QP-/Release-Pfad einordnen.", "app.stepDocumentReviewTitle", "app.stepDocumentReviewText"],
+  [PackageCheck, "Supply Matching", "Geeignete geprüfte Lieferpartner und Chargen über das CannaWorld-Ökosystem vorbereiten.", "app.stepSupplyMatchingTitle", "app.stepSupplyMatchingText"],
 ] as const;
 
 const dashboardNav = [
@@ -329,6 +341,7 @@ function Badge({ children }: { children: React.ReactNode }) {
 }
 
 function LandingPage() {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#070b10] pt-8 text-[#f4f8fb] selection:bg-cyan-400/25">
       <UniverseBar current="germany" />
@@ -343,16 +356,16 @@ function LandingPage() {
             <img src={logo} alt="CannaWorld" className="h-12 w-auto object-contain" />
           </Link>
           <div className="hidden items-center gap-5 text-sm font-medium text-white/60 md:flex">
-            <a href="#proof" className="transition hover:text-white">Proof</a>
-            <a href="#dashboard-preview" className="transition hover:text-white">Dashboard</a>
-            <a href="#prozess" className="transition hover:text-white">Prozess</a>
+            <a href="#proof" className="transition hover:text-white">{t("app.navProof", "Proof")}</a>
+            <a href="#dashboard-preview" className="transition hover:text-white">{t("app.navDashboard", "Dashboard")}</a>
+            <a href="#prozess" className="transition hover:text-white">{t("app.navProcess", "Prozess")}</a>
             <div className="h-5 w-px bg-white/10" />
             {networkLinks.map(([label, href]) => (
               <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="text-xs transition hover:text-cyan-200">{label}</a>
             ))}
           </div>
           <Link to="/login" className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-5 py-2.5 text-sm font-semibold text-cyan-200 transition hover:border-cyan-300/70 hover:bg-cyan-400/20">
-            Partner Login
+            {t("app.partnerLogin", "Partner Login")}
           </Link>
         </div>
       </nav>
@@ -372,32 +385,32 @@ function LandingPage() {
             </picture>
             <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
               <Badge>CannaWorld Germany</Badge>
-              <span className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-1.5 text-xs font-semibold text-emerald-300">B2B · Medizinisch · Reguliert</span>
+              <span className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-1.5 text-xs font-semibold text-emerald-300">{t("app.heroBadge", "B2B · Medizinisch · Reguliert")}</span>
             </div>
 
             <div className="space-y-5">
               <h1 className="text-4xl font-extrabold leading-[0.95] tracking-[-0.045em] md:text-6xl xl:text-7xl">
-                Deutscher Ansprechpartner für
+                {t("app.heroTitleLine1", "Deutscher Ansprechpartner für")}
                 <span className="block bg-gradient-to-r from-cyan-300 via-sky-300 to-emerald-300 bg-clip-text text-transparent drop-shadow-[0_0_24px_rgba(34,211,238,0.28)]">
-                  medizinischen Cannabis-Import.
+                  {t("app.heroTitleLine2", "medizinischen Cannabis-Import.")}
                 </span>
               </h1>
               <p className="mx-auto max-w-2xl text-lg leading-8 text-white/62 md:text-xl lg:mx-0">
-                Für Apotheken, Großhandel, Importeure und Herstellbetriebe, die geprüfte internationale Supply, belastbare Dokumentation und einen klaren EU-GMP/GDP/GACP-Pfad benötigen.
+                {t("app.heroSubtitle", "Für Apotheken, Großhandel, Importeure und Herstellbetriebe, die geprüfte internationale Supply, belastbare Dokumentation und einen klaren EU-GMP/GDP/GACP-Pfad benötigen.")}
               </p>
             </div>
 
             <div className="flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
               <Link to="/login" className="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-300 px-8 py-4 font-bold text-[#061016] shadow-[0_0_34px_rgba(34,211,238,0.25)] transition hover:-translate-y-0.5 hover:bg-cyan-200">
-                Partnerzugang öffnen <ArrowRight className="h-5 w-5" />
+                {t("app.heroCtaPartnerAccess", "Partnerzugang öffnen")} <ArrowRight className="h-5 w-5" />
               </Link>
               <a href="mailto:info@cannaworld-germany.de?subject=CannaWorld Germany Import-Anfrage" className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-8 py-4 font-semibold text-white transition hover:border-cyan-300/50 hover:bg-white/10">
-                Import-Anfrage stellen
+                {t("app.heroCtaImportRequest", "Import-Anfrage stellen")}
               </a>
             </div>
 
             <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
-              {[[ShieldCheck, "EU-GMP/GDP Dokumentenpfad"], [Truck, "Import- & Lieferketten-Koordination"], [Globe2, "Thailand → Deutschland/EU"]].map(([Icon, label]) => (
+              {[[ShieldCheck, t("app.heroPillDocumentPath", "EU-GMP/GDP Dokumentenpfad")], [Truck, t("app.heroPillSupplyChain", "Import- & Lieferketten-Koordination")], [Globe2, t("app.heroPillThailandGermany", "Thailand → Deutschland/EU")]].map(([Icon, label]) => (
                 <div key={String(label)} className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-white/65">
                   <Icon className="h-3.5 w-3.5 text-cyan-300" /> {String(label)}
                 </div>
@@ -414,20 +427,20 @@ function LandingPage() {
                   <Stethoscope className="h-7 w-7" />
                 </div>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-300">Proof-of-Trust Intake</p>
-                  <h2 className="text-2xl font-bold">Für regulierte Marktteilnehmer</h2>
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-300">{t("app.intakeEyebrow", "Proof-of-Trust Intake")}</p>
+                  <h2 className="text-2xl font-bold">{t("app.intakeTitle", "Für regulierte Marktteilnehmer")}</h2>
                 </div>
               </div>
               <div className="space-y-3">
                 {groups.map((item) => (
-                  <div key={item} className="flex gap-3 rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <div key={item.i18nKey} className="flex gap-3 rounded-2xl border border-white/10 bg-black/20 p-4">
                     <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-300" />
-                    <p className="text-sm leading-6 text-white/68">{item}</p>
+                    <p className="text-sm leading-6 text-white/68">{t(item.i18nKey, item.text)}</p>
                   </div>
                 ))}
               </div>
               <div className="mt-6 rounded-2xl border border-amber-300/20 bg-amber-300/10 p-4 text-sm leading-6 text-amber-100/85">
-                Keine Abgabe an Endkunden. Keine Sortenwerbung. Keine Therapie- oder Heilversprechen. Reiner B2B-/Compliance-/Import-Intake.
+                {t("app.intakeDisclaimer", "Keine Abgabe an Endkunden. Keine Sortenwerbung. Keine Therapie- oder Heilversprechen. Reiner B2B-/Compliance-/Import-Intake.")}
               </div>
             </div>
           </div>
@@ -435,10 +448,10 @@ function LandingPage() {
 
         <section className="relative border-y border-white/10 bg-white/[0.035] py-10">
           <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-5 text-center md:grid-cols-3 lg:grid-cols-6">
-            {stats.map(([value, label]) => (
-              <div key={label}>
+            {stats.map(([value, label, labelKey]) => (
+              <div key={labelKey}>
                 <div className="text-2xl font-bold text-cyan-300 drop-shadow-[0_0_12px_rgba(34,211,238,0.24)] md:text-3xl">{value}</div>
-                <div className="mt-1 text-sm text-white/45">{label}</div>
+                <div className="mt-1 text-sm text-white/45">{t(labelKey, label)}</div>
               </div>
             ))}
           </div>
@@ -446,16 +459,16 @@ function LandingPage() {
 
         <section id="proof" className="relative mx-auto max-w-7xl px-5 py-24 md:px-8">
           <div className="mx-auto mb-12 max-w-3xl text-center">
-            <Badge>Warum .de?</Badge>
-            <h2 className="mt-5 text-3xl font-extrabold tracking-tight md:text-5xl">Vertrauensanker für deutsche Apotheken und Importeure.</h2>
-            <p className="mt-4 text-white/58">CannaWorld Germany ist die deutsche Eintrittsstelle: klare Ansprechpartner, regulatorische Sprache und saubere Weiterleitung in passende Workstreams.</p>
+            <Badge>{t("app.proofBadge", "Warum .de?")}</Badge>
+            <h2 className="mt-5 text-3xl font-extrabold tracking-tight md:text-5xl">{t("app.proofTitle", "Vertrauensanker für deutsche Apotheken und Importeure.")}</h2>
+            <p className="mt-4 text-white/58">{t("app.proofSubtitle", "CannaWorld Germany ist die deutsche Eintrittsstelle: klare Ansprechpartner, regulatorische Sprache und saubere Weiterleitung in passende Workstreams.")}</p>
           </div>
           <div className="grid gap-5 md:grid-cols-3">
             {cards.map((card) => (
               <div key={card.title} className="rounded-3xl border border-white/10 bg-white/[0.045] p-7 shadow-[0_0_30px_rgba(34,211,238,0.06)] backdrop-blur transition hover:border-cyan-300/30">
                 <card.icon className="mb-5 h-9 w-9 text-cyan-300" />
-                <h3 className="text-xl font-bold">{card.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-white/56">{card.text}</p>
+                <h3 className="text-xl font-bold">{t(card.titleKey, card.title)}</h3>
+                <p className="mt-3 text-sm leading-6 text-white/56">{t(card.textKey, card.text)}</p>
               </div>
             ))}
           </div>
@@ -465,15 +478,15 @@ function LandingPage() {
           <div className="mx-auto max-w-7xl px-5 md:px-8">
             <div className="mx-auto mb-12 max-w-3xl text-center">
               <Badge>Protected Partner Cockpit</Badge>
-              <h2 className="mt-5 text-3xl font-extrabold tracking-tight md:text-5xl">Geschützter B2B-Bereich für deutsche Importfähigkeit.</h2>
-              <p className="mt-4 text-white/58">Die öffentliche Seite qualifiziert Interesse. Das Dashboard bleibt hinter Login: Marketplace, Trade Cases, Batches, QP Release, Compliance, Logistics, Suppliers, Documents, Regulatory, Warehouse, Audit Passport und Analytics für freigeschaltete Partner.</p>
+              <h2 className="mt-5 text-3xl font-extrabold tracking-tight md:text-5xl">{t("app.dashboardPreviewTitle", "Geschützter B2B-Bereich für deutsche Importfähigkeit.")}</h2>
+              <p className="mt-4 text-white/58">{t("app.dashboardPreviewSubtitle", "Die öffentliche Seite qualifiziert Interesse. Das Dashboard bleibt hinter Login: Marketplace, Trade Cases, Batches, QP Release, Compliance, Logistics, Suppliers, Documents, Regulatory, Warehouse, Audit Passport und Analytics für freigeschaltete Partner.")}</p>
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               {dashboardNav.slice(1).map((item) => (
                 <Link key={item.key} to={item.path} className="group rounded-3xl border border-white/10 bg-[#0b121b]/80 p-5 backdrop-blur transition hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-cyan-300/10">
                   <item.icon className="mb-4 h-7 w-7 text-cyan-300" />
-                  <div className="font-bold">{item.label}</div>
-                  <div className="mt-2 text-sm leading-6 text-white/48">Zum Germany-Modul öffnen</div>
+                  <div className="font-bold">{t(`app.nav.${item.key}`, item.label)}</div>
+                  <div className="mt-2 text-sm leading-6 text-white/48">{t("app.dashboardPreviewOpenModule", "Zum Germany-Modul öffnen")}</div>
                 </Link>
               ))}
             </div>
@@ -484,16 +497,16 @@ function LandingPage() {
 
         <section id="prozess" className="relative mx-auto max-w-7xl px-5 py-24 md:px-8">
           <div className="mx-auto mb-12 max-w-3xl text-center">
-            <Badge>Ablauf</Badge>
-            <h2 className="mt-5 text-3xl font-extrabold tracking-tight md:text-5xl">Vom Erstkontakt zur qualifizierten Importprüfung.</h2>
+            <Badge>{t("app.processBadge", "Ablauf")}</Badge>
+            <h2 className="mt-5 text-3xl font-extrabold tracking-tight md:text-5xl">{t("app.processTitle", "Vom Erstkontakt zur qualifizierten Importprüfung.")}</h2>
           </div>
           <div className="grid gap-5 md:grid-cols-4">
-            {steps.map(([Icon, title, text], index) => (
+            {steps.map(([Icon, title, text, titleKey, textKey], index) => (
               <div key={title} className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#0b121b]/80 p-6 backdrop-blur">
                 <div className="absolute right-5 top-4 text-5xl font-black text-cyan-300/10">0{index + 1}</div>
                 <Icon className="mb-5 h-8 w-8 text-cyan-300" />
-                <h3 className="font-bold">{title}</h3>
-                <p className="mt-3 text-sm leading-6 text-white/54">{text}</p>
+                <h3 className="font-bold">{t(titleKey, title)}</h3>
+                <p className="mt-3 text-sm leading-6 text-white/54">{t(textKey, text)}</p>
               </div>
             ))}
           </div>
@@ -502,10 +515,10 @@ function LandingPage() {
         <section id="kontakt" className="relative mx-auto max-w-5xl px-5 py-24 text-center md:px-8">
           <div className="rounded-[2rem] border border-cyan-300/20 bg-white/[0.055] p-8 shadow-[0_0_40px_rgba(34,211,238,0.1)] backdrop-blur-xl md:p-12">
             <Sparkles className="mx-auto mb-5 h-10 w-10 text-cyan-300" />
-            <h2 className="text-3xl font-extrabold md:text-5xl">Import-Anfrage stellen.</h2>
-            <p className="mx-auto mt-4 max-w-2xl text-white/58">Kurze Qualifizierung für Apotheken, Großhändler, Importeure und QA-/QP-nahe Entscheider mit realem medizinischem Bedarf.</p>
+            <h2 className="text-3xl font-extrabold md:text-5xl">{t("app.contactTitle", "Import-Anfrage stellen.")}</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-white/58">{t("app.contactSubtitle", "Kurze Qualifizierung für Apotheken, Großhändler, Importeure und QA-/QP-nahe Entscheider mit realem medizinischem Bedarf.")}</p>
             <div className="mx-auto mt-8 grid max-w-2xl gap-3 text-left text-sm text-white/62 sm:grid-cols-2">
-              {[[Database, "Geprüfte internationale Supply"], [BadgeCheck, "EU-GMP/GDP/GACP-Dokumentation"], [Network, "Importfähigkeit & Release-Pfad"], [Sparkles, "Dokumenten-Vorprüfung"]].map(([Icon, label]) => (
+              {[[Database, t("app.contactFeatureSupply", "Geprüfte internationale Supply")], [BadgeCheck, t("app.contactFeatureDocumentation", "EU-GMP/GDP/GACP-Dokumentation")], [Network, t("app.contactFeatureImportReadiness", "Importfähigkeit & Release-Pfad")], [Sparkles, t("app.contactFeaturePreCheck", "Dokumenten-Vorprüfung")]].map(([Icon, label]) => (
                 <div key={String(label)} className="flex gap-2 rounded-2xl border border-white/10 bg-black/20 p-4">
                   <Icon className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" /> {String(label)}
                 </div>
@@ -672,6 +685,7 @@ function ProtectedDashboard() {
 }
 
 function DashboardLayout() {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
 
   async function handleSignOut() {
@@ -712,7 +726,7 @@ function DashboardLayout() {
               }
             >
               <item.icon className="h-4 w-4 shrink-0" />
-              {item.label}
+              {t(`app.nav.${item.key}`, item.label)}
             </NavLink>
           ))}
         </nav>
@@ -730,10 +744,11 @@ function DashboardLayout() {
           <div className="ml-auto hidden items-center gap-3 md:flex">
             <Link to="/" className="rounded-xl border border-white/10 px-4 py-2 text-sm font-semibold text-white/70 hover:bg-white/10">Landing</Link>
             <button onClick={handleSignOut} className="rounded-xl border border-white/10 px-4 py-2 text-sm font-semibold text-white/70 hover:bg-white/10">Logout</button>
-            <a href="mailto:info@cannaworld-germany.de?subject=CannaWorld Germany Import-Anfrage" className="rounded-xl bg-cyan-300 px-4 py-2 text-sm font-bold text-[#061016] hover:bg-cyan-200">Import-Anfrage</a>
+            <a href="mailto:info@cannaworld-germany.de?subject=CannaWorld Germany Import-Anfrage" className="rounded-xl bg-cyan-300 px-4 py-2 text-sm font-bold text-[#061016] hover:bg-cyan-200">{t("app.headerImportRequest", "Import-Anfrage")}</a>
           </div>
         </header>
         <main className="p-5 lg:p-8">
+          <OnboardingBanner />
           <Outlet />
         </main>
       </div>
@@ -812,16 +827,76 @@ function DashboardModule({ moduleKey }: { moduleKey: string }) {
   );
 }
 
+function DashboardIndex() {
+  const gate = useOnboardingGate();
+
+  if (gate.loading) {
+    return (
+      <div className="flex min-h-[300px] items-center justify-center text-sm font-semibold text-cyan-200">
+        Lade Dashboard…
+      </div>
+    );
+  }
+
+  let skipped = false;
+  try {
+    skipped = sessionStorage.getItem(ONBOARDING_SKIP_KEY) === "1";
+  } catch {
+    /* sessionStorage unavailable — treat as not skipped */
+  }
+
+  // Soft-hybrid: a user who has never started onboarding is sent into the flow
+  // on first arrival. Once skipped this session — or a draft/submitted/approved
+  // entry exists — the dashboard renders normally and only the banner reminds.
+  if (gate.status === "no_onboarding" && !skipped) {
+    return <Navigate to="/dashboard/onboarding" replace />;
+  }
+
+  return <Overview />;
+}
+
+function OnboardingBanner() {
+  const gate = useOnboardingGate();
+  const location = useLocation();
+
+  if (location.pathname.startsWith("/dashboard/onboarding")) return null;
+  if (gate.loading) return null;
+  if (!["no_onboarding", "draft", "rejected"].includes(gate.status)) return null;
+
+  const isDraft = gate.status === "draft";
+  return (
+    <Link
+      to="/dashboard/onboarding"
+      className="mb-6 flex items-center gap-3 rounded-2xl border border-cyan-300/30 bg-cyan-300/10 px-5 py-4 transition hover:border-cyan-300/60 hover:bg-cyan-300/15"
+    >
+      <Sparkles className="h-5 w-5 shrink-0 text-cyan-300" />
+      <div className="flex-1">
+        <div className="text-sm font-bold text-white">
+          {isDraft ? "Onboarding fortsetzen" : "Onboarding abschließen"}
+        </div>
+        <div className="text-sm leading-5 text-white/55">
+          {isDraft
+            ? "Setzen Sie Ihre begonnene B2B-Qualifizierung fort, um Ihren Import-Pfad freizuschalten."
+            : "Schließen Sie Ihre B2B-Qualifizierung ab, damit Import-Pfad, Dokumente und Compliance vorbereitet werden."}
+        </div>
+      </div>
+      <ArrowRight className="h-4 w-4 shrink-0 text-cyan-300" />
+    </Link>
+  );
+}
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
+        <Toaster theme="dark" position="top-right" richColors closeButton />
         <BrowserRouter>
           <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
                 <Route path="/dashboard" element={<ProtectedDashboard />}>
-          <Route index element={<Overview />} />
+          <Route index element={<DashboardIndex />} />
+          <Route path="onboarding" element={<OnboardingPage />} />
           <Route
             path="trade-cases"
             element={
@@ -922,6 +997,22 @@ function App() {
             element={
               <RoleGuard allowedRoles={["pharmacy"]} requireBtMLicense>
                 <BtmPrescriptions />
+              </RoleGuard>
+            }
+          />
+          <Route
+            path="pharmacy-receive"
+            element={
+              <RoleGuard allowedRoles={["pharmacy"]}>
+                <PharmacyReceive />
+              </RoleGuard>
+            }
+          />
+          <Route
+            path="pharmacy-dispense"
+            element={
+              <RoleGuard allowedRoles={["pharmacy"]} requireBtMLicense>
+                <PharmacyDispense />
               </RoleGuard>
             }
           />

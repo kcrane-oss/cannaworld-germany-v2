@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useInventory, type InventoryRow } from "@/hooks/useInventory";
 import { Warehouse as WarehouseIcon, Loader2, AlertTriangle, Search } from "lucide-react";
 
@@ -15,6 +16,7 @@ function stockLabel(item: InventoryRow) {
 }
 
 export default function Warehouse() {
+  const { t } = useTranslation();
   const { data: items = [], isLoading, isError, error } = useInventory();
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<"all" | "low" | "ok">("all");
@@ -47,8 +49,7 @@ export default function Warehouse() {
           </div>
           <h1 className="text-3xl font-black tracking-tight md:text-5xl">Warehouse</h1>
           <p className="mt-4 max-w-2xl text-base leading-7 text-white/60">
-            Quarantäne-, Released-, Reserved-Status für die deutsche Lieferkette. Bewegungen
-            erfolgen weiterhin über die Gateway Operations-Layer.
+            {t("warehouse.heroSubtitle", "Quarantäne-, Released-, Reserved-Status für die deutsche Lieferkette. Bewegungen erfolgen weiterhin über die Gateway Operations-Layer.")}
           </p>
         </div>
       </section>
@@ -56,11 +57,11 @@ export default function Warehouse() {
       <section className="grid gap-4 md:grid-cols-4">
         <div className="rounded-3xl border border-cyan-300/25 bg-cyan-400/5 p-5">
           <div className="text-2xl font-black text-cyan-300">{summary.total}</div>
-          <div className="text-sm font-semibold text-cyan-100">Positionen</div>
+          <div className="text-sm font-semibold text-cyan-100">{t("warehouse.summaryPositions", "Positionen")}</div>
         </div>
         <div className="rounded-3xl border border-emerald-300/25 bg-emerald-400/5 p-5">
           <div className="text-2xl font-black text-emerald-300">{summary.onHand}</div>
-          <div className="text-sm font-semibold text-emerald-100">Einheiten on-hand</div>
+          <div className="text-sm font-semibold text-emerald-100">{t("warehouse.summaryOnHand", "Einheiten on-hand")}</div>
         </div>
         <div className="rounded-3xl border border-amber-300/25 bg-amber-400/5 p-5">
           <div className="text-2xl font-black text-amber-300">{summary.low}</div>
@@ -80,7 +81,7 @@ export default function Warehouse() {
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Produkt oder Lagerort suchen…"
+              placeholder={t("warehouse.searchPlaceholder", "Produkt oder Lagerort suchen…")}
               className="w-full rounded-xl border border-white/10 bg-black/30 py-2.5 pl-9 pr-3 text-sm text-white placeholder:text-white/30 focus:border-cyan-300/60 focus:outline-none"
             />
           </div>
@@ -96,7 +97,7 @@ export default function Warehouse() {
                     : "border border-white/10 bg-white/5 text-white/70 hover:border-cyan-300/40 hover:text-cyan-200"
                 }`}
               >
-                {opt === "all" ? "Alle" : opt === "ok" ? "OK" : "Low / Out"}
+                {opt === "all" ? t("warehouse.filterAll", "Alle") : opt === "ok" ? "OK" : "Low / Out"}
               </button>
             ))}
           </div>
@@ -114,8 +115,8 @@ export default function Warehouse() {
           <div className="flex items-start gap-3">
             <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
             <div>
-              <div className="font-bold">Inventar konnte nicht geladen werden</div>
-              <div className="mt-1 text-red-200/80">{error instanceof Error ? error.message : "Unbekannter Fehler"}</div>
+              <div className="font-bold">{t("warehouse.loadError", "Inventar konnte nicht geladen werden")}</div>
+              <div className="mt-1 text-red-200/80">{error instanceof Error ? error.message : t("warehouse.unknownError", "Unbekannter Fehler")}</div>
             </div>
           </div>
         </div>
@@ -124,7 +125,7 @@ export default function Warehouse() {
       {!isLoading && !isError && filtered.length === 0 && (
         <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-12 text-center">
           <WarehouseIcon className="mx-auto mb-4 h-10 w-10 text-white/30" />
-          <div className="text-lg font-bold text-white">Keine Positionen gefunden</div>
+          <div className="text-lg font-bold text-white">{t("warehouse.emptyState", "Keine Positionen gefunden")}</div>
         </div>
       )}
 

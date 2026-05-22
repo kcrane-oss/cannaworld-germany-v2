@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 
 export type AuditProvider = "openai" | "gemini";
@@ -35,6 +36,7 @@ Antworte auf Deutsch. Gib konkrete Bewertungen (konform/nicht konform) mit Begr√
 Erstelle automatisch Checklisten-Eintr√§ge im Format: [OK] oder [MANGEL] gefolgt von der Beschreibung.`;
 
 export function useRealtimeAudit() {
+  const { t } = useTranslation();
   const [state, setState] = useState<RealtimeAuditState>({
     provider: null,
     isConnected: false,
@@ -129,10 +131,10 @@ export function useRealtimeAudit() {
           const msg = JSON.parse(event.data);
           
           if (msg.type === "response.audio_transcript.done") {
-            addTranscript(`KI: ${msg.transcript}`);
+            addTranscript(`${t("useRealtimeAudit.speakerAi", "KI")}: ${msg.transcript}`);
           }
           if (msg.type === "conversation.item.input_audio_transcription.completed") {
-            addTranscript(`Auditor: ${msg.transcript}`);
+            addTranscript(`${t("useRealtimeAudit.speakerAuditor", "Auditor")}: ${msg.transcript}`);
           }
           if (msg.type === "response.text.done") {
             addAnalysis(msg.text);
@@ -147,7 +149,7 @@ export function useRealtimeAudit() {
                       addAnalysis(content.text);
                     }
                     if (content.transcript) {
-                      addTranscript(`KI: ${content.transcript}`);
+                      addTranscript(`${t("useRealtimeAudit.speakerAi", "KI")}: ${content.transcript}`);
                     }
                   }
                 }
@@ -203,10 +205,10 @@ export function useRealtimeAudit() {
       setState((prev) => ({
         ...prev,
         isConnecting: false,
-        error: err.message || "OpenAI-Verbindung fehlgeschlagen",
+        error: err.message || t("useRealtimeAudit.errorOpenaiConnection", "OpenAI-Verbindung fehlgeschlagen"),
       }));
     }
-  }, [addTranscript, addAnalysis]);
+  }, [addTranscript, addAnalysis, t]);
 
   const connectGemini = useCallback(async () => {
     setState((prev) => ({ ...prev, isConnecting: true, error: null }));
@@ -239,10 +241,10 @@ export function useRealtimeAudit() {
       setState((prev) => ({
         ...prev,
         isConnecting: false,
-        error: err.message || "Gemini-Verbindung fehlgeschlagen",
+        error: err.message || t("useRealtimeAudit.errorGeminiConnection", "Gemini-Verbindung fehlgeschlagen"),
       }));
     }
-  }, [addTranscript, addAnalysis]);
+  }, [addTranscript, addAnalysis, t]);
 
   const startGeminiRelayCapture = useCallback(async (sessionToken: string) => {
     try {
@@ -385,10 +387,14 @@ export function useRealtimeAudit() {
       return data?.id || null;
     } catch (err: any) {
       console.error("Failed to save audit session:", err);
-      setState((prev) => ({ ...prev, isSaving: false, error: `Speichern fehlgeschlagen: ${err.message}` }));
+      setState((prev) => ({
+        ...prev,
+        isSaving: false,
+        error: t("useRealtimeAudit.errorSaveFailed", "Speichern fehlgeschlagen: {{message}}", { message: err.message }),
+      }));
       return null;
     }
-  }, [state]);
+  }, [state, t]);
 
   const disconnect = useCallback(async () => {
     // Save session before disconnecting
