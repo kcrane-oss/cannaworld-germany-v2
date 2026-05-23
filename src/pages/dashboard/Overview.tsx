@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useDashboardStats } from "@/hooks/useDashboardStats";
 import { useAuth } from "@/hooks/useAuth";
+import OnboardingStatusPanel from "@/components/onboarding/OnboardingStatusPanel";
 import {
   ArrowRight,
   Clock,
@@ -102,6 +103,7 @@ export default function Overview() {
 
   return (
     <div className="space-y-7">
+      <OnboardingStatusPanel />
       <section className="relative overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-gradient-to-br from-cyan-300/12 via-white/[0.045] to-emerald-300/10 p-6 shadow-[0_0_42px_rgba(34,211,238,0.08)] md:p-8">
         <div className="absolute right-0 top-0 h-52 w-52 rounded-full bg-cyan-300/10 blur-3xl" />
         <div className="relative flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
