@@ -25,6 +25,16 @@ vi.mock("@/hooks/useDashboardStats", () => ({
     refetch: vi.fn(),
   }),
 }));
+vi.mock("@/hooks/useOnboardingGate", () => ({
+  useOnboardingGate: () => ({
+    status: "approved",
+    entries: [],
+    canAccess: true,
+    hasApprovedRole: true,
+    bestTier: "verified",
+    loading: false,
+  }),
+}));
 
 function wrap(node: React.ReactNode) {
   const client = new QueryClient({ defaultOptions: { queries: { retry: false } } });
