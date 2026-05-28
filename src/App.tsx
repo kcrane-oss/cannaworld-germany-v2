@@ -88,13 +88,6 @@ async function loadSupabase(): Promise<SupabaseClient> {
   return module.supabase;
 } 
 
-const networkLinks = [
-  ["Gateway", "https://cannaworld-thailand.com"],
-  ["Europe", "https://cannaworld-europe.com"],
-  ["Marketplace", "https://cannaworld-marketplace.com"],
-  ["AICert", "https://gmp-aicert.com"],
-] as const;
-
 const stats = [
   ["DE", "B2B Intake", "app.statsB2bIntake"],
   ["EU-GMP", "Dokumentenpfad", "app.statsDocumentPath"],
@@ -355,18 +348,19 @@ function LandingPage() {
           <Link to="/" className="flex items-center gap-3">
             <img src={logo} alt="CannaWorld" className="h-12 w-auto object-contain" />
           </Link>
-          <div className="hidden items-center gap-5 text-sm font-medium text-white/60 md:flex">
+          <div className="hidden items-center gap-6 text-sm font-medium text-white/60 md:flex">
             <a href="#proof" className="transition hover:text-white">{t("app.navProof", "Proof")}</a>
             <a href="#dashboard-preview" className="transition hover:text-white">{t("app.navDashboard", "Dashboard")}</a>
             <a href="#prozess" className="transition hover:text-white">{t("app.navProcess", "Prozess")}</a>
-            <div className="h-5 w-px bg-white/10" />
-            {networkLinks.map(([label, href]) => (
-              <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="text-xs transition hover:text-cyan-200">{label}</a>
-            ))}
           </div>
-          <Link to="/login" className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-5 py-2.5 text-sm font-semibold text-cyan-200 transition hover:border-cyan-300/70 hover:bg-cyan-400/20">
-            {t("app.partnerLogin", "Partner Login")}
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link to="/register" className="hidden text-sm font-semibold text-white/70 transition hover:text-cyan-200 sm:inline">
+              {t("app.partnerRegister", "Zugang beantragen")}
+            </Link>
+            <Link to="/login" className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-5 py-2.5 text-sm font-semibold text-cyan-200 transition hover:border-cyan-300/70 hover:bg-cyan-400/20">
+              {t("app.partnerLogin", "Partner Login")}
+            </Link>
+          </div>
         </div>
       </nav>
 
@@ -637,7 +631,15 @@ function LoginPage() {
           <button disabled={loading} className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-cyan-300 px-5 py-3 font-black text-[#061016] transition hover:bg-cyan-200 disabled:cursor-not-allowed disabled:opacity-60">
             {loading ? "Prüfe Login…" : "Dashboard öffnen"} <ArrowRight className="h-4 w-4" />
           </button>
-          <p className="mt-5 text-xs leading-5 text-white/38">Kein Account? Zugang wird manuell nach B2B-Qualifizierung freigeschaltet. Sensible Supplier-, Batch-, Dokumenten- und Trade-Case-Daten bleiben geschützt.</p>
+          <p className="mt-5 text-xs leading-5 text-white/45">
+            Kein Account? Zugang wird manuell nach B2B-Qualifizierung freigeschaltet. Sensible Supplier-, Batch-, Dokumenten- und Trade-Case-Daten bleiben geschützt.
+          </p>
+          <Link
+            to="/register"
+            className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-cyan-300 transition hover:text-cyan-200"
+          >
+            B2B-Zugang beantragen <ArrowRight className="h-3 w-3" />
+          </Link>
         </form>
       </main>
     </div>
@@ -885,6 +887,219 @@ function OnboardingBanner() {
   );
 }
 
+function RegisterPage() {
+  const [form, setForm] = useState({
+    company: "",
+    role: "pharmacy",
+    contactName: "",
+    email: "",
+    phone: "",
+    licenseNumber: "",
+    btmLicense: "",
+    volume: "",
+    message: "",
+  });
+  const [submitted, setSubmitted] = useState(false);
+
+  function update<K extends keyof typeof form>(key: K, value: (typeof form)[K]) {
+    setForm((prev) => ({ ...prev, [key]: value }));
+  }
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const roleLabels: Record<string, string> = {
+      pharmacy: "Apotheke",
+      wholesaler: "Pharma-Großhandel",
+      importer: "Importeur",
+      manufacturer: "Herstellbetrieb",
+    };
+    const body = [
+      "Neue B2B-Zugangsanfrage über cannaworld-germany.de/register",
+      "",
+      `Firma / Apotheke: ${form.company}`,
+      `Rolle: ${roleLabels[form.role] ?? form.role}`,
+      `Ansprechpartner: ${form.contactName}`,
+      `E-Mail: ${form.email}`,
+      `Telefon: ${form.phone}`,
+      `Apotheken- / Erlaubnis-Nr.: ${form.licenseNumber || "—"}`,
+      `BtM-Erlaubnis-Nr.: ${form.btmLicense || "—"}`,
+      `Erwartetes Volumen: ${form.volume || "—"}`,
+      "",
+      "Nachricht:",
+      form.message || "—",
+    ].join("\n");
+    const subject = `B2B-Zugangsanfrage — ${form.company || "Neue Anfrage"}`;
+    window.location.href = `mailto:info@cannaworld-germany.de?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setSubmitted(true);
+  }
+
+  return (
+    <div className="min-h-screen bg-[#071016] px-5 pb-16 pt-16 text-white">
+      <UniverseBar current="germany" />
+      <Link to="/" className="inline-flex items-center gap-3 text-sm font-semibold text-white/60 hover:text-white">
+        <img src={logo} alt="CannaWorld" className="h-8 w-auto" /> Zurück zur Landing
+      </Link>
+      <main className="mx-auto mt-10 max-w-2xl">
+        {submitted ? (
+          <div className="rounded-[2rem] border border-emerald-300/25 bg-white/[0.05] p-8 shadow-[0_0_44px_rgba(16,185,129,0.10)] backdrop-blur-xl">
+            <Badge>Antrag vorbereitet</Badge>
+            <h1 className="mt-5 text-3xl font-black tracking-tight">Vielen Dank für Ihre Anfrage</h1>
+            <p className="mt-4 text-sm leading-7 text-white/70">
+              Ihr E-Mail-Programm wurde mit allen Angaben geöffnet. Bitte senden Sie die vorbereitete Mail an
+              <span className="font-semibold text-cyan-200"> info@cannaworld-germany.de</span> ab — wir prüfen Ihre B2B-Qualifizierung
+              und melden uns innerhalb von 24 Stunden mit den nächsten Schritten.
+            </p>
+            <p className="mt-3 text-xs leading-6 text-white/45">
+              Sollte sich kein E-Mail-Programm geöffnet haben, schreiben Sie uns bitte direkt an info@cannaworld-germany.de.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link to="/" className="rounded-xl bg-cyan-300 px-5 py-2.5 text-sm font-black text-[#061016] transition hover:bg-cyan-200">
+                Zurück zur Startseite
+              </Link>
+              <button
+                type="button"
+                onClick={() => setSubmitted(false)}
+                className="rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition hover:border-cyan-300/40 hover:bg-white/10"
+              >
+                Weitere Anfrage senden
+              </button>
+            </div>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="rounded-[2rem] border border-cyan-300/20 bg-white/[0.055] p-7 shadow-[0_0_44px_rgba(34,211,238,0.11)] backdrop-blur-xl">
+            <Badge>B2B-Qualifizierung</Badge>
+            <h1 className="mt-5 text-3xl font-black tracking-tight">Zugang beantragen</h1>
+            <p className="mt-3 text-sm leading-6 text-white/56">
+              CannaWorld Germany ist ein reguliertes B2B-Gateway für medizinischen Cannabis-Import. Der Zugang wird nach
+              kurzer Qualifizierung manuell freigeschaltet — Apotheken, Großhandel, Importeure und Herstellbetriebe willkommen.
+            </p>
+
+            <div className="mt-7 grid gap-4 md:grid-cols-2">
+              <label className="block text-sm font-bold text-white/70">
+                Firma / Apotheke <span className="text-cyan-300">*</span>
+                <input
+                  type="text"
+                  required
+                  value={form.company}
+                  onChange={(e) => update("company", e.target.value)}
+                  className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition placeholder:text-white/30 focus:border-cyan-300/60"
+                  placeholder="z. B. Stern-Apotheke München"
+                />
+              </label>
+
+              <label className="block text-sm font-bold text-white/70">
+                Rolle <span className="text-cyan-300">*</span>
+                <select
+                  required
+                  value={form.role}
+                  onChange={(e) => update("role", e.target.value)}
+                  className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition focus:border-cyan-300/60"
+                >
+                  <option value="pharmacy">Apotheke</option>
+                  <option value="wholesaler">Pharma-Großhandel</option>
+                  <option value="importer">Importeur</option>
+                  <option value="manufacturer">Herstellbetrieb</option>
+                </select>
+              </label>
+
+              <label className="block text-sm font-bold text-white/70">
+                Ansprechpartner <span className="text-cyan-300">*</span>
+                <input
+                  type="text"
+                  required
+                  value={form.contactName}
+                  onChange={(e) => update("contactName", e.target.value)}
+                  className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition placeholder:text-white/30 focus:border-cyan-300/60"
+                  placeholder="Vor- und Nachname"
+                />
+              </label>
+
+              <label className="block text-sm font-bold text-white/70">
+                E-Mail <span className="text-cyan-300">*</span>
+                <input
+                  type="email"
+                  required
+                  value={form.email}
+                  onChange={(e) => update("email", e.target.value)}
+                  className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition placeholder:text-white/30 focus:border-cyan-300/60"
+                  placeholder="name@apotheke.de"
+                />
+              </label>
+
+              <label className="block text-sm font-bold text-white/70">
+                Telefon <span className="text-cyan-300">*</span>
+                <input
+                  type="tel"
+                  required
+                  value={form.phone}
+                  onChange={(e) => update("phone", e.target.value)}
+                  className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition placeholder:text-white/30 focus:border-cyan-300/60"
+                  placeholder="+49 …"
+                />
+              </label>
+
+              <label className="block text-sm font-bold text-white/70">
+                Apotheken- / Erlaubnis-Nr.
+                <input
+                  type="text"
+                  value={form.licenseNumber}
+                  onChange={(e) => update("licenseNumber", e.target.value)}
+                  className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition placeholder:text-white/30 focus:border-cyan-300/60"
+                  placeholder="optional, beschleunigt Qualifizierung"
+                />
+              </label>
+
+              <label className="block text-sm font-bold text-white/70">
+                BtM-Erlaubnis-Nr.
+                <input
+                  type="text"
+                  value={form.btmLicense}
+                  onChange={(e) => update("btmLicense", e.target.value)}
+                  className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition placeholder:text-white/30 focus:border-cyan-300/60"
+                  placeholder="optional"
+                />
+              </label>
+
+              <label className="block text-sm font-bold text-white/70">
+                Erwartetes Volumen
+                <input
+                  type="text"
+                  value={form.volume}
+                  onChange={(e) => update("volume", e.target.value)}
+                  className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition placeholder:text-white/30 focus:border-cyan-300/60"
+                  placeholder="z. B. 2 kg / Monat"
+                />
+              </label>
+            </div>
+
+            <label className="mt-4 block text-sm font-bold text-white/70">
+              Nachricht
+              <textarea
+                rows={4}
+                value={form.message}
+                onChange={(e) => update("message", e.target.value)}
+                className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition placeholder:text-white/30 focus:border-cyan-300/60"
+                placeholder="Welche Produkte / Indikationen, gewünschter Zeitrahmen, vorhandene Dokumentation …"
+              />
+            </label>
+
+            <button
+              type="submit"
+              className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-cyan-300 px-5 py-3 font-black text-[#061016] transition hover:bg-cyan-200"
+            >
+              Anfrage senden <ArrowRight className="h-4 w-4" />
+            </button>
+            <p className="mt-4 text-xs leading-5 text-white/45">
+              Mit dem Absenden öffnet sich Ihr E-Mail-Programm mit vorbereiteten Angaben. Wir melden uns innerhalb von
+              24 Stunden mit den nächsten Schritten zur B2B-Qualifizierung.
+            </p>
+          </form>
+        )}
+      </main>
+    </div>
+  );
+}
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -894,6 +1109,7 @@ function App() {
           <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
                 <Route path="/dashboard" element={<ProtectedDashboard />}>
           <Route index element={<DashboardIndex />} />
           <Route path="onboarding" element={<OnboardingPage />} />
