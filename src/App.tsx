@@ -61,6 +61,7 @@ import {
   FolderOpen,
   Globe2,
   LayoutDashboard,
+  Loader2,
   Mail,
   Menu,
   Network,
@@ -596,6 +597,110 @@ function GatewayServicesPreview() {
   );
 }
 
+function ImpressumPage() {
+  return (
+    <div className="relative min-h-screen bg-[#071016] px-5 pb-16 pt-16 text-white overflow-x-hidden">
+      <div className="pointer-events-none fixed inset-0 opacity-40">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.10),transparent_34%)]" />
+      </div>
+      <UniverseBar current="germany" />
+      <div className="relative mx-auto max-w-3xl">
+        <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-white/60 hover:text-white">
+          ← Zurück zur Startseite
+        </Link>
+        <div className="relative mt-8 rounded-[2rem] border border-white/10 bg-white/[0.045] p-8 backdrop-blur">
+          <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-[2rem] bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
+          <h1 className="text-3xl font-black tracking-tight">Impressum</h1>
+          <p className="mt-2 text-sm text-white/45">Angaben gemäß § 5 TMG</p>
+          <div className="mt-8 space-y-6 text-sm leading-7 text-white/70">
+            <div>
+              <div className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-white/40">Betreiber</div>
+              <p>CannaWorld Germany<br />c/o CannaWorld Ecosystem<br />Berlin, Deutschland</p>
+            </div>
+            <div>
+              <div className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-white/40">Kontakt</div>
+              <p>E-Mail: <a href="mailto:info@cannaworld-germany.de" className="text-cyan-300 hover:text-cyan-200">info@cannaworld-germany.de</a></p>
+            </div>
+            <div className="rounded-2xl border border-amber-300/20 bg-amber-300/8 p-4 text-amber-100/80">
+              Dieses Impressum wird derzeit vervollständigt. Für rechtliche Anfragen wenden Sie sich bitte direkt per E-Mail an uns.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DatenschutzPage() {
+  return (
+    <div className="relative min-h-screen bg-[#071016] px-5 pb-16 pt-16 text-white overflow-x-hidden">
+      <div className="pointer-events-none fixed inset-0 opacity-40">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.10),transparent_34%)]" />
+      </div>
+      <UniverseBar current="germany" />
+      <div className="relative mx-auto max-w-3xl">
+        <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-white/60 hover:text-white">
+          ← Zurück zur Startseite
+        </Link>
+        <div className="mt-8 rounded-[2rem] border border-white/10 bg-white/[0.045] p-8 backdrop-blur">
+          <h1 className="text-3xl font-black tracking-tight">Datenschutzerklärung</h1>
+          <p className="mt-2 text-sm text-white/45">Gemäß DSGVO / GDPR</p>
+          <div className="mt-8 space-y-6 text-sm leading-7 text-white/70">
+            <div>
+              <div className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-white/40">Verantwortlicher</div>
+              <p>CannaWorld Germany · info@cannaworld-germany.de</p>
+            </div>
+            <div>
+              <div className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-white/40">Datenverarbeitung</div>
+              <p>Diese Plattform verarbeitet ausschließlich B2B-Kontaktdaten zur Qualifizierung von Importanfragen. Es erfolgt keine Weitergabe an Dritte ohne Einwilligung. Speicherung und Verarbeitung erfolgen über Supabase (EU-Region).</p>
+            </div>
+            <div>
+              <div className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-white/40">Ihre Rechte</div>
+              <p>Auskunft, Berichtigung, Löschung und Widerspruch jederzeit per E-Mail an <a href="mailto:info@cannaworld-germany.de" className="text-cyan-300 hover:text-cyan-200">info@cannaworld-germany.de</a>.</p>
+            </div>
+            <div className="rounded-2xl border border-amber-300/20 bg-amber-300/8 p-4 text-amber-100/80">
+              Diese Datenschutzerklärung wird derzeit durch einen Rechtsanwalt vervollständigt.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AgbPage() {
+  return (
+    <div className="relative min-h-screen bg-[#071016] px-5 pb-16 pt-16 text-white overflow-x-hidden">
+      <div className="pointer-events-none fixed inset-0 opacity-40">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.10),transparent_34%)]" />
+      </div>
+      <UniverseBar current="germany" />
+      <div className="relative mx-auto max-w-3xl">
+        <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-white/60 hover:text-white">
+          ← Zurück zur Startseite
+        </Link>
+        <div className="mt-8 rounded-[2rem] border border-white/10 bg-white/[0.045] p-8 backdrop-blur">
+          <h1 className="text-3xl font-black tracking-tight">AGB</h1>
+          <p className="mt-2 text-sm text-white/45">Allgemeine Geschäftsbedingungen</p>
+          <div className="mt-8 space-y-6 text-sm leading-7 text-white/70">
+            <div>
+              <div className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-white/40">Geltungsbereich</div>
+              <p>Diese AGB gelten für die Nutzung der CannaWorld Germany B2B-Plattform durch qualifizierte gewerbliche Marktteilnehmer (Apotheken, Großhändler, Importeure, Herstellbetriebe).</p>
+            </div>
+            <div>
+              <div className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-white/40">Nutzung</div>
+              <p>Die Plattform dient ausschließlich der B2B-Qualifizierung für medizinischen Cannabis-Import nach deutschem und EU-Recht. Endkunden-Verkauf ist ausgeschlossen.</p>
+            </div>
+            <div className="rounded-2xl border border-amber-300/20 bg-amber-300/8 p-4 text-amber-100/80">
+              Diese AGB werden derzeit durch einen Rechtsanwalt erarbeitet.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -664,6 +769,14 @@ function LoginPage() {
               placeholder="••••••••"
             />
           </label>
+          <div className="mt-2 text-right">
+            <a
+              href="mailto:info@cannaworld-germany.de?subject=Passwort%20zur%C3%BCcksetzen%20%E2%80%94%20CannaWorld%20Germany"
+              className="text-xs text-white/45 transition hover:text-cyan-300"
+            >
+              Passwort vergessen?
+            </a>
+          </div>
           {error && <div className="mt-4 rounded-xl border border-red-300/20 bg-red-400/10 p-3 text-sm text-red-100">{error}</div>}
           <button disabled={loading} className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-cyan-300 px-5 py-3 font-black text-[#061016] transition hover:bg-cyan-200 disabled:cursor-not-allowed disabled:opacity-60">
             {loading ? "Prüfe Login…" : "Dashboard öffnen"} <ArrowRight className="h-4 w-4" />
@@ -712,7 +825,8 @@ function ProtectedDashboard() {
 
   if (allowed === null) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#071016] text-sm font-semibold text-cyan-200">
+      <div className="flex min-h-screen flex-col items-center justify-center gap-3 bg-[#071016] text-sm font-semibold text-cyan-200">
+        <Loader2 className="h-6 w-6 animate-spin text-cyan-300" />
         Prüfe Dashboard-Zugang…
       </div>
     );
@@ -1236,6 +1350,9 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/impressum" element={<ImpressumPage />} />
+        <Route path="/datenschutz" element={<DatenschutzPage />} />
+        <Route path="/agb" element={<AgbPage />} />
                 <Route path="/dashboard" element={<ProtectedDashboard />}>
           <Route index element={<DashboardIndex />} />
           <Route path="onboarding" element={<OnboardingPage />} />
