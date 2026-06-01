@@ -78,7 +78,7 @@ export default function PharmacyImport() {
         {PATHS.map((path) => {
           const Icon = path.icon;
           const Body = (
-            <div className={`group relative h-full overflow-hidden rounded-3xl border bg-gradient-to-br p-6 transition hover:-translate-y-0.5 ${path.tint}`}>
+            <div className={`group relative h-full overflow-hidden rounded-[2rem] border bg-gradient-to-br p-6 transition hover:-translate-y-0.5 ${path.tint}`}>
               <div className="mb-4 flex items-center justify-between">
                 <span className={`inline-flex items-center rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-wider ${path.tint}`}>
                   {path.badge}
@@ -111,7 +111,7 @@ export default function PharmacyImport() {
         })}
       </section>
 
-      <section className="rounded-3xl border border-white/10 bg-white/[0.045] p-6">
+      <section className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="max-w-2xl">
             <div className="mb-2 flex items-center gap-2">

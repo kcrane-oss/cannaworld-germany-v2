@@ -111,7 +111,7 @@ export default function Batches() {
       )}
 
       {isError && (
-        <div className="rounded-3xl border border-red-300/30 bg-red-400/5 p-5 text-sm text-red-200">
+        <div className="rounded-[2rem] border border-red-300/30 bg-red-400/5 p-5 text-sm text-red-200">
           <div className="flex items-start gap-3">
             <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
             <div>
@@ -123,7 +123,7 @@ export default function Batches() {
       )}
 
       {!isLoading && !isError && filtered.length === 0 && (
-        <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-12 text-center">
+        <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-12 text-center">
           <Package className="mx-auto mb-4 h-10 w-10 text-white/30" />
           <div className="text-lg font-bold text-white">Keine Chargen gefunden</div>
           <div className="mt-2 text-sm text-white/55">
@@ -143,7 +143,7 @@ export default function Batches() {
       )}
 
       {!isLoading && !isError && filtered.length > 0 && (
-        <section className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]">
+        <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03]">
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead className="bg-white/[0.04] text-[10px] font-bold uppercase tracking-wider text-white/45">

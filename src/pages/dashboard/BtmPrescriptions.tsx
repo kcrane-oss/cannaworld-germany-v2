@@ -31,7 +31,7 @@ export default function BtmPrescriptions() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-amber-300/30 bg-amber-400/[0.04] p-5">
+      <section className="rounded-[2rem] border border-amber-300/30 bg-amber-400/[0.04] p-5">
         <div className="flex items-start gap-3">
           <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-300" />
           <div className="text-sm leading-6 text-white/70">
@@ -55,7 +55,7 @@ export default function BtmPrescriptions() {
         ].map((item) => {
           const Icon = item.icon;
           return (
-            <div key={item.title} className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+            <div key={item.title} className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5">
               <Icon className="mb-3 h-5 w-5 text-cyan-300" />
               <div className="text-sm font-bold text-white">{item.title}</div>
               <div className="mt-1 text-xs leading-5 text-white/55">{item.hint}</div>

@@ -178,20 +178,20 @@ export default function PharmacyDispense() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-amber-300/30 bg-amber-400/[0.04] p-4 text-sm leading-6 text-amber-100">
+      <section className="rounded-[2rem] border border-amber-300/30 bg-amber-400/[0.04] p-4 text-sm leading-6 text-amber-100">
         <ShieldAlert className="mr-2 inline h-4 w-4" />
         <strong>Datenschutz:</strong> BtM-Rezept-Nr, Arzt-LANR und KV-Nr werden ausschließlich clientseitig zu SHA-256-Hashes verarbeitet (Art. 9 DSGVO).
       </section>
 
       {feedback && (
-        <div className={`rounded-3xl border p-4 text-sm ${feedback.kind === "ok" ? "border-emerald-300/30 bg-emerald-400/[0.05] text-emerald-100" : "border-rose-300/30 bg-rose-400/[0.05] text-rose-100"}`}>
+        <div className={`rounded-[2rem] border p-4 text-sm ${feedback.kind === "ok" ? "border-emerald-300/30 bg-emerald-400/[0.05] text-emerald-100" : "border-rose-300/30 bg-rose-400/[0.05] text-rose-100"}`}>
           {feedback.kind === "ok" ? <CheckCircle2 className="mr-2 inline h-4 w-4" /> : <AlertCircle className="mr-2 inline h-4 w-4" />}
           {feedback.text}
         </div>
       )}
 
       <section className="grid gap-6 md:grid-cols-[1fr_1.4fr]">
-        <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+        <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5">
           <div className="mb-3 flex items-center justify-between">
             <h2 className="text-sm font-bold uppercase tracking-wider text-white/70">{t("pharmacyDispense.availableBatches", "Verfügbare Chargen")}</h2>
             {loading && <Loader2 className="h-4 w-4 animate-spin text-white/40" />}
@@ -216,7 +216,7 @@ export default function PharmacyDispense() {
           </ul>
         </div>
 
-        <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+        <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5">
           {!selected ? (
             <div className="flex h-full flex-col items-center justify-center text-center text-white/45">
               <Pill className="mb-3 h-10 w-10 opacity-50" />

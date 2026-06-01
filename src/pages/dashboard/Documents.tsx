@@ -143,7 +143,7 @@ export default function Documents() {
       )}
 
       {isError && (
-        <div className="rounded-3xl border border-red-300/30 bg-red-400/5 p-5 text-sm text-red-200">
+        <div className="rounded-[2rem] border border-red-300/30 bg-red-400/5 p-5 text-sm text-red-200">
           <div className="flex items-start gap-3">
             <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
             <div>
@@ -155,7 +155,7 @@ export default function Documents() {
       )}
 
       {!isLoading && !isError && filtered.length === 0 && (
-        <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-12 text-center">
+        <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-12 text-center">
           <FolderOpen className="mx-auto mb-4 h-10 w-10 text-white/30" />
           <div className="text-lg font-bold text-white">Keine Dokumente gefunden</div>
           <div className="mt-2 text-sm text-white/55">
@@ -169,7 +169,7 @@ export default function Documents() {
           {filtered.map((doc: DocumentRow) => {
             const tint = TYPE_TINT[doc.document_type?.toLowerCase()] ?? "bg-white/5 text-white/60 border-white/15";
             return (
-              <div key={doc.id} className="rounded-3xl border border-white/10 bg-white/[0.045] p-4 transition hover:border-cyan-300/30">
+              <div key={doc.id} className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-4 transition hover:border-cyan-300/30">
                 <div className="flex items-start gap-3">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-cyan-300/10 ring-1 ring-cyan-300/25">
                     <FileText className="h-5 w-5 text-cyan-300" />

@@ -259,5 +259,11 @@
     "scaTitle": "SCA signature",
     "scaProofPlaceholder": "SCA proof",
     "submitButton": "Sign dispensing"
+  },
+  "roleGuard": {
+    "btmTitle": "BtM License Required",
+    "btmDesc": "This section requires a verified BtM permit under §3 BtMG. Please have your license number registered with the CannaWorld team at",
+    "denyTitle": "Access Denied",
+    "denyDesc": "This section requires a specific CannaWorld role ({{roles}}). If needed, please request access at"
   }
 }

@@ -119,7 +119,7 @@ export default function OnboardingStatusPanel() {
           </div>
           <div>
             <p className="text-sm font-bold text-white">{copy.title}</p>
-            <p className="text-sm leading-6 text-white/65">{copy.description}</p>
+            <p className="text-sm leading-6 text-white/60">{copy.description}</p>
           </div>
           <p className="text-sm font-semibold text-white/85">{copy.nextStep}</p>
         </div>
@@ -127,7 +127,7 @@ export default function OnboardingStatusPanel() {
         <div className="flex flex-col gap-2 sm:flex-row lg:flex-col">
           <button
             onClick={() => navigate("/dashboard/onboarding")}
-            className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-cyan-300 px-4 py-2 text-sm font-bold text-[#061016] transition hover:bg-cyan-200"
+            className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-cyan-300 px-4 py-2 text-sm font-bold text-black transition hover:bg-cyan-200"
           >
             {isActionRequired
               ? t("onboardingStatus.actionCta", "Onboarding öffnen")
