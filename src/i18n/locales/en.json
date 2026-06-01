@@ -235,5 +235,29 @@
     "supplierPassportStatus": "Supplier passport status",
     "unknownError": "Unknown error",
     "emptyState": "No suppliers with passport-relevant scores recorded yet."
+  },
+  "pharmacyDispense": {
+    "errorBtmRxMissing": "BtM prescription number missing",
+    "errorDutiesMissing": "Both pharmacist duties must be documented",
+    "errorQtyZero": "Quantity must be > 0",
+    "errorBtmSaltMissing": "BtM hashing not configured (VITE_BTM_SALT missing or dev placeholder). Dispensing blocked to prevent inconsistent BtM prescription hashes. Please contact the operator.",
+    "successMsg": "Dispensing recorded. Remaining stock: {{units}} units.",
+    "availableBatches": "Available batches",
+    "noBatchesReady": "No dispensable batches.",
+    "selectBatch": "Select a batch to dispense.",
+    "dispenseFor": "Dispense",
+    "fieldPharmacyLicense": "Pharmacy licence",
+    "fieldPharmacistId": "Pharmacist chamber ID",
+    "fieldBtmRx": "BtM prescription no. (hashed immediately)",
+    "fieldDoctorLanr": "Doctor LANR (optional)",
+    "fieldPatientKv": "KV no. (optional, pseudonymised)",
+    "fieldUnits": "Dispensed units",
+    "fieldWeight": "Dispensed weight (g)",
+    "fieldSecurpharm": "Securpharm decommission ID",
+    "checkContraindication": "Contraindication check performed",
+    "checkCounseling": "Patient counselled (§20 ApBetrO)",
+    "scaTitle": "SCA signature",
+    "scaProofPlaceholder": "SCA proof",
+    "submitButton": "Sign dispensing"
   }
 }

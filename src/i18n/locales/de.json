@@ -235,5 +235,29 @@
     "supplierPassportStatus": "Supplier Passport-Status",
     "unknownError": "Unbekannter Fehler",
     "emptyState": "Noch keine Supplier mit Passport-relevanten Scores erfasst."
+  },
+  "pharmacyDispense": {
+    "errorBtmRxMissing": "BtM-Rezept-Nr fehlt",
+    "errorDutiesMissing": "Beide Apotheker-Pflichten müssen dokumentiert sein",
+    "errorQtyZero": "Menge muss > 0 sein",
+    "errorBtmSaltMissing": "BtM-Hashing nicht konfiguriert (VITE_BTM_SALT fehlt oder ist der Dev-Platzhalter). Abgabe blockiert, um inkonsistente BtM-Rezept-Hashes zu verhindern. Bitte Betreiber kontaktieren.",
+    "successMsg": "Abgabe protokolliert. Reststand: {{units}} Einheiten.",
+    "availableBatches": "Verfügbare Chargen",
+    "noBatchesReady": "Keine abgabebereiten Chargen.",
+    "selectBatch": "Charge zur Abgabe wählen.",
+    "dispenseFor": "Abgabe",
+    "fieldPharmacyLicense": "Apotheke-Lizenz",
+    "fieldPharmacistId": "Apothekerkammer-ID",
+    "fieldBtmRx": "BtM-Rezept-Nr (wird sofort gehashed)",
+    "fieldDoctorLanr": "Arzt-LANR (optional)",
+    "fieldPatientKv": "KV-Nr (optional, pseudonymisiert)",
+    "fieldUnits": "Abgegebene Einheiten",
+    "fieldWeight": "Abgegebenes Gewicht (g)",
+    "fieldSecurpharm": "Securpharm Decommission-ID",
+    "checkContraindication": "Kontraindikations-Check durchgeführt",
+    "checkCounseling": "Patient beraten (§20 ApBetrO)",
+    "scaTitle": "SCA-Signatur",
+    "scaProofPlaceholder": "SCA-Proof",
+    "submitButton": "Abgabe signieren"
   }
 }
