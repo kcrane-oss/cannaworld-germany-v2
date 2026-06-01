@@ -37,6 +37,13 @@ const ROLE_LABELS: Record<OnboardingRole, string> = {
   pharmacy: "Apotheke",
   importer: "Importeur / Herstellbetrieb",
   trader: "Großhandel / Distribution",
+  exporter: "Exporteur",
+  farm: "Anbaubetrieb",
+  lab_provider: "Labor",
+  logistics: "Logistik",
+  auditor: "Auditor",
+  inspector: "Inspektor",
+  shop: "Fachhandel",
 };
 
 export default function OnboardingPage() {
