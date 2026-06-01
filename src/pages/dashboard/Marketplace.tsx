@@ -9,9 +9,9 @@ export default function Marketplace() {
 
   return (
     <div className="space-y-7">
-      <section className="relative overflow-hidden rounded-[2rem] border border-blue-400/25 bg-gradient-to-br from-blue-400/12 via-white/[0.045] to-cyan-400/10 p-6 shadow-[0_0_42px_rgba(59,130,246,0.08)] md:p-8">
+      <section className="relative overflow-hidden rounded-2xl border border-blue-400/25 bg-gradient-to-br from-blue-400/12 via-white/[0.045] to-cyan-400/10 p-6 shadow-[0_0_42px_rgba(59,130,246,0.08)] md:p-8">
         <div className="absolute right-0 top-0 h-52 w-52 rounded-full bg-blue-400/10 blur-3xl" />
-        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-[2rem] bg-gradient-to-r from-blue-400 via-sky-400 to-cyan-300" />
+        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-2xl bg-gradient-to-r from-blue-400 via-sky-400 to-cyan-300" />
         <div className="relative flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-3xl">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-400/25 bg-blue-400/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-blue-200">
@@ -35,7 +35,7 @@ export default function Marketplace() {
         </div>
       </section>
 
-      <section className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-6">
+      <section className="rounded-2xl border border-white/10 bg-white/[0.045] p-6">
         <div className="mb-5 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Package className="h-4 w-4 text-cyan-300" />
@@ -110,7 +110,7 @@ export default function Marketplace() {
         )}
       </section>
 
-      <section className="rounded-[2rem] border border-cyan-300/20 bg-gradient-to-br from-cyan-300/10 via-white/[0.045] to-emerald-300/8 p-6">
+      <section className="rounded-2xl border border-cyan-300/20 bg-gradient-to-br from-cyan-300/10 via-white/[0.045] to-emerald-300/8 p-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="max-w-2xl">
             <h3 className="text-lg font-bold text-white">Sample-Request für deutsche Importer</h3>

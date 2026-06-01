@@ -82,9 +82,9 @@ export default function Documents() {
 
   return (
     <div className="space-y-7">
-      <section className="relative overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-gradient-to-br from-cyan-300/12 via-white/[0.045] to-emerald-300/10 p-6 shadow-[0_0_42px_rgba(34,211,238,0.08)] md:p-8">
+      <section className="relative overflow-hidden rounded-2xl border border-cyan-300/20 bg-gradient-to-br from-cyan-300/12 via-white/[0.045] to-emerald-300/10 p-6 shadow-[0_0_42px_rgba(34,211,238,0.08)] md:p-8">
         <div className="absolute right-0 top-0 h-52 w-52 rounded-full bg-cyan-300/10 blur-3xl" />
-        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-[2rem] bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
+        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-2xl bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
         <div className="relative max-w-3xl">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">
             <FolderOpen className="h-4 w-4" /> Document Vault
@@ -98,7 +98,7 @@ export default function Documents() {
         </div>
       </section>
 
-      <section className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-5">
+      <section className="rounded-2xl border border-white/10 bg-white/[0.045] p-5">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div className="relative flex-1">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
@@ -143,7 +143,7 @@ export default function Documents() {
       )}
 
       {isError && (
-        <div className="rounded-[2rem] border border-red-300/30 bg-red-400/5 p-5 text-sm text-red-200">
+        <div className="rounded-2xl border border-red-300/30 bg-red-400/5 p-5 text-sm text-red-200">
           <div className="flex items-start gap-3">
             <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
             <div>
@@ -155,7 +155,7 @@ export default function Documents() {
       )}
 
       {!isLoading && !isError && filtered.length === 0 && (
-        <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-12 text-center">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-12 text-center">
           <FolderOpen className="mx-auto mb-4 h-10 w-10 text-white/30" />
           <div className="text-lg font-bold text-white">Keine Dokumente gefunden</div>
           <div className="mt-2 text-sm text-white/55">
@@ -169,7 +169,7 @@ export default function Documents() {
           {filtered.map((doc: DocumentRow) => {
             const tint = TYPE_TINT[doc.document_type?.toLowerCase()] ?? "bg-white/5 text-white/60 border-white/15";
             return (
-              <div key={doc.id} className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-4 transition hover:border-cyan-300/30">
+              <div key={doc.id} className="rounded-2xl border border-white/10 bg-white/[0.045] p-4 transition hover:border-cyan-300/30">
                 <div className="flex items-start gap-3">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-cyan-300/10 ring-1 ring-cyan-300/25">
                     <FileText className="h-5 w-5 text-cyan-300" />

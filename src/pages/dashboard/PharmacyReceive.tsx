@@ -155,9 +155,9 @@ export default function PharmacyReceive() {
 
   return (
     <div className="space-y-7">
-      <section className="relative overflow-hidden rounded-[2rem] border border-emerald-300/20 bg-gradient-to-br from-emerald-300/12 via-white/[0.045] to-cyan-300/10 p-6 shadow-[0_0_42px_rgba(52,211,153,0.08)] md:p-8">
+      <section className="relative overflow-hidden rounded-2xl border border-emerald-300/20 bg-gradient-to-br from-emerald-300/12 via-white/[0.045] to-cyan-300/10 p-6 shadow-[0_0_42px_rgba(52,211,153,0.08)] md:p-8">
         <div className="absolute right-0 top-0 h-52 w-52 rounded-full bg-emerald-300/10 blur-3xl" />
-        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-[2rem] bg-gradient-to-r from-emerald-300 via-teal-400 to-cyan-300" />
+        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-2xl bg-gradient-to-r from-emerald-300 via-teal-400 to-cyan-300" />
         <div className="relative max-w-3xl">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-300/25 bg-emerald-300/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-emerald-200">
             <Truck className="h-4 w-4" /> {t("pharmacyReceive.heroBadge", "Apothekenannahme (GDP)")}
@@ -170,14 +170,14 @@ export default function PharmacyReceive() {
       </section>
 
       {feedback && (
-        <div className={`rounded-[2rem] border p-4 text-sm ${feedback.kind === "ok" ? "border-emerald-300/30 bg-emerald-400/[0.05] text-emerald-100" : "border-rose-300/30 bg-rose-400/[0.05] text-rose-100"}`}>
+        <div className={`rounded-2xl border p-4 text-sm ${feedback.kind === "ok" ? "border-emerald-300/30 bg-emerald-400/[0.05] text-emerald-100" : "border-rose-300/30 bg-rose-400/[0.05] text-rose-100"}`}>
           {feedback.kind === "ok" ? <CheckCircle2 className="mr-2 inline h-4 w-4" /> : <AlertCircle className="mr-2 inline h-4 w-4" />}
           {feedback.text}
         </div>
       )}
 
       <section className="grid gap-6 md:grid-cols-[1fr_1.4fr]">
-        <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
           <div className="mb-3 flex items-center justify-between">
             <h2 className="text-sm font-bold uppercase tracking-wider text-white/70">{t("pharmacyReceive.incomingBatches", "Eingehende Chargen")}</h2>
             {loading && <Loader2 className="h-4 w-4 animate-spin text-white/40" />}
@@ -209,7 +209,7 @@ export default function PharmacyReceive() {
           </ul>
         </div>
 
-        <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
           {!selected ? (
             <div className="flex h-full flex-col items-center justify-center text-center text-white/45">
               <ShieldCheck className="mb-3 h-10 w-10 opacity-50" />

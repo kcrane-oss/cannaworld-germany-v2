@@ -399,7 +399,7 @@ function LandingPage() {
             src="/cannaworld-mark.webp"
             alt=""
             aria-hidden="true"
-            className="pointer-events-none absolute -right-20 top-1/2 hidden h-[520px] w-auto -translate-y-1/2 select-none object-contain opacity-[0.035] lg:block"
+            className="pointer-events-none absolute -right-20 top-1/2 hidden h-[520px] w-auto -translate-y-1/2 select-none object-contain opacity-[0.08] lg:block"
           />
           <div className="space-y-8 text-center lg:text-left">
             <picture className="mx-auto block lg:mx-0">
@@ -448,8 +448,8 @@ function LandingPage() {
           </div>
 
           <div className="relative">
-            <div className="absolute -inset-8 rounded-[2rem] bg-cyan-400/10 blur-3xl" />
-            <div className="relative overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-white/[0.055] p-6 shadow-2xl shadow-cyan-500/10 backdrop-blur-xl md:p-8">
+            <div className="absolute -inset-8 rounded-2xl bg-cyan-400/10 blur-3xl" />
+            <div className="relative overflow-hidden rounded-2xl border border-cyan-300/20 bg-white/[0.055] p-6 shadow-2xl shadow-cyan-500/10 backdrop-blur-xl md:p-8">
               <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
               <div className="mb-8 flex items-center gap-4">
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-300 ring-1 ring-cyan-300/25">
@@ -494,7 +494,7 @@ function LandingPage() {
           </div>
           <div className="grid gap-5 md:grid-cols-3">
             {cards.map((card) => (
-              <div key={card.title} className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-7 shadow-[0_0_30px_rgba(34,211,238,0.06)] backdrop-blur transition hover:border-cyan-300/30">
+              <div key={card.title} className="rounded-2xl border border-white/10 bg-white/[0.045] p-7 shadow-[0_0_30px_rgba(34,211,238,0.06)] backdrop-blur transition hover:border-cyan-300/30">
                 <card.icon className="mb-5 h-9 w-9 text-cyan-300" />
                 <h3 className="text-xl font-bold">{t(card.titleKey, card.title)}</h3>
                 <p className="mt-3 text-sm leading-6 text-white/56">{t(card.textKey, card.text)}</p>
@@ -512,7 +512,7 @@ function LandingPage() {
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               {dashboardNav.slice(1).map((item) => (
-                <Link key={item.key} to={item.path} className="group rounded-[2rem] border border-white/10 bg-[#0b121b]/80 p-5 backdrop-blur transition hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-cyan-300/10">
+                <Link key={item.key} to={item.path} className="group rounded-2xl border border-white/10 bg-[#0b121b]/80 p-5 backdrop-blur transition hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-cyan-300/10">
                   <item.icon className="mb-4 h-7 w-7 text-cyan-300" />
                   <div className="font-bold">{t(`app.nav.${item.key}`, item.label)}</div>
                   <div className="mt-2 text-sm leading-6 text-white/48">{t("app.dashboardPreviewOpenModule", "Zum Germany-Modul öffnen")}</div>
@@ -531,7 +531,7 @@ function LandingPage() {
           </div>
           <div className="grid gap-5 md:grid-cols-4">
             {steps.map(([Icon, title, text, titleKey, textKey], index) => (
-              <div key={title} className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b121b]/80 p-6 backdrop-blur">
+              <div key={title} className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0b121b]/80 p-6 backdrop-blur">
                 <div className="absolute right-5 top-4 text-5xl font-black text-cyan-300/10">0{index + 1}</div>
                 <Icon className="mb-5 h-8 w-8 text-cyan-300" />
                 <h3 className="font-bold">{t(titleKey, title)}</h3>
@@ -542,7 +542,7 @@ function LandingPage() {
         </section>
 
         <section id="kontakt" className="relative mx-auto max-w-5xl px-5 py-24 text-center md:px-8">
-          <div className="rounded-[2rem] border border-cyan-300/20 bg-white/[0.055] p-8 shadow-[0_0_40px_rgba(34,211,238,0.1)] backdrop-blur-xl md:p-12">
+          <div className="rounded-2xl border border-cyan-300/20 bg-white/[0.055] p-8 shadow-[0_0_40px_rgba(34,211,238,0.1)] backdrop-blur-xl md:p-12">
             <Sparkles className="mx-auto mb-5 h-10 w-10 text-cyan-300" />
             <h2 className="text-3xl font-extrabold md:text-5xl">{t("app.contactTitle", "Import-Anfrage stellen.")}</h2>
             <p className="mx-auto mt-4 max-w-2xl text-white/58">{t("app.contactSubtitle", "Kurze Qualifizierung für Apotheken, Großhändler, Importeure und QA-/QP-nahe Entscheider mit realem medizinischem Bedarf.")}</p>
@@ -603,7 +603,7 @@ function GatewayServicesPreview() {
       </div>
       <div className="grid gap-6">
         {serviceGroups.map((group) => (
-          <div key={group.title} className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-6 backdrop-blur">
+          <div key={group.title} className="rounded-2xl border border-white/10 bg-white/[0.045] p-6 backdrop-blur">
             <div className="mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
               <h3 className="text-2xl font-bold">{group.title}</h3>
               <p className="text-sm text-white/48">{group.subtitle}</p>
@@ -636,8 +636,8 @@ function ImpressumPage() {
         <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-white/60 hover:text-white">
           ← Zurück zur Startseite
         </Link>
-        <div className="relative mt-8 rounded-[2rem] border border-white/10 bg-white/[0.045] p-8 backdrop-blur">
-          <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-[2rem] bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
+        <div className="relative mt-8 rounded-2xl border border-white/10 bg-white/[0.045] p-8 backdrop-blur">
+          <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-2xl bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
           <h1 className="text-3xl font-black tracking-tight">Impressum</h1>
           <p className="mt-2 text-sm text-white/45">Angaben gemäß § 5 TMG</p>
           <div className="mt-8 space-y-6 text-sm leading-7 text-white/70">
@@ -670,7 +670,7 @@ function DatenschutzPage() {
         <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-white/60 hover:text-white">
           ← Zurück zur Startseite
         </Link>
-        <div className="relative mt-8 rounded-[2rem] border border-white/10 bg-white/[0.045] p-8 backdrop-blur">
+        <div className="relative mt-8 rounded-2xl border border-white/10 bg-white/[0.045] p-8 backdrop-blur">
           <h1 className="text-3xl font-black tracking-tight">Datenschutzerklärung</h1>
           <p className="mt-2 text-sm text-white/45">Gemäß DSGVO / GDPR</p>
           <div className="mt-8 space-y-6 text-sm leading-7 text-white/70">
@@ -707,7 +707,7 @@ function AgbPage() {
         <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-white/60 hover:text-white">
           ← Zurück zur Startseite
         </Link>
-        <div className="relative mt-8 rounded-[2rem] border border-white/10 bg-white/[0.045] p-8 backdrop-blur">
+        <div className="relative mt-8 rounded-2xl border border-white/10 bg-white/[0.045] p-8 backdrop-blur">
           <h1 className="text-3xl font-black tracking-tight">AGB</h1>
           <p className="mt-2 text-sm text-white/45">Allgemeine Geschäftsbedingungen</p>
           <div className="mt-8 space-y-6 text-sm leading-7 text-white/70">
@@ -770,14 +770,14 @@ function LoginPage() {
         src="/cannaworld-mark.webp"
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 right-0 h-[420px] w-auto select-none object-contain opacity-[0.04]"
+        className="pointer-events-none absolute bottom-0 right-0 h-[420px] w-auto select-none object-contain opacity-[0.09]"
       />
       <Link to="/" className="inline-flex items-center gap-3 text-sm font-semibold text-white/60 hover:text-white">
         <img src={logo} alt="CannaWorld" className="h-8 w-auto" /> Zurück zur Landing
       </Link>
-      <main className="mx-auto flex min-h-[calc(100vh-7rem)] max-w-md items-center">
-        <form onSubmit={handleSubmit} className="relative overflow-hidden w-full rounded-[2rem] border border-cyan-300/20 bg-white/[0.055] p-7 shadow-[0_0_44px_rgba(34,211,238,0.11)] backdrop-blur-xl">
-          <div className="absolute inset-x-0 top-0 h-1 rounded-t-[2rem] bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
+      <main className="mx-auto mt-8 max-w-md">
+        <form onSubmit={handleSubmit} className="relative overflow-hidden w-full rounded-2xl border border-cyan-300/20 bg-white/[0.055] p-7 shadow-[0_0_44px_rgba(34,211,238,0.11)] backdrop-blur-xl">
+          <div className="absolute inset-x-0 top-0 h-1 rounded-t-2xl bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
           <Badge>Protected Dashboard</Badge>
           <h1 className="mt-5 text-3xl font-black tracking-tight">CannaWorld Germany Login</h1>
           <p className="mt-3 text-sm leading-6 text-white/56">Das Dashboard ist nur für qualifizierte B2B-Partner, Import-/QA-Rollen und interne CannaWorld-Operatoren sichtbar.</p>
@@ -1032,14 +1032,14 @@ function DashboardModule({ moduleKey }: { moduleKey: string }) {
 
   return (
     <div className="space-y-7">
-      <section className={`relative overflow-hidden rounded-[2rem] ${colors.border} bg-gradient-to-br ${colors.header} p-6 ${colors.shadow} md:p-8`}>
+      <section className={`relative overflow-hidden rounded-2xl ${colors.border} bg-gradient-to-br ${colors.header} p-6 ${colors.shadow} md:p-8`}>
         <div className={`absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r ${colors.stripe}`} />
         <div className={`absolute right-0 top-0 h-52 w-52 rounded-full ${colors.blur} blur-3xl`} />
         <img
           src="/cannaworld-mark.webp"
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-4 right-4 h-40 w-auto select-none object-contain opacity-[0.05]"
+          className="pointer-events-none absolute -bottom-4 right-4 h-40 w-auto select-none object-contain opacity-[0.09]"
         />
         <div className="relative flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-3xl">
@@ -1057,7 +1057,7 @@ function DashboardModule({ moduleKey }: { moduleKey: string }) {
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {data.stats.map((stat, index) => (
-          <div key={stat} className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-5">
+          <div key={stat} className="rounded-2xl border border-white/10 bg-white/[0.045] p-5">
             <div className={`mb-4 flex h-10 w-10 items-center justify-center rounded-2xl ${colors.statIcon} ring-1`}>
               <span className="text-sm font-black">0{index + 1}</span>
             </div>
@@ -1068,7 +1068,7 @@ function DashboardModule({ moduleKey }: { moduleKey: string }) {
       </section>
 
       <section className="grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
-        <div className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-6">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-6">
           <h2 className="text-xl font-bold">Operational Flow</h2>
           <div className="mt-5 space-y-4">
             {steps.map(([StepIcon, title, text], index) => (
@@ -1084,7 +1084,7 @@ function DashboardModule({ moduleKey }: { moduleKey: string }) {
             ))}
           </div>
         </div>
-        <div className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-6">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-6">
           <h2 className="text-xl font-bold">Quick Actions</h2>
           <div className="mt-5 space-y-3">
             {data.actions.map((action) => (
@@ -1218,15 +1218,15 @@ function RegisterPage() {
         src="/cannaworld-mark.webp"
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 right-0 h-[420px] w-auto select-none object-contain opacity-[0.04]"
+        className="pointer-events-none absolute bottom-0 right-0 h-[420px] w-auto select-none object-contain opacity-[0.09]"
       />
       <Link to="/" className="inline-flex items-center gap-3 text-sm font-semibold text-white/60 hover:text-white">
         <img src={logo} alt="CannaWorld" className="h-8 w-auto" /> Zurück zur Landing
       </Link>
       <main className="mx-auto mt-10 max-w-2xl">
         {submitted ? (
-          <div className="relative overflow-hidden rounded-[2rem] border border-emerald-300/25 bg-white/[0.05] p-8 shadow-[0_0_44px_rgba(16,185,129,0.10)] backdrop-blur-xl">
-            <div className="absolute inset-x-0 top-0 h-1 rounded-t-[2rem] bg-gradient-to-r from-emerald-300 via-teal-400 to-cyan-300" />
+          <div className="relative overflow-hidden rounded-2xl border border-emerald-300/25 bg-white/[0.05] p-8 shadow-[0_0_44px_rgba(16,185,129,0.10)] backdrop-blur-xl">
+            <div className="absolute inset-x-0 top-0 h-1 rounded-t-2xl bg-gradient-to-r from-emerald-300 via-teal-400 to-cyan-300" />
             <Badge>Antrag vorbereitet</Badge>
             <h1 className="mt-5 text-3xl font-black tracking-tight">Vielen Dank für Ihre Anfrage</h1>
             <p className="mt-4 text-sm leading-7 text-white/70">
@@ -1251,8 +1251,8 @@ function RegisterPage() {
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="relative overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-white/[0.055] p-7 shadow-[0_0_44px_rgba(34,211,238,0.11)] backdrop-blur-xl">
-            <div className="absolute inset-x-0 top-0 h-1 rounded-t-[2rem] bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
+          <form onSubmit={handleSubmit} className="relative overflow-hidden rounded-2xl border border-cyan-300/20 bg-white/[0.055] p-7 shadow-[0_0_44px_rgba(34,211,238,0.11)] backdrop-blur-xl">
+            <div className="absolute inset-x-0 top-0 h-1 rounded-t-2xl bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
             <Badge>B2B-Qualifizierung</Badge>
             <h1 className="mt-5 text-3xl font-black tracking-tight">Zugang beantragen</h1>
             <p className="mt-3 text-sm leading-6 text-white/56">

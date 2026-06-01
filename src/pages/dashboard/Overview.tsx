@@ -104,9 +104,9 @@ export default function Overview() {
   return (
     <div className="space-y-7">
       <OnboardingStatusPanel />
-      <section className="relative overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-gradient-to-br from-cyan-300/12 via-white/[0.045] to-emerald-300/10 p-6 shadow-[0_0_42px_rgba(34,211,238,0.08)] md:p-8">
+      <section className="relative overflow-hidden rounded-2xl border border-cyan-300/20 bg-gradient-to-br from-cyan-300/12 via-white/[0.045] to-emerald-300/10 p-6 shadow-[0_0_42px_rgba(34,211,238,0.08)] md:p-8">
         <div className="absolute right-0 top-0 h-52 w-52 rounded-full bg-cyan-300/10 blur-3xl" />
-        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-[2rem] bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
+        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-2xl bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
         <div className="relative flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-3xl">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">
@@ -135,7 +135,7 @@ export default function Overview() {
       </section>
 
       {isError && (
-        <div className="rounded-[2rem] border border-red-300/30 bg-red-400/5 p-5 text-sm text-red-200">
+        <div className="rounded-2xl border border-red-300/30 bg-red-400/5 p-5 text-sm text-red-200">
           <div className="flex items-start gap-3">
             <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
             <div>
@@ -152,7 +152,7 @@ export default function Overview() {
           const toneClass = TONE_CLASSES[tile.tone];
           const Body = (
             <div
-              className={`rounded-[2rem] border bg-gradient-to-br p-5 ring-1 transition hover:-translate-y-0.5 hover:shadow-[0_8_24px_rgba(34,211,238,0.1)] ${toneClass}`}
+              className={`rounded-2xl border bg-gradient-to-br p-5 ring-1 transition hover:-translate-y-0.5 hover:shadow-[0_8_24px_rgba(34,211,238,0.1)] ${toneClass}`}
             >
               <div className="mb-4 flex items-center justify-between">
                 <div className={`flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/15 ${toneClass}`}>
@@ -177,7 +177,7 @@ export default function Overview() {
         })}
       </section>
 
-      <section className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-6">
+      <section className="rounded-2xl border border-white/10 bg-white/[0.045] p-6">
         <div className="mb-4 flex items-center gap-2">
           <Network className="h-4 w-4 text-cyan-300" />
           <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-white/75">Quick Pivot zu CannaWorld-Operations</h2>

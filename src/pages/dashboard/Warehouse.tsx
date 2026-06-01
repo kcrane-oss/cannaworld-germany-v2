@@ -41,9 +41,9 @@ export default function Warehouse() {
 
   return (
     <div className="space-y-7">
-      <section className="relative overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-gradient-to-br from-cyan-300/12 via-white/[0.045] to-emerald-300/10 p-6 shadow-[0_0_42px_rgba(34,211,238,0.08)] md:p-8">
+      <section className="relative overflow-hidden rounded-2xl border border-cyan-300/20 bg-gradient-to-br from-cyan-300/12 via-white/[0.045] to-emerald-300/10 p-6 shadow-[0_0_42px_rgba(34,211,238,0.08)] md:p-8">
         <div className="absolute right-0 top-0 h-52 w-52 rounded-full bg-cyan-300/10 blur-3xl" />
-        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-[2rem] bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
+        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-2xl bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
         <div className="relative max-w-3xl">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">
             <WarehouseIcon className="h-4 w-4" /> Inventory Control
@@ -56,25 +56,25 @@ export default function Warehouse() {
       </section>
 
       <section className="grid gap-4 md:grid-cols-4">
-        <div className="rounded-[2rem] border border-cyan-300/25 bg-cyan-400/5 p-5">
+        <div className="rounded-2xl border border-cyan-300/25 bg-cyan-400/5 p-5">
           <div className="text-2xl font-black text-cyan-300">{summary.total}</div>
           <div className="text-sm font-semibold text-cyan-100">{t("warehouse.summaryPositions", "Positionen")}</div>
         </div>
-        <div className="rounded-[2rem] border border-emerald-300/25 bg-emerald-400/5 p-5">
+        <div className="rounded-2xl border border-emerald-300/25 bg-emerald-400/5 p-5">
           <div className="text-2xl font-black text-emerald-300">{summary.onHand}</div>
           <div className="text-sm font-semibold text-emerald-100">{t("warehouse.summaryOnHand", "Einheiten on-hand")}</div>
         </div>
-        <div className="rounded-[2rem] border border-amber-300/25 bg-amber-400/5 p-5">
+        <div className="rounded-2xl border border-amber-300/25 bg-amber-400/5 p-5">
           <div className="text-2xl font-black text-amber-300">{summary.low}</div>
           <div className="text-sm font-semibold text-amber-100">Low-Stock</div>
         </div>
-        <div className="rounded-[2rem] border border-red-300/25 bg-red-400/5 p-5">
+        <div className="rounded-2xl border border-red-300/25 bg-red-400/5 p-5">
           <div className="text-2xl font-black text-red-300">{summary.out}</div>
           <div className="text-sm font-semibold text-red-100">Out-of-Stock</div>
         </div>
       </section>
 
-      <section className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-5">
+      <section className="rounded-2xl border border-white/10 bg-white/[0.045] p-5">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div className="relative flex-1">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
@@ -112,7 +112,7 @@ export default function Warehouse() {
       )}
 
       {isError && (
-        <div className="rounded-[2rem] border border-red-300/30 bg-red-400/5 p-5 text-sm text-red-200">
+        <div className="rounded-2xl border border-red-300/30 bg-red-400/5 p-5 text-sm text-red-200">
           <div className="flex items-start gap-3">
             <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
             <div>
@@ -124,14 +124,14 @@ export default function Warehouse() {
       )}
 
       {!isLoading && !isError && filtered.length === 0 && (
-        <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-12 text-center">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-12 text-center">
           <WarehouseIcon className="mx-auto mb-4 h-10 w-10 text-white/30" />
           <div className="text-lg font-bold text-white">{t("warehouse.emptyState", "Keine Positionen gefunden")}</div>
         </div>
       )}
 
       {!isLoading && !isError && filtered.length > 0 && (
-        <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03]">
+        <section className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead className="bg-white/[0.04] text-[10px] font-bold uppercase tracking-wider text-white/45">
