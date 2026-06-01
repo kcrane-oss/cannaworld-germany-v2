@@ -65,11 +65,25 @@ export default function Logistics() {
   }) || [];
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">{t("logistics.title")}</h1>
-        <p className="text-muted-foreground">Heavyweight GDP Logistics Hub: Integrated Trade Case Tracking</p>
-      </div>
+    <div className="space-y-7">
+      <section className="relative overflow-hidden rounded-[2rem] border border-emerald-300/20 bg-gradient-to-br from-emerald-300/12 via-white/[0.045] to-cyan-300/10 p-6 shadow-[0_0_42px_rgba(110,231,183,0.08)] md:p-8">
+        <div className="absolute right-0 top-0 h-52 w-52 rounded-full bg-emerald-300/10 blur-3xl" />
+        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-[2rem] bg-gradient-to-r from-emerald-300 via-teal-400 to-cyan-300" />
+        <div className="relative flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-3xl">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-300/25 bg-emerald-300/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-emerald-200">
+              <Truck className="h-4 w-4" /> Thailand → Germany
+            </div>
+            <h1 className="text-3xl font-black tracking-tight md:text-5xl">{t("logistics.title", "Logistics")}</h1>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-white/60">
+              Transportkette, GDP-Anforderungen, Export-/Importdokumente, Temperaturführung und Zollpunkte — Thailand bis Deutschland.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-black/20 p-4 text-sm text-white/60">
+            Germany scope · B2B · Compliance-first
+          </div>
+        </div>
+      </section>
 
       <div className="grid gap-4 md:grid-cols-4">
         <Card>
