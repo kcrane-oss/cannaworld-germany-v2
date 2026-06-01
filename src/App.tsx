@@ -342,6 +342,7 @@ function Badge({ children }: { children: React.ReactNode }) {
 
 function LandingPage() {
   const { t } = useTranslation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#071016] pt-8 text-[#f4f8fb] selection:bg-cyan-400/25">
       <UniverseBar current="germany" />
@@ -360,6 +361,15 @@ function LandingPage() {
             <a href="#dashboard-preview" className="transition hover:text-white">{t("app.navDashboard", "Dashboard")}</a>
             <a href="#prozess" className="transition hover:text-white">{t("app.navProcess", "Prozess")}</a>
           </div>
+          <button
+            onClick={() => setMobileMenuOpen((v) => !v)}
+            className="rounded-xl border border-white/10 bg-white/5 p-2 text-white/70 transition hover:bg-white/10 hover:text-white md:hidden"
+            aria-label="Menü öffnen"
+          >
+            {mobileMenuOpen
+              ? <X className="h-5 w-5" />
+              : <Menu className="h-5 w-5" />}
+          </button>
           <div className="flex items-center gap-4">
             <Link to="/register" className="hidden text-sm font-semibold text-white/70 transition hover:text-cyan-200 sm:inline">
               {t("app.partnerRegister", "Zugang beantragen")}
@@ -370,9 +380,27 @@ function LandingPage() {
           </div>
         </div>
       </nav>
+      {mobileMenuOpen && (
+        <div className="fixed inset-x-0 top-[calc(2rem+5rem)] z-40 border-b border-white/10 bg-[#071016]/95 backdrop-blur-2xl md:hidden">
+          <div className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4">
+            <a href="#proof" onClick={() => setMobileMenuOpen(false)} className="rounded-xl px-4 py-3 text-sm font-medium text-white/70 transition hover:bg-white/5 hover:text-white">{t("app.navProof", "Proof")}</a>
+            <a href="#dashboard-preview" onClick={() => setMobileMenuOpen(false)} className="rounded-xl px-4 py-3 text-sm font-medium text-white/70 transition hover:bg-white/5 hover:text-white">{t("app.navDashboard", "Dashboard")}</a>
+            <a href="#prozess" onClick={() => setMobileMenuOpen(false)} className="rounded-xl px-4 py-3 text-sm font-medium text-white/70 transition hover:bg-white/5 hover:text-white">{t("app.navProcess", "Prozess")}</a>
+            <div className="my-1 border-t border-white/10" />
+            <Link to="/register" onClick={() => setMobileMenuOpen(false)} className="rounded-xl px-4 py-3 text-sm font-semibold text-white/70 transition hover:bg-white/5 hover:text-white">{t("app.partnerRegister", "Zugang beantragen")}</Link>
+            <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="mx-4 mb-2 mt-1 rounded-xl bg-cyan-400/10 px-4 py-3 text-center text-sm font-semibold text-cyan-200 transition hover:bg-cyan-400/20">{t("app.partnerLogin", "Partner Login")}</Link>
+          </div>
+        </div>
+      )}
 
       <main id="top" className="relative">
         <section className="relative mx-auto grid min-h-[92vh] max-w-7xl items-center gap-14 px-5 pb-20 pt-32 md:px-8 lg:grid-cols-[1.04fr_0.96fr]">
+          <img
+            src="/cannaworld-mark.webp"
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-20 top-1/2 hidden h-[520px] w-auto -translate-y-1/2 select-none object-contain opacity-[0.035] lg:block"
+          />
           <div className="space-y-8 text-center lg:text-left">
             <picture className="mx-auto block lg:mx-0">
               <source srcSet="/cannaworld-lockup.webp" type="image/webp" />
@@ -738,6 +766,12 @@ function LoginPage() {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_80%)]" />
       </div>
       <UniverseBar current="germany" />
+      <img
+        src="/cannaworld-mark.webp"
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 right-0 h-[420px] w-auto select-none object-contain opacity-[0.04]"
+      />
       <Link to="/" className="inline-flex items-center gap-3 text-sm font-semibold text-white/60 hover:text-white">
         <img src={logo} alt="CannaWorld" className="h-8 w-auto" /> Zurück zur Landing
       </Link>
@@ -1001,6 +1035,12 @@ function DashboardModule({ moduleKey }: { moduleKey: string }) {
       <section className={`relative overflow-hidden rounded-[2rem] ${colors.border} bg-gradient-to-br ${colors.header} p-6 ${colors.shadow} md:p-8`}>
         <div className={`absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r ${colors.stripe}`} />
         <div className={`absolute right-0 top-0 h-52 w-52 rounded-full ${colors.blur} blur-3xl`} />
+        <img
+          src="/cannaworld-mark.webp"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-4 right-4 h-40 w-auto select-none object-contain opacity-[0.05]"
+        />
         <div className="relative flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-3xl">
             <div className={`mb-4 inline-flex items-center gap-2 rounded-full border ${colors.badge} px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em]`}>
@@ -1174,6 +1214,12 @@ function RegisterPage() {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_80%)]" />
       </div>
       <UniverseBar current="germany" />
+      <img
+        src="/cannaworld-mark.webp"
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 right-0 h-[420px] w-auto select-none object-contain opacity-[0.04]"
+      />
       <Link to="/" className="inline-flex items-center gap-3 text-sm font-semibold text-white/60 hover:text-white">
         <img src={logo} alt="CannaWorld" className="h-8 w-auto" /> Zurück zur Landing
       </Link>
