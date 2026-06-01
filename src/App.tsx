@@ -343,14 +343,14 @@ function Badge({ children }: { children: React.ReactNode }) {
 function LandingPage() {
   const { t } = useTranslation();
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#070b10] pt-8 text-[#f4f8fb] selection:bg-cyan-400/25">
+    <div className="min-h-screen overflow-x-hidden bg-[#071016] pt-8 text-[#f4f8fb] selection:bg-cyan-400/25">
       <UniverseBar current="germany" />
       <div className="pointer-events-none fixed inset-0 opacity-60">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.18),transparent_34%),radial-gradient(circle_at_75%_10%,rgba(34,197,94,0.14),transparent_28%),linear-gradient(180deg,#070b10,#091018_48%,#070b10)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.18),transparent_34%),radial-gradient(circle_at_75%_10%,rgba(34,197,94,0.14),transparent_28%),linear-gradient(180deg,#071016,#091018_48%,#071016)]" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_80%)]" />
       </div>
 
-      <nav className="fixed inset-x-0 top-8 z-50 border-b border-white/10 bg-[#070b10]/78 backdrop-blur-2xl">
+      <nav className="fixed inset-x-0 top-8 z-50 border-b border-white/10 bg-[#071016]/78 backdrop-blur-2xl">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 md:px-8">
           <Link to="/" className="flex items-center gap-3">
             <img src={logo} alt="CannaWorld" className="h-12 w-auto object-contain" />
@@ -412,7 +412,7 @@ function LandingPage() {
 
             <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
               {[[ShieldCheck, t("app.heroPillDocumentPath", "EU-GMP/GDP Dokumentenpfad")], [Truck, t("app.heroPillSupplyChain", "Import- & Lieferketten-Koordination")], [Globe2, t("app.heroPillThailandGermany", "Thailand → Deutschland/EU")]].map(([Icon, label]) => (
-                <div key={String(label)} className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-white/65">
+                <div key={String(label)} className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-white/60">
                   <Icon className="h-3.5 w-3.5 text-cyan-300" /> {String(label)}
                 </div>
               ))}
@@ -421,7 +421,7 @@ function LandingPage() {
 
           <div className="relative">
             <div className="absolute -inset-8 rounded-[2rem] bg-cyan-400/10 blur-3xl" />
-            <div className="relative overflow-hidden rounded-3xl border border-cyan-300/20 bg-white/[0.055] p-6 shadow-2xl shadow-cyan-500/10 backdrop-blur-xl md:p-8">
+            <div className="relative overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-white/[0.055] p-6 shadow-2xl shadow-cyan-500/10 backdrop-blur-xl md:p-8">
               <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
               <div className="mb-8 flex items-center gap-4">
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-300 ring-1 ring-cyan-300/25">
@@ -466,7 +466,7 @@ function LandingPage() {
           </div>
           <div className="grid gap-5 md:grid-cols-3">
             {cards.map((card) => (
-              <div key={card.title} className="rounded-3xl border border-white/10 bg-white/[0.045] p-7 shadow-[0_0_30px_rgba(34,211,238,0.06)] backdrop-blur transition hover:border-cyan-300/30">
+              <div key={card.title} className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-7 shadow-[0_0_30px_rgba(34,211,238,0.06)] backdrop-blur transition hover:border-cyan-300/30">
                 <card.icon className="mb-5 h-9 w-9 text-cyan-300" />
                 <h3 className="text-xl font-bold">{t(card.titleKey, card.title)}</h3>
                 <p className="mt-3 text-sm leading-6 text-white/56">{t(card.textKey, card.text)}</p>
@@ -484,7 +484,7 @@ function LandingPage() {
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               {dashboardNav.slice(1).map((item) => (
-                <Link key={item.key} to={item.path} className="group rounded-3xl border border-white/10 bg-[#0b121b]/80 p-5 backdrop-blur transition hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-cyan-300/10">
+                <Link key={item.key} to={item.path} className="group rounded-[2rem] border border-white/10 bg-[#0b121b]/80 p-5 backdrop-blur transition hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-cyan-300/10">
                   <item.icon className="mb-4 h-7 w-7 text-cyan-300" />
                   <div className="font-bold">{t(`app.nav.${item.key}`, item.label)}</div>
                   <div className="mt-2 text-sm leading-6 text-white/48">{t("app.dashboardPreviewOpenModule", "Zum Germany-Modul öffnen")}</div>
@@ -503,7 +503,7 @@ function LandingPage() {
           </div>
           <div className="grid gap-5 md:grid-cols-4">
             {steps.map(([Icon, title, text, titleKey, textKey], index) => (
-              <div key={title} className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#0b121b]/80 p-6 backdrop-blur">
+              <div key={title} className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b121b]/80 p-6 backdrop-blur">
                 <div className="absolute right-5 top-4 text-5xl font-black text-cyan-300/10">0{index + 1}</div>
                 <Icon className="mb-5 h-8 w-8 text-cyan-300" />
                 <h3 className="font-bold">{t(titleKey, title)}</h3>
@@ -1017,7 +1017,7 @@ function DashboardModule({ moduleKey }: { moduleKey: string }) {
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {data.stats.map((stat, index) => (
-          <div key={stat} className="rounded-3xl border border-white/10 bg-white/[0.045] p-5">
+          <div key={stat} className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-5">
             <div className={`mb-4 flex h-10 w-10 items-center justify-center rounded-2xl ${colors.statIcon} ring-1`}>
               <span className="text-sm font-black">0{index + 1}</span>
             </div>
@@ -1028,7 +1028,7 @@ function DashboardModule({ moduleKey }: { moduleKey: string }) {
       </section>
 
       <section className="grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
-        <div className="rounded-3xl border border-white/10 bg-white/[0.045] p-6">
+        <div className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-6">
           <h2 className="text-xl font-bold">Operational Flow</h2>
           <div className="mt-5 space-y-4">
             {steps.map(([StepIcon, title, text], index) => (
@@ -1044,7 +1044,7 @@ function DashboardModule({ moduleKey }: { moduleKey: string }) {
             ))}
           </div>
         </div>
-        <div className="rounded-3xl border border-white/10 bg-white/[0.045] p-6">
+        <div className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-6">
           <h2 className="text-xl font-bold">Quick Actions</h2>
           <div className="mt-5 space-y-3">
             {data.actions.map((action) => (
