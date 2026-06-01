@@ -3,36 +3,29 @@
 The live site **cannaworld-germany.de** is served by the Vercel project
 **`cw-germany-final-public-v100`** (org `kcrane-oss-projects`).
 
-Previously this project was updated by ad-hoc `vercel --prod` uploads from a
-local machine, so nothing in GitHub reached the live site automatically. That
-is now wired up.
+This project is now **connected to GitHub** (`kcrane-oss/cannaworld-germany-v2`,
+production branch `master`). Previously it was updated by ad-hoc `vercel --prod`
+uploads from a local machine; that is no longer needed.
 
 ## How deploys happen now
 
-- **Via Claude Code / a merge:** any push to `master` runs
-  `.github/workflows/deploy-production.yml`, which lint+tests, builds with the
-  project's **production env vars**, and deploys to the live project.
-- **Via OpenClaw / locally:** run `VERCEL_TOKEN=… ./scripts/deploy-prod.sh`
-  from a checkout. It does the exact same steps.
+- **Primary — automatic:** every push/merge to `master` triggers a Vercel
+  production deployment automatically (native Git integration). Both Claude Code
+  (via merge) and OpenClaw (via push) use this path.
+- **Manual fallback (optional):** `VERCEL_TOKEN=… ./scripts/deploy-prod.sh`
+  builds and deploys from a local checkout. Useful if you ever need to deploy
+  without pushing.
 
-Both paths pull the production environment variables from Vercel
-(`vercel pull --environment=production`) so `VITE_SUPABASE_URL`,
-`VITE_SUPABASE_PUBLISHABLE_KEY` and `VITE_BTM_SALT` are baked in correctly.
+Production environment variables are read from the Vercel project, so
+`VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY` (and, once set,
+`VITE_BTM_SALT`) are baked into the build.
 
-## One-time setup
+## VITE_BTM_SALT (only for the pharmacy BtM dispense feature)
 
-1. **GitHub secret** — repo → Settings → Secrets and variables → Actions →
-   add `VERCEL_TOKEN` (a Vercel access token with deploy rights).
-2. **Vercel production env vars** — project `cw-germany-final-public-v100` →
-   Settings → Environment Variables → Production:
-   - `VITE_SUPABASE_URL`
-   - `VITE_SUPABASE_PUBLISHABLE_KEY`
-   - `VITE_BTM_SALT` — **stable secret**, must never change after go-live and
-     must match what the `pharmacy-dispense` backend expects.
+Not required for the site to go live. It is only used to hash BtM prescription
+numbers in the pharmacy *dispense* flow. Until it is set in the project's
+Production environment variables, that single action is blocked at runtime
+(see `PharmacyDispense.tsx`) — the rest of the app works normally.
 
-## BtM salt guard
-
-Both the workflow and the script abort **before** deploying if the built
-output still contains `DEV_SALT_REPLACE_IN_PROD` — i.e. if `VITE_BTM_SALT`
-is not set in the Vercel production env. This prevents shipping a build that
-would generate wrong BtM prescription hashes.
+When you do set it: use a **stable secret** that must never change after
+go-live and must match what the `pharmacy-dispense` backend expects.
