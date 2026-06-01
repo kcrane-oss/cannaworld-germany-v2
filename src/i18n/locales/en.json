@@ -217,11 +217,15 @@
     "kpiActiveTradeCases": "Active Trade Cases",
     "kpiBatchesInReview": "Batches in review",
     "kpiActiveShipments": "Active shipments",
+    "kpiVerifiedSuppliers": "Verified Suppliers",
     "supplierDistributionTitle": "Supplier distribution by status",
     "noSupplierData": "No supplier data",
     "batchDistributionTitle": "Batch distribution by status",
     "noBatchData": "No batch data",
     "footerNote": "Note: data comes directly from the shared CannaWorld Gateway / Supabase backend (live, no cache). For historical trends, forecasting models and cohort analyses, use the AI-powered AICert analytics engine."
+  },
+  "batchVerification": {
+    "emptyHistory": "No verifications recorded yet."
   },
   "auditPassport": {
     "heroDescription": "Verifiable trust passport for supplier, facility, batch and documentation status. Generated and computed live in the GMP-AICert AI audit stack (ShinrAi 6-axis score).",

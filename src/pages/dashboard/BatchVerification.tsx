@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useBatchVerifications, useVerifyBatch, type BatchVerificationRow } from "@/hooks/useBatchVerifications";
 import { ShieldCheck, CheckCircle2, XCircle, Clock, AlertTriangle, Loader2, Search } from "lucide-react";
 
@@ -10,6 +11,7 @@ const DECISION_META: Record<BatchVerificationRow["decision"], { label: string; t
 };
 
 export default function BatchVerification() {
+  const { t } = useTranslation();
   const [token, setToken] = useState("");
   const [license, setLicense] = useState("");
   const [lastResult, setLastResult] = useState<{ decision: string; reason: string | null; batch_id: string | null } | null>(null);
@@ -101,7 +103,7 @@ export default function BatchVerification() {
         )}
         {!histLoading && history.length === 0 && (
           <div className="rounded-2xl border border-white/10 bg-black/20 p-8 text-center text-sm text-white/55">
-            Noch keine Verifikationen erfasst.
+            {t("batchVerification.emptyHistory", "Noch keine Verifikationen erfasst.")}
           </div>
         )}
         {!histLoading && history.length > 0 && (

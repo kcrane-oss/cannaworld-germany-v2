@@ -31,17 +31,21 @@ export default function Documents() {
   // OCR is the Phase 4b upgrade swap-in.
   const parseCoA = async (doc: DocumentRow) => {
     const text = window.prompt(
-      `Text aus dem CoA "${doc.document_number}" einfügen (Copy-Paste aus PDF). Lässt sich auch leer absenden, um einen Test-Run zu machen.`,
+      `Text aus dem CoA "${doc.document_number}" einfügen (Copy-Paste aus PDF-Inhalt).`,
       "",
     );
     if (text == null) return;
+    if (!text.trim()) {
+      toast.error("Bitte CoA-Text einfügen");
+      return;
+    }
     setParsingDocId(doc.id);
     try {
       const { data, error: invokeError } = await supabase.functions.invoke("germany-coa-parse", {
         body: {
           document_id: doc.id,
           source_file_url: doc.file_url,
-          extracted_text: text || "THC 18.5% CBD 0.4% Lead 0.5 mg/kg E. coli 5 cfu/g",
+          extracted_text: text,
         },
       });
       if (invokeError) throw invokeError;

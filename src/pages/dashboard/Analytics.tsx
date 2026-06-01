@@ -80,7 +80,7 @@ export default function Analytics() {
         {[
           { icon: Activity, label: t("analytics.kpiActiveTradeCases", "Aktive Trade-Cases"), value: stats?.activeTradeCases ?? 0, tint: "text-cyan-300" },
           { icon: Package, label: t("analytics.kpiBatchesInReview", "Chargen in Prüfung"), value: stats?.batchesInProgress ?? 0, tint: "text-amber-300" },
-          { icon: Building2, label: "Verified Suppliers", value: suppliers.filter((s: Supplier) => s.status === "qualified").length, tint: "text-emerald-300" },
+          { icon: Building2, label: t("analytics.kpiVerifiedSuppliers", "Verifizierte Supplier"), value: suppliers.filter((s: Supplier) => s.status === "qualified").length, tint: "text-emerald-300" },
           { icon: BarChart3, label: t("analytics.kpiActiveShipments", "Sendungen aktiv"), value: stats?.activeShipments ?? 0, tint: "text-purple-300" },
         ].map((m) => {
           const Icon = m.icon;

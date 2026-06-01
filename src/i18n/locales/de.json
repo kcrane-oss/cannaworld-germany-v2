@@ -217,11 +217,15 @@
     "kpiActiveTradeCases": "Aktive Trade-Cases",
     "kpiBatchesInReview": "Chargen in Prüfung",
     "kpiActiveShipments": "Sendungen aktiv",
+    "kpiVerifiedSuppliers": "Verifizierte Supplier",
     "supplierDistributionTitle": "Supplier-Verteilung nach Status",
     "noSupplierData": "Keine Supplier-Daten",
     "batchDistributionTitle": "Chargen-Verteilung nach Status",
     "noBatchData": "Keine Batch-Daten",
     "footerNote": "Hinweis: Daten kommen direkt aus dem geteilten CannaWorld Gateway / Supabase Backend (live, kein Cache). Für historische Trends, Vorhersage-Modelle und Cohort-Analysen die AI-gestützte AICert Analytics-Engine nutzen."
+  },
+  "batchVerification": {
+    "emptyHistory": "Noch keine Verifikationen erfasst."
   },
   "auditPassport": {
     "heroDescription": "Prüfbarer Vertrauenspass für Supplier, Facility, Batch und Dokumentenstand. Generiert und live berechnet im GMP-AICert AI-Audit-Stack (ShinrAi 6-Achsen-Score).",
