@@ -94,6 +94,7 @@ export default function Suppliers() {
     <div className="space-y-7">
       <section className="relative overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-gradient-to-br from-cyan-300/12 via-white/[0.045] to-emerald-300/10 p-6 shadow-[0_0_42px_rgba(34,211,238,0.08)] md:p-8">
         <div className="absolute right-0 top-0 h-52 w-52 rounded-full bg-cyan-300/10 blur-3xl" />
+        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-[2rem] bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
         <div className="relative max-w-3xl">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">
             <Building2 className="h-4 w-4" /> Verified Network
@@ -106,7 +107,7 @@ export default function Suppliers() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-white/10 bg-white/[0.045] p-5">
+      <section className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-5">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div className="relative flex-1">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
