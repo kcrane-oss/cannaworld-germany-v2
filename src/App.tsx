@@ -642,7 +642,7 @@ function DatenschutzPage() {
         <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-white/60 hover:text-white">
           ← Zurück zur Startseite
         </Link>
-        <div className="mt-8 rounded-[2rem] border border-white/10 bg-white/[0.045] p-8 backdrop-blur">
+        <div className="relative mt-8 rounded-[2rem] border border-white/10 bg-white/[0.045] p-8 backdrop-blur">
           <h1 className="text-3xl font-black tracking-tight">Datenschutzerklärung</h1>
           <p className="mt-2 text-sm text-white/45">Gemäß DSGVO / GDPR</p>
           <div className="mt-8 space-y-6 text-sm leading-7 text-white/70">
@@ -679,7 +679,7 @@ function AgbPage() {
         <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-white/60 hover:text-white">
           ← Zurück zur Startseite
         </Link>
-        <div className="mt-8 rounded-[2rem] border border-white/10 bg-white/[0.045] p-8 backdrop-blur">
+        <div className="relative mt-8 rounded-[2rem] border border-white/10 bg-white/[0.045] p-8 backdrop-blur">
           <h1 className="text-3xl font-black tracking-tight">AGB</h1>
           <p className="mt-2 text-sm text-white/45">Allgemeine Geschäftsbedingungen</p>
           <div className="mt-8 space-y-6 text-sm leading-7 text-white/70">
