@@ -19,3 +19,6 @@ export {
   triggerMarketplaceScan,
   type AggregatedRegulatory,
 } from "./regulatory-api";
+
+export * from "./gxp-types";
+export * from "./gxp-utils";
