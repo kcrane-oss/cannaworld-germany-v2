@@ -155,7 +155,7 @@ const dashboardNav = [
   { key: "analytics", label: "Analytics", icon: BarChart3, path: "/dashboard/analytics" },
 ];
 
-const moduleData: Record<string, { title: string; eyebrow: string; description: string; stats: string[]; actions: string[] }> = {
+const moduleData: Record<string, { title: string; eyebrow: string; description: string; stats: string[]; actions: string[]; color?: "cyan" | "blue" | "purple" | "emerald" }> = {
   overview: {
     eyebrow: "Germany Command Center",
     title: "Importer Dashboard",
@@ -169,6 +169,7 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     description: "Vorgeprüfte internationale Batches, Supplier-Profile und Dokumentenstände für deutsche B2B-Abnehmer.",
     stats: ["EU-ready Batch Pool", "CoA / Batch Records", "Supplier Trust Score", "Sample Request Flow"],
     actions: ["Batch anfragen", "Supplier vergleichen", "Sample Request vorbereiten"],
+    color: "blue",
   },
   "pharmacy-import": {
     eyebrow: "Apotheken-Workflow",
@@ -211,6 +212,7 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     description: "Transportkette, GDP-Anforderungen, Export-/Importdokumente, Temperaturführung und Zollpunkte in einem Flow.",
     stats: ["GDP Lane", "Temp Control", "Export Docs", "Customs Pack"],
     actions: ["Lane planen", "Dokumente bündeln", "ETA aktualisieren"],
+    color: "emerald",
   },
   suppliers: {
     eyebrow: "Verified Network",
@@ -218,6 +220,7 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     description: "Supplier-Profile mit Lizenzstatus, Auditdaten, Cultivation Proof und Batch-Historie.",
     stats: ["Supplier Score", "Audit Passport", "License Evidence", "Batch History"],
     actions: ["Supplier prüfen", "Auditdaten öffnen", "Shortlist bauen"],
+    color: "emerald",
   },
   documents: {
     eyebrow: "Document Vault",
@@ -239,6 +242,7 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     description: "Bestands-, Quarantäne- und Release-Status für medizinische Cannabis-Chargen in der Lieferkette.",
     stats: ["Quarantine", "Released", "Reserved", "Rejected"],
     actions: ["Bestand ansehen", "Charge reservieren", "Status ändern"],
+    color: "emerald",
   },
   "audit-passport": {
     eyebrow: "Proof Layer",
@@ -253,6 +257,7 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     description: "Pipeline-, Compliance-, Dokumenten- und Supplier-Metriken für schnelle Management-Entscheidungen.",
     stats: ["Pipeline Value", "Case Velocity", "Gap Density", "Supplier Quality"],
     actions: ["Report ansehen", "Filter setzen", "Management Snapshot"],
+    color: "purple",
   },
   services: {
     eyebrow: "Gateway Service Transfer",
@@ -260,6 +265,7 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     description: "Gateway-Angebote für die deutsche B2B-Rolle übersetzt: Intake, Qualifizierung, Dokumentenprüfung und Trade Matching — ohne eigenes Germany-Backend.",
     stats: ["24 Service-Bausteine", "4 Service-Layer", "DE Intake", "Gateway Handoff"],
     actions: ["Service auswählen", "Import-Fit prüfen", "Gateway-Handoff vorbereiten"],
+    color: "emerald",
   },
   settings: {
     eyebrow: "Workspace",
@@ -525,8 +531,33 @@ function LandingPage() {
         </section>
       </main>
 
-      <footer className="relative border-t border-white/10 py-10 text-center text-xs text-white/35">
-        © 2026 CannaWorld Germany · Berlin · Bangkok · B2B Compliance Intake
+      <footer className="relative border-t border-white/10 py-12 text-xs text-white/35">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
+          <div className="grid gap-8 md:grid-cols-3">
+            <div>
+              <div className="mb-3 font-bold text-white/50">CannaWorld Germany</div>
+              <p className="leading-6">B2B Compliance Intake · Berlin · Bangkok<br />© 2026 CannaWorld Germany</p>
+            </div>
+            <div>
+              <div className="mb-3 font-bold text-white/50">Rechtliches</div>
+              <div className="space-y-2">
+                <div><a href="/impressum" className="transition hover:text-white/60">Impressum</a></div>
+                <div><a href="/datenschutz" className="transition hover:text-white/60">Datenschutzerklärung</a></div>
+                <div><a href="/agb" className="transition hover:text-white/60">AGB</a></div>
+              </div>
+            </div>
+            <div>
+              <div className="mb-3 font-bold text-white/50">Kontakt</div>
+              <div className="space-y-2">
+                <div><a href="mailto:info@cannaworld-germany.de" className="transition hover:text-white/60">info@cannaworld-germany.de</a></div>
+                <div><a href="/register" className="transition hover:text-white/60">B2B-Zugang beantragen</a></div>
+              </div>
+            </div>
+          </div>
+          <div className="mt-8 border-t border-white/5 pt-6 text-center text-white/20">
+            Kein Endkunden-Verkauf. Keine Therapieversprechen. Reine B2B-Compliance-Plattform nach AMG/BtMG.
+          </div>
+        </div>
       </footer>
     </div>
   );
@@ -595,13 +626,19 @@ function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#071016] px-5 pb-10 pt-16 text-white">
+    <div className="relative min-h-screen bg-[#071016] px-5 pb-10 pt-16 text-white overflow-x-hidden">
+      {/* Dekorativer Hintergrund — gleich wie Landing */}
+      <div className="pointer-events-none fixed inset-0 opacity-50">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.14),transparent_34%),radial-gradient(circle_at_75%_10%,rgba(34,197,94,0.10),transparent_28%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_80%)]" />
+      </div>
       <UniverseBar current="germany" />
       <Link to="/" className="inline-flex items-center gap-3 text-sm font-semibold text-white/60 hover:text-white">
         <img src={logo} alt="CannaWorld" className="h-8 w-auto" /> Zurück zur Landing
       </Link>
       <main className="mx-auto flex min-h-[calc(100vh-7rem)] max-w-md items-center">
-        <form onSubmit={handleSubmit} className="w-full rounded-[2rem] border border-cyan-300/20 bg-white/[0.055] p-7 shadow-[0_0_44px_rgba(34,211,238,0.11)] backdrop-blur-xl">
+        <form onSubmit={handleSubmit} className="relative overflow-hidden w-full rounded-[2rem] border border-cyan-300/20 bg-white/[0.055] p-7 shadow-[0_0_44px_rgba(34,211,238,0.11)] backdrop-blur-xl">
+          <div className="absolute inset-x-0 top-0 h-1 rounded-t-[2rem] bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
           <Badge>Protected Dashboard</Badge>
           <h1 className="mt-5 text-3xl font-black tracking-tight">CannaWorld Germany Login</h1>
           <p className="mt-3 text-sm leading-6 text-white/56">Das Dashboard ist nur für qualifizierte B2B-Partner, Import-/QA-Rollen und interne CannaWorld-Operatoren sichtbar.</p>
@@ -686,6 +723,33 @@ function ProtectedDashboard() {
   return <DashboardLayout />;
 }
 
+const sidebarGroups = [
+  {
+    label: null, // kein Label für erste Gruppe
+    keys: ["overview"],
+  },
+  {
+    label: "Import & Handel",
+    keys: ["marketplace", "pharmacy-import", "trade-cases"],
+  },
+  {
+    label: "Qualität & Compliance",
+    keys: ["batches", "batch-verification", "btm-prescriptions", "qp-release", "compliance", "regulatory"],
+  },
+  {
+    label: "Logistik & Lager",
+    keys: ["logistics", "warehouse", "suppliers"],
+  },
+  {
+    label: "Dokumentation",
+    keys: ["documents", "audit-passport"],
+  },
+  {
+    label: "Analyse & Services",
+    keys: ["analytics", "services"],
+  },
+] as const;
+
 function DashboardLayout() {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
@@ -714,22 +778,37 @@ function DashboardLayout() {
             <X className="h-5 w-5" />
           </button>
         </div>
-        <nav className="h-[calc(100vh-5rem)] space-y-1 overflow-y-auto p-3">
-          {dashboardNav.map((item) => (
-            <NavLink
-              key={item.key}
-              to={item.path}
-              end={item.path === "/dashboard"}
-              onClick={() => setOpen(false)}
-              className={({ isActive }) =>
-                `flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition ${
-                  isActive ? "bg-cyan-300/15 text-cyan-200 ring-1 ring-cyan-300/20" : "text-white/58 hover:bg-white/7 hover:text-white"
-                }`
-              }
-            >
-              <item.icon className="h-4 w-4 shrink-0" />
-              {t(`app.nav.${item.key}`, item.label)}
-            </NavLink>
+        <nav className="h-[calc(100vh-5rem)] overflow-y-auto p-3 pb-6">
+          {sidebarGroups.map((group, groupIndex) => (
+            <div key={groupIndex} className={groupIndex > 0 ? "mt-5" : ""}>
+              {group.label && (
+                <div className="mb-1 px-4 text-[10px] font-bold uppercase tracking-[0.2em] text-white/25">
+                  {group.label}
+                </div>
+              )}
+              <div className="space-y-0.5">
+                {group.keys.map((key) => {
+                  const item = dashboardNav.find((n) => n.key === key);
+                  if (!item) return null;
+                  return (
+                    <NavLink
+                      key={item.key}
+                      to={item.path}
+                      end={item.path === "/dashboard"}
+                      onClick={() => setOpen(false)}
+                      className={({ isActive }) =>
+                        `flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium transition ${
+                          isActive ? "bg-cyan-300/15 text-cyan-200 ring-1 ring-cyan-300/20" : "text-white/58 hover:bg-white/7 hover:text-white"
+                        }`
+                      }
+                    >
+                      <item.icon className="h-4 w-4 shrink-0" />
+                      {t(`app.nav.${item.key}`, item.label)}
+                    </NavLink>
+                  );
+                })}
+              </div>
+            </div>
           ))}
         </nav>
       </aside>
@@ -758,18 +837,59 @@ function DashboardLayout() {
   );
 }
 
+const MODULE_COLORS = {
+  cyan: {
+    header: "from-cyan-300/12 via-white/[0.045] to-emerald-300/10",
+    blur: "bg-cyan-300/10",
+    shadow: "shadow-[0_0_42px_rgba(34,211,238,0.08)]",
+    border: "border-cyan-300/20",
+    badge: "border-cyan-300/25 bg-cyan-300/10 text-cyan-200",
+    statIcon: "bg-cyan-300/10 text-cyan-300 ring-cyan-300/20",
+    stripe: "from-cyan-300 via-sky-400 to-emerald-300",
+  },
+  blue: {
+    header: "from-blue-400/12 via-white/[0.045] to-blue-300/10",
+    blur: "bg-blue-400/10",
+    shadow: "shadow-[0_0_42px_rgba(96,165,250,0.08)]",
+    border: "border-blue-400/20",
+    badge: "border-blue-400/25 bg-blue-400/10 text-blue-200",
+    statIcon: "bg-blue-400/10 text-blue-300 ring-blue-400/20",
+    stripe: "from-blue-400 via-sky-400 to-cyan-300",
+  },
+  purple: {
+    header: "from-purple-400/12 via-white/[0.045] to-purple-300/10",
+    blur: "bg-purple-400/10",
+    shadow: "shadow-[0_0_42px_rgba(192,132,252,0.08)]",
+    border: "border-purple-400/20",
+    badge: "border-purple-400/25 bg-purple-400/10 text-purple-200",
+    statIcon: "bg-purple-400/10 text-purple-300 ring-purple-400/20",
+    stripe: "from-purple-400 via-violet-400 to-blue-300",
+  },
+  emerald: {
+    header: "from-emerald-300/12 via-white/[0.045] to-emerald-300/10",
+    blur: "bg-emerald-300/10",
+    shadow: "shadow-[0_0_42px_rgba(110,231,183,0.08)]",
+    border: "border-emerald-300/20",
+    badge: "border-emerald-300/25 bg-emerald-300/10 text-emerald-200",
+    statIcon: "bg-emerald-300/10 text-emerald-300 ring-emerald-300/20",
+    stripe: "from-emerald-300 via-teal-400 to-cyan-300",
+  },
+} as const;
+
 function DashboardModule({ moduleKey }: { moduleKey: string }) {
   const data = moduleData[moduleKey] ?? moduleData.overview;
   const current = dashboardNav.find((item) => item.key === moduleKey) ?? dashboardNav[0];
   const Icon = current.icon;
+  const colors = MODULE_COLORS[data.color ?? "cyan"];
 
   return (
     <div className="space-y-7">
-      <section className="relative overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-gradient-to-br from-cyan-300/12 via-white/[0.045] to-emerald-300/10 p-6 shadow-[0_0_42px_rgba(34,211,238,0.08)] md:p-8">
-        <div className="absolute right-0 top-0 h-52 w-52 rounded-full bg-cyan-300/10 blur-3xl" />
+      <section className={`relative overflow-hidden rounded-[2rem] ${colors.border} bg-gradient-to-br ${colors.header} p-6 ${colors.shadow} md:p-8`}>
+        <div className={`absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r ${colors.stripe}`} />
+        <div className={`absolute right-0 top-0 h-52 w-52 rounded-full ${colors.blur} blur-3xl`} />
         <div className="relative flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-3xl">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">
+            <div className={`mb-4 inline-flex items-center gap-2 rounded-full border ${colors.badge} px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em]`}>
               <Icon className="h-4 w-4" /> {data.eyebrow}
             </div>
             <h1 className="text-3xl font-black tracking-tight md:text-5xl">{data.title}</h1>
@@ -784,7 +904,7 @@ function DashboardModule({ moduleKey }: { moduleKey: string }) {
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {data.stats.map((stat, index) => (
           <div key={stat} className="rounded-3xl border border-white/10 bg-white/[0.045] p-5">
-            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-300 ring-1 ring-cyan-300/20">
+            <div className={`mb-4 flex h-10 w-10 items-center justify-center rounded-2xl ${colors.statIcon} ring-1`}>
               <span className="text-sm font-black">0{index + 1}</span>
             </div>
             <div className="font-bold">{stat}</div>
@@ -934,14 +1054,19 @@ function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#071016] px-5 pb-16 pt-16 text-white">
+    <div className="relative min-h-screen bg-[#071016] px-5 pb-16 pt-16 text-white overflow-x-hidden">
+      <div className="pointer-events-none fixed inset-0 opacity-50">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.14),transparent_34%),radial-gradient(circle_at_75%_10%,rgba(34,197,94,0.10),transparent_28%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_80%)]" />
+      </div>
       <UniverseBar current="germany" />
       <Link to="/" className="inline-flex items-center gap-3 text-sm font-semibold text-white/60 hover:text-white">
         <img src={logo} alt="CannaWorld" className="h-8 w-auto" /> Zurück zur Landing
       </Link>
       <main className="mx-auto mt-10 max-w-2xl">
         {submitted ? (
-          <div className="rounded-[2rem] border border-emerald-300/25 bg-white/[0.05] p-8 shadow-[0_0_44px_rgba(16,185,129,0.10)] backdrop-blur-xl">
+          <div className="relative overflow-hidden rounded-[2rem] border border-emerald-300/25 bg-white/[0.05] p-8 shadow-[0_0_44px_rgba(16,185,129,0.10)] backdrop-blur-xl">
+            <div className="absolute inset-x-0 top-0 h-1 rounded-t-[2rem] bg-gradient-to-r from-emerald-300 via-teal-400 to-cyan-300" />
             <Badge>Antrag vorbereitet</Badge>
             <h1 className="mt-5 text-3xl font-black tracking-tight">Vielen Dank für Ihre Anfrage</h1>
             <p className="mt-4 text-sm leading-7 text-white/70">
@@ -966,7 +1091,8 @@ function RegisterPage() {
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="rounded-[2rem] border border-cyan-300/20 bg-white/[0.055] p-7 shadow-[0_0_44px_rgba(34,211,238,0.11)] backdrop-blur-xl">
+          <form onSubmit={handleSubmit} className="relative overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-white/[0.055] p-7 shadow-[0_0_44px_rgba(34,211,238,0.11)] backdrop-blur-xl">
+            <div className="absolute inset-x-0 top-0 h-1 rounded-t-[2rem] bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
             <Badge>B2B-Qualifizierung</Badge>
             <h1 className="mt-5 text-3xl font-black tracking-tight">Zugang beantragen</h1>
             <p className="mt-3 text-sm leading-6 text-white/56">

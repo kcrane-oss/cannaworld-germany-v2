@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-dark: #0a0a0f;
+  --color-dark: #071016;
   --color-card: #111116;
-  --color-accent: #22C55E;
+  --color-accent: #67e8f9;
   --color-accent-light: #4ADE80;
   --color-gold: #C9A96E;
   --color-text: #f0f0f5;
@@ -11,5 +11,5 @@
 }
 
 html { scroll-behavior: smooth; }
-body { background: #0a0a0f; color: #f0f0f5; font-family: 'Inter', system-ui, sans-serif; }
+body { background: #071016; color: #f0f0f5; font-family: 'Inter', system-ui, sans-serif; }
 .glass { background: rgba(17,17,22,0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
