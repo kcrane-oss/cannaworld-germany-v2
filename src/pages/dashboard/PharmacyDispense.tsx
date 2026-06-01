@@ -12,7 +12,12 @@ import {
   type PharmacyDispenseRequest,
 } from "cannaworld-sdk";
 
-const BTM_SALT = (import.meta.env.VITE_BTM_SALT as string | undefined) ?? "DEV_SALT_REPLACE_IN_PROD";
+const DEV_BTM_SALT_PLACEHOLDER = "DEV_SALT_REPLACE_IN_PROD";
+const BTM_SALT = ((import.meta.env.VITE_BTM_SALT as string | undefined) ?? "").trim();
+// Fail-safe: a real, non-placeholder salt must be configured. Otherwise BtM
+// prescription hashes would be wrong/inconsistent — dispensing is blocked
+// rather than silently hashing with a dev placeholder.
+const BTM_SALT_CONFIGURED = BTM_SALT.length > 0 && BTM_SALT !== DEV_BTM_SALT_PLACEHOLDER;
 
 interface DispensableBatch {
   id: string;
@@ -89,6 +94,15 @@ export default function PharmacyDispense() {
     }
     if (!form.dispensed_units || Number(form.dispensed_units) <= 0) {
       setFeedback({ kind: "err", text: "Menge muss > 0 sein" });
+      return;
+    }
+    if (!BTM_SALT_CONFIGURED) {
+      setFeedback({
+        kind: "err",
+        text:
+          "BtM-Hashing nicht konfiguriert (VITE_BTM_SALT fehlt oder ist der Dev-Platzhalter). " +
+          "Abgabe blockiert, um inkonsistente BtM-Rezept-Hashes zu verhindern. Bitte Betreiber kontaktieren.",
+      });
       return;
     }
     setBusy(true);
