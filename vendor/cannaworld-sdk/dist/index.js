@@ -166,10 +166,22 @@ var triggerMarketplaceScan = () => invokeRegulatoryProxy({ action: "marketplace_
 var QP_INBOX_THAI = ["ready_for_thai_rp_release"];
 var QP_INBOX_EU = ["ready_for_eu_qp_release"];
 var EU_INTAKE_INBOX = ["ready_for_eu_intake"];
-var POST_HARVEST_INBOX = ["ready_for_eu_post_harvest", "eu_post_harvest_in_progress"];
-var WHOLESALE_HUB_INBOX = ["in_transit_to_wholesale_hub", "arrived_at_wholesale_hub"];
-var PHARMACY_RECEIVE_INBOX = ["in_transit_to_pharmacy", "ready_for_pharmacy_dispatch"];
-var PHARMACY_DISPENSE_INBOX = ["ready_for_patient_dispense", "received_at_pharmacy"];
+var POST_HARVEST_INBOX = [
+  "ready_for_eu_post_harvest",
+  "eu_post_harvest_in_progress"
+];
+var WHOLESALE_HUB_INBOX = [
+  "in_transit_to_wholesale_hub",
+  "arrived_at_wholesale_hub"
+];
+var PHARMACY_RECEIVE_INBOX = [
+  "in_transit_to_pharmacy",
+  "ready_for_pharmacy_dispatch"
+];
+var PHARMACY_DISPENSE_INBOX = [
+  "ready_for_patient_dispense",
+  "received_at_pharmacy"
+];
 var RECALL_ACTIVE = ["recall_initiated", "recall_in_progress"];
 var MARKETPLACE_LISTABLE = [
   "approved",
@@ -290,7 +302,9 @@ function validateScaPayload(p) {
   return { ok: true };
 }
 async function invokeGxpEdgeFn(client, name, body) {
-  const { data, error } = await client.functions.invoke(name, { body });
+  const { data, error } = await client.functions.invoke(name, {
+    body
+  });
   if (error) throw new Error(`edge_fn_failed:${name}:${error.message ?? String(error)}`);
   if (!data) throw new Error(`edge_fn_no_data:${name}`);
   return data;
