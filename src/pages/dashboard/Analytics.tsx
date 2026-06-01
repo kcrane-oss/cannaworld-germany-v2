@@ -52,6 +52,7 @@ export default function Analytics() {
     <div className="space-y-7">
       <section className="relative overflow-hidden rounded-[2rem] border border-purple-400/25 bg-gradient-to-br from-purple-400/12 via-white/[0.045] to-cyan-400/10 p-6 shadow-[0_0_42px_rgba(168,85,247,0.08)] md:p-8">
         <div className="absolute right-0 top-0 h-52 w-52 rounded-full bg-purple-400/10 blur-3xl" />
+        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-[2rem] bg-gradient-to-r from-purple-400 via-violet-400 to-blue-300" />
         <div className="relative flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-3xl">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-purple-400/25 bg-purple-400/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-purple-200">
@@ -85,7 +86,7 @@ export default function Analytics() {
         ].map((m) => {
           const Icon = m.icon;
           return (
-            <div key={m.label} className="rounded-3xl border border-white/10 bg-white/[0.045] p-5">
+            <div key={m.label} className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-5">
               <Icon className={`mb-3 h-5 w-5 ${m.tint}`} />
               <div className={`text-3xl font-black ${m.tint}`}>{isLoading ? <Loader2 className="h-7 w-7 animate-spin" /> : m.value}</div>
               <div className="mt-1 text-sm font-semibold text-white">{m.label}</div>
@@ -95,7 +96,7 @@ export default function Analytics() {
       </section>
 
       <section className="grid gap-5 lg:grid-cols-2">
-        <div className="rounded-3xl border border-white/10 bg-white/[0.045] p-6">
+        <div className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-6">
           <h3 className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-white/75">{t("analytics.supplierDistributionTitle", "Supplier-Verteilung nach Status")}</h3>
           {isLoading ? (
             <div className="flex h-64 items-center justify-center">
@@ -130,7 +131,7 @@ export default function Analytics() {
           )}
         </div>
 
-        <div className="rounded-3xl border border-white/10 bg-white/[0.045] p-6">
+        <div className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-6">
           <h3 className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-white/75">{t("analytics.batchDistributionTitle", "Chargen-Verteilung nach Status")}</h3>
           {isLoading ? (
             <div className="flex h-64 items-center justify-center">
@@ -159,7 +160,7 @@ export default function Analytics() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-xs text-white/45">
+      <section className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 text-xs text-white/45">
         {t(
           "analytics.footerNote",
           "Hinweis: Daten kommen direkt aus dem geteilten CannaWorld Gateway / Supabase Backend (live, kein Cache). Für historische Trends, Vorhersage-Modelle und Cohort-Analysen die AI-gestützte AICert Analytics-Engine nutzen.",

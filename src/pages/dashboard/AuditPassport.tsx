@@ -23,6 +23,7 @@ export default function AuditPassport() {
     <div className="space-y-7">
       <section className="relative overflow-hidden rounded-[2rem] border border-purple-400/25 bg-gradient-to-br from-purple-400/12 via-white/[0.045] to-cyan-400/10 p-6 shadow-[0_0_42px_rgba(168,85,247,0.08)] md:p-8">
         <div className="absolute right-0 top-0 h-52 w-52 rounded-full bg-purple-400/10 blur-3xl" />
+        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-[2rem] bg-gradient-to-r from-purple-400 via-violet-400 to-blue-300" />
         <div className="relative flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-3xl">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-purple-400/25 bg-purple-400/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-purple-200">
@@ -56,7 +57,7 @@ export default function AuditPassport() {
         ].map((s) => {
           const Icon = s.icon;
           return (
-            <div key={s.label} className="rounded-3xl border border-white/10 bg-white/[0.04] p-4">
+            <div key={s.label} className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-4">
               <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-2xl bg-purple-400/10 text-purple-300 ring-1 ring-purple-300/30">
                 <Icon className="h-4 w-4" />
               </div>
@@ -67,7 +68,7 @@ export default function AuditPassport() {
         })}
       </section>
 
-      <section className="rounded-3xl border border-white/10 bg-white/[0.045] p-6">
+      <section className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-6">
         <h2 className="mb-5 text-sm font-bold uppercase tracking-[0.2em] text-white/75">
           {t("auditPassport.supplierPassportStatus", "Supplier Passport-Status")}
         </h2>
