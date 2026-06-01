@@ -158,16 +158,14 @@ export default function PharmacyReceive() {
       <section className="relative overflow-hidden rounded-[2rem] border border-emerald-300/20 bg-gradient-to-br from-emerald-300/12 via-white/[0.045] to-cyan-300/10 p-6 shadow-[0_0_42px_rgba(52,211,153,0.08)] md:p-8">
         <div className="absolute right-0 top-0 h-52 w-52 rounded-full bg-emerald-300/10 blur-3xl" />
         <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-[2rem] bg-gradient-to-r from-emerald-300 via-teal-400 to-cyan-300" />
-        <div className="relative flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-3xl">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-300/25 bg-emerald-300/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-emerald-200">
-              <Truck className="h-4 w-4" /> {t("pharmacyReceive.heroBadge", "Apothekenannahme (GDP)")}
-            </div>
-            <h1 className="text-3xl font-black tracking-tight md:text-5xl">{t("pharmacyReceive.heroTitle", "Wareneingang Apotheke")}</h1>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-white/60">
-              {t("pharmacyReceive.heroSubtitle", "Annahme von Cannabis-Chargen vom Großhandel nach GDP 2013/C 343/01 Ch. 5 + Securpharm-Decommission (EU FMD). Jede Annahme erfordert SCA-Signatur (TOTP/WebAuthn).")}
-            </p>
+        <div className="relative max-w-3xl">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-300/25 bg-emerald-300/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-emerald-200">
+            <Truck className="h-4 w-4" /> {t("pharmacyReceive.heroBadge", "Apothekenannahme (GDP)")}
           </div>
+          <h1 className="text-3xl font-black tracking-tight md:text-5xl">{t("pharmacyReceive.heroTitle", "Wareneingang Apotheke")}</h1>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-white/60">
+            {t("pharmacyReceive.heroSubtitle", "Annahme von Cannabis-Chargen vom Großhandel nach GDP 2013/C 343/01 Ch. 5 + Securpharm-Decommission (EU FMD). Jede Annahme erfordert SCA-Signatur (TOTP/WebAuthn).")}
+          </p>
         </div>
       </section>
 

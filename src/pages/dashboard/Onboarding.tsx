@@ -74,7 +74,7 @@ export default function OnboardingPage() {
         <section className="relative overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-gradient-to-br from-cyan-300/12 via-white/[0.045] to-emerald-300/10 p-6 shadow-[0_0_42px_rgba(34,211,238,0.08)] md:p-8">
           <div className="absolute right-0 top-0 h-52 w-52 rounded-full bg-cyan-300/10 blur-3xl" />
           <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-[2rem] bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
-          <div className="relative flex items-center justify-between gap-4">
+          <div className="relative flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">
                 <Sparkles className="h-4 w-4" /> {t("ob.wizard_eyebrow", "Qualifizierung läuft")}
@@ -83,23 +83,15 @@ export default function OnboardingPage() {
                 {t(`ob.picker_${activeRole}_title`, ROLE_LABELS[activeRole])}
               </h1>
             </div>
-            <div className="flex shrink-0 flex-col items-end gap-2">
-              <button
-                onClick={() => (picked ? setPicked(null) : deferOnboarding())}
-                className="text-sm font-semibold text-white/55 transition hover:text-white"
-              >
-                ←{" "}
-                {picked
-                  ? t("ob.picker_back", "Andere Rolle wählen")
-                  : t("ob.defer_short", "Später · zum Dashboard")}
-              </button>
-              <button
-                onClick={deferOnboarding}
-                className="text-sm font-semibold text-white/45 transition hover:text-white"
-              >
-                {t("ob.defer", "Später abschließen")}
-              </button>
-            </div>
+            <button
+              onClick={() => (picked ? setPicked(null) : deferOnboarding())}
+              className="shrink-0 text-sm font-semibold text-white/55 transition hover:text-white"
+            >
+              ←{" "}
+              {picked
+                ? t("ob.picker_back", "Andere Rolle wählen")
+                : t("ob.defer_short", "Später · zum Dashboard")}
+            </button>
           </div>
         </section>
         <RoleOnboardingWizard role={activeRole} />
