@@ -98,6 +98,22 @@ plus ein paar Logs" vor, sondern eine **geschlossene Kette**, die eine QP zügig
 
 ---
 
+### Das „blinde Segment" — der unterschätzte Klassiker
+
+Die gefährlichste Lücke ist nicht die dokumentierte Temperatur-Exkursion — die kann man
+bewerten. Es ist das **Segment ohne Daten**: die Stunden am Zoll, die Standzeit auf dem
+Vorfeld, der Umschlag, für den kein Logger zuständig war. Auf dem Papier sieht so eine
+Lieferung „ohne Beanstandung" aus — in Wahrheit gibt es schlicht keinen Nachweis, *was*
+in diesem Zeitfenster passiert ist.
+
+Für eine QP ist „keine Daten" nicht „alles in Ordnung", sondern eine offene Frage. Deshalb
+ist die richtige Messlatte nicht „hatten wir Exkursionen?", sondern „ist *jede* Minute der
+Strecke belegt?". Lückenlosigkeit schlägt Perfektion: Ein durchgehend dokumentierter
+Transport mit einer sauber bewerteten Abweichung ist wertvoller als ein scheinbar perfekter
+mit einem blinden Fleck.
+
+---
+
 ### Was ich diese Woche gelernt habe
 [1 kurzer, ehrlicher Absatz — z. B. eine konkrete GDP-/Monitoring-Erkenntnis aus einer
 Transportplanung oder einem Audit, die dich überrascht hat.]

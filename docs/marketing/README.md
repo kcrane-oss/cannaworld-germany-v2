@@ -16,6 +16,24 @@ Konsumbezug. **Kein Rechtsrat** — Plattform-Policies & TH/EU-Regulatorik vor G
 | `newsletter-issue-03.md` | Newsletter Ausgabe #3 „QP-Freigabe entschlüsselt" (voll ausformuliert) + Promo-Post + Karussell-Ableitung |
 | `newsletter-issue-04.md` | Newsletter Ausgabe #4 „GDP-Logistik ohne Lücken" (voll ausformuliert) + Promo-Post + Karussell-Ableitung |
 | `webinar-export-readiness.md` | Online-Webinar: Run of Show, Foliengerüst, Promo-Plan, Q&A, Follow-up-Sequenz, Compliance-Check |
+| `webinar-deck.html` | Präsentationsfertiges, eigenständiges HTML-Deck (16 Folien, offline, Pfeiltasten-Navigation) — im Browser öffnen |
+| `social-assets.html` | Newsletter-Cover + 3 Social-Promo-Karten (Newsletter / Webinar / Checkliste) im gleichen Look |
+
+## Grafiken & Vorschauen (Render)
+Die `*.html`-Dateien sind die **Single Source of Truth**. PNG-Vorschauen werden daraus
+generiert und sind **bewusst nicht eingecheckt** (siehe `.gitignore`), um die History
+schlank zu halten.
+
+**So siehst du sie:**
+- **Schnell:** `webinar-deck.html` / `social-assets.html` einfach im Browser öffnen.
+- **Als Bilder:** mit einem Headless-Browser screenshotten, z. B. (lokal, einmalig):
+  ```bash
+  npx playwright install chromium
+  # Deck-Folien:  open webinar-deck.html, je Folie show(i) aufrufen, screenshot
+  # Social-Cards: Element-Screenshot je #id (nl-cover, promo-square, promo-webinar, promo-checklist)
+  ```
+- **Demo-Werte:** Im Deck die `[…]`-Platzhalter (Datum, Name, KPIs auf Folie 14) direkt
+  im HTML ersetzen — eine separate Demo-Datei wird bewusst nicht gepflegt.
 
 ## Reihenfolge zum Loslegen
 1. **Strategie** lesen → Plattform-Realität & Funnel verstehen.

@@ -95,6 +95,20 @@ zur Detektivarbeit.
 
 ---
 
+### Was „zu spät" konkret kostet
+
+Rechne es einmal durch. Eine Charge ist importiert, liegt im Lager — und die QP kann nicht
+zertifizieren, weil ein Prüfprotokoll fehlt oder eine Abweichung unbewertet ist. Jeder Tag
+bis zur Klärung ist gebundenes Kapital, belegter Lagerplatz und, je nach Produkt, tickende
+Haltbarkeit. Dazu kommt das, was sich schwerer beziffern lässt: ein Kunde im Zielmarkt, der
+auf Ware wartet, die „eigentlich da ist", aber nicht ausgeliefert werden darf.
+
+Der Unterschied zwischen „QP am Anfang gefragt" und „QP am Ende überrascht" ist damit kein
+organisatorisches Detail — er entscheidet, ob die Charge ein planbarer Vorgang oder ein
+offenes Risiko ist. Die billigste QP-Freigabe ist die, die nie eine Überraschung war.
+
+---
+
 ### Was ich diese Woche gelernt habe
 [1 kurzer, ehrlicher Absatz — z. B. ein konkretes QP-/Freigabe-Detail aus einem
 Gespräch mit einer QP oder einem Importeur, das dich überrascht hat.]

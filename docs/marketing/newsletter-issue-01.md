@@ -91,6 +91,35 @@ behandelt, nicht als Papierkram am Ende.
 
 ---
 
+### Ein Mini-Beispiel, wie es in der Praxis kippt
+
+Stell dir vor, eine Charge ist produziert, das CoA liegt vor, der Preis ist verhandelt.
+Auf dem Papier ist alles bereit. Beim Abgleich vor dem Versand fällt auf: Die Chargennummer
+auf dem CoA endet auf „-A", die auf der Importgenehmigung auf „-01". Gemeint ist dieselbe
+Charge — aber „gemeint" zählt an der Grenze nicht. Jetzt beginnt das, was jeden Import teuer
+macht: Rückfragen, Neuausstellung von Dokumenten, Wartezeit, im Zweifel eine Charge, die
+irgendwo zwischenlagert, während die Uhr läuft.
+
+Das Frustrierende daran ist nicht der Fehler selbst — es ist, dass er **trivial** ist. Eine
+Nummer, die nicht matcht. Genau deshalb behandeln wir Identität und Übereinstimmung nicht als
+Detail am Ende, sondern als ersten Prüfschritt: Bevor eine Charge überhaupt in Richtung Europa
+geplant wird, muss sie über **alle** Dokumente hinweg dieselbe Sprache sprechen.
+
+---
+
+### Warum gerade jetzt
+
+Der Markt für den Asien→EU-Korridor professionalisiert sich. Käuferseitig steigen die
+Anforderungen — Apotheken, Großhändler und Importeure können es sich nicht leisten, an einer
+Charge hängenzubleiben, deren Papierlage nicht hält. Verkäuferseitig differenziert sich
+Thailand: Wer von „GMP irgendwie" zu „EU-GMP belegbar" kommt, spielt in einer anderen Liga.
+
+Anders gesagt: Der Wettbewerb verschiebt sich von „Wer hat das Produkt?" zu „Wer kann es
+prüfbar liefern?". Genau dieser Verschiebung widmet sich dieser Newsletter — Ausgabe für
+Ausgabe nehmen wir eine Station der Kette auseinander, damit du sie bei dir wasserdicht machst.
+
+---
+
 ### Was ich diese Woche gelernt habe
 [1 kurzer, ehrlicher Absatz — z. B. eine Erkenntnis aus einem Audit, einem
 Partnergespräch oder dem Korridor-Aufbau. Macht den Newsletter menschlich und

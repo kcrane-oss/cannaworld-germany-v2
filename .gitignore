@@ -26,3 +26,7 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+
+# Regenerable marketing preview renders (source of truth: *.html)
+docs/marketing/deck-preview/
+docs/marketing/asset-preview/

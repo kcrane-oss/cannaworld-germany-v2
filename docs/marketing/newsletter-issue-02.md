@@ -96,6 +96,21 @@ bevor eine Charge überhaupt auf die Reise geht.
 
 ---
 
+### Das Signal, dem du nicht trauen solltest
+
+Es gibt einen Satz, der seriös klingt und trotzdem nichts beweist: „Wir haben ein
+GMP-Zertifikat." Die richtige Rückfrage ist nie „habt ihr eins?", sondern „nach welchem
+Regelwerk, für welche Anlage, und ist es EU-anerkannt?". Ein Zertifikat ist ein Dokument
+mit Geltungsbereich — kein Gütesiegel für alles, was die Firma produziert.
+
+Genauso wenig hilft ein Zertifikat, das auf dem Papier passt, dessen Geltungsdauer aber
+abgelaufen ist oder dessen Tätigkeitsumfang das konkrete Produkt nicht abdeckt. Behandle die
+EU-GMP-Bescheinigung also wie jedes andere Glied der Kette: nicht „vorhanden/nicht
+vorhanden", sondern „passt sie exakt zu *dieser* Charge aus *dieser* Anlage?". Diese eine
+Gewohnheit erspart später die teuersten Überraschungen.
+
+---
+
 ### Was ich diese Woche gelernt habe
 [1 kurzer, ehrlicher Absatz — z. B. ein konkretes EU-GMP-/QP-Detail aus einem Audit
 oder Partnergespräch, das dich überrascht hat. Hält den Newsletter menschlich.]
