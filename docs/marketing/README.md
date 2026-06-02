@@ -11,6 +11,8 @@ Konsumbezug. **Kein Rechtsrat** — Plattform-Policies & TH/EU-Regulatorik vor G
 | `30-day-content-calendar.md` | 30-Tage-Redaktionsplan mit ausformulierten Post-Vorlagen + Recycling-Regel |
 | `lead-magnet-import-readiness.md` | EU-GMP Import-Readiness Checkliste (Lead-Magnet) |
 | `outbound-templates.md` | Vorlagen: LinkedIn-Sequenz, LINE, Messenger, Cold-E-Mail, Webinar |
+| `newsletter-issue-01.md` | LinkedIn-Newsletter „The Compliant Corridor", Ausgabe #1 (voll ausformuliert) + Setup + Promo-Post |
+| `webinar-export-readiness.md` | Online-Webinar: Run of Show, Foliengerüst, Promo-Plan, Q&A, Follow-up-Sequenz, Compliance-Check |
 
 ## Reihenfolge zum Loslegen
 1. **Strategie** lesen → Plattform-Realität & Funnel verstehen.
