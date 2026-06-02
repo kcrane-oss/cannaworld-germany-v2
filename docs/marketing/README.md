@@ -12,6 +12,7 @@ Konsumbezug. **Kein Rechtsrat** — Plattform-Policies & TH/EU-Regulatorik vor G
 | `lead-magnet-import-readiness.md` | EU-GMP Import-Readiness Checkliste (Lead-Magnet) |
 | `outbound-templates.md` | Vorlagen: LinkedIn-Sequenz, LINE, Messenger, Cold-E-Mail, Webinar |
 | `newsletter-issue-01.md` | LinkedIn-Newsletter „The Compliant Corridor", Ausgabe #1 (voll ausformuliert) + Setup + Promo-Post |
+| `newsletter-issue-02.md` | Newsletter Ausgabe #2 „EU-GMP vs. GMP" (voll ausformuliert) + Promo-Post + Karussell-Ableitung |
 | `webinar-export-readiness.md` | Online-Webinar: Run of Show, Foliengerüst, Promo-Plan, Q&A, Follow-up-Sequenz, Compliance-Check |
 
 ## Reihenfolge zum Loslegen
