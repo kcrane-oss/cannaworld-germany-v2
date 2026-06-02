@@ -9,6 +9,7 @@ import Batches from "./pages/dashboard/Batches";
 import WarehousePage from "./pages/dashboard/Warehouse";
 import DocumentsPage from "./pages/dashboard/Documents";
 import Marketplace from "./pages/dashboard/Marketplace";
+import SampleRequests from "./pages/dashboard/SampleRequests";
 import PharmacyImport from "./pages/dashboard/PharmacyImport";
 import AuditPassport from "./pages/dashboard/AuditPassport";
 import Analytics from "./pages/dashboard/Analytics";
@@ -71,6 +72,7 @@ import {
   Shield,
   ShieldCheck,
   ShoppingBag,
+  Inbox,
   Sparkles,
   Stethoscope,
   Truck,
@@ -138,6 +140,7 @@ const steps = [
 const dashboardNav = [
   { key: "overview", label: "Overview", icon: LayoutDashboard, path: "/dashboard" },
   { key: "marketplace", label: "Marketplace", icon: ShoppingBag, path: "/dashboard/marketplace" },
+  { key: "sample-requests", label: "Sample-Requests", icon: Inbox, path: "/dashboard/sample-requests" },
   { key: "pharmacy-import", label: "Apotheken-Import", icon: FileCheck, path: "/dashboard/pharmacy-import" },
   { key: "trade-cases", label: "Trade Cases", icon: FileCheck, path: "/dashboard/trade-cases" },
   { key: "batches", label: "Batches", icon: Package, path: "/dashboard/batches" },
@@ -169,6 +172,13 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     description: "Vorgeprüfte internationale Batches, Supplier-Profile und Dokumentenstände für deutsche B2B-Abnehmer.",
     stats: ["EU-ready Batch Pool", "CoA / Batch Records", "Supplier Trust Score", "Sample Request Flow"],
     actions: ["Batch anfragen", "Supplier vergleichen", "Sample Request vorbereiten"],
+  },
+  "sample-requests": {
+    eyebrow: "B2B Intake",
+    title: "Sample-Requests",
+    description: "Eingegangene B2B-Sample-Requests aus dem Marketplace mit Status-Workflow (Eingegangen → In Prüfung → Erfüllt/Abgelehnt).",
+    stats: ["Strukturierter Bedarf", "B2B-bestätigt", "Status-Workflow", "Admin/Compliance"],
+    actions: ["Request prüfen", "Status setzen", "Supplier koordinieren"],
   },
   "pharmacy-import": {
     eyebrow: "Apotheken-Workflow",
@@ -1141,7 +1151,7 @@ function App() {
             }
           />
           {dashboardNav.slice(1).map((item) => {
-            if (["trade-cases", "qp-release", "logistics", "compliance", "regulatory", "suppliers", "batches", "warehouse", "documents", "marketplace", "pharmacy-import", "audit-passport", "analytics", "batch-verification", "btm-prescriptions"].includes(item.key)) return null;
+            if (["trade-cases", "qp-release", "logistics", "compliance", "regulatory", "suppliers", "batches", "warehouse", "documents", "marketplace", "sample-requests", "pharmacy-import", "audit-passport", "analytics", "batch-verification", "btm-prescriptions"].includes(item.key)) return null;
             const Body = item.key === "services" ? <GatewayServicesPreview /> : <DashboardModule moduleKey={item.key} />;
             return (
               <Route
@@ -1197,6 +1207,14 @@ function App() {
           <Route path="warehouse" element={<WarehousePage />} />
           <Route path="documents" element={<DocumentsPage />} />
           <Route path="marketplace" element={<Marketplace />} />
+          <Route
+            path="sample-requests"
+            element={
+              <RoleGuard allowedRoles={["admin", "compliance"]}>
+                <SampleRequests />
+              </RoleGuard>
+            }
+          />
           <Route path="pharmacy-import" element={<PharmacyImport />} />
           <Route path="audit-passport" element={<AuditPassport />} />
           <Route path="analytics" element={<Analytics />} />

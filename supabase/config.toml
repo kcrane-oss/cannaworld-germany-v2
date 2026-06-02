@@ -15,3 +15,6 @@ verify_jwt = true
 
 [functions.germany-sample-request]
 verify_jwt = true
+
+[functions.germany-sample-request-status]
+verify_jwt = true

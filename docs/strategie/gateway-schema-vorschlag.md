@@ -102,7 +102,11 @@ create table germany_sample_requests (
   metadata           jsonb not null default '{}',
   created_at         timestamptz not null default now()
 );
--- RLS: INSERT nur via Service-Role (Edge Function); SELECT für admin/compliance.
+-- + Spalten für den Admin-Workflow:
+--   updated_at timestamptz, updated_by uuid
+-- RLS: INSERT + UPDATE nur via Service-Role (Edge Functions germany-sample-request /
+--   germany-sample-request-status); SELECT für admin/compliance.
+-- Status-Workflow server-seitig erzwungen: received → in_review → fulfilled | declined.
 ```
 
 ### `farm_onboarding_events` — Audit-Trail der Tier-Übergänge

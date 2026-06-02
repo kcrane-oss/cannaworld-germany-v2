@@ -1,4 +1,17 @@
 {
+  "sampleAdmin": {
+    "title": "Sample-Requests",
+    "empty": "Keine Sample-Requests",
+    "loadError": "Requests konnten nicht geladen werden",
+    "updated": "Status aktualisiert",
+    "updateError": "Aktualisierung fehlgeschlagen",
+    "status": {
+      "received": "Eingegangen",
+      "in_review": "In Prüfung",
+      "fulfilled": "Erfüllt",
+      "declined": "Abgelehnt"
+    }
+  },
   "sampleRequest": {
     "cta": "Sample anfragen",
     "title": "B2B Sample-Request",

@@ -1,4 +1,17 @@
 {
+  "sampleAdmin": {
+    "title": "Sample requests",
+    "empty": "No sample requests",
+    "loadError": "Could not load requests",
+    "updated": "Status updated",
+    "updateError": "Update failed",
+    "status": {
+      "received": "Received",
+      "in_review": "In review",
+      "fulfilled": "Fulfilled",
+      "declined": "Declined"
+    }
+  },
   "sampleRequest": {
     "cta": "Request sample",
     "title": "B2B sample request",
