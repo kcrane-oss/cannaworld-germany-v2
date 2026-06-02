@@ -1,11 +1,17 @@
 import { useBatches, type BatchRow } from "@/hooks/useBatches";
-import { ShoppingBag, ExternalLink, ArrowRight, Loader2, AlertTriangle, Mail, Package } from "lucide-react";
+import { useFarmProducers } from "@/hooks/useFarmProducers";
+import { ShoppingBag, ExternalLink, ArrowRight, Loader2, AlertTriangle, Mail, Package, Sprout } from "lucide-react";
+import { deriveBatchProvenance } from "@/lib/marketplace-provenance";
+import { GatekeeperProvenance } from "@/components/marketplace/GatekeeperProvenance";
+import { FarmTierFunnel } from "@/components/onboarding/FarmTierFunnel";
 
 const QUALIFIED_STATUSES = new Set(["released", "approved"]);
 
 export default function Marketplace() {
   const { data: allBatches = [], isLoading, isError, error } = useBatches();
+  const { data: farmProducers = [], isError: farmsError } = useFarmProducers();
   const qualified = allBatches.filter((b: BatchRow) => QUALIFIED_STATUSES.has(b.status ?? "")).slice(0, 6);
+  const showPipeline = !farmsError && farmProducers.length > 0;
 
   return (
     <div className="space-y-7">
@@ -33,6 +39,18 @@ export default function Marketplace() {
           </a>
         </div>
       </section>
+
+      {showPipeline && (
+        <section className="rounded-3xl border border-emerald-300/20 bg-white/[0.045] p-6">
+          <div className="mb-4 flex items-center gap-2">
+            <Sprout className="h-4 w-4 text-emerald-300" />
+            <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-white/75">
+              Supply-Pipeline · Thailand-Farmen
+            </h2>
+          </div>
+          <FarmTierFunnel producers={farmProducers} />
+        </section>
+      )}
 
       <section className="rounded-3xl border border-white/10 bg-white/[0.045] p-6">
         <div className="mb-5 flex items-center justify-between">
@@ -92,6 +110,9 @@ export default function Marketplace() {
                     {b.status}
                   </span>
                 </div>
+                <GatekeeperProvenance
+                  provenance={deriveBatchProvenance({ status: b.status, originCountry: b.origin_country })}
+                />
                 <div className="mt-3 flex items-center justify-between text-xs text-white/55">
                   <span>{b.quantity != null ? `${b.quantity} ${b.unit ?? ""}` : "—"}</span>
                   <a

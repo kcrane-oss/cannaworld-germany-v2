@@ -1,4 +1,10 @@
 {
+  "mpProvenance": {
+    "title": "Gatekeeper-Herkunft",
+    "gacp": "GACP-Anbau",
+    "gmp": "EU-GMP-Hub",
+    "qp": "QP-Freigabe"
+  },
   "farmFunnel": {
     "title": "Thailand-Onboarding-Funnel",
     "total": "Farmen gesamt",

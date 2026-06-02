@@ -15,6 +15,16 @@ vi.mock("@/hooks/useBatches", () => ({
   }),
 }));
 
+vi.mock("@/hooks/useFarmProducers", () => ({
+  useFarmProducers: () => ({
+    data: [
+      { id: "f1", name: "Farm A", type: "farm", province: "Chiang Mai", tier: "tier_2_gacp_certified", status: "active", created_at: "2026-01-01T00:00:00Z" },
+      { id: "f2", name: "Farm B", type: "farm", province: "Chiang Rai", tier: "tier_3_hub_linked", status: "active", created_at: "2026-01-02T00:00:00Z" },
+    ],
+    isError: false,
+  }),
+}));
+
 describe("Marketplace page", () => {
   it("renders header + qualified batches only (released/approved)", () => {
     render(<Marketplace />);
@@ -36,5 +46,18 @@ describe("Marketplace page", () => {
     render(<Marketplace />);
     const link = screen.getByText(/Sample anfragen/).closest("a");
     expect(link?.getAttribute("href")?.startsWith("mailto:info@cannaworld-germany.de")).toBe(true);
+  });
+
+  it("shows the gatekeeper provenance chain on listings", () => {
+    render(<Marketplace />);
+    // English test locale; at least one listing renders the chain stages
+    expect(screen.getAllByText("GACP cultivation").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("QP release").length).toBeGreaterThan(0);
+  });
+
+  it("renders the Thailand supply pipeline when farm producers exist", () => {
+    render(<Marketplace />);
+    expect(screen.getByText(/Supply-Pipeline/)).toBeInTheDocument();
+    expect(screen.getByText(/Total farms/)).toHaveTextContent("2");
   });
 });
