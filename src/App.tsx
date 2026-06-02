@@ -10,6 +10,7 @@ import WarehousePage from "./pages/dashboard/Warehouse";
 import DocumentsPage from "./pages/dashboard/Documents";
 import Marketplace from "./pages/dashboard/Marketplace";
 import SampleRequests from "./pages/dashboard/SampleRequests";
+import SupportInbox from "./pages/dashboard/SupportInbox";
 import PharmacyImport from "./pages/dashboard/PharmacyImport";
 import AuditPassport from "./pages/dashboard/AuditPassport";
 import Analytics from "./pages/dashboard/Analytics";
@@ -141,6 +142,7 @@ const dashboardNav = [
   { key: "overview", label: "Overview", icon: LayoutDashboard, path: "/dashboard" },
   { key: "marketplace", label: "Marketplace", icon: ShoppingBag, path: "/dashboard/marketplace" },
   { key: "sample-requests", label: "Sample-Requests", icon: Inbox, path: "/dashboard/sample-requests" },
+  { key: "support-inbox", label: "Support-Inbox", icon: Inbox, path: "/dashboard/support-inbox" },
   { key: "pharmacy-import", label: "Apotheken-Import", icon: FileCheck, path: "/dashboard/pharmacy-import" },
   { key: "trade-cases", label: "Trade Cases", icon: FileCheck, path: "/dashboard/trade-cases" },
   { key: "batches", label: "Batches", icon: Package, path: "/dashboard/batches" },
@@ -179,6 +181,13 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     description: "Eingegangene B2B-Sample-Requests aus dem Marketplace mit Status-Workflow (Eingegangen → In Prüfung → Erfüllt/Abgelehnt).",
     stats: ["Strukturierter Bedarf", "B2B-bestätigt", "Status-Workflow", "Admin/Compliance"],
     actions: ["Request prüfen", "Status setzen", "Supplier koordinieren"],
+  },
+  "support-inbox": {
+    eyebrow: "Back-Office",
+    title: "Support-Inbox",
+    description: "Eingehende Partner-Konversationen (Mail/Chat über Codex) mit Zuweisung, Status- und Eskalations-Workflow. AI-Triage folgt als zuschaltbarer Layer (B2).",
+    stats: ["Conversation-Threads", "Zuweisung & Tier", "Status-Workflow", "Admin/Compliance"],
+    actions: ["Antworten", "Zuweisen", "Eskalieren"],
   },
   "pharmacy-import": {
     eyebrow: "Apotheken-Workflow",
@@ -1151,7 +1160,7 @@ function App() {
             }
           />
           {dashboardNav.slice(1).map((item) => {
-            if (["trade-cases", "qp-release", "logistics", "compliance", "regulatory", "suppliers", "batches", "warehouse", "documents", "marketplace", "sample-requests", "pharmacy-import", "audit-passport", "analytics", "batch-verification", "btm-prescriptions"].includes(item.key)) return null;
+            if (["trade-cases", "qp-release", "logistics", "compliance", "regulatory", "suppliers", "batches", "warehouse", "documents", "marketplace", "sample-requests", "support-inbox", "pharmacy-import", "audit-passport", "analytics", "batch-verification", "btm-prescriptions"].includes(item.key)) return null;
             const Body = item.key === "services" ? <GatewayServicesPreview /> : <DashboardModule moduleKey={item.key} />;
             return (
               <Route
@@ -1212,6 +1221,14 @@ function App() {
             element={
               <RoleGuard allowedRoles={["admin", "compliance"]}>
                 <SampleRequests />
+              </RoleGuard>
+            }
+          />
+          <Route
+            path="support-inbox"
+            element={
+              <RoleGuard allowedRoles={["admin", "compliance", "auditor"]}>
+                <SupportInbox />
               </RoleGuard>
             }
           />

@@ -1,4 +1,27 @@
 {
+  "support": {
+    "title": "Support-Inbox",
+    "empty": "Keine Konversationen",
+    "loadError": "Konversationen konnten nicht geladen werden",
+    "selectHint": "Konversation auswählen",
+    "noMessages": "Noch keine Nachrichten",
+    "replyPlaceholder": "Antwort an den Partner…",
+    "send": "Senden",
+    "replied": "Antwort gesendet",
+    "replyError": "Senden fehlgeschlagen",
+    "updated": "Aktualisiert",
+    "updateError": "Aktualisierung fehlgeschlagen",
+    "assignMe": "Mir zuweisen",
+    "statusLabel": "Status",
+    "tierLabel": "Stufe",
+    "filter": { "open": "Offen", "mine": "Meine", "all": "Alle" },
+    "status": {
+      "open": "Offen", "triaged": "Vorsortiert", "assigned": "Zugewiesen",
+      "waiting": "Wartet auf Partner", "resolved": "Gelöst", "closed": "Geschlossen"
+    },
+    "tier": { "0": "AI / Auto", "1": "Mitarbeiter", "2": "Spezialist", "3": "Admin" },
+    "priority": { "low": "Niedrig", "normal": "Normal", "high": "Hoch", "urgent": "Dringend" }
+  },
   "sampleAdmin": {
     "title": "Sample-Requests",
     "empty": "Keine Sample-Requests",

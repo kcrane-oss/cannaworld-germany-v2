@@ -18,3 +18,9 @@ verify_jwt = true
 
 [functions.germany-sample-request-status]
 verify_jwt = true
+
+[functions.germany-support-reply]
+verify_jwt = true
+
+[functions.germany-support-assign]
+verify_jwt = true
