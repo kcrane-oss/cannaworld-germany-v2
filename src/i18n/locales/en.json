@@ -1,4 +1,21 @@
 {
+  "sampleRequest": {
+    "cta": "Request sample",
+    "title": "B2B sample request",
+    "subtitle": "Structure your demand — CannaWorld coordinates qualified supplier, EU release and logistics. B2B / compliance intake only.",
+    "company": "Company",
+    "email": "Contact email",
+    "category": "Category",
+    "quantity": "Quantity (kg)",
+    "pathway": "Target pathway",
+    "contextLabel": "Context (optional)",
+    "b2b": "I confirm B2B context — no consumer sale, no therapeutic claims.",
+    "submit": "Send request",
+    "success": "Sample request submitted",
+    "error": "Submission failed",
+    "cat": { "flower": "Flower", "extract": "Extract", "other": "Other" },
+    "path": { "wholesale": "Wholesale (§52a AMG)", "pharmacy": "Pharmacy supply", "processing": "Processing / EU-GMP hub" }
+  },
   "mpProvenance": {
     "title": "Gatekeeper provenance",
     "gacp": "GACP cultivation",

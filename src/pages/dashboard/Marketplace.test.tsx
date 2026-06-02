@@ -29,6 +29,11 @@ vi.mock("@/hooks/useBatchProvenanceLinks", () => ({
   useBatchProvenanceLinks: () => ({ data: [], isError: false }),
 }));
 
+// SampleRequestDialog pulls in the Supabase client via sample-request-api; mock it.
+vi.mock("@/lib/sample-request-api", () => ({
+  submitSampleRequest: vi.fn().mockResolvedValue({ id: "sr-1", status: "received" }),
+}));
+
 describe("Marketplace page", () => {
   it("renders header + qualified batches only (released/approved)", () => {
     render(<Marketplace />);
@@ -46,10 +51,12 @@ describe("Marketplace page", () => {
     expect(link?.getAttribute("href")).toBe("https://cannaworld-marketplace.com");
   });
 
-  it("renders Sample-Request mailto", () => {
+  it("renders the in-app Sample-Request CTA (no mailto)", () => {
     render(<Marketplace />);
-    const link = screen.getByText(/Sample anfragen/).closest("a");
-    expect(link?.getAttribute("href")?.startsWith("mailto:info@cannaworld-germany.de")).toBe(true);
+    // English test locale → "Request sample"; it is a button, not a mailto link
+    const cta = screen.getByText("Request sample");
+    expect(cta).toBeInTheDocument();
+    expect(cta.closest("a")).toBeNull();
   });
 
   it("shows the gatekeeper provenance chain on listings", () => {

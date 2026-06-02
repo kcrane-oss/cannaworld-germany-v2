@@ -83,6 +83,28 @@ create view farm_batch_provenance as
   join   farm_producers   fp on fp.id = fbl.producer_id;
 ```
 
+### `germany_sample_requests` — In-App B2B Sample-Requests (Marktplatz)
+Befüllt **nur** über die Edge Function `germany-sample-request` (auth + rate-limit + validiert),
+nicht direkt vom Browser.
+```sql
+create table germany_sample_requests (
+  id                 uuid primary key default gen_random_uuid(),
+  requested_by       uuid,                              -- auth.uid()
+  requested_by_email text,
+  company            text not null,
+  contact_email      text not null,
+  product_category   text check (product_category in ('flower','extract','other')) not null,
+  quantity_kg        numeric not null check (quantity_kg > 0),
+  target_pathway     text check (target_pathway in ('wholesale','pharmacy_supply','processing')) not null,
+  context            text,
+  b2b_confirmed      boolean not null default false,
+  status             text not null default 'received',
+  metadata           jsonb not null default '{}',
+  created_at         timestamptz not null default now()
+);
+-- RLS: INSERT nur via Service-Role (Edge Function); SELECT für admin/compliance.
+```
+
 ### `farm_onboarding_events` — Audit-Trail der Tier-Übergänge
 ```sql
 create table farm_onboarding_events (

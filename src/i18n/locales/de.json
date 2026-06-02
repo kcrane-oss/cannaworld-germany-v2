@@ -1,4 +1,21 @@
 {
+  "sampleRequest": {
+    "cta": "Sample anfragen",
+    "title": "B2B Sample-Request",
+    "subtitle": "Bedarf strukturieren — CannaWorld koordiniert qualifizierten Supplier, EU-Release und Logistik. Reiner B2B-/Compliance-Intake.",
+    "company": "Firma",
+    "email": "Kontakt-E-Mail",
+    "category": "Kategorie",
+    "quantity": "Menge (kg)",
+    "pathway": "Ziel-Pfad",
+    "contextLabel": "Kontext (optional)",
+    "b2b": "Ich bestätige B2B-Bezug — keine Verbraucherabgabe, kein Therapieversprechen.",
+    "submit": "Anfrage senden",
+    "success": "Sample-Request übermittelt",
+    "error": "Übermittlung fehlgeschlagen",
+    "cat": { "flower": "Blüte", "extract": "Extrakt", "other": "Andere" },
+    "path": { "wholesale": "Großhandel (§52a AMG)", "pharmacy": "Apotheken-Belieferung", "processing": "Verarbeitung / EU-GMP-Hub" }
+  },
   "mpProvenance": {
     "title": "Gatekeeper-Herkunft",
     "gacp": "GACP-Anbau",

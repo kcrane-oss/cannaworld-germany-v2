@@ -1,9 +1,10 @@
 import { useBatches, type BatchRow } from "@/hooks/useBatches";
 import { useFarmProducers } from "@/hooks/useFarmProducers";
 import { useBatchProvenanceLinks } from "@/hooks/useBatchProvenanceLinks";
-import { ShoppingBag, ExternalLink, ArrowRight, Loader2, AlertTriangle, Mail, Package, Sprout } from "lucide-react";
+import { ShoppingBag, ExternalLink, ArrowRight, Loader2, AlertTriangle, Package, Sprout } from "lucide-react";
 import { deriveBatchProvenance, tierByBatchId } from "@/lib/marketplace-provenance";
 import { GatekeeperProvenance } from "@/components/marketplace/GatekeeperProvenance";
+import { SampleRequestDialog } from "@/components/marketplace/SampleRequestDialog";
 import { FarmTierFunnel } from "@/components/onboarding/FarmTierFunnel";
 
 const QUALIFIED_STATUSES = new Set(["released", "approved"]);
@@ -149,12 +150,7 @@ export default function Marketplace() {
               B2B-/Compliance-Intake.
             </p>
           </div>
-          <a
-            href="mailto:info@cannaworld-germany.de?subject=CannaWorld Germany Sample-Request"
-            className="inline-flex shrink-0 items-center gap-2 rounded-xl border border-cyan-300/40 bg-cyan-300/10 px-5 py-3 text-sm font-bold text-cyan-200 transition hover:border-cyan-200 hover:bg-cyan-300/20"
-          >
-            <Mail className="h-4 w-4" /> Sample anfragen
-          </a>
+          <SampleRequestDialog />
         </div>
       </section>
     </div>
