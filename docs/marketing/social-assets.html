@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><title>CannaWorld Social Assets</title>
+<style>
+  :root{--bg:#040b10;--cyan:#22d3ee;--emerald:#34d399;--ink:#e8fbff;--mut:#7fa8b5;--line:rgba(52,211,153,.2)}
+  *{box-sizing:border-box;margin:0}
+  body{background:#0a0a0a;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    display:flex;flex-wrap:wrap;gap:30px;padding:30px;align-items:flex-start}
+  .card{position:relative;overflow:hidden;color:var(--ink);border-radius:6px;
+    background:
+      radial-gradient(700px 500px at 80% -10%,rgba(34,211,238,.18),transparent 60%),
+      radial-gradient(600px 500px at 5% 115%,rgba(52,211,153,.16),transparent 60%),
+      var(--bg);
+    display:flex;flex-direction:column;justify-content:center;padding:64px}
+  .card::after{content:"";position:absolute;inset:0;border:1px solid var(--line);border-radius:6px;pointer-events:none}
+  .nl-cover{width:1280px;height:496px}          /* LinkedIn newsletter cover ~2.58:1 */
+  .sq{width:1080px;height:1080px}                /* IG/LINE square */
+  .li{width:1200px;height:627px}                 /* LinkedIn/FB link card 1.91:1 */
+  .brand{font-weight:800;letter-spacing:.04em;font-size:1.6rem;margin-bottom:auto}
+  .brand b{color:var(--cyan)}
+  .kick{font-size:.95rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cyan);font-weight:700;margin-bottom:20px}
+  .sq .kick,.li .kick{font-size:1.1rem}
+  h1{font-size:3.4rem;line-height:1.05;font-weight:800;
+    background:linear-gradient(100deg,#fff,var(--cyan) 55%,var(--emerald));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sq h1{font-size:4.6rem} .li h1{font-size:3.6rem}
+  p.sub{color:var(--mut);font-size:1.35rem;line-height:1.4;margin-top:22px;max-width:34ch}
+  .sq p.sub{font-size:1.7rem;max-width:24ch}
+  .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;color:var(--mut);font-size:1.05rem;font-weight:600}
+  .foot .url{color:var(--emerald)}
+  .tag{display:inline-block;padding:8px 18px;border:1px solid var(--line);border-radius:999px;color:var(--emerald);font-weight:700;font-size:1rem;margin-bottom:26px;width:fit-content}
+</style></head><body>
+
+<!-- 1) LinkedIn-Newsletter-Cover -->
+<div class="card nl-cover" id="nl-cover">
+  <div class="brand">Canna<b>World</b></div>
+  <div class="kick">Der Newsletter · 2×/Monat · B2B</div>
+  <h1>The Compliant Corridor</h1>
+  <p class="sub">Wie GMP-Cannabis prüfbar von Thailand in die EU kommt — Compliance, Dokumentation, Marktzugang.</p>
+</div>
+
+<!-- 2) Square Promo (Newsletter-Launch / LINE / IG) -->
+<div class="card sq" id="promo-square">
+  <div class="brand">Canna<b>World</b></div>
+  <span class="tag">Neuer Newsletter</span>
+  <h1>Warum Importe an der Doku&shy;mentation scheitern — nicht am Produkt.</h1>
+  <p class="sub">Der 6-Stationen-Dokumentenpfad Thailand→EU. Ausgabe #1 jetzt live.</p>
+  <div class="foot"><span>The Compliant Corridor</span><span class="url">cannaworld-thailand.com</span></div>
+</div>
+
+<!-- 3) Webinar Promo (LinkedIn/FB link card 1.91:1) -->
+<div class="card li" id="promo-webinar">
+  <div class="brand">Canna<b>World</b></div>
+  <div class="kick">Kostenloses Live-Webinar · online</div>
+  <h1>Thailand→EU Export Readiness</h1>
+  <p class="sub">Der Dokumentenpfad, der an der EU-Grenze hält — + die 5 häufigsten Stopp-Gründe. B2B.</p>
+  <div class="foot"><span>[Datum / Uhrzeit] · Anmeldung</span><span class="url">cannaworld-thailand.com/import</span></div>
+</div>
+
+<!-- 4) Lead-Magnet Promo (square) -->
+<div class="card sq" id="promo-checklist">
+  <div class="brand">Canna<b>World</b></div>
+  <span class="tag">Kostenlose Checkliste</span>
+  <h1>EU-GMP Import-Readiness Checkliste</h1>
+  <p class="sub">CoA · GMP/EU-GMP · Import&shy;genehmigung · GDP · Audit-Passport. Bist du import-ready?</p>
+  <div class="foot"><span>Für Apotheken · Großhandel · Import</span><span class="url">cannaworld-thailand.com</span></div>
+</div>
+
+</body></html>
