@@ -109,6 +109,34 @@ create table germany_sample_requests (
 -- Status-Workflow server-seitig erzwungen: received → in_review → fulfilled | declined.
 ```
 
+### `farm_audit_submissions` — Self-Service Farm-Self-Audit (Mensch-Freigabe)
+Befüllt über `germany-farm-audit-submit` (status='pending'); Freigabe über
+`germany-farm-audit-decide` (admin/compliance) → bei Approval `farm_producers` (tier_1).
+```sql
+create table farm_audit_submissions (
+  id                    uuid primary key default gen_random_uuid(),
+  submitted_by          uuid,
+  submitted_by_email    text,
+  farm_name             text not null,
+  province              text,
+  country               text not null default 'TH',
+  self_assessment_score numeric,
+  risk_score            numeric default 0,        -- aus dem Integritäts-Check
+  document_count        int default 0,
+  missing_required      text[] default '{}',
+  documents             jsonb not null default '[]',  -- UploadedDocMeta[] (Metadaten)
+  integrity             jsonb not null default '{}',  -- IntegrityReport
+  status                text check (status in ('pending','approved','rejected')) default 'pending',
+  decided_by            uuid,
+  decision_note         text,
+  decided_at            timestamptz,
+  created_at            timestamptz not null default now()
+);
+-- RLS: INSERT/UPDATE nur via Edge Functions (Service-Role); SELECT admin/compliance.
+-- HINWEIS: Der Integritäts-Check ist heuristisch (Vollständigkeit, Doppel-Datei,
+-- Format/Größe) — KEINE garantierte Fälschungserkennung; Mensch gibt frei.
+```
+
 ### `farm_onboarding_events` — Audit-Trail der Tier-Übergänge
 ```sql
 create table farm_onboarding_events (

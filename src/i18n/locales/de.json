@@ -1,4 +1,33 @@
 {
+  "farmAudit": {
+    "title": "Farm Self-Audit",
+    "intro": "Selbstregistrierung + Selbsteinschätzung + Dokumenten-Upload. Ein automatischer Integritäts-Check markiert Auffälligkeiten — die finale Freigabe trifft ein Mensch.",
+    "farmName": "Farm-Name",
+    "province": "Provinz",
+    "selfAssessment": "Selbsteinschätzung",
+    "documents": "Dokumente",
+    "upload": "Hochladen",
+    "integrity": "Integritäts-Check",
+    "risk": "Risiko",
+    "humanNote": "Heuristischer Check — die finale Freigabe trifft ein Mensch.",
+    "submit": "Zur Freigabe einreichen",
+    "submitted": "Self-Audit eingereicht — wartet auf Freigabe",
+    "submitError": "Einreichen fehlgeschlagen",
+    "doc": { "gacp_cert": "GACP-Zertifikat", "coa": "Analysenzertifikat (CoA)", "license": "Lizenz" },
+    "flag": { "missing": "Pflichtdokument fehlt", "duplicate_content": "Identische Datei mehrfach verwendet", "unexpected_format": "Unerwartetes Dateiformat", "too_small": "Datei zu klein", "too_large": "Datei zu groß" }
+  },
+  "farmReview": {
+    "title": "Farm-Freigabe",
+    "empty": "Keine Einreichungen",
+    "loadError": "Einreichungen konnten nicht geladen werden",
+    "risk": "Risiko",
+    "approve": "Freigeben",
+    "reject": "Ablehnen",
+    "approved": "Farm freigegeben",
+    "rejected": "Abgelehnt",
+    "error": "Entscheidung fehlgeschlagen",
+    "status": { "pending": "Offen", "approved": "Freigegeben", "rejected": "Abgelehnt" }
+  },
   "admin": {
     "title": "Admin-Console",
     "openConvs": "Offene Konversationen",

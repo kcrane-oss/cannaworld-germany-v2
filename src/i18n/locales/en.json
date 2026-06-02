@@ -1,4 +1,33 @@
 {
+  "farmAudit": {
+    "title": "Farm self-audit",
+    "intro": "Self-registration + self-assessment + document upload. An automatic integrity check flags anomalies — a human makes the final release.",
+    "farmName": "Farm name",
+    "province": "Province",
+    "selfAssessment": "Self-assessment",
+    "documents": "Documents",
+    "upload": "Upload",
+    "integrity": "Integrity check",
+    "risk": "Risk",
+    "humanNote": "Heuristic check — a human makes the final release.",
+    "submit": "Submit for release",
+    "submitted": "Self-audit submitted — awaiting release",
+    "submitError": "Submission failed",
+    "doc": { "gacp_cert": "GACP certificate", "coa": "Certificate of Analysis (CoA)", "license": "License" },
+    "flag": { "missing": "Required document missing", "duplicate_content": "Identical file used more than once", "unexpected_format": "Unexpected file format", "too_small": "File too small", "too_large": "File too large" }
+  },
+  "farmReview": {
+    "title": "Farm release",
+    "empty": "No submissions",
+    "loadError": "Could not load submissions",
+    "risk": "Risk",
+    "approve": "Release",
+    "reject": "Reject",
+    "approved": "Farm released",
+    "rejected": "Rejected",
+    "error": "Decision failed",
+    "status": { "pending": "Pending", "approved": "Released", "rejected": "Rejected" }
+  },
   "admin": {
     "title": "Admin console",
     "openConvs": "Open conversations",

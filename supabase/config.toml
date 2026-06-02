@@ -41,3 +41,9 @@ verify_jwt = false
 
 [functions.germany-staff-role]
 verify_jwt = true
+
+[functions.germany-farm-audit-submit]
+verify_jwt = true
+
+[functions.germany-farm-audit-decide]
+verify_jwt = true

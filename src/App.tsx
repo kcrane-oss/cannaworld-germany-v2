@@ -12,6 +12,8 @@ import Marketplace from "./pages/dashboard/Marketplace";
 import SampleRequests from "./pages/dashboard/SampleRequests";
 import SupportInbox from "./pages/dashboard/SupportInbox";
 import AdminConsole from "./pages/dashboard/AdminConsole";
+import FarmSelfAudit from "./pages/dashboard/FarmSelfAudit";
+import FarmReview from "./pages/dashboard/FarmReview";
 import PharmacyImport from "./pages/dashboard/PharmacyImport";
 import AuditPassport from "./pages/dashboard/AuditPassport";
 import Analytics from "./pages/dashboard/Analytics";
@@ -145,6 +147,8 @@ const dashboardNav = [
   { key: "sample-requests", label: "Sample-Requests", icon: Inbox, path: "/dashboard/sample-requests" },
   { key: "support-inbox", label: "Support-Inbox", icon: Inbox, path: "/dashboard/support-inbox" },
   { key: "admin-console", label: "Admin-Console", icon: ShieldCheck, path: "/dashboard/admin-console" },
+  { key: "farm-self-audit", label: "Farm Self-Audit", icon: Sparkles, path: "/dashboard/farm-self-audit" },
+  { key: "farm-review", label: "Farm-Freigabe", icon: ClipboardCheck, path: "/dashboard/farm-review" },
   { key: "pharmacy-import", label: "Apotheken-Import", icon: FileCheck, path: "/dashboard/pharmacy-import" },
   { key: "trade-cases", label: "Trade Cases", icon: FileCheck, path: "/dashboard/trade-cases" },
   { key: "batches", label: "Batches", icon: Package, path: "/dashboard/batches" },
@@ -197,6 +201,20 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     description: "Team- & Rollenverwaltung plus operativer Überblick (offene Konversationen, überfällige Fälle, Sample-Requests). Admin-only.",
     stats: ["Team & Rollen", "Ops-Überblick", "Eskalations-Sicht", "Admin-only"],
     actions: ["Rolle zuweisen", "Rolle entziehen", "Last prüfen"],
+  },
+  "farm-self-audit": {
+    eyebrow: "Self-Service",
+    title: "Farm Self-Audit",
+    description: "Selbstregistrierung + Selbsteinschätzung + Dokumenten-Upload mit automatischem Integritäts-Check. Finale Freigabe durch einen Menschen.",
+    stats: ["Selbsteinschätzung", "Dokumenten-Upload", "Integritäts-Check", "Mensch-Freigabe"],
+    actions: ["Self-Audit starten", "Dokumente hochladen", "Einreichen"],
+  },
+  "farm-review": {
+    eyebrow: "Back-Office",
+    title: "Farm-Freigabe",
+    description: "Eingereichte Farm-Self-Audits mit Selbsteinschätzungs-Score und Integritäts-Risiko prüfen und freigeben oder ablehnen.",
+    stats: ["Eingereichte Audits", "Risiko-Signale", "Score-Übersicht", "Admin/Compliance"],
+    actions: ["Prüfen", "Freigeben", "Ablehnen"],
   },
   "pharmacy-import": {
     eyebrow: "Apotheken-Workflow",
@@ -1169,7 +1187,7 @@ function App() {
             }
           />
           {dashboardNav.slice(1).map((item) => {
-            if (["trade-cases", "qp-release", "logistics", "compliance", "regulatory", "suppliers", "batches", "warehouse", "documents", "marketplace", "sample-requests", "support-inbox", "admin-console", "pharmacy-import", "audit-passport", "analytics", "batch-verification", "btm-prescriptions"].includes(item.key)) return null;
+            if (["trade-cases", "qp-release", "logistics", "compliance", "regulatory", "suppliers", "batches", "warehouse", "documents", "marketplace", "sample-requests", "support-inbox", "admin-console", "farm-self-audit", "farm-review", "pharmacy-import", "audit-passport", "analytics", "batch-verification", "btm-prescriptions"].includes(item.key)) return null;
             const Body = item.key === "services" ? <GatewayServicesPreview /> : <DashboardModule moduleKey={item.key} />;
             return (
               <Route
@@ -1246,6 +1264,22 @@ function App() {
             element={
               <RoleGuard allowedRoles={["admin"]}>
                 <AdminConsole />
+              </RoleGuard>
+            }
+          />
+          <Route
+            path="farm-self-audit"
+            element={
+              <RoleGuard allowedRoles={["farm", "admin"]}>
+                <FarmSelfAudit />
+              </RoleGuard>
+            }
+          />
+          <Route
+            path="farm-review"
+            element={
+              <RoleGuard allowedRoles={["admin", "compliance"]}>
+                <FarmReview />
               </RoleGuard>
             }
           />
