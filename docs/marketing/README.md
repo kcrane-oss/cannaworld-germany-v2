@@ -19,6 +19,7 @@ Konsumbezug. **Kein Rechtsrat** — Plattform-Policies & TH/EU-Regulatorik vor G
 | `newsletter-issue-02.md` | Newsletter Ausgabe #2 „EU-GMP vs. GMP" (voll ausformuliert) + Promo-Post + Karussell-Ableitung |
 | `newsletter-issue-03.md` | Newsletter Ausgabe #3 „QP-Freigabe entschlüsselt" (voll ausformuliert) + Promo-Post + Karussell-Ableitung |
 | `newsletter-issue-04.md` | Newsletter Ausgabe #4 „GDP-Logistik ohne Lücken" (voll ausformuliert) + Promo-Post + Karussell-Ableitung |
+| `newsletter-issue-05.md` | Newsletter Ausgabe #5 „Der Audit-Passport" (Serienfinale, voll ausformuliert) + Promo-Post + Karussell + Serien-Überblick |
 | `webinar-export-readiness.md` | Online-Webinar: Run of Show, Foliengerüst, Promo-Plan, Q&A, Follow-up-Sequenz, Compliance-Check |
 | `webinar-deck.html` | Präsentationsfertiges, eigenständiges HTML-Deck (16 Folien, offline, Pfeiltasten-Navigation) — im Browser öffnen |
 | `social-assets.html` | Newsletter-Cover + 3 Social-Promo-Karten (Newsletter / Webinar / Checkliste) im gleichen Look |
