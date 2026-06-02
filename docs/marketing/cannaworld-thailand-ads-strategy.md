@@ -18,6 +18,13 @@ Bezahlte **Cannabis-Anzeigen sind auf den großen Plattformen verboten** — auc
 | **Meta / Facebook** | ❌ verboten (Substanz, Konsum, Verkaufsabsicht) | Organische Page/Gruppen, **neutrale Ads** ohne Pflanze/THC/Heilbezug (Trade-Tech, Logistik, Compliance), Messenger-Funnel |
 | **LINE (Thailand)** | ⚠️ stark eingeschränkt, Review-pflichtig | Official Account, 1:1-Beratung, Broadcasts an Opt-in-Audience, LINE VOOM organisch |
 
+> **Präzisierung (verifiziert, Stand 2026-06, Quellen: `compliance-sources.md`):** Verboten ist
+> das **bezahlte Bewerben des Produkts** Cannabis. **Organische** (nicht bezahlte) Inhalte —
+> Aufklärung, Branchen-/B2B-Content — sind grundsätzlich erlaubt. Meta hat 6/2025 die *organische*
+> Auffindbarkeit gelockert (nicht Paid-Produktwerbung); die einzigen Paid-Ausnahmen sind
+> LegitScript-zertifiziertes CBD (v. a. USA) und Hanf in bestimmten Märkten — **kein** B2B-Medizin-
+> Cannabis-Schlupfloch. Das ändert nichts an der Strategie, schärft aber die Begründung.
+
 **Konsequenz:** Diese Strategie ist zu ~80 % **organisch + Thought Leadership + Outbound**,
 und zu ~20 % **policy-konforme bezahlte Reichweite**, bei der die Creatives bewusst die
 *Infrastruktur* bewerben (Trade-Compliance, GMP-Dokumentation, Logistik-Transparenz) — **nicht
@@ -27,7 +34,7 @@ das Produkt Cannabis**. Kein Wirkstoff-, Heil-, Sorten- oder Konsumbezug. Niemal
 - **B2B-only.** Zielgruppe: Apotheken, Großhändler, Importeure, Hersteller, QPs, Behörden-/Verbandskontakte. **Kein Endkunden-/Patienten-Targeting.**
 - **Keine therapeutischen/medizinischen Heilversprechen.** Keine Indikationen, keine Dosierung, keine "hilft bei …".
 - **Keine Sorten-/Strain-Werbung, keine THC-Werte als Verkaufsargument, keine Produktbilder von Blüten.**
-- **Thailand-Kontext beachten:** Der rechtliche Rahmen bewegt sich seit 2024/25 zurück Richtung **medizinisch/B2B**. Positionierung als seriöser, regulierter Exporteur ist genau richtig — Recreational-Konnotation strikt vermeiden.
+- **Thailand-Kontext beachten:** Der rechtliche Rahmen bewegt sich seit 2024/25 zurück Richtung **medizinisch/B2B** (ab 6/2025 ist Cannabisblüte „kontrollierte Heilpflanze", Abgabe nur auf Rezept). **Export ist nicht verboten, aber lizenzpflichtig:** Die Ministerialverordnung Nr. 2 B.E. 2569 (Royal Gazette 30.04.2026) schafft einen ausdrücklichen Export-Lizenzrahmen für Cannabisblüte. Positionierung als seriöser, *lizenzierter* Exporteur ist genau richtig — Recreational-Konnotation strikt vermeiden. (Details/Quellen: `compliance-sources.md`.)
 - Jede Behauptung muss durch Dokumente belegbar sein (CoA, GMP-Cert, Importgenehmigung).
 
 ---
@@ -194,8 +201,8 @@ angebunden — Leads dort taggen.)
 
 ## 9. Risiken & Stolperfallen
 - **Ad-Ablehnung/Account-Sperre** auf Meta/LinkedIn bei jedem Cannabis-Signal → neutrale Creatives, isolierte Ad-Assets, organisch als Rückfallebene.
-- **Thailand-Regulatorik in Bewegung** → Aussagen aktuell halten, „medizinisch/B2B/Export"-Framing strikt halten, Recreational meiden.
-- **Plattform-Policies ändern sich** → vor jedem Spend Richtlinien neu prüfen; dieses Dokument ist Strategie, kein Rechtsrat. **Rechtliche/Marktzulassungs-Prüfung (TH & EU) vor Go-live einholen.**
+- **Thailand-Regulatorik in Bewegung** → Aussagen aktuell halten, „medizinisch/B2B/lizenzierter Export"-Framing strikt halten, Recreational meiden. Export setzt die TH-Export-Lizenz (Min.-Verordnung Nr. 2 B.E. 2569) voraus.
+- **Plattform-Policies ändern sich** → vor jedem Spend Richtlinien neu prüfen; dieses Dokument ist Strategie, kein Rechtsrat. **Rechtliche/Marktzulassungs-Prüfung (TH & EU) vor Go-live einholen.** Verifizierter Faktenstand + Quellen: `compliance-sources.md`.
 
 ---
 

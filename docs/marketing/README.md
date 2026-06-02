@@ -4,9 +4,13 @@ Praxis-Paket für die B2B-Vermarktung des Korridors **Thailand → Deutschland/E
 (LinkedIn / Facebook / LINE). Alles compliance-first: B2B-only, kein Heil-/Sorten-/THC-/
 Konsumbezug. **Kein Rechtsrat** — Plattform-Policies & TH/EU-Regulatorik vor Go-live prüfen.
 
+> Die regulatorischen und plattformbezogenen Aussagen sind gegen Primär-/Fachquellen
+> verifiziert (Stand 2026-06-02) — siehe **`compliance-sources.md`**.
+
 | Datei | Inhalt |
 |---|---|
 | `cannaworld-thailand-ads-strategy.md` | Gesamtstrategie: Plattform-Realität (Cannabis-Ad-Verbote), Funnel, Kanäle, KPIs, 90-Tage-Rollout |
+| `compliance-sources.md` | Verifizierter Faktenstand + Quellen zu Plattform-Policies, EU-GMP/QP/GDP, Thailand-Export-Lizenz, DE/IT-Spezifika |
 | `profile-copy-de-en-th.md` | Fertige Profiltexte: LinkedIn (DU + Company), Facebook, LINE — DE/EN/TH |
 | `30-day-content-calendar.md` | 30-Tage-Redaktionsplan mit ausformulierten Post-Vorlagen + Recycling-Regel |
 | `lead-magnet-import-readiness.md` | EU-GMP Import-Readiness Checkliste (Lead-Magnet) |

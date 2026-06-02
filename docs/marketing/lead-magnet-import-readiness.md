@@ -47,12 +47,14 @@ Reihenfolge, in der wir im CannaWorld-Gateway prüfen.
 ## Pflichtdokumente nach Zielmarkt (Auszug, Stand Repo-Daten)
 | Markt | Mindest-Zertifizierung | Pflichtdokumente |
 |---|---|---|
-| **Deutschland (DE)** | EU-GMP | CoA · GMP-Zertifikat · Importgenehmigung |
+| **Deutschland (DE)** | EU-GMP | CoA · GMP-Zertifikat · Importgenehmigung · (zusätzl.: GACP-Anbau, §72 AMG Einfuhrerlaubnis, MedCanG §4 BfArM-Erlaubnis) |
 | **EU (allg.)** | EU-GMP / GMP | CoA · GMP-Zertifikat · Importgenehmigung · Produktspezifikation |
-| **Italien (Beispiel Sonderfall)** | EU-GMP | + AIFA-Genehmigung · Facharzt-Verschreibung · ministerielle Chargenfreigabe · THC in mg/g auf Etikett |
+| **Italien (Beispiel Sonderfall)** | EU-GMP | + AIFA **und** Narkotika-Behörde des Gesundheitsministeriums (DPR 309/1990) · Facharzt-Verschreibung/Therapieplan · magistrale Apothekenzubereitung |
 
 > Vollständige, aktuelle Anforderungen je Markt: im CannaWorld-Gateway hinterlegt.
-> Länderlisten ändern sich — vor Versand verifizieren.
+> Länderlisten ändern sich — vor Versand verifizieren. Verifizierter Faktenstand + Quellen:
+> `compliance-sources.md`. (DE: 2025 hat BfArM die EU-GMP-Prüfung verschärft; je nach
+> Einstufung als Wirkstoff gab es historisch Landesunterschiede.)
 
 ---
 
