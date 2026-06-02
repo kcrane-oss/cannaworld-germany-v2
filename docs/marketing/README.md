@@ -15,6 +15,7 @@ Konsumbezug. **Kein Rechtsrat** — Plattform-Policies & TH/EU-Regulatorik vor G
 | `30-day-content-calendar.md` | 30-Tage-Redaktionsplan mit ausformulierten Post-Vorlagen + Recycling-Regel |
 | `lead-magnet-import-readiness.md` | EU-GMP Import-Readiness Checkliste (Lead-Magnet) |
 | `outbound-templates.md` | Vorlagen: LinkedIn-Sequenz, LINE, Messenger, Cold-E-Mail, Webinar |
+| `faq-objection-handling.md` | Einwand-Behandlung & FAQ für Gespräche/DMs: Vertrauen, Bedarf/Timing, Compliance, Preis, heikle Fragen sauber abgrenzen |
 | `newsletter-issue-01.md` | LinkedIn-Newsletter „The Compliant Corridor", Ausgabe #1 (voll ausformuliert) + Setup + Promo-Post |
 | `newsletter-issue-02.md` | Newsletter Ausgabe #2 „EU-GMP vs. GMP" (voll ausformuliert) + Promo-Post + Karussell-Ableitung |
 | `newsletter-issue-03.md` | Newsletter Ausgabe #3 „QP-Freigabe entschlüsselt" (voll ausformuliert) + Promo-Post + Karussell-Ableitung |
