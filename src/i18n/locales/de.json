@@ -1,5 +1,21 @@
 {
+  "admin": {
+    "title": "Admin-Console",
+    "openConvs": "Offene Konversationen",
+    "overdue": "Überfällig",
+    "openSamples": "Offene Sample-Requests",
+    "team": "Team",
+    "teamRoles": "Team & Rollen",
+    "loadError": "Team konnte nicht geladen werden",
+    "empty": "Keine Team-Mitglieder",
+    "roleUpdated": "Rolle aktualisiert",
+    "roleError": "Rollenänderung fehlgeschlagen",
+    "removeRole": "Rolle entfernen",
+    "addRoleLabel": "Rolle hinzufügen",
+    "add": "Hinzufügen"
+  },
   "support": {
+    "overdue": "Überfällig",
     "title": "Support-Inbox",
     "empty": "Keine Konversationen",
     "loadError": "Konversationen konnten nicht geladen werden",

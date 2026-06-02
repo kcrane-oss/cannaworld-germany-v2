@@ -1,5 +1,21 @@
 {
+  "admin": {
+    "title": "Admin console",
+    "openConvs": "Open conversations",
+    "overdue": "Overdue",
+    "openSamples": "Open sample requests",
+    "team": "Team",
+    "teamRoles": "Team & roles",
+    "loadError": "Could not load team",
+    "empty": "No team members",
+    "roleUpdated": "Role updated",
+    "roleError": "Role change failed",
+    "removeRole": "Remove role",
+    "addRoleLabel": "Add role",
+    "add": "Add"
+  },
   "support": {
+    "overdue": "Overdue",
     "title": "Support inbox",
     "empty": "No conversations",
     "loadError": "Could not load conversations",

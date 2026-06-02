@@ -24,3 +24,20 @@ verify_jwt = true
 
 [functions.germany-support-assign]
 verify_jwt = true
+
+# Codex-facing (service-to-service via CODEX_SERVICE_TOKEN) — no user JWT.
+[functions.germany-support-inbound]
+verify_jwt = false
+
+[functions.germany-support-outbound]
+verify_jwt = false
+
+[functions.germany-support-outbound-ack]
+verify_jwt = false
+
+# Triage authenticates itself (Codex token OR staff JWT).
+[functions.germany-support-triage]
+verify_jwt = false
+
+[functions.germany-staff-role]
+verify_jwt = true

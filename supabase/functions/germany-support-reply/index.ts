@@ -62,7 +62,7 @@ Deno.serve(async (req) => {
       .eq("id", conversationId);
 
     return json(req, { message_id: (inserted as { id?: string } | null)?.id ?? null });
-  } catch (_error) {
+  } catch {
     return json(req, { error: "internal_error" }, 500);
   }
 });

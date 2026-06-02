@@ -62,7 +62,7 @@ Deno.serve(async (req) => {
     if (updErr) return json(req, { error: "update_failed" }, 500);
 
     return json(req, { id: conversationId });
-  } catch (_error) {
+  } catch {
     return json(req, { error: "internal_error" }, 500);
   }
 });

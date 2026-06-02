@@ -11,6 +11,7 @@ import DocumentsPage from "./pages/dashboard/Documents";
 import Marketplace from "./pages/dashboard/Marketplace";
 import SampleRequests from "./pages/dashboard/SampleRequests";
 import SupportInbox from "./pages/dashboard/SupportInbox";
+import AdminConsole from "./pages/dashboard/AdminConsole";
 import PharmacyImport from "./pages/dashboard/PharmacyImport";
 import AuditPassport from "./pages/dashboard/AuditPassport";
 import Analytics from "./pages/dashboard/Analytics";
@@ -143,6 +144,7 @@ const dashboardNav = [
   { key: "marketplace", label: "Marketplace", icon: ShoppingBag, path: "/dashboard/marketplace" },
   { key: "sample-requests", label: "Sample-Requests", icon: Inbox, path: "/dashboard/sample-requests" },
   { key: "support-inbox", label: "Support-Inbox", icon: Inbox, path: "/dashboard/support-inbox" },
+  { key: "admin-console", label: "Admin-Console", icon: ShieldCheck, path: "/dashboard/admin-console" },
   { key: "pharmacy-import", label: "Apotheken-Import", icon: FileCheck, path: "/dashboard/pharmacy-import" },
   { key: "trade-cases", label: "Trade Cases", icon: FileCheck, path: "/dashboard/trade-cases" },
   { key: "batches", label: "Batches", icon: Package, path: "/dashboard/batches" },
@@ -188,6 +190,13 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     description: "Eingehende Partner-Konversationen (Mail/Chat über Codex) mit Zuweisung, Status- und Eskalations-Workflow. AI-Triage folgt als zuschaltbarer Layer (B2).",
     stats: ["Conversation-Threads", "Zuweisung & Tier", "Status-Workflow", "Admin/Compliance"],
     actions: ["Antworten", "Zuweisen", "Eskalieren"],
+  },
+  "admin-console": {
+    eyebrow: "Back-Office",
+    title: "Admin-Console",
+    description: "Team- & Rollenverwaltung plus operativer Überblick (offene Konversationen, überfällige Fälle, Sample-Requests). Admin-only.",
+    stats: ["Team & Rollen", "Ops-Überblick", "Eskalations-Sicht", "Admin-only"],
+    actions: ["Rolle zuweisen", "Rolle entziehen", "Last prüfen"],
   },
   "pharmacy-import": {
     eyebrow: "Apotheken-Workflow",
@@ -1160,7 +1169,7 @@ function App() {
             }
           />
           {dashboardNav.slice(1).map((item) => {
-            if (["trade-cases", "qp-release", "logistics", "compliance", "regulatory", "suppliers", "batches", "warehouse", "documents", "marketplace", "sample-requests", "support-inbox", "pharmacy-import", "audit-passport", "analytics", "batch-verification", "btm-prescriptions"].includes(item.key)) return null;
+            if (["trade-cases", "qp-release", "logistics", "compliance", "regulatory", "suppliers", "batches", "warehouse", "documents", "marketplace", "sample-requests", "support-inbox", "admin-console", "pharmacy-import", "audit-passport", "analytics", "batch-verification", "btm-prescriptions"].includes(item.key)) return null;
             const Body = item.key === "services" ? <GatewayServicesPreview /> : <DashboardModule moduleKey={item.key} />;
             return (
               <Route
@@ -1229,6 +1238,14 @@ function App() {
             element={
               <RoleGuard allowedRoles={["admin", "compliance", "auditor"]}>
                 <SupportInbox />
+              </RoleGuard>
+            }
+          />
+          <Route
+            path="admin-console"
+            element={
+              <RoleGuard allowedRoles={["admin"]}>
+                <AdminConsole />
               </RoleGuard>
             }
           />

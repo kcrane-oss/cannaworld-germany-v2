@@ -1,8 +1,9 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
-import { Inbox, Loader2, AlertTriangle, Send, UserCheck } from "lucide-react";
+import { Inbox, Loader2, AlertTriangle, Send, UserCheck, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { evaluateEscalation } from "@/lib/escalation";
 import { useAuth } from "@/hooks/useAuth";
 import { useSupportConversations, type SupportConversationRow } from "@/hooks/useSupportConversations";
 import { useSupportMessages, type SupportMessageRow } from "@/hooks/useSupportMessages";
@@ -127,6 +128,7 @@ export default function SupportInbox() {
             {filtered.map((c: SupportConversationRow) => {
               const status = (c.status ?? "open") as SupportStatus;
               const label = SUPPORT_STATUS_LABELS[status] ?? { key: "", de: status };
+              const esc = evaluateEscalation({ status: c.status, tier: c.tier, priority: c.priority, updatedAt: c.updated_at });
               return (
                 <button
                   key={c.id}
@@ -138,7 +140,14 @@ export default function SupportInbox() {
                 >
                   <div className="flex items-center justify-between gap-2">
                     <span className="truncate text-sm font-bold text-white">{c.subject ?? "—"}</span>
-                    <span className="shrink-0 text-[10px] uppercase text-white/45">{c.channel}</span>
+                    <span className="flex shrink-0 items-center gap-1.5">
+                      {esc.overdue && (
+                        <span className="inline-flex items-center gap-0.5 rounded-full border border-red-300/30 bg-red-400/10 px-1.5 py-0.5 text-[9px] font-bold uppercase text-red-300">
+                          <Clock className="h-2.5 w-2.5" /> {t("support.overdue", "Überfällig")}
+                        </span>
+                      )}
+                      <span className="text-[10px] uppercase text-white/45">{c.channel}</span>
+                    </span>
                   </div>
                   <div className="mt-1 flex items-center gap-2 text-[10px] text-white/50">
                     <span className="rounded-full border border-white/15 bg-white/5 px-1.5 py-0.5">{t(label.key, label.de)}</span>
