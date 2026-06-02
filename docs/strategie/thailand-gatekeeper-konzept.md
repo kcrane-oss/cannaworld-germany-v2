@@ -5,6 +5,12 @@
 > (Thailand + DE/EU) einholen. B2B-only, compliance-first — keine Verbraucher-,
 > Heilungs- oder Wirkversprechen in der Außendarstellung.
 > **Stand:** 2026-06
+>
+> **Validierung:** Die harten regulatorischen Aussagen wurden über einen Multi-Quellen-
+> Deep-Research-Lauf gegengeprüft — siehe `quellen-validierung.md` (Verdikte + Quellen).
+> Inline-Marker: ✅ belegt · 🟡 belegt mit Nuance · ⚠️ Annahme/Extrapolation · ⛔ anwaltlich
+> zu klären. Methodik-Vorbehalt: Belege aus quergeprüften Such-Auszügen der Primärquellen
+> (direkter Seitenabruf war geblockt) — Statut-Wortlaute hochkonfident, nicht verbatim.
 
 ---
 
@@ -30,18 +36,28 @@ getrennte Qualitäts-Layer:
 
 | Stufe | Tätigkeit | Geforderter Standard | Wer trägt die Last |
 |---|---|---|---|
-| **Anbau & Ernte** | Aussaat, Kultivierung, Ernte, Trocknung (Feld) | **GACP** (EMA/HMPC) — *hier passt Thai GACP als Basis* | Farm |
-| **Verarbeitung & Freigabe** | Trimmen, Bestrahlung, Mahlen, QC-Labor, Verpackung, Chargenzertifizierung | **EU-GMP** (Part II Wirkstoff) | Zentrales Verarbeitungs-/QC-Werk |
-| **EU-Import & Marktfreigabe** | Einfuhr, Re-Testing, Chargenfreigabe durch **QP** | **MIA/Herstellungs- & Einfuhrerlaubnis + Qualified Person** | EU-Importeur |
-| **Betäubungsmittel-/Narkotika-Kontrolle** | Export-/Import-Genehmigungen | Thai FDA/ONCB Export-Permit ↔ **BfArM/Bundesopiumstelle** Einfuhrgenehmigung (MedCanG) | beide Seiten |
+| **Anbau & Ernte** ✅ | Aussaat, Kultivierung, Ernte, Trocknung (Feld) | **GACP** (EMA/HMPC, EMEA/HMPC/246816/2005 Rev.1) — *hier passt Thai GACP als Basis* | Farm |
+| **Verarbeitung & Freigabe** ✅ | Trimmen, Bestrahlung, Mahlen, QC-Labor, Verpackung, Chargenzertifizierung | **EU-GMP** (EudraLex Annex 7; Part II Wirkstoff) | Zentrales Verarbeitungs-/QC-Werk |
+| **EU-Import & Marktfreigabe** ✅ | Einfuhr, Re-Testing, Chargenfreigabe durch **QP** | **MIA + QP** (RL 2001/83/EG; Annex 16: Voll-Re-Test mangels MRA) | EU-Importeur |
+| **Export-/Einfuhr-Kontrolle** 🟡 | Export-/Import-Genehmigungen | TH: **geschichtet** — Blüte über DTAM (Section 46) + Thai FDA, Extrakte >0,2 % THC über FDA/ONCB ↔ DE: **BfArM** Einfuhrerlaubnis (§§12/14 MedCanG, Verfahren via BtMAHV) | beide Seiten |
+
+> 🟡 **Thailand-Status aktualisiert (Stand 06/2026):** Cannabis wurde 2022 von der Narkotika-Liste
+> gestrichen (Extrakte >0,2 % THC bleiben kontrolliert), **seit 25.06.2025** ist die Blüte aber
+> ein **„controlled herb"** unter dem Thai-Traditional-Medicine-Act → **verschreibungspflichtig,
+> medizinisch-only**. Export bleibt **lizenziert für medizinisch/wissenschaftlich** zulässig
+> (Ministerialverordnung 30.04.2026). Detail + Quellen: `quellen-validierung.md` §2.
 
 **Konsequenz für die Strategie:**
-- **Thai GACP** (vom *Department of Thai Traditional and Alternative Medicine*, DTAM) bringt
+- **Thai GACP** 🟡 (vom *Department of Thai Traditional and Alternative Medicine*, DTAM — DTAM
+  **erkennt Äquivalente an**: Organic Thailand, EU-GMP, GLOBAL GAP, IFOAM, DOA-Herbal-GAP) bringt
   uns die **Anbaustufe** sauber und ist **schnell + günstig skalierbar** → genau das richtige
   Werkzeug, um *viele Farmen schnell* an Bord zu holen.
-- Aber Thai GACP ≠ EU-GMP. Die EU-Tür öffnet erst die **GMP-Schicht** (Verarbeitung/Freigabe)
+- Aber Thai GACP ≠ EU-GMP ✅. Die EU-Tür öffnet erst die **GMP-Schicht** (Verarbeitung/Freigabe)
   + **QP-Chargenfreigabe** in der EU. Das ist teuer und langsam — also **zentralisieren** wir
   sie, statt sie jeder Farm aufzubürden.
+- ⚠️ **Realer Engpass:** Ende 2025 gab es in TH nur **~149 GACP-zertifizierte Farmen** (bei
+  ~11.800 Lizenznehmern). „Viele Farmen schnell" heißt daher v. a. **GACP-Zertifizierung
+  beschleunigen**, nicht nur registrieren.
 
 → **Das ist der Hebel des gesamten Konzepts** (siehe Weg A, Hub-&-Spoke).
 
@@ -69,18 +85,23 @@ Was wir **nicht** behaupten dürfen, bevor wir es sind: „akkreditiert", „GMP
 Drei Vertrauens-Layer, die wir uns am Anfang einkaufen und später internalisieren:
 
 ### 4.1 OneCert — der Agrar-/GACP-Layer (schnell, on-the-ground in Asien)
-- Stärke: **Bio-/GACP-/GlobalGAP-artige Zertifizierung**, Gruppen-/Cluster-Zertifizierung,
-  vorhandene Auditoren in Süd-/Südostasien.
+- Stärke 🟡: **Bio-Zertifizierung** (USDA-NOP, NPOP, JAS) ✅, **GACP** (WHO-GACP, Heil-/Aromapflanzen) ✅
+  und **Gruppen-/Cluster-Zertifizierung mit ICS** ✅ (zertifiziert lt. eigener Angabe 24 Grower
+  Groups außerhalb Indiens). Sitz Jaipur/Indien; ⚠️ Südostasien-Präsenz nicht separat belegt,
+  ⚠️ **cannabis-spezifisches** GACP nicht explizit ausgewiesen (vorab anfragen).
 - Rolle bei uns: **Farm-Level-Audits + GACP/Bio-Zertifikate**, vor allem die
   **Gruppen-Zertifizierung** für Kooperativen (→ viele Farmen mit *einem* Dach-Audit).
 - Warum zuerst: günstig, schnell, skaliert horizontal über viele Farmen.
 
-### 4.2 TÜV (SÜD / Rheinland / NORD) — der Pharma-/GMP-Layer (EU-anerkanntes Vertrauen)
-- Stärke: **GMP-Readiness-Audits, Werks-Qualifizierung, ISO, Lieferanten-Qualifizierung** —
-  ein Name, dem EU-Apotheken & Großhändler sofort vertrauen.
+### 4.2 TÜV (SÜD) + cannabis-spezifische Zertifizierer — der Pharma-/GMP-Layer
+- TÜV SÜD ✅: belegt **Pharma-GMP-Audits + Lieferanten-Qualifizierung** — ein Name, dem EU-Apotheken
+  & Großhändler vertrauen. ⚠️ **GACP-(Cannabis-)Audits sind für TÜV nicht belegt.**
+- 🟡 **Korrektur:** Die etablierten **cannabis-spezifischen GACP/GMP-Zertifizierer sind
+  SGS, Control Union (CUMCS) und Q-Cert** — TÜV ist es nach aktueller Recherche *nicht*. Für den
+  GACP-Audit-Layer also **SGS/Control Union als primäre Kandidaten** prüfen; TÜV für GMP-Readiness/
+  Werks-Qualifizierung des Hubs.
 - Rolle bei uns: **Audit & Qualifizierung des zentralen Verarbeitungs-/QC-Werks (Hub)**,
   GMP-Gap-Assessments, Begleitung Richtung EU-GMP-Zertifikat.
-- Warum: TÜV liefert die **pharmazeutische Glaubwürdigkeit**, die OneCert (Agrar) nicht abdeckt.
 
 ### 4.3 EU-GMP-Importeur mit QP — der Marktzugangs-Layer (sofortiger Türöffner)
 - Ein bestehender deutscher **MIA-/QP-Inhaber** macht die **Chargenfreigabe in der EU**,
@@ -114,6 +135,12 @@ Nicht *ein* Weg — ein **Portfolio**. Empfehlung: **A + B + C parallel** fahren
   **Gruppen-Zertifizierung** (wie bei Bio-Gruppenzertifikaten) über OneCert.
 - Ein Dach-Audit deckt einen ganzen Cluster ab → Dutzende Farmen pro Audit-Zyklus.
 - Passt kulturell/strukturell zur thailändischen Klein-Farm-Landschaft.
+- ⚠️ **Kritische Annahme (vor Skalierung verbindlich klären):** Gruppen-/ICS-Zertifizierung ist
+  **für Bio formal etabliert** (IFOAM, EU-Öko-VO 2018/848, √N-Stichprobe), aber eine formale
+  **ICS-Gruppenroute für Medizinal-Cannabis-GACP ist nicht dokumentiert** — GACP-Cannabis wird
+  bislang **per Standort** zertifiziert. Weg B steht und fällt damit: vorab mit Zertifizierer
+  (OneCert / Control Union) klären, ob Gruppen-GACP für Cannabis akzeptiert wird. Sonst Fallback
+  auf Weg F (Master-Umbrella) oder Einzel-GACP.
 
 ### Weg C — Piggyback auf bestehenden EU-GMP-Importeur (Time-to-Market)
 - Partner-MIA/QP macht heute schon Freigabe → **erster Umsatz, während** A/B aufgebaut werden.
@@ -171,11 +198,18 @@ Zwei Vorlagen liegen unter `docs/strategie/vorlagen/`:
 - **Standard-Verwechslung:** Thai GACP ≠ EU-GMP nicht verschleiern — sonst Glaubwürdigkeits-
   und Haftungsrisiko gegenüber EU-Käufern. Immer transparent kommunizieren, welcher Layer
   von wem getragen wird.
-- **Narkotika-/Export-Recht:** Thai Export-Permit (FDA/ONCB) + deutsche Einfuhrgenehmigung
-  (BfArM/Bundesopiumstelle, MedCanG-Regime seit 2024) sind **harte Tür-Voraussetzungen** —
-  ohne sie kein Gramm legal in der EU.
-- **Bestrahlung & Re-Testing:** QP-Chargenfreigabe in der EU verlangt Identitäts-/Voll-Retest;
-  Bestrahlungsakzeptanz vorab klären.
+- **Export-/Einfuhr-Recht 🟡:** TH-Exportlizenz **geschichtet** (Blüte: DTAM/Section 46 + Thai FDA;
+  Extrakte >0,2 % THC: FDA/ONCB, ausländische Firmen ausgeschlossen) + deutsche Einfuhrerlaubnis
+  (BfArM, §§12/14 MedCanG via BtMAHV) sind **harte Tür-Voraussetzungen**. DE-Erlaubnis-Stack:
+  §4 MedCanG + §52a/§72/§13 AMG + DAB-Cannabisblüten-Monographie. ⛔ Welche TH-Behörde die
+  Exportlizenz *formal* ausstellt (DTAM vs. FDA), ist quellenuneinheitlich — anwaltlich klären.
+- **Regulatorische Volatilität (neu, wichtig):**
+  - **TH:** kein einheitliches Cannabis-Gesetz; Regime = Ministerialverordnungen, Blüte seit
+    06/2025 verschreibungspflichtig/medizinisch-only → Verträge **mit Regulatory-Change-Klausel**.
+  - **DE:** Kabinettsentwurf 08/2025 verschärft (Arzt-Präsenzpflicht, **Versandhandelsverbot für
+    Blüten**) — bleibt im MedCanG, Stand 06/2026 noch nicht in Kraft, aber im Verfahren beobachten.
+- **Bestrahlung & Re-Testing ✅:** QP-Chargenfreigabe in der EU verlangt Identitäts-/Voll-Retest
+  (Annex 16, mangels MRA); Bestrahlungsakzeptanz vorab klären.
 - **Marketing-Compliance:** B2B-only, keine Heil-/Wirkversprechen, keine Sortenwerbung
   (deckt sich mit `CLAUDE.md`-Vorgaben dieses Repos).
 - **Datenschutz/RLS:** Farm- und Charge-Dossiers laufen über die geteilte Supabase-Plattform —

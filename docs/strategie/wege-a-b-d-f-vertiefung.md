@@ -50,6 +50,12 @@ nutze **Gruppen-Zertifizierung** mit einem **Internen Kontrollsystem (ICS)** —
 Modell, das im Bio-Bereich Tausende Smallholder unter *ein* Zertifikat bringt. OneCert
 kann Gruppen-/ICS-Zertifizierung.
 
+> ⚠️ **Validierungs-Flag (siehe `quellen-validierung.md` §2, Claim 10):** Das ICS-/Gruppen-Modell
+> ist **für Bio formal etabliert** (IFOAM, EU-Öko-VO 2018/848, √N-Stichprobe). Eine formale
+> **ICS-Gruppenroute speziell für Medizinal-Cannabis-GACP ist jedoch nicht dokumentiert** — GACP-
+> Cannabis wird bislang per Standort zertifiziert. Die Übertragung ist **plausibel, aber Annahme**.
+> Vor dem Skalieren mit dem Zertifizierer (OneCert / Control Union) verbindlich bestätigen.
+
 ### Wie Gruppen-Zertifizierung funktioniert
 1. Die Kooperative betreibt ein **ICS**: eigene interne Inspektoren prüfen **jede** Mitgliedsfarm jährlich gegen die GACP-SOPs.
 2. Die externe Stelle (OneCert) **auditiert das ICS** + zieht eine **Stichprobe** der Farmen (Wurzel-aus-N-Logik).
