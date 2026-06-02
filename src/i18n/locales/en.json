@@ -1,4 +1,19 @@
 {
+  "farmFunnel": {
+    "title": "Thailand onboarding funnel",
+    "total": "Total farms",
+    "tier0": "Registered",
+    "tier1": "GACP-ready",
+    "tier2": "GACP-certified",
+    "tier3": "Hub-linked",
+    "gate": {
+      "selfAssessment": "Self-assessment above threshold",
+      "preAudit": "Remote pre-audit passed",
+      "gacpCert": "Valid GACP certificate on file",
+      "supplyAgreement": "Supply / quality assurance agreement",
+      "hubGmp": "Linked to an EU-GMP-certified hub"
+    }
+  },
   "batches": {
     "batchNumber": "Batch / Case"
   },

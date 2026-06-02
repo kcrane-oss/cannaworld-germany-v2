@@ -1,4 +1,19 @@
 {
+  "farmFunnel": {
+    "title": "Thailand-Onboarding-Funnel",
+    "total": "Farmen gesamt",
+    "tier0": "Registriert",
+    "tier1": "GACP-bereit",
+    "tier2": "GACP-zertifiziert",
+    "tier3": "Hub-angebunden",
+    "gate": {
+      "selfAssessment": "Selbsteinschätzung über Schwellenwert",
+      "preAudit": "Remote-Pre-Audit bestanden",
+      "gacpCert": "Gültiges GACP-Zertifikat hinterlegt",
+      "supplyAgreement": "Liefer-/Qualitätssicherungsvertrag",
+      "hubGmp": "Anbindung an EU-GMP-zertifizierten Hub"
+    }
+  },
   "batches": {
     "batchNumber": "Charge / Vorgang"
   },
