@@ -1,5 +1,27 @@
 import { describe, it, expect } from "vitest";
-import { deriveBatchProvenance, isThailandOrigin } from "./marketplace-provenance";
+import {
+  deriveBatchProvenance,
+  isThailandOrigin,
+  tierByBatchId,
+  type BatchTierLink,
+} from "./marketplace-provenance";
+
+describe("tierByBatchId", () => {
+  it("builds a batch_id → tier lookup", () => {
+    const links: BatchTierLink[] = [
+      { batch_id: "1", producer_tier: "tier_2_gacp_certified" },
+      { batch_id: "2", producer_tier: "tier_3_hub_linked" },
+    ];
+    const map = tierByBatchId(links);
+    expect(map.get("1")).toBe("tier_2_gacp_certified");
+    expect(map.get("2")).toBe("tier_3_hub_linked");
+    expect(map.get("missing")).toBeUndefined();
+  });
+
+  it("returns an empty map for no links", () => {
+    expect(tierByBatchId([]).size).toBe(0);
+  });
+});
 
 describe("isThailandOrigin", () => {
   it("matches Thailand variants case-insensitively", () => {

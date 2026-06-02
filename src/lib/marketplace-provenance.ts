@@ -22,6 +22,17 @@ export interface BatchProvenance {
   summary: "qualified" | "in_review" | "unknown";
 }
 
+/** A batch's link to the tier of its originating farm producer (Weg D). */
+export interface BatchTierLink {
+  batch_id: string;
+  producer_tier: FarmTier | null;
+}
+
+/** Build a batch_id → tier lookup from the links (empty when none). */
+export function tierByBatchId(links: BatchTierLink[]): Map<string, FarmTier | null> {
+  return new Map(links.map((l) => [l.batch_id, l.producer_tier]));
+}
+
 const THAILAND = new Set(["th", "tha", "thailand"]);
 
 export function isThailandOrigin(origin: string | null): boolean {

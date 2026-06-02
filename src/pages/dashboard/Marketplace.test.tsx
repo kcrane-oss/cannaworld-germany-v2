@@ -25,6 +25,10 @@ vi.mock("@/hooks/useFarmProducers", () => ({
   }),
 }));
 
+vi.mock("@/hooks/useBatchProvenanceLinks", () => ({
+  useBatchProvenanceLinks: () => ({ data: [], isError: false }),
+}));
+
 describe("Marketplace page", () => {
   it("renders header + qualified batches only (released/approved)", () => {
     render(<Marketplace />);

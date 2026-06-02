@@ -1,7 +1,8 @@
 import { useBatches, type BatchRow } from "@/hooks/useBatches";
 import { useFarmProducers } from "@/hooks/useFarmProducers";
+import { useBatchProvenanceLinks } from "@/hooks/useBatchProvenanceLinks";
 import { ShoppingBag, ExternalLink, ArrowRight, Loader2, AlertTriangle, Mail, Package, Sprout } from "lucide-react";
-import { deriveBatchProvenance } from "@/lib/marketplace-provenance";
+import { deriveBatchProvenance, tierByBatchId } from "@/lib/marketplace-provenance";
 import { GatekeeperProvenance } from "@/components/marketplace/GatekeeperProvenance";
 import { FarmTierFunnel } from "@/components/onboarding/FarmTierFunnel";
 
@@ -10,8 +11,12 @@ const QUALIFIED_STATUSES = new Set(["released", "approved"]);
 export default function Marketplace() {
   const { data: allBatches = [], isLoading, isError, error } = useBatches();
   const { data: farmProducers = [], isError: farmsError } = useFarmProducers();
+  const { data: provenanceLinks = [], isError: linksError } = useBatchProvenanceLinks();
   const qualified = allBatches.filter((b: BatchRow) => QUALIFIED_STATUSES.has(b.status ?? "")).slice(0, 6);
   const showPipeline = !farmsError && farmProducers.length > 0;
+  // Real per-batch farm tier (Weg D) when the link table exists; empty otherwise
+  // so deriveBatchProvenance falls back to status inference.
+  const tierMap = linksError ? new Map() : tierByBatchId(provenanceLinks);
 
   return (
     <div className="space-y-7">
@@ -111,7 +116,11 @@ export default function Marketplace() {
                   </span>
                 </div>
                 <GatekeeperProvenance
-                  provenance={deriveBatchProvenance({ status: b.status, originCountry: b.origin_country })}
+                  provenance={deriveBatchProvenance({
+                    status: b.status,
+                    originCountry: b.origin_country,
+                    producerTier: tierMap.get(b.id) ?? null,
+                  })}
                 />
                 <div className="mt-3 flex items-center justify-between text-xs text-white/55">
                   <span>{b.quantity != null ? `${b.quantity} ${b.unit ?? ""}` : "—"}</span>
