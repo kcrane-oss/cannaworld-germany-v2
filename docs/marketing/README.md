@@ -23,6 +23,10 @@ Konsumbezug. **Kein Rechtsrat** — Plattform-Policies & TH/EU-Regulatorik vor G
 | `webinar-export-readiness.md` | Online-Webinar: Run of Show, Foliengerüst, Promo-Plan, Q&A, Follow-up-Sequenz, Compliance-Check |
 | `webinar-deck.html` | Präsentationsfertiges, eigenständiges HTML-Deck (16 Folien, offline, Pfeiltasten-Navigation) — im Browser öffnen |
 | `social-assets.html` | Newsletter-Cover + 3 Social-Promo-Karten (Newsletter / Webinar / Checkliste) im gleichen Look |
+| `operating-plan-budget-roles.md` | Umsetzungsplan: 3 Betriebsmodelle, Rollen, Tooling mit Budget, Zeitaufwand, Compliance-Gate |
+| `tracking-crm-setup.md` | UTM-Schema, HubSpot-Feldschema, Pipeline-Stufen, KPI-Zielwerte, Reporting-Rhythmus |
+| `partner-onepager-pitch.md` | One-Pager, Partner-Pitch-Deck-Outline, Firmen-Boilerplate, E-Mail-Signatur |
+| `events-pr-partnerships.md` | Event-Landschaft, Teilnahme-Stufen, PR/Thought-Leadership, Partnerschaften, Event-Funnel |
 
 ## Grafiken & Vorschauen (Render)
 Die `*.html`-Dateien sind die **Single Source of Truth**. PNG-Vorschauen werden daraus
