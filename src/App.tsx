@@ -942,6 +942,14 @@ const sidebarGroups = [
     label: "Analyse & Services",
     keys: ["analytics", "services"],
   },
+  {
+    label: "Onboarding",
+    keys: ["farm-self-audit"],
+  },
+  {
+    label: "Back-Office",
+    keys: ["sample-requests", "support-inbox", "farm-review", "admin-console"],
+  },
 ] as const;
 
 function DashboardLayout() {
@@ -1559,9 +1567,10 @@ function App() {
           <Route
             path="farm-self-audit"
             element={
-              <RoleGuard allowedRoles={["farm", "admin"]}>
-                <FarmSelfAudit />
-              </RoleGuard>
+              // Open to any authenticated user — free self-onboarding. The
+              // submission is created as 'pending' and grants no privilege; the
+              // real gate is the human release in Farm-Freigabe (germany-farm-audit-decide).
+              <FarmSelfAudit />
             }
           />
           <Route
