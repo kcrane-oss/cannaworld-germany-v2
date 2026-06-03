@@ -1,4 +1,123 @@
 {
+  "farmAudit": {
+    "title": "Farm self-audit",
+    "intro": "Self-registration + self-assessment + document upload. An automatic integrity check flags anomalies — a human makes the final release.",
+    "farmName": "Farm name",
+    "province": "Province",
+    "selfAssessment": "Self-assessment",
+    "documents": "Documents",
+    "upload": "Upload",
+    "integrity": "Integrity check",
+    "risk": "Risk",
+    "humanNote": "Heuristic check — a human makes the final release.",
+    "submit": "Submit for release",
+    "submitted": "Self-audit submitted — awaiting release",
+    "submitError": "Submission failed",
+    "doc": { "gacp_cert": "GACP certificate", "coa": "Certificate of Analysis (CoA)", "license": "License" },
+    "flag": { "missing": "Required document missing", "duplicate_content": "Identical file used more than once", "unexpected_format": "Unexpected file format", "too_small": "File too small", "too_large": "File too large" }
+  },
+  "farmReview": {
+    "title": "Farm release",
+    "empty": "No submissions",
+    "loadError": "Could not load submissions",
+    "risk": "Risk",
+    "approve": "Release",
+    "reject": "Reject",
+    "approved": "Farm released",
+    "rejected": "Rejected",
+    "error": "Decision failed",
+    "status": { "pending": "Pending", "approved": "Released", "rejected": "Rejected" }
+  },
+  "admin": {
+    "title": "Admin console",
+    "openConvs": "Open conversations",
+    "overdue": "Overdue",
+    "openSamples": "Open sample requests",
+    "team": "Team",
+    "teamRoles": "Team & roles",
+    "loadError": "Could not load team",
+    "empty": "No team members",
+    "roleUpdated": "Role updated",
+    "roleError": "Role change failed",
+    "removeRole": "Remove role",
+    "addRoleLabel": "Add role",
+    "add": "Add"
+  },
+  "support": {
+    "overdue": "Overdue",
+    "title": "Support inbox",
+    "empty": "No conversations",
+    "loadError": "Could not load conversations",
+    "selectHint": "Select a conversation",
+    "noMessages": "No messages yet",
+    "replyPlaceholder": "Reply to the partner…",
+    "send": "Send",
+    "replied": "Reply sent",
+    "replyError": "Send failed",
+    "updated": "Updated",
+    "updateError": "Update failed",
+    "assignMe": "Assign to me",
+    "statusLabel": "Status",
+    "tierLabel": "Tier",
+    "filter": { "open": "Open", "mine": "Mine", "all": "All" },
+    "status": {
+      "open": "Open", "triaged": "Triaged", "assigned": "Assigned",
+      "waiting": "Waiting on partner", "resolved": "Resolved", "closed": "Closed"
+    },
+    "tier": { "0": "AI / Auto", "1": "Staff", "2": "Specialist", "3": "Admin" },
+    "priority": { "low": "Low", "normal": "Normal", "high": "High", "urgent": "Urgent" }
+  },
+  "sampleAdmin": {
+    "title": "Sample requests",
+    "empty": "No sample requests",
+    "loadError": "Could not load requests",
+    "updated": "Status updated",
+    "updateError": "Update failed",
+    "status": {
+      "received": "Received",
+      "in_review": "In review",
+      "fulfilled": "Fulfilled",
+      "declined": "Declined"
+    }
+  },
+  "sampleRequest": {
+    "cta": "Request sample",
+    "title": "B2B sample request",
+    "subtitle": "Structure your demand — CannaWorld coordinates qualified supplier, EU release and logistics. B2B / compliance intake only.",
+    "company": "Company",
+    "email": "Contact email",
+    "category": "Category",
+    "quantity": "Quantity (kg)",
+    "pathway": "Target pathway",
+    "contextLabel": "Context (optional)",
+    "b2b": "I confirm B2B context — no consumer sale, no therapeutic claims.",
+    "submit": "Send request",
+    "success": "Sample request submitted",
+    "error": "Submission failed",
+    "cat": { "flower": "Flower", "extract": "Extract", "other": "Other" },
+    "path": { "wholesale": "Wholesale (§52a AMG)", "pharmacy": "Pharmacy supply", "processing": "Processing / EU-GMP hub" }
+  },
+  "mpProvenance": {
+    "title": "Gatekeeper provenance",
+    "gacp": "GACP cultivation",
+    "gmp": "EU-GMP hub",
+    "qp": "QP release"
+  },
+  "farmFunnel": {
+    "title": "Thailand onboarding funnel",
+    "total": "Total farms",
+    "tier0": "Registered",
+    "tier1": "GACP-ready",
+    "tier2": "GACP-certified",
+    "tier3": "Hub-linked",
+    "gate": {
+      "selfAssessment": "Self-assessment above threshold",
+      "preAudit": "Remote pre-audit passed",
+      "gacpCert": "Valid GACP certificate on file",
+      "supplyAgreement": "Supply / quality assurance agreement",
+      "hubGmp": "Linked to an EU-GMP-certified hub"
+    }
+  },
   "batches": {
     "batchNumber": "Batch / Case"
   },

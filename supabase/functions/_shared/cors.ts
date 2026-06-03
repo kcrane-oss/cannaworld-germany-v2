@@ -60,6 +60,27 @@ export async function authenticate(req: Request): Promise<{ userId: string; user
   return { userId: data.user.id, userEmail: data.user.email ?? null, admin };
 }
 
+/** Service-role client without a user JWT — for machine-to-machine endpoints. */
+export function serviceClient(): SupabaseClient {
+  return createClient(
+    Deno.env.get("SUPABASE_URL")!,
+    Deno.env.get("SB_SECRET_KEY") || Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+    { auth: { persistSession: false, autoRefreshToken: false } },
+  );
+}
+
+/**
+ * Verifies a Codex service-to-service call against CODEX_SERVICE_TOKEN.
+ * Returns false if the secret is unset (fail closed) or the bearer mismatches.
+ */
+export function codexAuthorized(req: Request): boolean {
+  const expected = Deno.env.get("CODEX_SERVICE_TOKEN");
+  if (!expected) return false;
+  const authHeader = req.headers.get("authorization") || "";
+  if (!authHeader.startsWith("Bearer ")) return false;
+  return authHeader.slice("Bearer ".length).trim() === expected;
+}
+
 /**
  * Simple DB-backed rate limit. Inserts a row into `germany_function_rate_limits`
  * (table created by 20260519080000 migration) and counts hits in the window.

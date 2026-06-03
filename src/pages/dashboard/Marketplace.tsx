@@ -1,11 +1,23 @@
 import { useBatches, type BatchRow } from "@/hooks/useBatches";
-import { ShoppingBag, ExternalLink, ArrowRight, Loader2, AlertTriangle, Mail, Package } from "lucide-react";
+import { useFarmProducers } from "@/hooks/useFarmProducers";
+import { useBatchProvenanceLinks } from "@/hooks/useBatchProvenanceLinks";
+import { ShoppingBag, ExternalLink, ArrowRight, Loader2, AlertTriangle, Package, Sprout } from "lucide-react";
+import { deriveBatchProvenance, tierByBatchId } from "@/lib/marketplace-provenance";
+import { GatekeeperProvenance } from "@/components/marketplace/GatekeeperProvenance";
+import { SampleRequestDialog } from "@/components/marketplace/SampleRequestDialog";
+import { FarmTierFunnel } from "@/components/onboarding/FarmTierFunnel";
 
 const QUALIFIED_STATUSES = new Set(["released", "approved"]);
 
 export default function Marketplace() {
   const { data: allBatches = [], isLoading, isError, error } = useBatches();
+  const { data: farmProducers = [], isError: farmsError } = useFarmProducers();
+  const { data: provenanceLinks = [], isError: linksError } = useBatchProvenanceLinks();
   const qualified = allBatches.filter((b: BatchRow) => QUALIFIED_STATUSES.has(b.status ?? "")).slice(0, 6);
+  const showPipeline = !farmsError && farmProducers.length > 0;
+  // Real per-batch farm tier (Weg D) when the link table exists; empty otherwise
+  // so deriveBatchProvenance falls back to status inference.
+  const tierMap = linksError ? new Map() : tierByBatchId(provenanceLinks);
 
   return (
     <div className="space-y-7">
@@ -34,6 +46,18 @@ export default function Marketplace() {
           </a>
         </div>
       </section>
+
+      {showPipeline && (
+        <section className="rounded-2xl border border-emerald-300/20 bg-white/[0.045] p-6">
+          <div className="mb-4 flex items-center gap-2">
+            <Sprout className="h-4 w-4 text-emerald-300" />
+            <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-white/75">
+              Supply-Pipeline · Thailand-Farmen
+            </h2>
+          </div>
+          <FarmTierFunnel producers={farmProducers} />
+        </section>
+      )}
 
       <section className="rounded-2xl border border-white/10 bg-white/[0.045] p-6">
         <div className="mb-5 flex items-center justify-between">
@@ -93,6 +117,13 @@ export default function Marketplace() {
                     {b.status}
                   </span>
                 </div>
+                <GatekeeperProvenance
+                  provenance={deriveBatchProvenance({
+                    status: b.status,
+                    originCountry: b.origin_country,
+                    producerTier: tierMap.get(b.id) ?? null,
+                  })}
+                />
                 <div className="mt-3 flex items-center justify-between text-xs text-white/55">
                   <span>{b.quantity != null ? `${b.quantity} ${b.unit ?? ""}` : "—"}</span>
                   <a
@@ -120,12 +151,7 @@ export default function Marketplace() {
               B2B-/Compliance-Intake.
             </p>
           </div>
-          <a
-            href="mailto:info@cannaworld-germany.de?subject=CannaWorld Germany Sample-Request"
-            className="inline-flex shrink-0 items-center gap-2 rounded-xl border border-cyan-300/40 bg-cyan-300/10 px-5 py-3 text-sm font-bold text-cyan-200 transition hover:border-cyan-200 hover:bg-cyan-300/20"
-          >
-            <Mail className="h-4 w-4" /> Sample anfragen
-          </a>
+          <SampleRequestDialog />
         </div>
       </section>
     </div>

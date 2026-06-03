@@ -45,3 +45,21 @@ export const onboardingStep1Schema = z.object({
 });
 
 export type OnboardingStep1Data = z.infer<typeof onboardingStep1Schema>;
+
+// In-app B2B sample request (replaces the legacy mailto on the Marketplace).
+// Compliance-first: B2B intake only, no consumer sale, no therapeutic claims —
+// the b2bConfirmed gate must be true.
+export const sampleRequestSchema = z.object({
+  company: z.string().trim().min(1, "Firmenname ist erforderlich").max(200, "Max. 200 Zeichen"),
+  contactEmail: z.string().trim().email("Gültige E-Mail erforderlich").max(200),
+  productCategory: z.enum(["flower", "extract", "other"]),
+  quantityKg: z
+    .number({ message: "Menge erforderlich" })
+    .positive("Menge muss größer als 0 sein")
+    .max(100000, "Menge unplausibel hoch"),
+  targetPathway: z.enum(["wholesale", "pharmacy_supply", "processing"]),
+  context: z.string().max(2000, "Max. 2000 Zeichen").optional().default(""),
+  b2bConfirmed: z.literal(true, { message: "B2B-Bestätigung erforderlich" }),
+});
+
+export type SampleRequestData = z.infer<typeof sampleRequestSchema>;

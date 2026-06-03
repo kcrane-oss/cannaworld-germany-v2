@@ -1,4 +1,123 @@
 {
+  "farmAudit": {
+    "title": "Farm Self-Audit",
+    "intro": "Selbstregistrierung + Selbsteinschätzung + Dokumenten-Upload. Ein automatischer Integritäts-Check markiert Auffälligkeiten — die finale Freigabe trifft ein Mensch.",
+    "farmName": "Farm-Name",
+    "province": "Provinz",
+    "selfAssessment": "Selbsteinschätzung",
+    "documents": "Dokumente",
+    "upload": "Hochladen",
+    "integrity": "Integritäts-Check",
+    "risk": "Risiko",
+    "humanNote": "Heuristischer Check — die finale Freigabe trifft ein Mensch.",
+    "submit": "Zur Freigabe einreichen",
+    "submitted": "Self-Audit eingereicht — wartet auf Freigabe",
+    "submitError": "Einreichen fehlgeschlagen",
+    "doc": { "gacp_cert": "GACP-Zertifikat", "coa": "Analysenzertifikat (CoA)", "license": "Lizenz" },
+    "flag": { "missing": "Pflichtdokument fehlt", "duplicate_content": "Identische Datei mehrfach verwendet", "unexpected_format": "Unerwartetes Dateiformat", "too_small": "Datei zu klein", "too_large": "Datei zu groß" }
+  },
+  "farmReview": {
+    "title": "Farm-Freigabe",
+    "empty": "Keine Einreichungen",
+    "loadError": "Einreichungen konnten nicht geladen werden",
+    "risk": "Risiko",
+    "approve": "Freigeben",
+    "reject": "Ablehnen",
+    "approved": "Farm freigegeben",
+    "rejected": "Abgelehnt",
+    "error": "Entscheidung fehlgeschlagen",
+    "status": { "pending": "Offen", "approved": "Freigegeben", "rejected": "Abgelehnt" }
+  },
+  "admin": {
+    "title": "Admin-Console",
+    "openConvs": "Offene Konversationen",
+    "overdue": "Überfällig",
+    "openSamples": "Offene Sample-Requests",
+    "team": "Team",
+    "teamRoles": "Team & Rollen",
+    "loadError": "Team konnte nicht geladen werden",
+    "empty": "Keine Team-Mitglieder",
+    "roleUpdated": "Rolle aktualisiert",
+    "roleError": "Rollenänderung fehlgeschlagen",
+    "removeRole": "Rolle entfernen",
+    "addRoleLabel": "Rolle hinzufügen",
+    "add": "Hinzufügen"
+  },
+  "support": {
+    "overdue": "Überfällig",
+    "title": "Support-Inbox",
+    "empty": "Keine Konversationen",
+    "loadError": "Konversationen konnten nicht geladen werden",
+    "selectHint": "Konversation auswählen",
+    "noMessages": "Noch keine Nachrichten",
+    "replyPlaceholder": "Antwort an den Partner…",
+    "send": "Senden",
+    "replied": "Antwort gesendet",
+    "replyError": "Senden fehlgeschlagen",
+    "updated": "Aktualisiert",
+    "updateError": "Aktualisierung fehlgeschlagen",
+    "assignMe": "Mir zuweisen",
+    "statusLabel": "Status",
+    "tierLabel": "Stufe",
+    "filter": { "open": "Offen", "mine": "Meine", "all": "Alle" },
+    "status": {
+      "open": "Offen", "triaged": "Vorsortiert", "assigned": "Zugewiesen",
+      "waiting": "Wartet auf Partner", "resolved": "Gelöst", "closed": "Geschlossen"
+    },
+    "tier": { "0": "AI / Auto", "1": "Mitarbeiter", "2": "Spezialist", "3": "Admin" },
+    "priority": { "low": "Niedrig", "normal": "Normal", "high": "Hoch", "urgent": "Dringend" }
+  },
+  "sampleAdmin": {
+    "title": "Sample-Requests",
+    "empty": "Keine Sample-Requests",
+    "loadError": "Requests konnten nicht geladen werden",
+    "updated": "Status aktualisiert",
+    "updateError": "Aktualisierung fehlgeschlagen",
+    "status": {
+      "received": "Eingegangen",
+      "in_review": "In Prüfung",
+      "fulfilled": "Erfüllt",
+      "declined": "Abgelehnt"
+    }
+  },
+  "sampleRequest": {
+    "cta": "Sample anfragen",
+    "title": "B2B Sample-Request",
+    "subtitle": "Bedarf strukturieren — CannaWorld koordiniert qualifizierten Supplier, EU-Release und Logistik. Reiner B2B-/Compliance-Intake.",
+    "company": "Firma",
+    "email": "Kontakt-E-Mail",
+    "category": "Kategorie",
+    "quantity": "Menge (kg)",
+    "pathway": "Ziel-Pfad",
+    "contextLabel": "Kontext (optional)",
+    "b2b": "Ich bestätige B2B-Bezug — keine Verbraucherabgabe, kein Therapieversprechen.",
+    "submit": "Anfrage senden",
+    "success": "Sample-Request übermittelt",
+    "error": "Übermittlung fehlgeschlagen",
+    "cat": { "flower": "Blüte", "extract": "Extrakt", "other": "Andere" },
+    "path": { "wholesale": "Großhandel (§52a AMG)", "pharmacy": "Apotheken-Belieferung", "processing": "Verarbeitung / EU-GMP-Hub" }
+  },
+  "mpProvenance": {
+    "title": "Gatekeeper-Herkunft",
+    "gacp": "GACP-Anbau",
+    "gmp": "EU-GMP-Hub",
+    "qp": "QP-Freigabe"
+  },
+  "farmFunnel": {
+    "title": "Thailand-Onboarding-Funnel",
+    "total": "Farmen gesamt",
+    "tier0": "Registriert",
+    "tier1": "GACP-bereit",
+    "tier2": "GACP-zertifiziert",
+    "tier3": "Hub-angebunden",
+    "gate": {
+      "selfAssessment": "Selbsteinschätzung über Schwellenwert",
+      "preAudit": "Remote-Pre-Audit bestanden",
+      "gacpCert": "Gültiges GACP-Zertifikat hinterlegt",
+      "supplyAgreement": "Liefer-/Qualitätssicherungsvertrag",
+      "hubGmp": "Anbindung an EU-GMP-zertifizierten Hub"
+    }
+  },
   "batches": {
     "batchNumber": "Charge / Vorgang"
   },
