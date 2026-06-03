@@ -117,7 +117,7 @@ const CrossAppCTA = ({ moduleKey }: CrossAppCTAProps) => {
 
   return (
     <section
-      className={`relative overflow-hidden rounded-3xl border bg-gradient-to-br p-6 shadow-[0_0_28px_rgba(34,211,238,0.05)] backdrop-blur ${tint.ring} ${tint.bg} ${tint.hoverBorder} transition`}
+      className={`relative overflow-hidden rounded-2xl border bg-gradient-to-br p-6 shadow-[0_0_28px_rgba(34,211,238,0.05)] backdrop-blur ${tint.ring} ${tint.bg} ${tint.hoverBorder} transition`}
     >
       <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
         <div className="flex items-start gap-4">

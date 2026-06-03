@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useUserRoles } from "@/hooks/useUserRoles";
 import { useHasRole } from "@/hooks/useHasRole";
 import { useAuth } from "@/hooks/useAuth";
@@ -29,6 +30,7 @@ interface RoleGuardProps {
 
 const RoleGuard = ({ allowedRoles, redirectOnDeny = false, requireBtMLicense = false, children }: RoleGuardProps) => {
   const location = useLocation();
+  const { t } = useTranslation();
   const { user, loading: authLoading } = useAuth();
   const { roles, loading: rolesLoading } = useUserRoles();
   const { hasRole: isAdmin, loading: adminLoading } = useHasRole("admin");
@@ -78,16 +80,16 @@ const RoleGuard = ({ allowedRoles, redirectOnDeny = false, requireBtMLicense = f
 
   if (btmEffective === "missing") {
     return (
-      <div className="flex flex-col items-center justify-center gap-3 rounded-3xl border border-amber-300/30 bg-amber-400/5 py-16 text-center">
+      <div className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-amber-300/30 bg-amber-400/5 py-16 text-center">
         <div className="rounded-full bg-amber-400/10 p-3 ring-1 ring-amber-300/30">
           <svg className="h-8 w-8 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
           </svg>
         </div>
-        <p className="text-base font-semibold text-white">BtM-Lizenz erforderlich</p>
-        <p className="max-w-md text-sm leading-6 text-white/55">
-          Diese Sektion erfordert eine verifizierte BtM-Erlaubnis nach §3 BtMG. Bitte
-          Lizenznummer beim CannaWorld-Team registrieren lassen unter <a className="text-cyan-300 hover:text-cyan-200" href="mailto:info@cannaworld-germany.de">info@cannaworld-germany.de</a>.
+        <p className="text-base font-semibold text-white">{t("roleGuard.btmTitle", "BtM-Lizenz erforderlich")}</p>
+        <p className="max-w-md text-sm leading-6 text-white/60">
+          {t("roleGuard.btmDesc", "Diese Sektion erfordert eine verifizierte BtM-Erlaubnis nach §3 BtMG. Bitte Lizenznummer beim CannaWorld-Team registrieren lassen unter")}{" "}
+          <a className="text-cyan-300 hover:text-cyan-200" href="mailto:info@cannaworld-germany.de">info@cannaworld-germany.de</a>.
         </p>
       </div>
     );
@@ -98,16 +100,16 @@ const RoleGuard = ({ allowedRoles, redirectOnDeny = false, requireBtMLicense = f
       return <Navigate to="/dashboard" replace />;
     }
     return (
-      <div className="flex flex-col items-center justify-center gap-3 rounded-3xl border border-red-300/20 bg-red-400/5 py-16 text-center">
+      <div className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-red-300/20 bg-red-400/5 py-16 text-center">
         <div className="rounded-full bg-red-400/10 p-3 ring-1 ring-red-300/30">
           <svg className="h-8 w-8 text-red-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
           </svg>
         </div>
-        <p className="text-base font-semibold text-white">Zugriff verweigert</p>
-        <p className="max-w-md text-sm leading-6 text-white/55">
-          Diese Sektion erfordert eine spezifische CannaWorld-Rolle ({allowedRoles.join(", ")}). Bei Bedarf bitte
-          freischalten lassen unter <a className="text-cyan-300 hover:text-cyan-200" href="mailto:info@cannaworld-germany.de">info@cannaworld-germany.de</a>.
+        <p className="text-base font-semibold text-white">{t("roleGuard.denyTitle", "Zugriff verweigert")}</p>
+        <p className="max-w-md text-sm leading-6 text-white/60">
+          {t("roleGuard.denyDesc", "Diese Sektion erfordert eine spezifische CannaWorld-Rolle ({{roles}}). Bei Bedarf bitte freischalten lassen unter", { roles: allowedRoles.join(", ") })}{" "}
+          <a className="text-cyan-300 hover:text-cyan-200" href="mailto:info@cannaworld-germany.de">info@cannaworld-germany.de</a>.
         </p>
       </div>
     );

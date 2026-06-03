@@ -336,11 +336,15 @@
     "kpiActiveTradeCases": "Active Trade Cases",
     "kpiBatchesInReview": "Batches in review",
     "kpiActiveShipments": "Active shipments",
+    "kpiVerifiedSuppliers": "Verified Suppliers",
     "supplierDistributionTitle": "Supplier distribution by status",
     "noSupplierData": "No supplier data",
     "batchDistributionTitle": "Batch distribution by status",
     "noBatchData": "No batch data",
     "footerNote": "Note: data comes directly from the shared CannaWorld Gateway / Supabase backend (live, no cache). For historical trends, forecasting models and cohort analyses, use the AI-powered AICert analytics engine."
+  },
+  "batchVerification": {
+    "emptyHistory": "No verifications recorded yet."
   },
   "auditPassport": {
     "heroDescription": "Verifiable trust passport for supplier, facility, batch and documentation status. Generated and computed live in the GMP-AICert AI audit stack (ShinrAi 6-axis score).",
@@ -350,5 +354,35 @@
     "supplierPassportStatus": "Supplier passport status",
     "unknownError": "Unknown error",
     "emptyState": "No suppliers with passport-relevant scores recorded yet."
+  },
+  "pharmacyDispense": {
+    "errorBtmRxMissing": "BtM prescription number missing",
+    "errorDutiesMissing": "Both pharmacist duties must be documented",
+    "errorQtyZero": "Quantity must be > 0",
+    "errorBtmSaltMissing": "BtM hashing not configured (VITE_BTM_SALT missing or dev placeholder). Dispensing blocked to prevent inconsistent BtM prescription hashes. Please contact the operator.",
+    "successMsg": "Dispensing recorded. Remaining stock: {{units}} units.",
+    "availableBatches": "Available batches",
+    "noBatchesReady": "No dispensable batches.",
+    "selectBatch": "Select a batch to dispense.",
+    "dispenseFor": "Dispense",
+    "fieldPharmacyLicense": "Pharmacy licence",
+    "fieldPharmacistId": "Pharmacist chamber ID",
+    "fieldBtmRx": "BtM prescription no. (hashed immediately)",
+    "fieldDoctorLanr": "Doctor LANR (optional)",
+    "fieldPatientKv": "KV no. (optional, pseudonymised)",
+    "fieldUnits": "Dispensed units",
+    "fieldWeight": "Dispensed weight (g)",
+    "fieldSecurpharm": "Securpharm decommission ID",
+    "checkContraindication": "Contraindication check performed",
+    "checkCounseling": "Patient counselled (§20 ApBetrO)",
+    "scaTitle": "SCA signature",
+    "scaProofPlaceholder": "SCA proof",
+    "submitButton": "Sign dispensing"
+  },
+  "roleGuard": {
+    "btmTitle": "BtM License Required",
+    "btmDesc": "This section requires a verified BtM permit under §3 BtMG. Please have your license number registered with the CannaWorld team at",
+    "denyTitle": "Access Denied",
+    "denyDesc": "This section requires a specific CannaWorld role ({{roles}}). If needed, please request access at"
   }
 }

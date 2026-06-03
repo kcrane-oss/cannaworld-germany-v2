@@ -119,13 +119,25 @@ export default function QPRelease() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-end">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">{t("qpRelease.title")}</h1>
-          <p className="text-muted-foreground">Heavyweight QP Release Hub: Release readiness based on actual Trade Cases.</p>
+    <div className="space-y-7">
+      <section className="relative overflow-hidden rounded-2xl border border-cyan-300/20 bg-gradient-to-br from-cyan-300/12 via-white/[0.045] to-emerald-300/10 p-6 shadow-[0_0_42px_rgba(34,211,238,0.08)] md:p-8">
+        <div className="absolute right-0 top-0 h-52 w-52 rounded-full bg-cyan-300/10 blur-3xl" />
+        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-2xl bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
+        <div className="relative flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-3xl">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">
+              <ClipboardCheck className="h-4 w-4" /> Release Control
+            </div>
+            <h1 className="text-3xl font-black tracking-tight md:text-5xl">{t("qpRelease.title", "QP Release")}</h1>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-white/60">
+              QP-nahe Freigabelogik: Dokumentenpaket, Abweichungen, Verantwortlichkeiten und finales Release-Readiness Signal.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-black/20 p-4 text-sm text-white/60">
+            Germany scope · B2B · Compliance-first
+          </div>
         </div>
-      </div>
+      </section>
 
       <div className="grid gap-4 md:grid-cols-3">
         <Card>

@@ -110,8 +110,9 @@ export default function Compliance() {
 
   return (
     <div className="space-y-7">
-      <section className="relative overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-gradient-to-br from-cyan-300/12 via-white/[0.045] to-emerald-300/10 p-6 shadow-[0_0_42px_rgba(34,211,238,0.08)] md:p-8">
+      <section className="relative overflow-hidden rounded-2xl border border-cyan-300/20 bg-gradient-to-br from-cyan-300/12 via-white/[0.045] to-emerald-300/10 p-6 shadow-[0_0_42px_rgba(34,211,238,0.08)] md:p-8">
         <div className="absolute right-0 top-0 h-52 w-52 rounded-full bg-cyan-300/10 blur-3xl" />
+        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-2xl bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
         <div className="relative flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-3xl">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">
@@ -131,25 +132,25 @@ export default function Compliance() {
       </section>
 
       <section className="grid gap-4 md:grid-cols-4">
-        <div className="rounded-3xl border border-emerald-300/25 bg-emerald-400/5 p-5">
+        <div className="rounded-2xl border border-emerald-300/25 bg-emerald-400/5 p-5">
           <div className="text-2xl font-black text-emerald-300">{overallCounts.covered}</div>
           <div className="text-sm font-semibold text-emerald-100">Abgedeckt</div>
         </div>
-        <div className="rounded-3xl border border-amber-300/25 bg-amber-400/5 p-5">
+        <div className="rounded-2xl border border-amber-300/25 bg-amber-400/5 p-5">
           <div className="text-2xl font-black text-amber-300">{overallCounts.partial}</div>
           <div className="text-sm font-semibold text-amber-100">Teilweise</div>
         </div>
-        <div className="rounded-3xl border border-red-300/25 bg-red-400/5 p-5">
+        <div className="rounded-2xl border border-red-300/25 bg-red-400/5 p-5">
           <div className="text-2xl font-black text-red-300">{overallCounts.missing}</div>
           <div className="text-sm font-semibold text-red-100">Fehlt</div>
         </div>
-        <div className="rounded-3xl border border-white/15 bg-white/5 p-5">
+        <div className="rounded-2xl border border-white/15 bg-white/5 p-5">
           <div className="text-2xl font-black text-white/60">{overallCounts.na}</div>
           <div className="text-sm font-semibold text-white/60">N/A</div>
         </div>
       </section>
 
-      <section className="rounded-3xl border border-white/10 bg-white/[0.045] p-6">
+      <section className="rounded-2xl border border-white/10 bg-white/[0.045] p-6">
         <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div className="flex gap-2">
             {FRAMEWORKS.map((f) => (
