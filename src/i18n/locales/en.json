@@ -1,6 +1,16 @@
 {
+  "guidance": {
+    "level": { "label": "Level", "simple": "Simple", "standard": "Standard", "expert": "Expert" },
+    "readAloud": "Read aloud"
+  },
   "farmAudit": {
     "title": "Farm self-audit",
+    "introSimple": "Register your farm here. Answer a few questions and upload 3 documents. Then a human reviews and releases you. You can have everything read aloud.",
+    "introExpert": "Self-audit: self-assessment + 3 required documents. Heuristic integrity check, final release by a human.",
+    "farmNameSimple": "What's your farm called?",
+    "submitSimple": "Done — submit",
+    "selfAssessmentHelp": "Only tick what's actually true. This isn't a test — it just helps us see where you stand.",
+    "documentsHelp": "Upload three documents: GACP certificate, certificate of analysis, and your license. Tap Upload and choose the file.",
     "intro": "Self-registration + self-assessment + document upload. An automatic integrity check flags anomalies — a human makes the final release.",
     "farmName": "Farm name",
     "province": "Province",

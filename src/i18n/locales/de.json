@@ -1,6 +1,16 @@
 {
+  "guidance": {
+    "level": { "label": "Niveau", "simple": "Einfach", "standard": "Standard", "expert": "Experte" },
+    "readAloud": "Vorlesen"
+  },
   "farmAudit": {
     "title": "Farm Self-Audit",
+    "introSimple": "Hier meldest du deine Farm an. Beantworte ein paar Fragen und lade 3 Dokumente hoch. Danach schaut ein Mensch drüber und gibt dich frei. Du kannst dir alles vorlesen lassen.",
+    "introExpert": "Self-Audit: Selbsteinschätzung + 3 Pflichtdokumente. Heuristischer Integritäts-Check, finale Freigabe durch Mensch.",
+    "farmNameSimple": "Wie heißt deine Farm?",
+    "submitSimple": "Fertig — abschicken",
+    "selfAssessmentHelp": "Hake nur an, was wirklich stimmt. Das ist keine Prüfung — es hilft uns nur einzuschätzen, wo du stehst.",
+    "documentsHelp": "Lade drei Dokumente hoch: GACP-Zertifikat, Analysenzertifikat und deine Lizenz. Tippe auf Hochladen und wähle die Datei.",
     "intro": "Selbstregistrierung + Selbsteinschätzung + Dokumenten-Upload. Ein automatischer Integritäts-Check markiert Auffälligkeiten — die finale Freigabe trifft ein Mensch.",
     "farmName": "Farm-Name",
     "province": "Provinz",
