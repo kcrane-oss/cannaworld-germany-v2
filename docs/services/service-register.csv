@@ -1,0 +1,81 @@
+ID,Service,Domaene,CannaWorld-Teil,Delivery-Typ,Reife,Beleg (Code)
+CUL-01,Farm Self-Audit (Einreichung),Cultivation/Farm,Germany,AI+Mensch,im Code,supabase/functions/germany-farm-audit-submit; src/pages/dashboard/FarmSelfAudit.tsx; src/hooks/useFarmAuditSubmissions.ts
+CUL-02,Farm-Audit Freigabe/Entscheidung,Cultivation/Farm,Germany,Mensch,im Code,supabase/functions/germany-farm-audit-decide; src/pages/dashboard/FarmReview.tsx
+CUL-03,Farm-Produzenten-Register,Cultivation/Farm,Gateway/TH,Plattform,im Code,src/hooks/useFarmProducers.ts (thailand-farm-producers)
+CUL-04,Farm-Workspace,Cultivation/Farm,Germany,Plattform,im Code,src/hooks/useFarmWorkspace.ts; src/lib/farm-workspace
+CUL-05,Farm-Dashboard,Cultivation/Farm,Germany,Plattform,im Code,src/hooks/useFarmDashboard.ts
+CUL-06,Farm-Onboarding,Cultivation/Farm,Germany,Plattform,im Code,src/lib/farm-onboarding.ts
+QUA-01,Batch-Verwaltung (Master),Quality/GxP,Germany,Plattform,im Code,src/hooks/useBatches.ts (germany-batches); src/pages/dashboard/Batches.tsx
+QUA-02,Batch-Verifizierung,Quality/GxP,Germany,AI+Mensch,im Code,supabase/functions/germany-batch-verify; src/pages/dashboard/BatchVerification.tsx; src/hooks/useBatchVerifications.ts
+QUA-03,Batch-Provenance/Herkunftslinks,Quality/GxP,Marketplace,Plattform,im Code,src/hooks/useBatchProvenanceLinks.ts; src/lib/marketplace-provenance.ts
+QUA-04,CoA-Parsing (LIMS),Quality/GxP,Germany,AI,im Code,supabase/functions/germany-coa-parse; src/lib/lims-api.ts (parseCoA)
+QUA-05,QP-Release,Quality/GxP,Germany,Mensch,im Code,src/lib/lims-api.ts (requestQpRelease); src/hooks/use-qp-release.ts; src/pages/dashboard/QPRelease.tsx
+QUA-06,Annex-16-Checkliste,Quality/GxP,Germany,Plattform,im Code,src/lib/annex16-checklist.ts
+QUA-07,Pre-Audit Gap-Report,Quality/GxP,AICert,AI,im Code,src/lib/pre-audit-gap-generator.ts (generatePreAuditReport)
+QUA-08,Batch-Compliance-Pruefung,Quality/GxP,Germany,Plattform,im Code,src/lib/regulatory-requirements.ts (checkBatchCompliance); src/pages/dashboard/Compliance.tsx
+QUA-09,Facility-Compliance-Pruefung,Quality/GxP,Germany,Plattform,im Code,src/lib/facility-compliance-rules.ts (runComplianceCheck)
+TRU-01,Audit Passport,Trust/Audit,AICert,Plattform,im Code,src/pages/dashboard/AuditPassport.tsx; src/lib/audit-status-api.ts
+TRU-02,Audit-Logging,Trust/Audit,uebergreifend,Plattform,im Code,src/lib/audit-logger.ts
+TRU-03,Realtime-Audit,Trust/Audit,uebergreifend,Plattform,im Code,src/hooks/useRealtimeAudit.ts
+TRU-04,Dokumenten-Integritaets-Scan,Trust/Audit,Germany,AI,im Code,src/lib/document-integrity.ts (scanDocuments); src/lib/integrity-api.ts
+TRU-05,Post-Quantum Audit-Chain (Dilithium/Kyber),Trust/Audit,uebergreifend,Plattform,im Code,src/lib/quantum-crypto.ts (chainedAuditHash; verifyAuditChain; signWithDilithium)
+TRU-06,Zertifikats-Verifizierung,Trust/Audit,AICert/Marketplace,Plattform,im Code,src/lib/audit-status-api.ts (verifyCertificate); vendor/.../marketplace-api.ts (verifyCertificateViaMarketplace); src/hooks/use-certificates.ts
+TRU-07,AICert-Scan,Trust/Audit,AICert,AI,im Code,vendor/cannaworld-sdk/src/regulatory-api.ts (triggerAiCertScan)
+TRU-08,Universe-/Company-Compliance-Stats,Trust/Audit,uebergreifend,Plattform,im Code,src/lib/audit-status-api.ts (getUniverseStats; getCompanyCompliance)
+REG-01,Regulatorische Anforderungen/Cert-Hierarchie,Regulatory,Germany,Plattform,im Code,src/lib/regulatory-requirements.ts (CERT_HIERARCHY; certMeetsRequirement)
+REG-02,Regulatory AI-Scan,Regulatory,AICert,AI,im Code,vendor/cannaworld-sdk/src/regulatory-api.ts (runRegulatoryAiScan)
+REG-03,Regulatory Updates/Alerts,Regulatory,Europe,AI,im Code,vendor/.../regulatory-api.ts (getRegulatoryUpdates; aggregateRegulatoryUpdates; syncRegulatoryAlert)
+REG-04,Target-Market-Analyse,Regulatory,Europe,AI,im Code,vendor/.../target-market-api.ts (analyzeTargetMarkets); src/lib/market-data.ts (KEY_MARKETS)
+REG-05,Regulatory-Modul (DE/EU),Regulatory,Germany/Europe,Plattform,im Code,src/pages/dashboard/Regulatory.tsx
+REG-06,BtM-Lizenz-Verifizierung,Regulatory,Germany,AI+Mensch,im Code,supabase/functions/germany-btm-license-verify
+REG-07,BtM-Rezepte,Regulatory,Germany,Plattform,im Code,src/pages/dashboard/BtmPrescriptions.tsx
+MKT-01,Marketplace Listings/Batches,Trade/Marketplace,Marketplace,Plattform,im Code,vendor/.../marketplace-api.ts (listMarketplaceBatches; getMarketplaceBatch); src/pages/dashboard/Marketplace.tsx
+MKT-02,Marketplace Orders,Trade/Marketplace,Marketplace,Plattform,im Code,vendor/.../marketplace-api.ts (createMarketplaceOrder; updateMarketplaceOrder)
+MKT-03,Marketplace Stats/Health,Trade/Marketplace,Marketplace,Plattform,im Code,vendor/.../marketplace-api.ts (getMarketplaceStats; checkMarketplaceHealth)
+MKT-04,Marketplace-Scan,Trade/Marketplace,AICert/Marketplace,AI,im Code,vendor/.../regulatory-api.ts (triggerMarketplaceScan)
+MKT-05,Sample-Requests,Trade/Marketplace,Germany,Plattform,im Code,supabase/functions/germany-sample-request(+-status); src/hooks/useSampleRequests.ts; src/pages/dashboard/SampleRequests.tsx
+MKT-06,Trade Cases,Trade/Marketplace,Gateway/TH,Plattform,im Code,src/pages/dashboard/TradeCases.tsx; src/lib/logistics-sync.ts (syncTradeCaseStatusChange)
+MKT-07,Supplier-Verwaltung,Trade/Marketplace,Gateway/TH,Plattform,im Code,src/hooks/use-suppliers.ts; src/pages/dashboard/Suppliers.tsx
+LOG-01,Logistik-Modul,Logistics,Germany,Plattform,im Code,src/pages/dashboard/Logistics.tsx
+LOG-02,Shipment-Status-Sync,Logistics,uebergreifend,Plattform,im Code,src/lib/logistics-sync.ts (syncShipmentStatusChange)
+LOG-03,Customs/Zoll-Sync,Logistics,uebergreifend,Plattform,im Code,src/lib/logistics-sync.ts (syncCustomsStatusChange)
+LOG-04,Warehouse/Inventory,Logistics,Germany,Plattform,im Code,src/hooks/useInventory.ts (germany-inventory); src/pages/dashboard/Warehouse.tsx
+DOC-01,Document Vault,Documents/Data,Germany,Plattform,im Code,src/hooks/useDocuments.ts (germany-documents); src/pages/dashboard/Documents.tsx
+DOC-02,Document AI,Documents/Data,Germany,AI,im Code,src/hooks/useDocumentAI.ts
+PHA-01,Apotheken-Import (Managed/Direct),Pharmacy,Germany,Plattform,im Code,src/pages/dashboard/PharmacyImport.tsx
+PHA-02,Apotheken-Wareneingang,Pharmacy,Germany,Plattform,im Code,src/pages/dashboard/PharmacyReceive.tsx
+PHA-03,Apotheken-Abgabe,Pharmacy,Germany,Plattform,im Code,src/pages/dashboard/PharmacyDispense.tsx
+FAC-01,Facility-Planner (Plaene/Zonen/Verbindungen),Facility,AICert,Plattform,im Code,src/hooks/use-facility-plans.ts; src/lib/facility-planner-models.ts
+FAC-02,Facility-Blueprint-Templates,Facility,AICert,Plattform,im Code,src/lib/facility-blueprint-templates.ts
+FAC-03,Facility-Plan Export,Facility,AICert,Plattform,im Code,src/lib/export-facility-plan.ts
+FAC-04,Facility-Plan Import,Facility,AICert,Plattform,im Code,src/lib/facility-import-utils.ts
+FAC-05,Facilities-Register,Facility,Germany,Plattform,im Code,src/hooks/use-facilities.ts (facilities)
+EDU-01,Classroom-Sessions (geplant/live),Education,uebergreifend,Plattform,im Code,src/hooks/use-sessions.ts (ClassroomSession; SessionStatus)
+EDU-02,Session-Chat,Education,uebergreifend,Plattform,im Code,src/hooks/use-session-chat.ts
+EDU-03,Session-Notizen,Education,uebergreifend,Plattform,im Code,src/hooks/use-session-notes.ts
+EDU-04,Classroom-AI (Transkript),Education,uebergreifend,AI,im Code,src/hooks/use-classroom-ai.ts (TranscriptSegment)
+EDU-05,Live-Uebersetzung,Education,uebergreifend,AI,im Code,src/hooks/use-live-translation.ts
+EDU-06,Native Speech/TTS,Education,uebergreifend,AI,im Code,src/hooks/use-native-speech.ts; src/lib/speech.ts
+EDU-07,Guidance-Level (Read-Aloud/Barrierearm),Education,Germany,Plattform,im Code,src/hooks/useGuidanceLevel.ts; src/lib/guidance-level.ts
+SUP-01,Support-Inbox (Konversationen),Support,Germany,Plattform,im Code,src/hooks/useSupportConversations.ts; src/pages/dashboard/SupportInbox.tsx
+SUP-02,Support Inbound (Codex-Bruecke),Support,Germany,Plattform,im Code,supabase/functions/germany-support-inbound
+SUP-03,Support Outbound (+Ack),Support,Germany,Plattform,im Code,supabase/functions/germany-support-outbound(+-ack)
+SUP-04,Support-Reply,Support,Germany,Mensch,im Code,supabase/functions/germany-support-reply
+SUP-05,Support-Zuweisung,Support,Germany,Mensch,im Code,supabase/functions/germany-support-assign; src/hooks/useStaffRoles.ts
+SUP-06,Support-Triage (AI),Support,Germany,AI,im Code,supabase/functions/germany-support-triage; src/lib/triage-rules.ts
+SUP-07,Eskalation,Support,Germany,Plattform,im Code,src/lib/escalation.ts
+SUP-08,Staff-Rollen-Verwaltung,Support,Germany,Mensch,im Code,supabase/functions/germany-staff-role; src/lib/staff-api.ts; src/pages/dashboard/AdminConsole.tsx
+PLT-01,Auth/Session,Platform,uebergreifend,Plattform,im Code,src/hooks/useAuth.tsx
+PLT-02,Rollen/RBAC,Platform,uebergreifend,Plattform,im Code,src/hooks/useUserRoles.ts; src/hooks/useHasRole.ts; src/components/RoleGuard.tsx
+PLT-03,Cross-Login (SSO ueber Verticals),Platform,uebergreifend,Plattform,im Code,src/lib/cross-login-api.ts; src/components/UniverseBar.tsx (cross-login)
+PLT-04,Cross-Platform-Sync,Platform,uebergreifend,Plattform,im Code,src/hooks/useCrossPlatformSync.ts; vendor/.../marketplace-api.ts (complianceSync; auditSync; notifySync; regulatorySync)
+PLT-05,Benachrichtigungen,Platform,Germany,Plattform,im Code,src/hooks/useNotifications.ts
+PLT-06,Presence,Platform,uebergreifend,Plattform,im Code,src/hooks/usePresence.ts
+PLT-07,Dashboard-Stats,Platform,Germany,Plattform,im Code,src/hooks/useDashboardStats.ts; src/pages/dashboard/Overview.tsx
+PLT-08,Analytics,Platform,AICert,Plattform,im Code,src/pages/dashboard/Analytics.tsx
+PLT-09,Onboarding (Rollen-Wizard),Platform,Germany,Plattform,im Code,src/hooks/useRoleOnboarding.ts; src/hooks/useOnboardingGate.ts; src/pages/dashboard/Onboarding.tsx
+PLT-10,Exporter-Onboarding,Platform,Gateway/TH,Plattform,im Code,src/hooks/useExporterOnboarding.ts
+PLT-11,E-Mail-Benachrichtigung,Platform,Germany,Plattform,im Code,src/lib/email-notify.ts; src/lib/notify-email.ts
+PLT-12,Webhook-Events,Platform,uebergreifend,Plattform,im Code,src/lib/webhook-events.ts
+BIL-01,Abo-Billing (Stripe) Testzugang/GMP/Enterprise,Billing,uebergreifend,Plattform,LIVE-naeher,src/lib/billing-api.ts (PLANS: Testzugang EUR0->499 / GMP EUR499 / Enterprise EUR1199; createCheckout; checkSubscription)
+BIL-02,Rechnungsstellung/Invoicing,Billing,uebergreifend,Plattform,im Code,src/lib/billing-api.ts (createInvoice; sendInvoice; markInvoicePaid; listInvoices)
