@@ -1,4 +1,117 @@
 {
+  "pricing": {
+    "metaBadge": "CannaWorld · Thailand Export Suite",
+    "title": "Fünf Pakete für den Export aus Thailand.",
+    "subtitle": "Rolle × Tier, Abo + Transaktion. Von der GACP-Farm bis zur exportierenden Producer-Group — Zertifizierung & Proof in Thailand, Absatz im EU-Funnel.",
+    "billingMonthly": "Monatlich",
+    "billingYearly": "Jährlich",
+    "billingSave": "−17 %",
+    "billedYearly": "jährlich abgerechnet · 2 Monate gratis",
+    "popular": "Beliebt",
+    "from": "ab",
+    "perMonth": "/Mon.",
+    "txLabel": "Transaktion",
+    "cta": "Beratung anfragen",
+    "ctaGateway": "Zum Gateway (Thailand)",
+    "matrixTitle": "Funktions-Matrix im Vergleich",
+    "matrixFeature": "Funktion",
+    "legendIncluded": "im Paket enthalten",
+    "legendAddon": "à la carte zubuchbar (Preis je Zelle)",
+    "matrixNote": "Kein Service ist gesperrt: Funktionen, die ein Paket nicht enthält, lassen sich jederzeit zum angegebenen Preis zubuchen.",
+    "addonsTitle": "Add-on-Module (paketübergreifend)",
+    "addonFor": "Für",
+    "gtmEyebrow": "Warum diese Struktur trägt",
+    "gtmTitle": "Land-and-Expand entlang der Thai-Wertschöpfung.",
+    "faqTitle": "Pricing-FAQ",
+    "ctaTitle": "Passendes Paket finden.",
+    "ctaSubtitle": "Kurze Qualifizierung für Farms, Hersteller, Labore und Exporteure mit realem EU-Exportbedarf. Wir empfehlen das passende Paket und den Upgrade-Pfad.",
+    "disclaimer": "Alle Preise in THB, zzgl. anwendbarer Steuern. B2B-Konditionen. Marketplace-Provisionen werden auf den EUR-Deal berechnet und transparent in THB ausgewiesen.",
+    "pkg": {
+      "farm": {
+        "name": "Farm Starter", "short": "Farm", "persona": "Cultivator / Farm · Einstieg",
+        "tagline": "Selbstregistrierung, GACP-Vorbereitung und Audit-Einstieg für thailändische Farmen.",
+        "tx": "฿3.500 / GACP-Audit",
+        "f1": "Gateway-Onboarding & Farm Self-Audit",
+        "f2": "GACP-Roadmap (DTAM-konform)",
+        "f3": "Document Vault (Basis) + Audit Passport (lesend)",
+        "f4": "3 User · 1 Farm"
+      },
+      "exporter": {
+        "name": "Marketplace Exporter", "short": "Exporter", "persona": "Trader / Exporteur · Pro",
+        "tagline": "Marketplace aus Seller-Sicht: Listings, Auctions und EU-Buyer-Reach.",
+        "tx": "4 % Seller-Commission + ฿1.500 / Listing",
+        "f1": "Listings, Auctions & Sample-Fulfillment",
+        "f2": "Batch-Master + CoA-Anhang",
+        "f3": "Export-Docs / GDP Cold-Chain (Thailand → EU)",
+        "f4": "5 User · 1 Standort"
+      },
+      "producer": {
+        "name": "Producer GMP", "short": "Producer", "persona": "Hersteller / Extraktion · Advanced",
+        "tagline": "GMP-AICert + Thailand/Gateway gebündelt: AI-Audit, ShinrAi-Score und EU-GMP-Pfad.",
+        "tx": "฿35.000 / AI-Video-Audit · ฿59.000 Cert-Setup",
+        "f1": "AI Video Audit + Audit Passport (ShinrAi-Score)",
+        "f2": "EU-GMP-Roadmap + CAPA-Engine",
+        "f3": "อย.- / Narcotics-Permit-Tracking",
+        "f4": "15 User · Multi-Batch · Compliance-Kontakt"
+      },
+      "lab": {
+        "name": "Lab & CoA Partner", "short": "Lab", "persona": "Labor / CoA · Pro",
+        "tagline": "CoA-Master fürs Netzwerk: Verifizierung, Methodik-Transparenz, Batch-Verknüpfung.",
+        "tx": "฿900 / verifiziertem CoA",
+        "f1": "CoA-Upload & -Verifizierung (Master)",
+        "f2": "Lab-Profil im verifizierten Netzwerk",
+        "f3": "Potenz-/Kontaminations-Methodik sichtbar",
+        "f4": "8 User · 1 Lab"
+      },
+      "enterprise": {
+        "name": "Export Enterprise", "short": "Enterprise", "persona": "Producer-Group / Multi-Site · Enterprise",
+        "tagline": "Voller Cross-App-Zugriff inkl. Europe-Portal, API, White-Label und SLA.",
+        "tx": "reduzierte Provisionen + API-Quoten",
+        "f1": "Alle Module + Europe-Portal (EU-Zielseite)",
+        "f2": "Voller API-Zugang, SSO, White-Label",
+        "f3": "Customer Success Manager · SLA 99,9 %",
+        "f4": "∞ User · Multi-Site"
+      }
+    },
+    "tok": {
+      "basic": "Basis", "read": "Lesen", "create": "Erstellen", "contrib": "Beitrag", "master": "Master", "full": "Voll",
+      "seats3": "3 / 1", "seats5": "5 / 1", "seats15": "15 / Multi", "seats8": "8 / 1", "seatsInf": "∞ / Multi"
+    },
+    "feat": {
+      "gateway": "Gateway-Onboarding (TH)", "selfAudit": "Farm Self-Audit", "gacp": "GACP-Roadmap (DTAM)",
+      "vault": "Document Vault", "passport": "Audit Passport", "aiAudit": "AI Video Audit / ShinrAi",
+      "euGmp": "EU-GMP-Roadmap + CAPA", "listings": "Marketplace Listings / Auctions", "sample": "Sample-Request-Fulfillment",
+      "coa": "CoA-Upload & -Verifizierung", "batch": "Batch-Master + Release-State", "export": "Export-Docs / GDP Cold-Chain",
+      "permit": "อย. / Narcotics-Permit-Tracking", "europe": "Europe-Portal (EU-Zielseite)", "api": "API-Zugang", "seats": "User / Standorte"
+    },
+    "add": {
+      "selfAudit": "+฿1.900/Mon", "gacp": "+฿2.500/Mon", "aiAudit": "฿35.000/Audit", "euGmp": "+฿6.900/Mon",
+      "listings": "+฿4.900/Mon", "sample": "+฿1.500/Mon", "coa": "฿900/CoA", "batch": "+฿2.400/Mon",
+      "export": "+฿3.200/Mon", "permit": "+฿2.800/Mon", "europe": "+฿9.900/Mon", "api": "+฿5.900/Mon", "seats": "+฿2.900/Standort"
+    },
+    "addon": {
+      "seller": { "name": "Marketplace-Seller-Zusatz", "price": "฿4.900/Mon + 4 %", "for": "Producer GMP" },
+      "facility": { "name": "Zusätzliche Facility / Farm", "price": "฿2.900/Mon je Standort", "for": "Producer · Enterprise" },
+      "express": { "name": "Express-AI-Video-Audit (72 h)", "price": "+฿15.000", "for": "Producer GMP" },
+      "qp": { "name": "QP-Release-Begleitung (EU)", "price": "฿12.000 / Release", "for": "Producer · Enterprise" },
+      "memo": { "name": "Regulatory-Memo (อย. ↔ EU)", "price": "฿8.000 / Stück", "for": "alle Supply-Rollen" },
+      "matching": { "name": "Priority-Buyer-Matching", "price": "฿6.900/Mon", "for": "Marketplace Exporter" }
+    },
+    "gtm": {
+      "funnel": "Niedrige Einstiegshürde (Farm Starter) füllt den Lieferanten-Funnel — mehr verifizierte Supply bedeutet mehr Marketplace-Volumen.",
+      "scale": "Transaktionserlös skaliert mit Kundenerfolg statt mit Seat-Count — fair für preissensible Thai-SMEs.",
+      "anchor": "Producer GMP ist der Margen-Anker (Abo + hochpreisige Audits + Cert-Setup) und der natürliche Upgrade-Sprung.",
+      "trust": "Das Lab als Quer-Rolle erhöht die Datenqualität im ganzen Netzwerk und stärkt den Trust-Layer für alle."
+    },
+    "faq": {
+      "thb": { "q": "Warum sind die Preise in THB?", "a": "Abos sind lokal in THB kalkuliert. Marketplace-Provisionen werden auf den EUR-Deal berechnet und transparent in THB ausgewiesen und ausgezahlt." },
+      "upgrade": { "q": "Wie funktioniert das Upgrade?", "a": "Farm Starter → Producer GMP → Export Enterprise. Bereits bezahlte GACP-/AI-Audits werden auf das Cert-Setup angerechnet." },
+      "lockin": { "q": "Gibt es einen Lock-in?", "a": "Nein. Audit Passport und Dokumente bleiben portierbar — die Daten gehören dem Producer." },
+      "commission": { "q": "Wann fällt Provision an?", "a": "Nur bei tatsächlichem Verkauf über den Marketplace. Kein Verkauf, keine Provision." },
+      "group": { "q": "Gibt es Mengenrabatte?", "a": "Ja: ab 3 Farms −15 %, ab 10 Farms −25 %. Jährliche Zahlung spart 2 Monate (−17 %)." },
+      "lang": { "q": "In welchen Sprachen ist die Plattform verfügbar?", "a": "Deutsch, Englisch und Thai. Die Sprache lässt sich oben rechts umschalten." }
+    }
+  },
   "guidance": {
     "level": { "label": "Niveau", "simple": "Einfach", "standard": "Standard", "expert": "Experte" },
     "readAloud": "Vorlesen"
@@ -326,6 +439,7 @@
     "navProof": "Proof",
     "navDashboard": "Dashboard",
     "navProcess": "Prozess",
+    "navPricing": "Preise",
     "partnerLogin": "Partner Login",
     "heroBadge": "B2B · Medizinisch · Reguliert",
     "heroTitleLine1": "Deutscher Ansprechpartner für",

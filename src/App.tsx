@@ -22,6 +22,7 @@ import BtmPrescriptions from "./pages/dashboard/BtmPrescriptions";
 import PharmacyReceive from "./pages/dashboard/PharmacyReceive";
 import PharmacyDispense from "./pages/dashboard/PharmacyDispense";
 import OnboardingPage, { ONBOARDING_SKIP_KEY } from "./pages/dashboard/Onboarding";
+import PricingPage from "./pages/Pricing";
 import UniverseBar from "./components/UniverseBar";
 import CrossAppCTA from "./components/CrossAppCTA";
 import RoleGuard from "./components/RoleGuard";
@@ -406,6 +407,7 @@ function LandingPage() {
             <a href="#proof" className="transition hover:text-white">{t("app.navProof", "Proof")}</a>
             <a href="#dashboard-preview" className="transition hover:text-white">{t("app.navDashboard", "Dashboard")}</a>
             <a href="#prozess" className="transition hover:text-white">{t("app.navProcess", "Prozess")}</a>
+            <Link to="/pricing" className="transition hover:text-white">{t("app.navPricing", "Preise")}</Link>
           </div>
           <button
             onClick={() => setMobileMenuOpen((v) => !v)}
@@ -432,6 +434,7 @@ function LandingPage() {
             <a href="#proof" onClick={() => setMobileMenuOpen(false)} className="rounded-xl px-4 py-3 text-sm font-medium text-white/70 transition hover:bg-white/5 hover:text-white">{t("app.navProof", "Proof")}</a>
             <a href="#dashboard-preview" onClick={() => setMobileMenuOpen(false)} className="rounded-xl px-4 py-3 text-sm font-medium text-white/70 transition hover:bg-white/5 hover:text-white">{t("app.navDashboard", "Dashboard")}</a>
             <a href="#prozess" onClick={() => setMobileMenuOpen(false)} className="rounded-xl px-4 py-3 text-sm font-medium text-white/70 transition hover:bg-white/5 hover:text-white">{t("app.navProcess", "Prozess")}</a>
+            <Link to="/pricing" onClick={() => setMobileMenuOpen(false)} className="rounded-xl px-4 py-3 text-sm font-medium text-white/70 transition hover:bg-white/5 hover:text-white">{t("app.navPricing", "Preise")}</Link>
             <div className="my-1 border-t border-white/10" />
             <Link to="/register" onClick={() => setMobileMenuOpen(false)} className="rounded-xl px-4 py-3 text-sm font-semibold text-white/70 transition hover:bg-white/5 hover:text-white">{t("app.partnerRegister", "Zugang beantragen")}</Link>
             <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="mx-4 mb-2 mt-1 rounded-xl bg-cyan-400/10 px-4 py-3 text-center text-sm font-semibold text-cyan-200 transition hover:bg-cyan-400/20">{t("app.partnerLogin", "Partner Login")}</Link>
@@ -1448,6 +1451,7 @@ function App() {
         <BrowserRouter>
           <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/pricing" element={<PricingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/impressum" element={<ImpressumPage />} />
