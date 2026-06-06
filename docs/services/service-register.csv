@@ -79,3 +79,10 @@ PLT-11,E-Mail-Benachrichtigung,Platform,Germany,Plattform,im Code,src/lib/email-
 PLT-12,Webhook-Events,Platform,uebergreifend,Plattform,im Code,src/lib/webhook-events.ts
 BIL-01,Abo-Billing (Stripe) Testzugang/GMP/Enterprise,Billing,uebergreifend,Plattform,LIVE-naeher,src/lib/billing-api.ts (PLANS: Testzugang EUR0->499 / GMP EUR499 / Enterprise EUR1199; createCheckout; checkSubscription)
 BIL-02,Rechnungsstellung/Invoicing,Billing,uebergreifend,Plattform,im Code,src/lib/billing-api.ts (createInvoice; sendInvoice; markInvoicePaid; listInvoices)
+AIHF-01,AIHF Lead-/Referral-Intake,Federation/Partner,AIHF,Mensch,Konzept,MOU CannaWorld<->AIHF 2026-05-21 Klausel 5.1/3.2 (AIHF vermittelt Kunden/Opportunities)
+AIHF-02,AIHF Commission-/Revenue-Share-Abrechnung,Billing,AIHF,Plattform,Konzept,MOU 2026-05-21 Klausel 5.2 (Referral-Fee/Commission/Revenue-Share an AIHF)
+AIHF-03,Co-Promotion & Business-Matching auf AIHEF-Expo,Marketing/Events,AIHF,Mensch,Konzept,MOU 2026-05-21 Klausel 2.7/3.3/4.2 (Konferenzen/Exhibitions/Business-Matching)
+AIHF-04,AIHF Federation-Membership -> Marktzugang (national/intl),Federation/Partner,AIHF,Plattform,Konzept,MOU 2026-05-21 Recitals/2.1/2.3 (Plattform & Coordination-Center fuer Mitglieder)
+AIHF-05,Standards-/Zertifizierungs-Kooperation,Regulatory,AIHF,Mensch,Konzept,MOU 2026-05-21 Klausel 2.6/3.5/4.4 (internationale Standards/Certification-Initiativen)
+AIHF-06,Markt-/Regulatory-Intelligence-Austausch,Data/AI,AIHF,Plattform,Konzept,MOU 2026-05-21 Klausel 2.5/3.4 (Legal-Updates/Market-Intelligence/Tech)
+AIHF-07,Conference-/Seminar-/Training-Kooperation,Education,AIHF,Mensch,Konzept,MOU 2026-05-21 Klausel 2.7/4.3 (Trainings/Akademische Foren/Events)

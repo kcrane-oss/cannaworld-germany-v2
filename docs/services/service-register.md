@@ -36,7 +36,12 @@ sein, nicht meine erfundenen THB-Pakete.
 | Support/Back-Office | 8 | Inbox, Codex-Bridge, Triage (AI), Eskalation, Staff-Rollen |
 | Platform/Identity | 12 | Auth, RBAC, Cross-Login (SSO), Cross-Platform-Sync, Onboarding, Analytics |
 | Billing | 2 | Abo (Stripe), Invoicing |
-| **Summe** | **~80** | |
+| Federation/Partner (AIHF) | 7 | Referral-Intake, Commission/Revenue-Share, AIHEF-Expo-Matching, Membership→Marktzugang, Standards-Kooperation |
+| **Summe** | **~87** | |
+
+> Hinweis: Die 7 **AIHF**-Services (Präfix `AIHF-*`) sind **nicht** code-belegt, sondern
+> **MOU-belegt** (Draft MOU CannaWorld ↔ AIHF, 21.05.2026) — Reife „Konzept". Mehrere mappen
+> in bestehende Domänen (Billing, Regulatory, Education, Data/AI); hier gebündelt dargestellt.
 
 ## Überraschende, bisher nicht eingepreiste Service-Domänen
 Diese tauchten in keinem der bisherigen Paket-Entwürfe auf, sind aber im Code real:
@@ -53,5 +58,7 @@ Diese tauchten in keinem der bisherigen Paket-Entwürfe auf, sind aber im Code r
 Dieses Register ist **nur der Code**. Noch nicht erfasst (für die Discovery-Session):
 - Weitere Repos (Gateway/Thailand, Marketplace, AICert, Europe) via `list_repos`/`add_repo`.
 - Drive (alte Framework-/openclaw-Entwürfe), Gmail (Kunden-Threads), HubSpot (Deals/Line-Items), Kalender.
-- **AIHF** (Asia International Hemp Federation) – noch keine Code-Spur; Service-Quelle separat erfassen
-  (siehe `docs/notes/cannaworld-context.md`).
+- **AIHF** (Asia International **Herbs** Federation) – ✅ jetzt erfasst (7 Services `AIHF-*`,
+  MOU-belegt, 21.05.2026). Personen: Tanadee Pantumkomon (VP BizDev & Compliance), Sunpit
+  Boonyasampan (VP Intl Affairs); AIHEF = zugehörige Expo. Siehe `docs/notes/cannaworld-context.md`.
+  Offen: Klausel-5-Provisionsmodell konkretisieren; Phumchai-Rolle (Präsident) in finaler MOU bestätigen.
