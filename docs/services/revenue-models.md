@@ -13,7 +13,7 @@
 | **GreenChrono-Rate-Card** | Std-Sätze: Modul A 220k · E 120–150k/Audit · F 100k · Retainers 45–120k/Mon · Batch 25–90k · COA 15–45k · Buyer-Fee 2–5% | Drive (THB) [BELEGT] |
 | **Framework v2** | 7 Revenue-Streams + Jahres-Memberships 120k–2,4M | Drive (THB) [BELEGT] |
 | **MOU §5** | AIHF-Referral → CannaWorld zahlt Commission/Revenue-Share | MOU 21.05.2026 [BELEGT] |
-| **Rechnung kilokings** | 220k / 5 Milestones, **M1+M2 abgerechnet** | CW-INV-2026-001 [BELEGT] |
+| **Rechnung kilokings** | M1+M2 **geliefert & fakturiert, aber UNBEZAHLT** (Kunde verweigert Zahlung) — beweist *Leistung*, **nicht** *Erlös* | CW-INV-2026-001 |
 
 ## Erlösmodell je Modul
 
@@ -72,6 +72,9 @@
 - **Marge folgt der Besetzung** (frühere Analyse): Thai-QA günstig, Expat/DE-Auditor teuer → Delivery-Mix
   bestimmt die Marge, nicht der Listenpreis.
 - **VAT 7 % (TH)**, Zahlungsziele (Net 7 Projekt / Net 14 Retainer), Suspension bei Default.
+- ⚠️ **Zahlungsausfall ist real, nicht theoretisch:** kilokings hat M1+M2 erhalten und **verweigert
+  die Zahlung**. Konsequenz fürs Modell: **Vorkasse/Milestone-vor-Lieferung**, Net-7, Liefer-Stopp bei
+  Default und SOW-Unterschrift **vor** Arbeitsbeginn sind Pflicht — gilt besonders fürs Einmal-Projekt M1.
 
 ## Was bewusst NICHT festgelegt ist
 - Keine neuen erfundenen THB/EUR-Zahlen für M10–M12 — nur **Modell-Typ + realer Anker + [offen]-Flag**.

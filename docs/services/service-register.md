@@ -11,14 +11,16 @@ Im Code ist eine **Stripe-Billing-Integration verdrahtet** (`billing-api.ts`: `P
 €0→€499 / GMP €499 / Enterprise €1.199) sind laut Founder **Platzhalter, kein aktiver Tarif**.
 → **Nicht** als Preis-Anker verwenden. Belegt ist nur, dass die *Infrastruktur* existiert — **nicht** die Zahlen.
 
-## ⚠️ Zweiter Fund: das Framework ist REAL (abgerechnet + angeboten)
-Die „theoretischen" Framework-v2-Module werden tatsächlich verkauft — das schließt die
-HubSpot-Lücke („was kaufen Kunden wirklich"):
-- **Echte Rechnung `CW-INV-2026-001`** (kilokings/Josh, Pattaya, 17.05.2026): Thai-GACP-Readiness,
-  220.000 THB / 5 Milestones, **M1+M2 abgerechnet** (Site-Visit, Gap-Report, Blueprint, SOP/Hygiene).
-- **GreenChrono Priority-Partner-Rate-Card** (Rev-A, 03.06.2026): vollständige **Modul-Taxonomie mit
-  Standardsätzen** (Modul A 220k · E 120–150k/Audit · F 100k · Retainers 45–120k/Mon · Buyer-Coordination 2–5%).
-→ Heißt: die echte Erlöslinie ist **Advisory/Readiness/Retainer** — bestätigt die frühere Kostenanalyse.
+## ⚠️ Zweiter Fund: Framework v2 ist real — aber Erlös ≠ gesichert
+Die Framework-v2-Module sind **real** (geliefert + angeboten) — Vorsicht aber bei „bezahlt":
+- **Rechnung `CW-INV-2026-001`** (kilokings/Josh, Pattaya, 17.05.2026): Thai-GACP-Readiness,
+  220.000 THB / 5 Milestones, **M1+M2 geliefert und in Rechnung gestellt — aber UNBEZAHLT**
+  (Kunde **verweigert die Zahlung**). → beweist **gelieferte Leistung**, **nicht** Erlös.
+- **GreenChrono Priority-Partner-Rate-Card** (Rev-A, 03.06.2026) — **vom Founder als real/gültig
+  bestätigt**: Modul-Taxonomie mit **Standardsätzen** (Modul A 220k · E 120–150k/Audit · F 100k ·
+  Retainers 45–120k/Mon · Buyer-Coordination 2–5%). Status: **angeboten** (Rate-Card, nicht „bezahlt").
+→ Erlöslinie ist **Advisory/Readiness/Retainer** — aber **Zahlungsausfall ist real** (kilokings):
+  Net-7/Vorkasse/Suspension-Klauseln (Framework §13) sind **nicht** optional.
 
 ## Domänen-Übersicht (Anzahl Services)
 | Domäne | # | Beispiele |
