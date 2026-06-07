@@ -73,6 +73,8 @@ Dieses Register ist **nur der Code**. Noch nicht erfasst (für die Discovery-Ses
 - Weitere Repos (Gateway/Thailand, Marketplace, AICert, Europe) via `list_repos`/`add_repo`.
 - Drive (alte Framework-/openclaw-Entwürfe), Gmail (Kunden-Threads), HubSpot (Deals/Line-Items), Kalender.
 - **AIHF** (Asia International **Herbs** Federation) – ✅ jetzt erfasst (7 Services `AIHF-*`,
-  MOU-belegt, 21.05.2026). Personen: Tanadee Pantumkomon (VP BizDev & Compliance), Sunpit
-  Boonyasampan (VP Intl Affairs); AIHEF = zugehörige Expo. Siehe `docs/notes/cannaworld-context.md`.
-  Offen: Klausel-5-Provisionsmodell konkretisieren; Phumchai-Rolle (Präsident) in finaler MOU bestätigen.
+  MOU-belegt, 21.05.2026). Unterzeichnung (final, Founder-bestätigt): **Phumchai Kambhato =
+  AIHF-Präsident & Hauptunterzeichner — zugleich Salus-CEO (dieselbe Person)**; **Tanadee
+  Pantumkomon = Zeuge**; Sunpit Boonyasampan = VP Intl Affairs/Kontakt. AIHEF = zugehörige Expo.
+  Siehe `docs/notes/cannaworld-context.md`. ⚠️ Phumchai-Doppelrolle (AIHF×Salus) → Conflict-of-Interest beachten.
+  Offen: Klausel-5-Provisionsmodell konkretisieren.

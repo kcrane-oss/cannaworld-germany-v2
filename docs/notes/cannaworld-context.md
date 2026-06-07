@@ -18,17 +18,22 @@ bereitgestellt. [BELEGT durch MOU], sofern nicht anders markiert.
   **nicht-bindend** außer Klausel 7 (Confidentiality), 8 (IP/Advertising), 9 (Costs), 14 (Law/Thailand).
   **Klausel 5:** AIHF vermittelt Kunden/Opportunities → CannaWorld zahlt **Referral-/Commission-/
   Revenue-Share** (separat zu vereinbaren). → eigene Service-/Revenue-Quelle.
+- **Unterzeichnung (finale Fassung, [durch Founder bestätigt]):**
+  - **Phumchai Kambhato** — **Präsident der AIHF** und **Hauptunterzeichner** der MOU; zugleich
+    **CEO/Direktor von Salus Bioceutical (Thailand)** — **dieselbe Person**. (Schlüsselfigur in beiden Rollen.)
+  - **Tanadee Pantumkomon** — **Zeuge** (Vice President, Business Development & Compliance).
+  - **Sunpit Boonyasampan** — Vice President, International Affairs (Kontakt; sunpitb22@gmail.com;
+    derselbe „hemp.enquiries"-Kontakt aus Gmail).
+  - ⚠️ **Draft ≠ final:** Der mir vorliegende **Entwurf** vom 21.05.2026 listet abweichend Tanadee als
+    Unterzeichner und Sunpit als Zeugen; Phumchai ist im Entwurf nicht genannt. Maßgeblich ist die
+    **finale** Unterzeichnung oben (Founder-Aussage).
 - **CannaWorld-Partei:** Cannaworld Co., Ltd. (Reg. 0105567045912, One Pacific Place, Bangkok;
   Org bezeichnet als „Cannaworld + GMP AiCert"); Vertreter **Kevin Crane, Authorized Director**.
-- **AIHF-Personen laut MOU:**
-  - **Tanadee Pantumkomon** — Vice President, Business Development & Compliance (unterzeichnet für AIHF).
-  - **Sunpit Boonyasampan** — Vice President, International Affairs (Kontakt/Zeuge; sunpitb22@gmail.com;
-    derselbe „hemp.enquiries"-Kontakt aus Gmail).
-- **Phumchai Kambhato:** [durch Founder bestätigt] = **Direktor von Salus Bioceutical (Thailand)**
-  *und* **Präsident der AIHF** (dieselbe Person). ⚠️ Im MOU-Entwurf wird Phumchai **nicht** genannt;
-  ein Präsident ist dort nicht ausgewiesen — also Founder-Aussage, nicht durch dieses Dokument belegt.
 - **AIHEF** = die zur Föderation gehörige **Expo/Forum** [durch Founder bestätigt]. AIHF = Föderation,
   AIHEF = Messe. (Belegt: dein AIHEF-Speaker-/Forum-Bezug via Sunpit Boonyasampan.)
+- **Phumchai-Doppelrolle = wichtig:** Da Phumchai sowohl AIHF-Präsident als auch Salus-CEO ist, sind
+  die AIHF-Partnerschaft und der Salus-Export-Deal über dieselbe Person verbunden — bei Impartiality/
+  Conflict-of-Interest beachten.
 - AIHF ist eine **eigene Organisation** — NICHT identisch mit dem internen Vertical „GMP-AICert".
   Die CannaWorld×AIHF-Integration ist eine eigene Quelle von Services/Aktivitäten.
 
