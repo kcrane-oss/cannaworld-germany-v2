@@ -104,3 +104,58 @@ Transaction-Fee verdienen (M5) — **struktureller Interessenkonflikt**. 3-Phase
 (1) linguistische/prozedurale Trennung, (2) Information-Barriers/Team-Trennung,
 (3) **strukturelle Trennung** der Review-Funktion in eigene Einheit (GMP-AICert) → Ziel ISO 17065.
 ⚠️ Verschärft durch **Phumchai-Doppelrolle** (AIHF-Präsident × Salus-CEO) — s. `cannaworld-context.md`.
+
+---
+
+# Neue Bereiche — Abgrenzung (ENTWURF, noch nicht in Framework v2)
+
+> Diese drei Bereiche sind technisch real (Code) bzw. vertraglich real (MOU), im kommerziellen
+> Framework v2 aber **nicht** definiert/abgegrenzt. Hier als Entwurf im selben Stil — zur Abstimmung,
+> **nicht** finalisiert. Compliance-/B2B-Framing gewahrt (kein Endkunden-/Heilversprechen).
+
+## Modul 10 — Germany Pharmacy Import Gateway (DE-Käuferseite) · [ENTWURF, Code-belegt]
+**Definition:** Compliance-first **B2B-Frontdoor**, der deutsche Marktteilnehmer (Apotheken,
+Pharma-Großhandel, Importeure, Herstellbetriebe) für Medizinal-Cannabis-Import qualifiziert,
+Dokumente prüft und Importpfade bereitstellt. **Kein Endkundenverkauf.**
+**Enthalten:** B2B-Qualifizierung/Onboarding, Rollen-/Lizenz-Check, **BtM-Erlaubnis-Gate**,
+**Managed Import** (Full-Service-Koordination) vs **Direct Import** (Self-Service-Pfad),
+Apotheken-Wareneingang & Abgabe-Workflows, **Batch-Verification** für Apotheken,
+Compliance-/Regulatory-Oberfläche, Document-Vault.
+**NICHT enthalten:** **keine** eigene Einfuhr-/Großhandelserlaubnis (Kunde/Partner ist
+Lizenzinhaber), **kein** Endkunden-/Konsumentenverkauf, **keine** medizinische/therapeutische
+Beratung oder Heilversprechen, keine physische Logistik/Spedition, keine Übernahme von
+Apotheken-/Verschreibungspflichten, keine Behörden-Vertretung.
+*Beleg:* `PharmacyImport/Receive/Dispense`, `RoleGuard(requireBtMLicense)`,
+`germany-btm-license-verify`, `germany-batch-verify`. Register: PHA-01…03, REG-06/07, QUA-02.
+
+## Modul 11 — Trust & Verifiable Proof (Audit Passport / On-Chain / Post-Quantum) · [ENTWURF, Code-belegt]
+**Definition:** Manipulationssicherer, **extern verifizierbarer** Trust-Layer — Audit Passport
+mit **ShinrAi-Score**, verkettete **Post-Quantum**-Audit-Hashes (Dilithium/Kyber) und
+**On-Chain-Anchoring** für Zertifikate/CoA/Batches.
+**Enthalten:** tamper-evident Audit-Trail, öffentlich verifizierbarer Zertifikats-/CoA-/Report-Check,
+ShinrAi-Trust-Score, On-Chain-Anchor-Nachweis, Identity/KYC-Bindung.
+**NICHT enthalten:** **kein** Token/Coin/Krypto-Asset, **keine** Finanz-/Verwahr-Dienstleistung,
+**keine** akkreditierte Zertifizierung/Rechtsbeweis, **keine** Garantie der Produktqualität
+(nur Integrität der **Aufzeichnung**), keine Sicherheit gegen falsche Eingabedaten (garbage-in).
+*Beleg:* `AuditPassport`, `quantum-crypto.ts` (Dilithium/Kyber/chainedAuditHash/verifyAuditChain),
+`audit-status-api` (verifyCertificate/Report), Marketplace-On-Chain. Register: TRU-01/05/06, QUA-03.
+
+## Modul 12 — AIHF Federation Partner Layer · [ENTWURF, MOU-belegt]
+**Definition:** Kooperations-/Vermittlungs-Layer mit der **Asia International Herbs Federation**
+(MOU 21.05.2026) — Lead-Vermittlung, Provisions-/Revenue-Share, Expo-/Business-Matching (AIHEF),
+Membership-Marktzugang, Standards-/Zertifizierungs-Kooperation.
+**Enthalten:** Referral-Intake, **Commission-/Revenue-Share-Abrechnung** (Klausel 5),
+AIHEF-Co-Promotion/Business-Matching, Federation-Membership → Marktzugang, Standards-Kooperation,
+Markt-/Regulatory-Intelligence-Austausch, Conference-/Training-Kooperation.
+**NICHT enthalten:** **non-exklusiv** (keine Exklusivbindung), **keine** bindende Liefer-/
+Abnahmeverpflichtung (MOU non-binding außer §7/8/9/14), Logo/Marke nur mit **schriftlicher
+Zustimmung** (§8), jede Partei trägt eigene Kosten (§9), **AIHF zertifiziert nicht**, ersetzt keine
+regulierten Pflichten.
+⚠️ **Conflict:** Phumchai-Doppelrolle (AIHF-Präsident × Salus-CEO) — Offenlegung nötig.
+*Beleg:* MOU CannaWorld↔AIHF 2026-05-21. Register: AIHF-01…07.
+
+## Offene Punkte zu den 3 Entwurfs-Modulen
+- **M10:** kommerzielles Modell der DE-Seite offen — Abo, Per-Import-Fee, oder Provision? (Stripe-Tiers
+  €499/€1199 existieren bereits im Code — als Ausgangspunkt prüfen.)
+- **M11:** Trust als eigenes Produkt (verkaufter Verify-Zugang/Siegel) vs. reines Enabler-Feature?
+- **M12:** Klausel-5-Provisionshöhe noch „separat zu vereinbaren" — konkretisieren.

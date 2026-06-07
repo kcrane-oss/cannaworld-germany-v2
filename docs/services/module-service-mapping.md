@@ -43,5 +43,6 @@ abgegrenzt — Kandidaten für „neue Module" oder bewusst interne Enabler:
 2. **Drei Bereiche sind technisch real, kommerziell aber undefiniert:** (a) Germany/Apotheke,
    (b) Trust/On-Chain/Post-Quantum, (c) AIHF-Partnerschaft. → das sind die echten „neuen Module".
 3. **M9 ist die größte Definition-↔-Code-Lücke** (kommerziell sauber, technisch kaum gestützt).
-4. Empfehlung: bevor neue Pakete — diese 3 undefinierten Bereiche **gleich abgrenzen** (includes/
-   excludes im Stil von `service-definitions.md`), damit Definition + Abgrenzung **vollständig** wird.
+4. ✅ **Erledigt:** Die 3 Bereiche sind jetzt als **M10 (Germany/Apotheke), M11 (Trust/On-Chain/
+   Post-Quantum), M12 (AIHF)** in `service-definitions.md` abgegrenzt (Entwurf) — Definition +
+   includes/excludes vollständig. Offen bleibt nur das **kommerzielle Modell** je Bereich (s. dort).
