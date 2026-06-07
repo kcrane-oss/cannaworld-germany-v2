@@ -155,7 +155,7 @@ regulierten Pflichten.
 *Beleg:* MOU CannaWorld↔AIHF 2026-05-21. Register: AIHF-01…07.
 
 ## Offene Punkte zu den 3 Entwurfs-Modulen
-- **M10:** kommerzielles Modell der DE-Seite offen — Abo, Per-Import-Fee, oder Provision? (Stripe-Tiers
-  €499/€1199 existieren bereits im Code — als Ausgangspunkt prüfen.)
+- **M10:** kommerzielles Modell der DE-Seite offen — Abo, Per-Import-Fee, oder Provision? (Hinweis:
+  die Stripe-Preise im Code sind **Platzhalter**, kein realer Tarif — **nicht** als Anker verwenden.)
 - **M11:** Trust als eigenes Produkt (verkaufter Verify-Zugang/Siegel) vs. reines Enabler-Feature?
 - **M12:** Klausel-5-Provisionshöhe noch „separat zu vereinbaren" — konkretisieren.

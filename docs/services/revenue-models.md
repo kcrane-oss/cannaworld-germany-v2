@@ -9,7 +9,7 @@
 ## Belegbasis (die echten Anker)
 | Anker | Inhalt | Quelle |
 |---|---|---|
-| **Stripe-Tiers** | Testzugang €0→**€499** · GMP **€499/Mon** · Enterprise **€1.199/Mon** | Code `billing-api.ts` [BELEGT] |
+| ~~Stripe-Tiers~~ **GESTRICHEN** | Stripe-Integration ist verdrahtet, aber die `PLANS`-Preise (€499/€1199) sind **Platzhalter, kein realer Tarif** [Founder] — **kein** Anker | Code `billing-api.ts` |
 | **GreenChrono-Rate-Card** | Std-Sätze: Modul A 220k · E 120–150k/Audit · F 100k · Retainers 45–120k/Mon · Batch 25–90k · COA 15–45k · Buyer-Fee 2–5% | Drive (THB) [BELEGT] |
 | **Framework v2** | 7 Revenue-Streams + Jahres-Memberships 120k–2,4M | Drive (THB) [BELEGT] |
 | **MOU §5** | AIHF-Referral → CannaWorld zahlt Commission/Revenue-Share | MOU 21.05.2026 [BELEGT] |
@@ -28,7 +28,7 @@
 | **M7 Batch/COA/CAPA/DD** | **Per-Case** | Batch 25–90k · COA 15–45k · Buyer-DD 35–120k | [BELEGT] |
 | **M8 AI Compliance Desk** | **Abo-Retainer (Tiers)** | 18k–45k/Mon (Framework) | [BELEGT] |
 | **M9 Authority Liaison** | **Per-Application** (+ per Klärungsrunde) | 35–80k / Application | [BELEGT] |
-| **M10 Germany/Apotheke** | **Abo (DE-SaaS) + optional Per-Import-Fee** | Anker: Stripe **€499 / €1.199** | **[Entwurf]** |
+| **M10 Germany/Apotheke** | **Abo (DE-SaaS) + optional Per-Import-Fee** | **kein belegter Tarif** (Stripe-Preise = Platzhalter) | **[Entwurf/offen]** |
 | **M11 Trust & Proof** | **Enabler (gebündelt) + Premium-Add-on „Verified Passport"** | kein Std-Preis | **[Entwurf/offen]** |
 | **M12 AIHF Partner Layer** | **Revenue-Share an AIHF** (Cost-of-Sale) auf vermittelte Deals | §5 „separat" · Decke: Framework-Success-Fee 2–5 % | **[Entwurf/offen]** |
 
@@ -46,9 +46,9 @@
 ### M10 — Germany / Apotheke [Entwurf]
 - **Modell:** monatliches **B2B-SaaS-Abo** für qualifizierte DE-Teilnehmer + **Per-Import-Fee** für
   Managed Import (Full-Service-Koordination); Direct Import im Abo enthalten.
-- **Anker:** die **bereits live im Code** existierenden Stripe-Tiers €499 (GMP) / €1.199 (Enterprise) —
-  **kein** neuer erfundener Preis nötig, sondern den Ist-Zustand bestätigen/ausrollen.
-- **Offen:** Höhe der Per-Import-Fee; ob Provision auf vermitteltes Importvolumen statt Fee.
+- **Anker:** **keiner.** Die Stripe-Integration ist zwar im Code verdrahtet, aber die `PLANS`-Preise
+  (€499/€1199) sind **Platzhalter und kein realer Tarif** [Founder] — nicht verwenden.
+- **Offen:** der **gesamte** DE-Preis (Abo-Höhe + Per-Import-Fee bzw. Provision) — gehört dir, kein Anker vorhanden.
 
 ### M11 — Trust & Proof [Entwurf]
 - **Modell-Optionen:** (a) **Enabler** — in M2/M4/M5 eingepreist, kein Einzelverkauf;

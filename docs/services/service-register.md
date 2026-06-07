@@ -5,20 +5,11 @@
 > keine Preise** — nur was der Code tatsächlich implementiert. Seed für die große
 > Discovery-Session (Code ist nur EINE Quelle; Drive/Gmail/CRM/weitere Repos fehlen noch).
 
-## ⚠️ Wichtigster Fund (widerlegt eine Annahme)
-Im Code existiert **bereits ein echtes 3-Stufen-Stripe-Billing** — nicht das erfundene
-5-Pakete-THB-Modell:
-
-| Plan | Preis | Stripe |
-|---|---|---|
-| **Testzugang** | €0 Trial → danach €499 | `price_1T5Dtj…` / `prod_U3KY0…` |
-| **GMP** | **€499** | `price_1T5DMF…` / `prod_U3K0Y…` |
-| **Enterprise** | **€1.199** | `price_1T5DMW…` / `prod_U3K08…` |
-
-Quelle: `src/lib/billing-api.ts` (`PLANS`) + `createCheckout/checkSubscription/openCustomerPortal`
-+ vollständiges Invoicing (`createInvoice/sendInvoice/markInvoicePaid/listInvoices`).
-→ **In EUR, monatlich, 3 Tiers.** Bevor wir neue Pakete bauen, muss das hier der Ausgangspunkt
-sein, nicht meine erfundenen THB-Pakete.
+## ⚠️ Korrektur: Stripe-Preise sind Platzhalter (kein realer Tarif)
+Im Code ist eine **Stripe-Billing-Integration verdrahtet** (`billing-api.ts`: `PLANS`,
+`createCheckout/checkSubscription`, Invoicing). **Aber** die hinterlegten Preise (Testzugang
+€0→€499 / GMP €499 / Enterprise €1.199) sind laut Founder **Platzhalter, kein aktiver Tarif**.
+→ **Nicht** als Preis-Anker verwenden. Belegt ist nur, dass die *Infrastruktur* existiert — **nicht** die Zahlen.
 
 ## ⚠️ Zweiter Fund: das Framework ist REAL (abgerechnet + angeboten)
 Die „theoretischen" Framework-v2-Module werden tatsächlich verkauft — das schließt die
