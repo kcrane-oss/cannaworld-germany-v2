@@ -20,6 +20,15 @@ Quelle: `src/lib/billing-api.ts` (`PLANS`) + `createCheckout/checkSubscription/o
 → **In EUR, monatlich, 3 Tiers.** Bevor wir neue Pakete bauen, muss das hier der Ausgangspunkt
 sein, nicht meine erfundenen THB-Pakete.
 
+## ⚠️ Zweiter Fund: das Framework ist REAL (abgerechnet + angeboten)
+Die „theoretischen" Framework-v2-Module werden tatsächlich verkauft — das schließt die
+HubSpot-Lücke („was kaufen Kunden wirklich"):
+- **Echte Rechnung `CW-INV-2026-001`** (kilokings/Josh, Pattaya, 17.05.2026): Thai-GACP-Readiness,
+  220.000 THB / 5 Milestones, **M1+M2 abgerechnet** (Site-Visit, Gap-Report, Blueprint, SOP/Hygiene).
+- **GreenChrono Priority-Partner-Rate-Card** (Rev-A, 03.06.2026): vollständige **Modul-Taxonomie mit
+  Standardsätzen** (Modul A 220k · E 120–150k/Audit · F 100k · Retainers 45–120k/Mon · Buyer-Coordination 2–5%).
+→ Heißt: die echte Erlöslinie ist **Advisory/Readiness/Retainer** — bestätigt die frühere Kostenanalyse.
+
 ## Domänen-Übersicht (Anzahl Services)
 | Domäne | # | Beispiele |
 |---|---|---|
@@ -37,7 +46,12 @@ sein, nicht meine erfundenen THB-Pakete.
 | Platform/Identity | 12 | Auth, RBAC, Cross-Login (SSO), Cross-Platform-Sync, Onboarding, Analytics |
 | Billing | 2 | Abo (Stripe), Invoicing |
 | Federation/Partner (AIHF) | 7 | Referral-Intake, Commission/Revenue-Share, AIHEF-Expo-Matching, Membership→Marktzugang, Standards-Kooperation |
-| **Summe** | **~87** | |
+| Advisory/Commercial (`ADV-*`) | 27 | GACP-Readiness (Modul A–F), Retainers, Buyer/Export-Desk, Batch/COA, QP-Support, Brokerage, Farmer-Talk |
+| **Summe** | **~114** | |
+
+> Die 27 **ADV-**-Services sind **Drive-belegt** (Framework v2, GreenChrono-Rate-Card, **echte Rechnung
+> CW-INV-2026-001**, QP-Support-Modell, Farmer-Speech) — nicht code-belegt. Reife: `live/abgerechnet`
+> (kilokings M1+M2), `angeboten` (GreenChrono-Standardsätze), `Konzept` (QP/Brokerage).
 
 > Hinweis: Die 7 **AIHF**-Services (Präfix `AIHF-*`) sind **nicht** code-belegt, sondern
 > **MOU-belegt** (Draft MOU CannaWorld ↔ AIHF, 21.05.2026) — Reife „Konzept". Mehrere mappen

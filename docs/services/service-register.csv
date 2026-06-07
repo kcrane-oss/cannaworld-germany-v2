@@ -86,3 +86,30 @@ AIHF-04,AIHF Federation-Membership -> Marktzugang (national/intl),Federation/Par
 AIHF-05,Standards-/Zertifizierungs-Kooperation,Regulatory,AIHF,Mensch,Konzept,MOU 2026-05-21 Klausel 2.6/3.5/4.4 (internationale Standards/Certification-Initiativen)
 AIHF-06,Markt-/Regulatory-Intelligence-Austausch,Data/AI,AIHF,Plattform,Konzept,MOU 2026-05-21 Klausel 2.5/3.4 (Legal-Updates/Market-Intelligence/Tech)
 AIHF-07,Conference-/Seminar-/Training-Kooperation,Education,AIHF,Mensch,Konzept,MOU 2026-05-21 Klausel 2.7/4.3 (Trainings/Akademische Foren/Events)
+ADV-01,GACP Readiness Preparation (Modul A; 5 Milestones),Advisory,Gateway/TH,Mensch,live/abgerechnet,Drive Invoice CW-INV-2026-001 (kilokings/Josh M1+M2) + GreenChrono Rate-Card (Modul A 220k)
+ADV-02,Farm-/Facility-Site-Inspektion,Advisory,Gateway/TH,Mensch,live/abgerechnet,Drive Invoice CW-INV-2026-001 Pos.1 (Site Visit Pattaya 6h)
+ADV-03,GACP Gap-Assessment-Report (DTAM + EU-GACP),Advisory,Gateway/TH,Mensch,live/abgerechnet,Drive Invoice CW-INV-2026-001 Pos.3 (8h Report)
+ADV-04,GACP Facility-Layout / Blueprint-Digitalisierung,Facility,Gateway/TH,Mensch,live/abgerechnet,Drive Invoice CW-INV-2026-001 Pos.5 (Hand-Layout -> GACP-konform)
+ADV-05,Facility-Upgrade Monitoring & Advisory (remote/WhatsApp),Advisory,Gateway/TH,Mensch,live/abgerechnet,Drive Invoice CW-INV-2026-001 Pos.6
+ADV-06,SOP-/Hygiene-Mapping & On-Site-Verifizierung,Quality/GxP,Gateway/TH,Mensch,live/abgerechnet,Drive Invoice CW-INV-2026-001 Pos.7
+ADV-07,Projekt-Koordination / Ongoing Consulting (Calls; DTAM-Termin),Advisory,Gateway/TH,Mensch,live/abgerechnet,Drive Invoice CW-INV-2026-001 Pos.8
+ADV-08,Supplier Onboarding & Initial Qualification (Modul F),Trade/Marketplace,Gateway/TH,Mensch,angeboten,Drive GreenChrono Rate-Card (Modul F 100k one-off)
+ADV-09,Semiannual Supplier Compliance Audit (Modul E),Trust/Audit,Gateway/TH,Mensch,angeboten,Drive GreenChrono Rate-Card (Modul E 120-150k/Audit)
+ADV-10,Verified Supplier Retainer,Trade/Marketplace,Gateway/TH,Mensch,angeboten,Drive GreenChrono Rate-Card (75k/Mon)
+ADV-11,Compliance Management Retainer,Quality/GxP,Gateway/TH,Mensch,angeboten,Drive GreenChrono Rate-Card (45k/Mon)
+ADV-12,Export & Buyer Desk Retainer,Trade/Marketplace,Gateway/TH,Mensch,angeboten,Drive GreenChrono Rate-Card (120k/Mon)
+ADV-13,Buyer Onboarding,Trade/Marketplace,Gateway/TH,Mensch,angeboten,Drive GreenChrono Rate-Card (25-75k)
+ADV-14,Buyer Due Diligence Review,Trade/Marketplace,Gateway/TH,Mensch,angeboten,Drive GreenChrono Rate-Card (35-120k)
+ADV-15,Restricted Data Room Access (pro Buyer),Platform,Gateway/TH,Plattform,angeboten,Drive GreenChrono Rate-Card (15-50k/Buyer/Mon)
+ADV-16,Buyer Q&A Coordination (stundenweise),Trade/Marketplace,Gateway/TH,Mensch,angeboten,Drive GreenChrono Rate-Card (2.5-5k/h)
+ADV-17,Export Readiness (Light/Standard),Trade/Marketplace,Gateway/TH,Mensch,angeboten,Drive GreenChrono Rate-Card (60-180k)
+ADV-18,Batch Review (Light/Standard),Quality/GxP,Gateway/TH,Mensch,angeboten,Drive GreenChrono Rate-Card (25-90k/Batch)
+ADV-19,COA Sample Planning,Quality/GxP,Gateway/TH,Mensch,angeboten,Drive GreenChrono Rate-Card (15-25k/Sample)
+ADV-20,COA Completeness Review,Quality/GxP,Gateway/TH,Mensch,angeboten,Drive GreenChrono Rate-Card (15-45k)
+ADV-21,Buyer Coordination Fee (fix oder 2-5%),Billing,Gateway/TH,Mensch,angeboten,Drive GreenChrono Rate-Card + Framework v2 Modul 5
+ADV-22,Licence Verification Pack,Regulatory,Gateway/TH,Mensch,angeboten,Drive GreenChrono Rate-Card (in Modul A enthalten)
+ADV-23,QP Support & Export-Gate Control (Chargenfreigabe),Quality/GxP,GMP-AICert,Mensch,Konzept,Drive QP-Support-Service-Modell-Exportkontrolle
+ADV-24,EU-GMP Roadmap Support,Regulatory,Europe,Mensch,angeboten,Drive Framework v2 + Salus Rev-H (EU-GMP Roadmap Side-Letter)
+ADV-25,Triangular Transaction Structuring (Supplier/EU-Buyer/Toller),Trade/Marketplace,Europe,Mensch,Konzept,Drive Salus Rev-H §3 (Triangular Supply Template)
+ADV-26,Off-Take & Brokerage (Volume-Corridor),Trade/Marketplace,Europe,Mensch,Konzept,Drive Framework v2 Modul 5 + Salus Rev-H §7 (Off-Take & Brokerage Master)
+ADV-27,Farmer Education Stage-Talk (Post-Harvest; Live-Interpreter),Education,Gateway/TH,Mensch,live,Drive PostHarvest_FarmerSpeech_EN (Speaker Kevin + DyDy)
