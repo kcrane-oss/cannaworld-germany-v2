@@ -13,7 +13,7 @@ import type { LucideIcon } from "lucide-react";
 import { useOnboardingGate, type GateStatus } from "@/hooks/useOnboardingGate";
 
 const SUPPORT_MAILTO =
-  "mailto:info@cannaworld-germany.de?subject=Onboarding%20Support";
+  "mailto:support@cannaworld-thailand.com?subject=Onboarding%20Support";
 
 const VISIBLE_STATUSES = new Set<GateStatus>([
   "no_onboarding",

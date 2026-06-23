@@ -87,7 +87,7 @@ const RoleGuard = ({ allowedRoles, redirectOnDeny = false, requireBtMLicense = f
         <p className="text-base font-semibold text-white">BtM-Lizenz erforderlich</p>
         <p className="max-w-md text-sm leading-6 text-white/55">
           Diese Sektion erfordert eine verifizierte BtM-Erlaubnis nach §3 BtMG. Bitte
-          Lizenznummer beim CannaWorld-Team registrieren lassen unter <a className="text-cyan-300 hover:text-cyan-200" href="mailto:info@cannaworld-germany.de">info@cannaworld-germany.de</a>.
+          Lizenznummer beim CannaWorld-Team registrieren lassen unter <a className="text-cyan-300 hover:text-cyan-200" href="mailto:support@cannaworld-thailand.com">support@cannaworld-thailand.com</a>.
         </p>
       </div>
     );
@@ -107,7 +107,7 @@ const RoleGuard = ({ allowedRoles, redirectOnDeny = false, requireBtMLicense = f
         <p className="text-base font-semibold text-white">Zugriff verweigert</p>
         <p className="max-w-md text-sm leading-6 text-white/55">
           Diese Sektion erfordert eine spezifische CannaWorld-Rolle ({allowedRoles.join(", ")}). Bei Bedarf bitte
-          freischalten lassen unter <a className="text-cyan-300 hover:text-cyan-200" href="mailto:info@cannaworld-germany.de">info@cannaworld-germany.de</a>.
+          freischalten lassen unter <a className="text-cyan-300 hover:text-cyan-200" href="mailto:support@cannaworld-thailand.com">support@cannaworld-thailand.com</a>.
         </p>
       </div>
     );

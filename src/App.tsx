@@ -19,6 +19,7 @@ import PharmacyDispense from "./pages/dashboard/PharmacyDispense";
 import OnboardingPage, { ONBOARDING_SKIP_KEY } from "./pages/dashboard/Onboarding";
 import UniverseBar from "./components/UniverseBar";
 import CrossAppCTA from "./components/CrossAppCTA";
+import SupportMailButton from "./components/SupportMailButton";
 import RoleGuard from "./components/RoleGuard";
 import { AuthProvider } from "./hooks/useAuth";
 import { useOnboardingGate } from "./hooks/useOnboardingGate";
@@ -373,7 +374,7 @@ function LandingPage() {
                 src="/cannaworld-lockup.png"
                 alt="CannaWorld AI Cert Tech"
                 className="h-20 w-auto object-contain md:h-24 [filter:drop-shadow(0_0_24px_rgba(34,211,238,0.18))_invert(1)]"
-                fetchPriority="high"
+                loading="eager"
                 decoding="async"
               />
             </picture>
@@ -688,6 +689,7 @@ function ProtectedDashboard() {
 
 function DashboardLayout() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
   async function handleSignOut() {
@@ -695,7 +697,7 @@ function DashboardLayout() {
       const supabase = await loadSupabase();
       await supabase.auth.signOut();
     } finally {
-      window.location.href = "/login";
+      navigate("/login");
     }
   }
 
@@ -950,7 +952,7 @@ function RegisterPage() {
               und melden uns innerhalb von 24 Stunden mit den nächsten Schritten.
             </p>
             <p className="mt-3 text-xs leading-6 text-white/45">
-              Sollte sich kein E-Mail-Programm geöffnet haben, schreiben Sie uns bitte direkt an info@cannaworld-germany.de.
+              Sollte sich kein E-Mail-Programm geöffnet haben, schreiben Sie uns bitte direkt an <a href="mailto:info@cannaworld-germany.de" className="text-cyan-300 hover:underline">info@cannaworld-germany.de</a>.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link to="/" className="rounded-xl bg-cyan-300 px-5 py-2.5 text-sm font-black text-[#061016] transition hover:bg-cyan-200">
@@ -1237,6 +1239,7 @@ function App() {
         </Route>
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
+          <SupportMailButton />
         </BrowserRouter>
       </AuthProvider>
     </QueryClientProvider>
