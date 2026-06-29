@@ -13,3 +13,13 @@
 html { scroll-behavior: smooth; }
 body { background: #0a0a0f; color: #f0f0f5; font-family: 'Inter', system-ui, sans-serif; }
 .glass { background: rgba(17,17,22,0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
+
+/* Mobile: lift the floating Support button above the fixed bottom tab bar
+   (BottomNav, h-16 = 64px) so it doesn't cover the last tab. !important overrides
+   the component's inline style; scoped via :has() so public pages without a bottom
+   nav keep the button at its normal position. */
+@media (max-width: 767px) {
+  body:has(.bottom-nav) .fab-support {
+    bottom: calc(80px + env(safe-area-inset-bottom)) !important;
+  }
+}

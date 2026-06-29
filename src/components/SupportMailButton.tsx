@@ -12,6 +12,7 @@ export default function SupportMailButton() {
     <a
       href={href}
       aria-label="Email CannaWorld support"
+      className="fab-support"
       style={{
         position: "fixed",
         bottom: "24px",
