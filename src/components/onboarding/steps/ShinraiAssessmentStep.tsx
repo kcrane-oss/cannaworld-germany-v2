@@ -114,7 +114,7 @@ export function ShinraiAssessmentStep({ data, roleConfig, onSave, onBack, onSubm
           <Shield className="h-6 w-6 text-amber-500" />
         </div>
         <div>
-          <h2 className="text-xl font-semibold">{t("ob.shinrai_title", "ShinrAi Self-Assessment")}</h2>
+          <h2 className="text-xl font-semibold">{t("ob.shinrai_title", "Readiness Self-Assessment")}</h2>
           <p className="text-sm text-muted-foreground">
             {t("ob.shinrai_desc", "Rate your current compliance readiness across all dimensions")}
           </p>

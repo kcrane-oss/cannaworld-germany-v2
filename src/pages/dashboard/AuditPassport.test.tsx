@@ -51,6 +51,7 @@ describe("AuditPassport page", () => {
   it("renders header + 4 passport signal tiles", () => {
     render(<AuditPassport />);
     expect(screen.getByText("Audit Passport")).toBeInTheDocument();
+    expect(screen.getByText(/ersetzen keine Zertifizierung/)).toBeInTheDocument();
     expect(screen.getByText("Facility Proof")).toBeInTheDocument();
     expect(screen.getByText("Document Proof")).toBeInTheDocument();
     expect(screen.getByText("ISO Proof")).toBeInTheDocument();
@@ -60,6 +61,7 @@ describe("AuditPassport page", () => {
   it("renders supplier row with 4/4 passport signals met", () => {
     render(<AuditPassport />);
     expect(screen.getByText("Anchor Farm")).toBeInTheDocument();
+    expect(screen.getByText(/Readiness 84/)).toBeInTheDocument();
     expect(screen.getByText(/4 von 4 Passport-Signalen erfüllt/)).toBeInTheDocument();
   });
 

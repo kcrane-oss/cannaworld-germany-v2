@@ -114,7 +114,7 @@
     "select": "Auswählen...",
     "service_types": "Leistungsarten",
     "shinrai_desc": "Bewerten Sie Ihre aktuelle Compliance-Bereitschaft über alle Dimensionen hinweg",
-    "shinrai_title": "ShinrAi-Selbsteinschätzung",
+    "shinrai_title": "Readiness-Selbsteinschätzung",
     "sign_now": "Jetzt unterzeichnen",
     "state": "Bundesland / Provinz",
     "status_review": "In Prüfung",
@@ -212,7 +212,7 @@
     "intakeDisclaimer": "Keine Abgabe an Endkunden. Keine Sortenwerbung. Keine Therapie- oder Heilversprechen. Reiner B2B-/Compliance-/Import-Intake."
   },
   "analytics": {
-    "heroDescription": "Snapshot der deutschen Pipeline: Trade-Cases, Chargen, Supplier-Qualität, Inventar-Health. Tiefere Time-Series, Cohort-Analysen und ShinrAi-Scoring im AICert Analytics-Layer.",
+    "heroDescription": "Snapshot der deutschen Pipeline: Trade-Cases, Chargen, Supplier-Qualität und Inventar-Health. Tiefere Time-Series, Cohort-Analysen und Readiness-Auswertungen liegen im AICert Analytics-Layer.",
     "openAicertAnalytics": "AICert Analytics öffnen",
     "kpiActiveTradeCases": "Aktive Trade-Cases",
     "kpiBatchesInReview": "Chargen in Prüfung",
@@ -224,7 +224,7 @@
     "footerNote": "Hinweis: Daten kommen direkt aus dem geteilten CannaWorld Gateway / Supabase Backend (live, kein Cache). Für historische Trends, Vorhersage-Modelle und Cohort-Analysen die AI-gestützte AICert Analytics-Engine nutzen."
   },
   "auditPassport": {
-    "heroDescription": "Prüfbarer Vertrauenspass für Supplier, Facility, Batch und Dokumentenstand. Generiert und live berechnet im GMP-AICert AI-Audit-Stack (ShinrAi 6-Achsen-Score).",
+    "heroDescription": "Prüfbarer Vertrauenspass für Supplier, Facility, Batch und Dokumentenstand. Die Kennzahlen sind Readiness-Signale und ersetzen keine Zertifizierung, QP-Freigabe oder behördliche Entscheidung.",
     "fullAuditsInAicert": "Vollständige Audits in AICert",
     "hintIsoOrHigher": "ISO 9001 oder höher",
     "hintQualifiedOrConditional": "Qualified oder Conditional",

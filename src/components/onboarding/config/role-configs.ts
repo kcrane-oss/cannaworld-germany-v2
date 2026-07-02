@@ -1,6 +1,6 @@
 /**
  * Role-specific onboarding configurations.
- * Each role has its own step titles, document types, ShinrAi assessment axes, etc.
+ * Each role has its own step titles, document types, readiness assessment axes, etc.
  */
 
 export type OnboardingRole =
@@ -57,7 +57,7 @@ export interface RoleConfig {
 }
 
 // ──────────────────────────────────────────────
-// Shared ShinrAi question template
+// Shared readiness question template
 // ──────────────────────────────────────────────
 const q = (key: string, label: string) => ({
   key,

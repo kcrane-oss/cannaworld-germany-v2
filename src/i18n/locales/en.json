@@ -114,7 +114,7 @@
     "select": "Select...",
     "service_types": "Service Types",
     "shinrai_desc": "Rate your current compliance readiness across all dimensions",
-    "shinrai_title": "ShinrAi Self-Assessment",
+    "shinrai_title": "Readiness Self-Assessment",
     "sign_now": "Sign Now",
     "state": "State / Province",
     "status_review": "Under Review",
@@ -212,7 +212,7 @@
     "intakeDisclaimer": "No dispensing to end consumers. No strain advertising. No therapeutic or healing claims. Strictly B2B / compliance / import intake."
   },
   "analytics": {
-    "heroDescription": "Snapshot of the German pipeline: Trade Cases, batches, supplier quality, inventory health. Deeper time-series, cohort analyses and ShinrAi scoring in the AICert analytics layer.",
+    "heroDescription": "Snapshot of the German pipeline: Trade Cases, batches, supplier quality and inventory health. Deeper time-series, cohort analysis and readiness analytics live in the AICert analytics layer.",
     "openAicertAnalytics": "Open AICert Analytics",
     "kpiActiveTradeCases": "Active Trade Cases",
     "kpiBatchesInReview": "Batches in review",
@@ -224,7 +224,7 @@
     "footerNote": "Note: data comes directly from the shared CannaWorld Gateway / Supabase backend (live, no cache). For historical trends, forecasting models and cohort analyses, use the AI-powered AICert analytics engine."
   },
   "auditPassport": {
-    "heroDescription": "Verifiable trust passport for supplier, facility, batch and documentation status. Generated and computed live in the GMP-AICert AI audit stack (ShinrAi 6-axis score).",
+    "heroDescription": "Verifiable trust passport for supplier, facility, batch and documentation status. The metrics are readiness signals and do not replace certification, QP release or regulatory decisions.",
     "fullAuditsInAicert": "Full audits in AICert",
     "hintIsoOrHigher": "ISO 9001 or higher",
     "hintQualifiedOrConditional": "Qualified or Conditional",

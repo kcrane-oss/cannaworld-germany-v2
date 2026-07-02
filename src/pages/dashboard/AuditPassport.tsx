@@ -32,7 +32,7 @@ export default function AuditPassport() {
             <p className="mt-4 max-w-2xl text-base leading-7 text-white/60">
               {t(
                 "auditPassport.heroDescription",
-                "Prüfbarer Vertrauenspass für Supplier, Facility, Batch und Dokumentenstand. Generiert und live berechnet im GMP-AICert AI-Audit-Stack (ShinrAi 6-Achsen-Score).",
+                "Prüfbarer Vertrauenspass für Supplier, Facility, Batch und Dokumentenstand. Die Kennzahlen sind Readiness-Signale und ersetzen keine Zertifizierung, QP-Freigabe oder behördliche Entscheidung.",
               )}
             </p>
           </div>
@@ -49,8 +49,8 @@ export default function AuditPassport() {
 
       <section className="grid gap-3 md:grid-cols-4">
         {[
-          { icon: Shield, label: "Facility Proof", hint: "GMP-Score ≥ 70" },
-          { icon: FileText, label: "Document Proof", hint: "Doc-Score ≥ 70" },
+          { icon: Shield, label: "Facility Proof", hint: "Facility evidence reviewed" },
+          { icon: FileText, label: "Document Proof", hint: "Document set reviewed" },
           { icon: ShieldCheck, label: "ISO Proof", hint: t("auditPassport.hintIsoOrHigher", "ISO 9001 oder höher") },
           { icon: Fingerprint, label: "Qualified Status", hint: t("auditPassport.hintQualifiedOrConditional", "Qualified oder Conditional") },
         ].map((s) => {
@@ -105,13 +105,13 @@ export default function AuditPassport() {
                       <div className="text-xs font-bold uppercase tracking-wider text-purple-200">{s.supplier_number}</div>
                       <div className="mt-1 truncate text-sm font-bold text-white">{s.name}</div>
                       <div className="text-xs text-white/45">
-                        {[s.category, s.country].filter(Boolean).join(" · ")} · Overall {s.overall_score ?? "—"}
+                        {[s.category, s.country].filter(Boolean).join(" · ")} · Readiness {s.overall_score ?? "—"}
                       </div>
                     </div>
                     <div className="flex flex-wrap items-center gap-1.5">
                       {[
-                        { ok: sig.facilityProof, icon: Shield, title: "Facility ≥70" },
-                        { ok: sig.docProof, icon: FileText, title: "Docs ≥70" },
+                        { ok: sig.facilityProof, icon: Shield, title: "Facility evidence threshold" },
+                        { ok: sig.docProof, icon: FileText, title: "Document evidence threshold" },
                         { ok: sig.isoProof, icon: ShieldCheck, title: "ISO" },
                         { ok: sig.qualified, icon: Fingerprint, title: "Qualified" },
                       ].map(({ ok, icon: Icon, title }) => (
