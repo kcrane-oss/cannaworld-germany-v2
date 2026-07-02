@@ -29,7 +29,7 @@ const TARGETS: Record<
     url: "https://gmp-aicert.com",
     icon: Shield,
     tint: "purple",
-    rationale: "Facility-/Batch-/Document-Proof und ShinrAi-Score werden im GMP-AICert AI-Audit-Stack erzeugt.",
+    rationale: "Facility-, Batch- und Document-Proof werden im GMP-AICert Audit-Stack als reviewbare Readiness-Signale erzeugt.",
   },
   compliance: {
     app: "AICert",

@@ -77,7 +77,7 @@ export function RoleOnboardingWizard({ role }: Props) {
         <p className="text-muted-foreground">
           Tier: <strong className="text-foreground">{data.tier.toUpperCase()}</strong>
           {data.shinrai_score !== null && (
-            <> · ShinrAi Score: <strong className="text-foreground">{data.shinrai_score}</strong></>
+            <> · Readiness Score: <strong className="text-foreground">{data.shinrai_score}</strong></>
           )}
         </p>
       </div>
@@ -217,7 +217,7 @@ export function RoleOnboardingWizard({ role }: Props) {
           />
         )}
 
-        {/* Streamlined 3-step flow (Farm etc.): Step 2 = Docs, Step 3 = ShinrAi */}
+        {/* Streamlined 3-step flow (Farm etc.): Step 2 = Docs, Step 3 = readiness assessment */}
         {isStreamlined && step === 2 && (
           <LicensingStep
             data={data}

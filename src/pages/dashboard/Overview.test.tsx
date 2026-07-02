@@ -69,6 +69,14 @@ describe("Overview page", () => {
     expect(screen.getByText("12")).toBeInTheDocument(); // inventory items
   });
 
+  it("renders the first-wave operational lanes", () => {
+    render(wrap(<Overview />));
+    expect(screen.getByText("Farm Fast Lane")).toBeInTheDocument();
+    expect(screen.getByText("P0 User-Ops")).toBeInTheDocument();
+    expect(screen.getByText("Premium Lane")).toBeInTheDocument();
+    expect(screen.getByText("Ops Command")).toBeInTheDocument();
+  });
+
   it("renders Quick Pivot CTAs to Gateway / Marketplace / AICert", () => {
     render(wrap(<Overview />));
     expect(screen.getByText(/Gateway öffnen/)).toBeInTheDocument();

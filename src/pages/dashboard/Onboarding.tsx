@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowRight, ArrowRightLeft, Import, Loader2, Pill } from "lucide-react";
+import { ArrowRight, ArrowRightLeft, Import, Loader2, Pill, Sprout } from "lucide-react";
 import { RoleOnboardingWizard } from "@/components/onboarding/RoleOnboardingWizard";
 import { useOnboardingGate } from "@/hooks/useOnboardingGate";
 import {
@@ -13,6 +13,12 @@ import {
 export const ONBOARDING_SKIP_KEY = "germany_onboarding_skipped";
 
 const ROLE_CHOICES: { role: OnboardingRole; icon: typeof Pill; title: string; desc: string }[] = [
+  {
+    role: "farm",
+    icon: Sprout,
+    title: "Thai Farm Fast Lane",
+    desc: "Niedriger Einstieg für Farmen: Basisdaten, vorhandene Dokumente und kurzer GACP-Readiness-Check.",
+  },
   {
     role: "pharmacy",
     icon: Pill,
@@ -89,7 +95,7 @@ export default function OnboardingPage() {
 
   // No entry yet → role picker.
   return (
-    <div className="mx-auto max-w-3xl space-y-8 py-2">
+    <div className="mx-auto max-w-5xl space-y-8 py-2">
       <div className="text-center">
         <h1 className="text-3xl font-black tracking-tight text-white">
           {t("ob.picker_title", "Willkommen bei CannaWorld Germany")}
@@ -97,11 +103,11 @@ export default function OnboardingPage() {
         <p className="mx-auto mt-3 max-w-xl text-white/60">
           {t(
             "ob.picker_subtitle",
-            "Ein kurzes Onboarding qualifiziert Ihren Import-Pfad, Ihre Dokumente und Ihren Compliance-Status. Wählen Sie zum Start Ihre Rolle.",
+            "Ein kurzes Onboarding qualifiziert Farm-Einstieg, Import-Pfad, Dokumente und Compliance-Status. Wählen Sie zum Start Ihre Rolle.",
           )}
         </p>
       </div>
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {ROLE_CHOICES.map((choice) => (
           <button
             key={choice.role}

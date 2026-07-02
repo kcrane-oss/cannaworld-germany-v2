@@ -6,6 +6,8 @@ import {
   ArrowRight,
   Clock,
   ClipboardCheck,
+  FileCheck,
+  MailCheck,
   Package,
   Truck,
   Warehouse,
@@ -13,6 +15,8 @@ import {
   Loader2,
   Network,
   LayoutDashboard,
+  ShieldCheck,
+  Sprout,
 } from "lucide-react";
 
 interface KpiTile {
@@ -101,6 +105,49 @@ export default function Overview() {
     },
   ];
 
+  const firstWave = [
+    {
+      key: "farm-fast-lane",
+      label: "Farm Fast Lane",
+      title: "Thai-Farm-Einstieg sichtbar",
+      text: "3-Schritt-Readiness für Basisdaten, vorhandene Nachweise und kurze GACP-Lückenprüfung.",
+      action: "Farm-Onboarding starten",
+      href: "/dashboard/onboarding",
+      icon: Sprout,
+      tone: "border-emerald-300/25 bg-emerald-300/10 text-emerald-100",
+    },
+    {
+      key: "mail-auth",
+      label: "P0 User-Ops",
+      title: "Mail, Auth und Notifications",
+      text: "Login, Review-Hinweise, Support und Delivery-Ledger bleiben Release-Gates vor jedem Go-live.",
+      action: "Support-Kanal testen",
+      href: "mailto:support@cannaworld-thailand.com?subject=CannaWorld%20User-Ops%20Check",
+      icon: MailCheck,
+      tone: "border-amber-300/25 bg-amber-300/10 text-amber-100",
+    },
+    {
+      key: "premium-lane",
+      label: "Premium Lane",
+      title: "Selected supplier pathway",
+      text: "Buyer-ready Evidence Packs, QP-nahe Prüfpunkte und klare Claim-Grenzen vor kommerziellem Matching.",
+      action: "Audit Passport öffnen",
+      href: "/dashboard/audit-passport",
+      icon: ShieldCheck,
+      tone: "border-cyan-300/25 bg-cyan-300/10 text-cyan-100",
+    },
+    {
+      key: "command-center",
+      label: "Ops Command",
+      title: "Eine Führungsoberfläche",
+      text: "Trade-Cases, Batches, QP, Logistics, Warehouse und Recalls werden hier als Management-Queue gebündelt.",
+      action: "KPIs aktualisieren",
+      onClick: () => refetch(),
+      icon: FileCheck,
+      tone: "border-blue-300/25 bg-blue-300/10 text-blue-100",
+    },
+  ];
+
   return (
     <div className="space-y-7">
       <OnboardingStatusPanel />
@@ -144,6 +191,51 @@ export default function Overview() {
           </div>
         </div>
       )}
+
+      <section className="grid gap-4 xl:grid-cols-4">
+        {firstWave.map((lane) => {
+          const Icon = lane.icon;
+          const body = (
+            <div className={`h-full rounded-2xl border p-5 transition hover:-translate-y-0.5 ${lane.tone}`}>
+              <div className="mb-4 flex items-center justify-between gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-black/25">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <span className="rounded-full border border-white/10 bg-black/20 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/65">
+                  {lane.label}
+                </span>
+              </div>
+              <h2 className="text-base font-bold text-white">{lane.title}</h2>
+              <p className="mt-2 min-h-[4.5rem] text-sm leading-6 text-white/58">{lane.text}</p>
+              <div className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.16em] text-white/75">
+                {lane.action} <ArrowRight className="h-3.5 w-3.5" />
+              </div>
+            </div>
+          );
+
+          if (lane.onClick) {
+            return (
+              <button key={lane.key} type="button" onClick={lane.onClick} className="text-left">
+                {body}
+              </button>
+            );
+          }
+
+          if (lane.href.startsWith("mailto:")) {
+            return (
+              <a key={lane.key} href={lane.href} className="block">
+                {body}
+              </a>
+            );
+          }
+
+          return (
+            <Link key={lane.key} to={lane.href} className="block">
+              {body}
+            </Link>
+          );
+        })}
+      </section>
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {tiles.map((tile) => {
@@ -207,7 +299,7 @@ export default function Overview() {
             className="rounded-2xl border border-purple-400/25 bg-purple-400/5 p-4 text-sm text-purple-100 transition hover:border-purple-300/55 hover:bg-purple-400/10"
           >
             <div className="font-bold">AICert öffnen →</div>
-            <div className="text-xs text-purple-100/70">Audit Passport, ShinrAi Score, CAPA</div>
+            <div className="text-xs text-purple-100/70">Audit Passport, Readiness Analytics, CAPA</div>
           </a>
         </div>
       </section>

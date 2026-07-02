@@ -6,6 +6,7 @@ describe("Compliance page", () => {
   it("renders heading + framework switcher", () => {
     render(<Compliance />);
     expect(screen.getByText("EU-GMP / GDP / GACP")).toBeInTheDocument();
+    expect(screen.getByText(/evidence-basierte Readiness-Prüfung/)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "EU-GMP" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "GDP" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "GACP" })).toBeInTheDocument();
