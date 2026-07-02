@@ -18,6 +18,7 @@ import PharmacyReceive from "./pages/dashboard/PharmacyReceive";
 import PharmacyDispense from "./pages/dashboard/PharmacyDispense";
 import OnboardingPage, { ONBOARDING_SKIP_KEY } from "./pages/dashboard/Onboarding";
 import UniverseBar from "./components/UniverseBar";
+import { ImpressumPage, DatenschutzPage } from "./pages/Legal";
 import CrossAppCTA from "./components/CrossAppCTA";
 import SupportMailButton from "./components/SupportMailButton";
 import RoleGuard from "./components/RoleGuard";
@@ -74,6 +75,7 @@ import {
   ShoppingBag,
   Sparkles,
   Stethoscope,
+  Sprout,
   Truck,
   User,
   Warehouse,
@@ -90,8 +92,8 @@ async function loadSupabase(): Promise<SupabaseClient> {
 } 
 
 const stats = [
-  ["DE", "B2B Intake", "app.statsB2bIntake"],
-  ["EU-GMP", "Dokumentenpfad", "app.statsDocumentPath"],
+  ["DE", "Buyer Intake", "app.statsB2bIntake"],
+  ["TH", "Farm Fast Lane", "app.statsFarmFastLane"],
   ["GDP", "Lieferkette", "app.statsSupplyChain"],
   ["GACP", "Cultivation Proof", "app.statsCultivationProof"],
   ["QP", "Release Track", "app.statsReleaseTrack"],
@@ -119,6 +121,13 @@ const cards = [
     title: "Dokumente zuerst",
     textKey: "app.cardDocumentsFirstText",
     text: "CoA, Batch Records, EU-GMP/GDP/GACP-Nachweise und Release-Pfad vor kommerzieller Diskussion.",
+  },
+  {
+    icon: Sprout,
+    titleKey: "app.cardFarmFastLaneTitle",
+    title: "Thai Farm Fast Lane",
+    textKey: "app.cardFarmFastLaneText",
+    text: "Farmen steigen niedrigschwellig ein: Basisdaten, vorhandene Nachweise und ein kurzer GACP-Readiness-Check ohne Zertifizierungsversprechen.",
   },
   {
     icon: ShieldCheck,
@@ -168,7 +177,7 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     eyebrow: "Qualified Supply",
     title: "Marketplace",
     description: "Vorgeprüfte internationale Batches, Supplier-Profile und Dokumentenstände für deutsche B2B-Abnehmer.",
-    stats: ["EU-ready Batch Pool", "CoA / Batch Records", "Supplier Trust Score", "Sample Request Flow"],
+    stats: ["EU-ready Batch Pool", "CoA / Batch Records", "Supplier Evidence", "Sample Request Flow"],
     actions: ["Batch anfragen", "Supplier vergleichen", "Sample Request vorbereiten"],
   },
   "pharmacy-import": {
@@ -402,10 +411,14 @@ function LandingPage() {
               <a href="mailto:info@cannaworld-germany.de?subject=CannaWorld Germany Import-Anfrage" className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-8 py-4 font-semibold text-white transition hover:border-cyan-300/50 hover:bg-white/10">
                 {t("app.heroCtaImportRequest", "Import-Anfrage stellen")}
               </a>
+              <a href="mailto:support@cannaworld-thailand.com?subject=Thai%20Farm%20Fast%20Lane" className="inline-flex items-center justify-center gap-2 rounded-xl border border-emerald-300/25 bg-emerald-300/10 px-8 py-4 font-semibold text-emerald-100 transition hover:border-emerald-300/55 hover:bg-emerald-300/15">
+                <Sprout className="h-5 w-5" />
+                {t("app.heroCtaFarmLane", "Thai Farm Fast Lane")}
+              </a>
             </div>
 
             <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
-              {[[ShieldCheck, t("app.heroPillDocumentPath", "EU-GMP/GDP Dokumentenpfad")], [Truck, t("app.heroPillSupplyChain", "Import- & Lieferketten-Koordination")], [Globe2, t("app.heroPillThailandGermany", "Thailand → Deutschland/EU")]].map(([Icon, label]) => (
+              {[[ShieldCheck, t("app.heroPillDocumentPath", "EU-GMP/GDP Dokumentenpfad")], [Sprout, t("app.heroPillFarmLane", "Thai Farm Fast Lane")], [Truck, t("app.heroPillSupplyChain", "Import- & Lieferketten-Koordination")], [Globe2, t("app.heroPillThailandGermany", "Thailand → Deutschland/EU")]].map(([Icon, label]) => (
                 <div key={String(label)} className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-white/65">
                   <Icon className="h-3.5 w-3.5 text-cyan-300" /> {String(label)}
                 </div>
@@ -458,7 +471,7 @@ function LandingPage() {
             <h2 className="mt-5 text-3xl font-extrabold tracking-tight md:text-5xl">{t("app.proofTitle", "Vertrauensanker für deutsche Apotheken und Importeure.")}</h2>
             <p className="mt-4 text-white/58">{t("app.proofSubtitle", "CannaWorld Germany ist die deutsche Eintrittsstelle: klare Ansprechpartner, regulatorische Sprache und saubere Weiterleitung in passende Workstreams.")}</p>
           </div>
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {cards.map((card) => (
               <div key={card.title} className="rounded-3xl border border-white/10 bg-white/[0.045] p-7 shadow-[0_0_30px_rgba(34,211,238,0.06)] backdrop-blur transition hover:border-cyan-300/30">
                 <card.icon className="mb-5 h-9 w-9 text-cyan-300" />
@@ -527,7 +540,12 @@ function LandingPage() {
       </main>
 
       <footer className="relative border-t border-white/10 py-10 text-center text-xs text-white/35">
-        © 2026 CannaWorld Germany · Berlin · Bangkok · B2B Compliance Intake
+        <div className="space-x-4">
+          <Link to="/impressum" className="transition hover:text-white/70">{t("app.footerImprint", "Impressum")}</Link>
+          <Link to="/datenschutz" className="transition hover:text-white/70">{t("app.footerPrivacy", "Datenschutz")}</Link>
+          <a href="mailto:info@cannaworld-germany.de" className="transition hover:text-white/70">{t("app.footerContact", "Kontakt")}</a>
+        </div>
+        <div className="mt-3">© 2026 CannaWorld Germany · Berlin · Bangkok · B2B Compliance Intake</div>
       </footer>
     </div>
   );
@@ -914,11 +932,16 @@ function RegisterPage() {
       wholesaler: "Pharma-Großhandel",
       importer: "Importeur",
       manufacturer: "Herstellbetrieb",
+      farm: "Thai Farm / Supplier",
     };
+    const isFarmLane = form.role === "farm";
+    const recipient = isFarmLane ? "support@cannaworld-thailand.com" : "info@cannaworld-germany.de";
     const body = [
-      "Neue B2B-Zugangsanfrage über cannaworld-germany.de/register",
+      isFarmLane
+        ? "Neue Thai Farm Fast Lane Anfrage über cannaworld-germany.de/register"
+        : "Neue B2B-Zugangsanfrage über cannaworld-germany.de/register",
       "",
-      `Firma / Apotheke: ${form.company}`,
+      `Firma / Farm / Apotheke: ${form.company}`,
       `Rolle: ${roleLabels[form.role] ?? form.role}`,
       `Ansprechpartner: ${form.contactName}`,
       `E-Mail: ${form.email}`,
@@ -930,8 +953,10 @@ function RegisterPage() {
       "Nachricht:",
       form.message || "—",
     ].join("\n");
-    const subject = `B2B-Zugangsanfrage — ${form.company || "Neue Anfrage"}`;
-    window.location.href = `mailto:info@cannaworld-germany.de?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const subject = isFarmLane
+      ? `Thai Farm Fast Lane — ${form.company || "Neue Anfrage"}`
+      : `B2B-Zugangsanfrage — ${form.company || "Neue Anfrage"}`;
+    window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setSubmitted(true);
   }
 
@@ -948,11 +973,16 @@ function RegisterPage() {
             <h1 className="mt-5 text-3xl font-black tracking-tight">Vielen Dank für Ihre Anfrage</h1>
             <p className="mt-4 text-sm leading-7 text-white/70">
               Ihr E-Mail-Programm wurde mit allen Angaben geöffnet. Bitte senden Sie die vorbereitete Mail an
-              <span className="font-semibold text-cyan-200"> info@cannaworld-germany.de</span> ab — wir prüfen Ihre B2B-Qualifizierung
+              <span className="font-semibold text-cyan-200"> {form.role === "farm" ? "support@cannaworld-thailand.com" : "info@cannaworld-germany.de"}</span> ab — wir prüfen Ihre B2B-Qualifizierung
               und melden uns innerhalb von 24 Stunden mit den nächsten Schritten.
             </p>
             <p className="mt-3 text-xs leading-6 text-white/45">
-              Sollte sich kein E-Mail-Programm geöffnet haben, schreiben Sie uns bitte direkt an <a href="mailto:info@cannaworld-germany.de" className="text-cyan-300 hover:underline">info@cannaworld-germany.de</a>.
+              Sollte sich kein E-Mail-Programm geöffnet haben, schreiben Sie uns bitte direkt an{" "}
+              {form.role === "farm" ? (
+                <a href="mailto:support@cannaworld-thailand.com" className="text-cyan-300 hover:underline">support@cannaworld-thailand.com</a>
+              ) : (
+                <a href="mailto:info@cannaworld-germany.de" className="text-cyan-300 hover:underline">info@cannaworld-germany.de</a>
+              )}.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link to="/" className="rounded-xl bg-cyan-300 px-5 py-2.5 text-sm font-black text-[#061016] transition hover:bg-cyan-200">
@@ -972,20 +1002,20 @@ function RegisterPage() {
             <Badge>B2B-Qualifizierung</Badge>
             <h1 className="mt-5 text-3xl font-black tracking-tight">Zugang beantragen</h1>
             <p className="mt-3 text-sm leading-6 text-white/56">
-              CannaWorld Germany ist ein reguliertes B2B-Gateway für medizinischen Cannabis-Import. Der Zugang wird nach
-              kurzer Qualifizierung manuell freigeschaltet — Apotheken, Großhandel, Importeure und Herstellbetriebe willkommen.
+              CannaWorld Germany ist ein reguliertes B2B-Gateway für medizinischen Cannabis-Import. Thai-Farmen können über
+              die Fast Lane eine frühe Readiness-Prüfung starten; Käufer und Importrollen werden manuell qualifiziert.
             </p>
 
             <div className="mt-7 grid gap-4 md:grid-cols-2">
               <label className="block text-sm font-bold text-white/70">
-                Firma / Apotheke <span className="text-cyan-300">*</span>
+                Firma / Farm / Apotheke <span className="text-cyan-300">*</span>
                 <input
                   type="text"
                   required
                   value={form.company}
                   onChange={(e) => update("company", e.target.value)}
                   className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition placeholder:text-white/30 focus:border-cyan-300/60"
-                  placeholder="z. B. Stern-Apotheke München"
+                  placeholder="z. B. Stern-Apotheke München oder Golden Thai Farm"
                 />
               </label>
 
@@ -1001,6 +1031,7 @@ function RegisterPage() {
                   <option value="wholesaler">Pharma-Großhandel</option>
                   <option value="importer">Importeur</option>
                   <option value="manufacturer">Herstellbetrieb</option>
+                  <option value="farm">Thai Farm / Supplier Fast Lane</option>
                 </select>
               </label>
 
@@ -1093,7 +1124,7 @@ function RegisterPage() {
             </button>
             <p className="mt-4 text-xs leading-5 text-white/45">
               Mit dem Absenden öffnet sich Ihr E-Mail-Programm mit vorbereiteten Angaben. Wir melden uns innerhalb von
-              24 Stunden mit den nächsten Schritten zur B2B-Qualifizierung.
+              24 Stunden mit den nächsten Schritten zur B2B-Qualifizierung oder Farm-Readiness-Vorprüfung.
             </p>
           </form>
         )}
@@ -1112,6 +1143,8 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/impressum" element={<ImpressumPage />} />
+        <Route path="/datenschutz" element={<DatenschutzPage />} />
                 <Route path="/dashboard" element={<ProtectedDashboard />}>
           <Route index element={<DashboardIndex />} />
           <Route path="onboarding" element={<OnboardingPage />} />

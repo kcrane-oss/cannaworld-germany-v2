@@ -80,7 +80,7 @@ export function ShinraiScoreRadar({ axes, totalScore, rating, size = 280, classN
           );
         })}
         <text x={cx} y={cy - 8} textAnchor="middle" className="fill-foreground text-2xl font-bold">{totalScore}</text>
-        <text x={cx} y={cy + 12} textAnchor="middle" className="fill-muted-foreground text-[10px]">ShinrAi</text>
+        <text x={cx} y={cy + 12} textAnchor="middle" className="fill-muted-foreground text-[10px]">Readiness</text>
       </svg>
       <div className={cn("text-sm font-medium", ratingInfo.color)}>
         {ratingInfo.stars} {ratingInfo.label}
