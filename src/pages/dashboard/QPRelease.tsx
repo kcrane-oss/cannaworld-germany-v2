@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -7,11 +6,10 @@ import type { Json } from "@/integrations/supabase/types";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { ClipboardCheck, CheckCircle2, XCircle, Clock, Loader2, Network, FileSignature } from "lucide-react";
+import { ClipboardCheck, CheckCircle2, XCircle, Clock, Loader2, Network, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
-import QPReleaseChecklistDialog from "@/components/QPReleaseChecklistDialog";
-import type { ChecklistState } from "@/lib/annex16-checklist";
+
+const AICERT_ORIGIN = "https://gmp-aicert.com";
 
 type WorkflowMilestone = { key?: string; status?: string; [key: string]: Json | undefined };
 type QpStatus = "pending" | "released" | "rejected";
@@ -26,9 +24,8 @@ const getMilestones = (value: Json): WorkflowMilestone[] => {
 export default function QPRelease() {
   const { t } = useTranslation();
   const { user } = useAuth();
-  const [checklistFor, setChecklistFor] = useState<{ id: string; ref: string; milestones: WorkflowMilestone[] } | null>(null);
 
-  const { data: cases, isLoading, refetch } = useQuery({
+  const { data: cases, isLoading } = useQuery({
     queryKey: ["qp-trade-cases", user?.id],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -66,52 +63,6 @@ export default function QPRelease() {
     }
   };
 
-  const markAsReleased = async (id: string, currentMilestones: WorkflowMilestone[], checklist?: ChecklistState) => {
-    try {
-      const releasedAt = new Date().toISOString();
-      const updated = currentMilestones.map((m) =>
-        m.key === "qp_release"
-          ? {
-              ...m,
-              status: "done",
-              released_at: releasedAt,
-              released_by: user?.email ?? null,
-              annex16_checklist: (checklist as unknown as Json) ?? null,
-            }
-          : m,
-      );
-      const { error } = await supabase.from("trade_cases").update({ workflow_milestones: updated }).eq("id", id);
-      if (error) throw error;
-      toast.success("Batch released by QP", { description: "Annex 16 checklist persisted on milestone metadata." });
-      refetch();
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Unable to release batch");
-    }
-  };
-
-  const markAsRejected = async (id: string, currentMilestones: WorkflowMilestone[], reason: string) => {
-    try {
-      const rejectedAt = new Date().toISOString();
-      const updated = currentMilestones.map((m) =>
-        m.key === "qp_release"
-          ? {
-              ...m,
-              status: "rejected",
-              rejected_at: rejectedAt,
-              rejected_by: user?.email ?? null,
-              rejection_reason: reason,
-            }
-          : m,
-      );
-      const { error } = await supabase.from("trade_cases").update({ workflow_milestones: updated }).eq("id", id);
-      if (error) throw error;
-      toast.success("Batch rejected by QP", { description: reason.slice(0, 80) });
-      refetch();
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Unable to reject batch");
-    }
-  };
-
   const stats = {
     pending: cases?.filter((tradeCase) => getQpStatus(getMilestones(tradeCase.workflow_milestones)) === 'pending').length || 0,
     released: cases?.filter((tradeCase) => getQpStatus(getMilestones(tradeCase.workflow_milestones)) === 'released').length || 0,
@@ -123,7 +74,7 @@ export default function QPRelease() {
       <div className="flex justify-between items-end">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">{t("qpRelease.title")}</h1>
-          <p className="text-muted-foreground">Heavyweight QP Release Hub: Release readiness based on actual Trade Cases.</p>
+          <p className="text-muted-foreground">Read-only release overview. Authoritative QP decisions are created in AICert with credential and SCA checks.</p>
         </div>
       </div>
 
@@ -161,7 +112,7 @@ export default function QPRelease() {
         <CardHeader>
           <CardTitle>{t("qpRelease.batchInfo", "Batch Releases")}</CardTitle>
           <CardDescription>
-            Live Trade Case milestone tracking for Qualified Persons.
+            Trade Case status mirror. This page cannot create or alter a QP release.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -203,15 +154,15 @@ export default function QPRelease() {
                       </TableCell>
                       <TableCell>{getStatusBadge(qpStatus)}</TableCell>
                       <TableCell className="text-right">
-                        {qpStatus === "pending" && (
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            className="h-7 text-xs border-cyan-500/30 text-cyan-600 hover:bg-cyan-50 dark:hover:bg-cyan-500/10"
-                            onClick={() => setChecklistFor({ id: tc.id, ref: tc.batch_number || tc.case_number || tc.id.slice(0, 8), milestones })}
-                          >
-                            <FileSignature className="mr-1 h-3 w-3" /> QP Checklist öffnen
+                        {qpStatus === "pending" && tc.batch_id && (
+                          <Button asChild size="sm" variant="outline" className="h-7 text-xs border-primary/30 text-primary hover:bg-primary/10">
+                            <a href={`${AICERT_ORIGIN}/qp-release/eu_qp/${tc.batch_id}`}>
+                              <ExternalLink className="mr-1 h-3 w-3" /> Controlled QP review öffnen
+                            </a>
                           </Button>
+                        )}
+                        {qpStatus === "pending" && !tc.batch_id && (
+                          <span className="text-xs text-amber-500">Batch-Verknüpfung erforderlich</span>
                         )}
                         {qpStatus === "released" && (
                           <span className="text-xs text-muted-foreground">Completed</span>
@@ -229,20 +180,6 @@ export default function QPRelease() {
         </CardContent>
       </Card>
 
-      {checklistFor && (
-        <QPReleaseChecklistDialog
-          open={!!checklistFor}
-          onOpenChange={(open) => !open && setChecklistFor(null)}
-          caseId={checklistFor.id}
-          caseRef={checklistFor.ref}
-          onRelease={async (state) => {
-            await markAsReleased(checklistFor.id, checklistFor.milestones, state);
-          }}
-          onReject={async (reason) => {
-            await markAsRejected(checklistFor.id, checklistFor.milestones, reason);
-          }}
-        />
-      )}
     </div>
   );
 }
