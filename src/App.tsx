@@ -139,7 +139,7 @@ const steps = [
   [Mail, "Import-Anfrage", "Bedarf, Rolle, Zielmenge, Zeithorizont und Ausgangslage erfassen.", "app.stepImportRequestTitle", "app.stepImportRequestText"],
   [ClipboardCheck, "Qualifizierung", "Prüfen, ob Apotheke, Großhandel, Importeur oder Herstellbetrieb in den Prozess fällt.", "app.stepQualificationTitle", "app.stepQualificationText"],
   [ShieldCheck, "Dokumentenprüfung", "EU-GMP/GDP/GACP, CoA, Batch-Dokumentation, QP-/Release-Pfad einordnen.", "app.stepDocumentReviewTitle", "app.stepDocumentReviewText"],
-  [PackageCheck, "Supply Matching", "Geeignete geprüfte Lieferpartner und Chargen über das CannaWorld-Ökosystem vorbereiten.", "app.stepSupplyMatchingTitle", "app.stepSupplyMatchingText"],
+  [PackageCheck, "Supply Matching", "Dokumentierte Lieferkandidaten und Chargen über das CannaWorld-Ökosystem für die weitere Prüfung vorbereiten.", "app.stepSupplyMatchingTitle", "app.stepSupplyMatchingText"],
 ] as const;
 
 const dashboardNav = [
@@ -178,8 +178,8 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
   marketplace: {
     eyebrow: "Qualified Supply",
     title: "Marketplace",
-    description: "Vorgeprüfte internationale Batches, Supplier-Profile und Dokumentenstände für deutsche B2B-Abnehmer.",
-    stats: ["EU-ready Batch Pool", "CoA / Batch Records", "Supplier Trust Score", "Sample Request Flow"],
+    description: "Nach Evidenzstatus eingeordnete internationale Lieferkandidaten, Supplier-Profile und Dokumentenstände für deutsche B2B-Abnehmer.",
+    stats: ["Readiness-tagged Batches", "CoA / Batch Records", "Supplier Evidence", "Sample Request Flow"],
     actions: ["Batch anfragen", "Supplier vergleichen", "Sample Request vorbereiten"],
     color: "blue",
   },
@@ -222,7 +222,7 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     eyebrow: "Apotheken-Workflow",
     title: "Apotheken-Import",
     description: "Zwei Pfade für den deutschen Markt: 'Managed Import' (Full-Service über das CannaWorld-Ökosystem) oder 'Direct Import' (Apotheke importiert selbst + QP Freigabe).",
-    stats: ["Managed Import Route", "Direct Import (Bester Deal)", "QP Release Integration", "GDP-konforme Lieferung"],
+    stats: ["Managed Import Route", "Direct Import Option", "QP Review Workflow", "GDP-facing Lieferdokumentation"],
     actions: ["Managed Import starten", "Direct Import Kalkulation", "QP-Freigabe anfragen"],
   },
   "trade-cases": {
@@ -310,7 +310,7 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     eyebrow: "Gateway Service Transfer",
     title: "Gateway Services for Germany",
     description: "Gateway-Angebote für die deutsche B2B-Rolle übersetzt: Intake, Qualifizierung, Dokumentenprüfung und Trade Matching — ohne eigenes Germany-Backend.",
-    stats: ["24 Service-Bausteine", "4 Service-Layer", "DE Intake", "Gateway Handoff"],
+    stats: ["Modularer Servicekatalog", "Kontrollierte Workflows", "DE Intake", "Gateway Handoff"],
     actions: ["Service auswählen", "Import-Fit prüfen", "Gateway-Handoff vorbereiten"],
     color: "emerald",
   },
@@ -360,7 +360,7 @@ const serviceGroups = [
     title: "Trade & Logistics",
     subtitle: "Von qualifizierter Nachfrage zu qualifizierter Supply.",
     items: [
-      [Building2, "Supplier Qualification", "Nur vorgeprüfte Farmen, Hersteller und Partner in den DE-Funnel."],
+      [Building2, "Supplier Qualification", "Farmen, Hersteller und Partner nach dokumentiertem Evidenzstatus in den DE-Funnel einordnen."],
       [Stethoscope, "Lab / CoA Review", "Potenz, Kontamination, Methodik und Plausibilität verständlich prüfen."],
       [Truck, "GDP Logistics", "Transport-, Zoll- und Cold-Chain-Readiness für Deutschland abbilden."],
       [ClipboardCheck, "QP Release Support", "Realistisch einschätzen, ob ein Batch QP-fähig ist."],
@@ -471,7 +471,7 @@ function LandingPage() {
                 </span>
               </h1>
               <p className="mx-auto max-w-2xl text-lg leading-8 text-white/62 md:text-xl lg:mx-0">
-                {t("app.heroSubtitle", "Für Apotheken, Großhandel, Importeure und Herstellbetriebe, die geprüfte internationale Supply, belastbare Dokumentation und einen klaren EU-GMP/GDP/GACP-Pfad benötigen.")}
+                {t("app.heroSubtitle", "Für Apotheken, Großhandel, Importeure und Herstellbetriebe, die evidenzgeprüfte Lieferkandidaten, belastbare Dokumentation und einen klaren EU-GMP/GDP/GACP-Readiness-Pfad benötigen.")}
               </p>
             </div>
 
@@ -491,6 +491,9 @@ function LandingPage() {
                 </div>
               ))}
             </div>
+            <p className="max-w-2xl text-xs leading-5 text-white/45">
+              {t("app.claimBoundary", "CannaWorld strukturiert Evidenz und Readiness. Zertifizierung, Importgenehmigung, QP-Freigabe, Behördenentscheidung und Transaktion werden nicht garantiert.")}
+            </p>
           </div>
 
           <div className="relative">
@@ -593,7 +596,7 @@ function LandingPage() {
             <h2 className="text-3xl font-extrabold md:text-5xl">{t("app.contactTitle", "Import-Anfrage stellen.")}</h2>
             <p className="mx-auto mt-4 max-w-2xl text-white/58">{t("app.contactSubtitle", "Kurze Qualifizierung für Apotheken, Großhändler, Importeure und QA-/QP-nahe Entscheider mit realem medizinischem Bedarf.")}</p>
             <div className="mx-auto mt-8 grid max-w-2xl gap-3 text-left text-sm text-white/62 sm:grid-cols-2">
-              {[[Database, t("app.contactFeatureSupply", "Geprüfte internationale Supply")], [BadgeCheck, t("app.contactFeatureDocumentation", "EU-GMP/GDP/GACP-Dokumentation")], [Network, t("app.contactFeatureImportReadiness", "Importfähigkeit & Release-Pfad")], [Sparkles, t("app.contactFeaturePreCheck", "Dokumenten-Vorprüfung")]].map(([Icon, label]) => (
+              {[[Database, t("app.contactFeatureSupply", "Evidenzgeprüfte Lieferkandidaten")], [BadgeCheck, t("app.contactFeatureDocumentation", "EU-GMP/GDP/GACP-Dokumentation")], [Network, t("app.contactFeatureImportReadiness", "Import-Readiness & Release-Pfad")], [Sparkles, t("app.contactFeaturePreCheck", "Dokumenten-Vorprüfung")]].map(([Icon, label]) => (
                 <div key={String(label)} className="flex gap-2 rounded-2xl border border-white/10 bg-black/20 p-4">
                   <Icon className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" /> {String(label)}
                 </div>
@@ -630,7 +633,7 @@ function LandingPage() {
             </div>
           </div>
           <div className="mt-8 border-t border-white/5 pt-6 text-center text-white/20">
-            Kein Endkunden-Verkauf. Keine Therapieversprechen. Reine B2B-Compliance-Plattform nach AMG/BtMG.
+            Kein Endkunden-Verkauf. Keine Therapieversprechen. B2B-Workflow-Plattform; regulatorische Entscheidungen verbleiben bei den zuständigen Rollen und Behörden.
           </div>
         </div>
       </footer>

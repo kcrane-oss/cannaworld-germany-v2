@@ -330,7 +330,7 @@
     "heroBadge": "B2B · Medizinisch · Reguliert",
     "heroTitleLine1": "Deutscher Ansprechpartner für",
     "heroTitleLine2": "medizinischen Cannabis-Import.",
-    "heroSubtitle": "Für Apotheken, Großhandel, Importeure und Herstellbetriebe, die geprüfte internationale Supply, belastbare Dokumentation und einen klaren EU-GMP/GDP/GACP-Pfad benötigen.",
+    "heroSubtitle": "Für Apotheken, Großhandel, Importeure und Herstellbetriebe, die evidenzgeprüfte Lieferkandidaten, belastbare Dokumentation und einen klaren EU-GMP/GDP/GACP-Readiness-Pfad benötigen.",
     "heroCtaPartnerAccess": "Partnerzugang öffnen",
     "heroCtaImportRequest": "Import-Anfrage stellen",
     "heroPillDocumentPath": "EU-GMP/GDP Dokumentenpfad",
@@ -338,7 +338,8 @@
     "heroPillThailandGermany": "Thailand → Deutschland/EU",
     "intakeEyebrow": "Proof-of-Trust Intake",
     "intakeTitle": "Für regulierte Marktteilnehmer",
-    "intakeDisclaimer": "Keine Abgabe an Endkunden. Keine Sortenwerbung. Keine Therapie- oder Heilversprechen. Reiner B2B-/Compliance-/Import-Intake."
+    "intakeDisclaimer": "Keine Abgabe an Endkunden. Keine Sortenwerbung. Keine Therapie- oder Heilversprechen. Reiner B2B-/Compliance-/Import-Intake.",
+    "claimBoundary": "CannaWorld strukturiert Evidenz und Readiness. Zertifizierung, Importgenehmigung, QP-Freigabe, Behördenentscheidung und Transaktion werden nicht garantiert."
   },
   "analytics": {
     "heroDescription": "Snapshot der deutschen Pipeline: Trade-Cases, Chargen, Supplier-Qualität, Inventar-Health. Tiefere Time-Series, Cohort-Analysen und ShinrAi-Scoring im AICert Analytics-Layer.",
