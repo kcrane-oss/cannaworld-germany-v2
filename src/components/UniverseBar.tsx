@@ -3,11 +3,11 @@ import { Building2, Globe, Shield, ShoppingBag, Network } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 const apps = [
-  { key: "gateway", label: "Gateway", icon: Globe, url: "https://cannaworld-thailand.com", color: "text-emerald-400" },
-  { key: "europe", label: "Europe", icon: Network, url: "https://cannaworld-europe.com", color: "text-emerald-400" },
-  { key: "germany", label: "Germany", icon: Building2, url: "https://cannaworld-germany.de", color: "text-cyan-400" },
-  { key: "marketplace", label: "Marketplace", icon: ShoppingBag, url: "https://cannaworld-marketplace.com", color: "text-blue-400" },
-  { key: "aicert", label: "AICert", icon: Shield, url: "https://gmp-aicert.com", color: "text-purple-400" },
+  { key: "gateway", label: "Gateway", icon: Globe, url: "https://cannaworld-thailand.com" },
+  { key: "europe", label: "Europe", icon: Network, url: "https://cannaworld-europe.com" },
+  { key: "germany", label: "Germany", icon: Building2, url: "https://cannaworld-germany.de" },
+  { key: "marketplace", label: "Marketplace", icon: ShoppingBag, url: "https://cannaworld-marketplace.com" },
+  { key: "aicert", label: "AICert", icon: Shield, url: "https://gmp-aicert.com" },
 ] as const;
 
 type AppKey = (typeof apps)[number]["key"];
@@ -48,11 +48,13 @@ const UniverseBar = ({ current }: UniverseBarProps) => {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 bg-black/90 backdrop-blur-sm border-b border-white/5 z-[60]">
-      <div className="container flex items-center justify-between h-8 px-4">
-        <div className="flex items-center gap-1.5">
-          <Network className="h-3 w-3 text-cyan-300" />
-          <span className="text-[10px] font-semibold tracking-wider text-white/60 uppercase">CannaWorld Universe</span>
+    <div className="fixed inset-x-0 top-0 z-[60] border-b border-white/5 bg-black/90 backdrop-blur-xl">
+      <div className="mx-auto flex h-8 max-w-7xl items-center justify-between px-4">
+        <div className="flex min-w-0 items-center gap-2">
+          <span className="flex size-5 shrink-0 items-center justify-center rounded border border-cyan-300/20 bg-cyan-300/10">
+            <img src="/cannaworld-mark.png" alt="" aria-hidden="true" className="size-4 object-contain brightness-0 invert" />
+          </span>
+          <span className="truncate text-[10px] font-semibold uppercase tracking-wider text-white/60">CannaWorld Universe</span>
         </div>
         <div className="flex items-center gap-1">
           {apps.map((app) => {
@@ -65,10 +67,10 @@ const UniverseBar = ({ current }: UniverseBarProps) => {
                 rel={isCurrent ? undefined : "noopener noreferrer"}
                 onClick={(event) => openApp(event, app)}
                 className={`flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-medium transition-colors ${
-                  isCurrent ? "bg-white/10 text-white" : "text-white/40 hover:text-white/80 hover:bg-white/5"
+                  isCurrent ? "bg-white/10 text-white" : "text-white/45 hover:bg-white/5 hover:text-white/85"
                 }`}
               >
-                <app.icon className={`h-3 w-3 ${isCurrent ? app.color : ""}`} />
+                <app.icon className={`h-3 w-3 ${isCurrent ? "text-cyan-300" : ""}`} />
                 <span className="hidden sm:inline">{app.label}</span>
               </a>
             );

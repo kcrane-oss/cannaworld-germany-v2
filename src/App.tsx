@@ -390,17 +390,21 @@ function LandingPage() {
   const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#071016] pt-8 text-[#f4f8fb] selection:bg-cyan-400/25">
+    <div className="min-h-screen overflow-x-hidden bg-[#07110d] pt-8 text-[#f0f5f0] selection:bg-cyan-400/25">
       <UniverseBar current="germany" />
       <div className="pointer-events-none fixed inset-0 opacity-60">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.18),transparent_34%),radial-gradient(circle_at_75%_10%,rgba(34,197,94,0.14),transparent_28%),linear-gradient(180deg,#071016,#091018_48%,#071016)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,197,94,0.18),transparent_34%),radial-gradient(circle_at_75%_10%,rgba(201,169,110,0.10),transparent_28%),linear-gradient(180deg,#07110d,#09150f_48%,#07110d)]" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_80%)]" />
       </div>
 
-      <nav className="fixed inset-x-0 top-8 z-50 border-b border-white/10 bg-[#071016]/78 backdrop-blur-2xl">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 md:px-8">
-          <Link to="/" className="flex items-center gap-3">
-            <img src={logo} alt="CannaWorld" className="h-12 w-auto object-contain" />
+      <nav className="fixed inset-x-0 top-8 z-50 border-b border-white/10 bg-[#07110d]/90 backdrop-blur-2xl">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:px-8">
+          <Link to="/" className="flex items-center gap-2.5">
+            <img src="/cannaworld-mark.png" alt="CannaWorld Germany" className="h-11 w-11 object-contain brightness-0 invert" />
+            <div className="hidden flex-col leading-none sm:flex">
+              <span className="text-base font-bold tracking-wide text-white">CANNAWORLD</span>
+              <span className="text-[9px] font-medium tracking-[0.25em] text-cyan-300">GERMANY</span>
+            </div>
           </Link>
           <div className="hidden items-center gap-6 text-sm font-medium text-white/60 md:flex">
             <a href="#proof" className="transition hover:text-white">{t("app.navProof", "Proof")}</a>
@@ -427,7 +431,7 @@ function LandingPage() {
         </div>
       </nav>
       {mobileMenuOpen && (
-        <div className="fixed inset-x-0 top-[calc(2rem+5rem)] z-40 border-b border-white/10 bg-[#071016]/95 backdrop-blur-2xl md:hidden">
+        <div className="fixed inset-x-0 top-[calc(2rem+4rem)] z-40 border-b border-white/10 bg-[#07110d]/95 backdrop-blur-2xl md:hidden">
           <div className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4">
             <a href="#proof" onClick={() => setMobileMenuOpen(false)} className="rounded-xl px-4 py-3 text-sm font-medium text-white/70 transition hover:bg-white/5 hover:text-white">{t("app.navProof", "Proof")}</a>
             <a href="#dashboard-preview" onClick={() => setMobileMenuOpen(false)} className="rounded-xl px-4 py-3 text-sm font-medium text-white/70 transition hover:bg-white/5 hover:text-white">{t("app.navDashboard", "Dashboard")}</a>
@@ -613,7 +617,13 @@ function LandingPage() {
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <div className="grid gap-8 md:grid-cols-3">
             <div>
-              <div className="mb-3 font-bold text-white/50">CannaWorld Germany</div>
+              <div className="mb-4 flex items-center gap-2.5">
+                <img src="/cannaworld-mark.png" alt="" aria-hidden="true" className="h-8 w-8 object-contain brightness-0 invert" />
+                <div className="flex flex-col leading-none">
+                  <span className="font-bold tracking-wide text-white/70">CANNAWORLD</span>
+                  <span className="text-[9px] font-medium tracking-[0.25em] text-cyan-300">GERMANY</span>
+                </div>
+              </div>
               <p className="leading-6">B2B Compliance Intake · Berlin · Bangkok<br />© 2026 CannaWorld Germany</p>
             </div>
             <div>

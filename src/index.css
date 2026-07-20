@@ -1,15 +1,24 @@
 @import "tailwindcss";
 
 @theme {
-  --color-dark: #071016;
-  --color-card: #111116;
-  --color-accent: #67e8f9;
+  --color-dark: #07110d;
+  --color-card: #0f1a0f;
+  --color-accent: #22C55E;
   --color-accent-light: #4ADE80;
   --color-gold: #C9A96E;
   --color-text: #f0f0f5;
-  --color-muted: #888898;
+  --color-muted: #8da18f;
+
+  /* CannaWorld family palette: legacy cyan/sky utilities resolve to green. */
+  --color-cyan-100: #dcfce7;
+  --color-cyan-200: #bbf7d0;
+  --color-cyan-300: #4ade80;
+  --color-cyan-400: #22c55e;
+  --color-cyan-500: #16a34a;
+  --color-sky-300: #86efac;
+  --color-sky-400: #4ade80;
 }
 
 html { scroll-behavior: smooth; }
-body { background: #071016; color: #f0f0f5; font-family: 'Inter', system-ui, sans-serif; }
-.glass { background: rgba(17,17,22,0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
+body { background: #07110d; color: #f0f5f0; font-family: 'Inter', 'Noto Sans Thai', 'Noto Sans SC', system-ui, sans-serif; }
+.glass { background: rgba(15,26,15,0.82); backdrop-filter: blur(12px); border: 1px solid rgba(34,197,94,0.08); }
