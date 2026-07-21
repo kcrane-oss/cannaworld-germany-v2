@@ -44,4 +44,16 @@ describe("CannaWorld family design contract", () => {
     expect(marketplace).toContain("#B8C2D1");
     expect(marketplace).toContain("#E8874A");
   });
+
+  it("keeps AICert identity out of Germany metadata and install surfaces", () => {
+    const html = read("index.html");
+    const vite = read("vite.config.ts");
+    expect(html).toContain("CannaWorld Germany — B2B Import Gateway");
+    expect(html).toContain('/cannaworld-mark.png');
+    expect(vite).toContain('name: "CannaWorld Germany"');
+    expect(vite).toContain('theme_color: "#080C14"');
+    expect(html).not.toContain("AI Cert Tech");
+    expect(html).not.toContain("cannaworld-aicerttech-logo");
+    expect(vite).not.toContain("cannaworld-aicerttech-logo");
+  });
 });
