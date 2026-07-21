@@ -6,7 +6,7 @@ const PATHS = [
     key: "managed",
     title: "Managed Import",
     badge: "Full-Service",
-    tint: "border-emerald-400/25 from-emerald-400/12 to-emerald-300/5 text-emerald-200",
+    tint: "border-gold/25 from-gold/12 to-platinum/5 text-gold",
     icon: Network,
     summary:
       "CannaWorld koordiniert Supplier, EU-Import-QP, Zoll und GDP-Logistik. Apotheke erhält geprüfte, release-fähige Ware ohne eigene Import-Infrastruktur.",
@@ -58,9 +58,9 @@ const PATHS = [
 export default function PharmacyImport() {
   return (
     <div className="space-y-7">
-      <section className="relative overflow-hidden rounded-2xl border border-cyan-300/20 bg-gradient-to-br from-cyan-300/12 via-white/[0.045] to-emerald-300/10 p-6 shadow-[0_0_42px_rgba(34,211,238,0.08)] md:p-8">
+      <section className="relative overflow-hidden rounded-2xl border border-cyan-300/20 bg-gradient-to-br from-cyan-300/12 via-white/[0.045] to-white/[0.025] p-6 shadow-[0_0_42px_rgba(214,168,75,0.08)] md:p-8">
         <div className="absolute right-0 top-0 h-52 w-52 rounded-full bg-cyan-300/10 blur-3xl" />
-        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-2xl bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
+        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-2xl bg-gradient-to-r from-cyan-300 via-sky-400 to-white" />
         <div className="relative max-w-3xl">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">
             <FileCheck className="h-4 w-4" /> Apotheken-Workflow
@@ -125,7 +125,7 @@ export default function PharmacyImport() {
           </div>
           <Link
             to="/dashboard/regulatory"
-            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-cyan-300 px-5 py-3 text-sm font-bold text-[#061016] transition hover:bg-cyan-200"
+            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-cyan-300 px-5 py-3 text-sm font-bold text-[#080C14] transition hover:bg-cyan-200"
           >
             Decision Tree starten <ArrowRight className="h-4 w-4" />
           </Link>

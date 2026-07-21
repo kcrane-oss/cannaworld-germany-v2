@@ -155,11 +155,11 @@ export default function PharmacyReceive() {
 
   return (
     <div className="space-y-7">
-      <section className="relative overflow-hidden rounded-2xl border border-emerald-300/20 bg-gradient-to-br from-emerald-300/12 via-white/[0.045] to-cyan-300/10 p-6 shadow-[0_0_42px_rgba(52,211,153,0.08)] md:p-8">
-        <div className="absolute right-0 top-0 h-52 w-52 rounded-full bg-emerald-300/10 blur-3xl" />
-        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-2xl bg-gradient-to-r from-emerald-300 via-teal-400 to-cyan-300" />
+      <section className="relative overflow-hidden rounded-2xl border border-cyan-300/20 bg-gradient-to-br from-cyan-300/12 via-white/[0.045] to-white/[0.025] p-6 shadow-[0_0_42px_rgba(214,168,75,0.08)] md:p-8">
+        <div className="absolute right-0 top-0 h-52 w-52 rounded-full bg-cyan-300/10 blur-3xl" />
+        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-2xl bg-gradient-to-r from-cyan-300 via-sky-400 to-white" />
         <div className="relative max-w-3xl">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-300/25 bg-emerald-300/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-emerald-200">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">
             <Truck className="h-4 w-4" /> {t("pharmacyReceive.heroBadge", "Apothekenannahme (GDP)")}
           </div>
           <h1 className="text-3xl font-black tracking-tight md:text-5xl">{t("pharmacyReceive.heroTitle", "Wareneingang Apotheke")}</h1>
@@ -193,7 +193,7 @@ export default function PharmacyReceive() {
                   <button
                     type="button"
                     onClick={() => setSelected(b)}
-                    className={`w-full rounded-2xl border p-3 text-left transition ${selected?.id === b.id ? "border-emerald-300/60 bg-emerald-400/[0.08]" : "border-white/10 bg-white/[0.02] hover:bg-white/[0.05]"}`}
+                    className={`w-full rounded-2xl border p-3 text-left transition ${selected?.id === b.id ? "border-cyan-300/60 bg-cyan-300/[0.08]" : "border-white/10 bg-white/[0.02] hover:bg-white/[0.05]"}`}
                   >
                     <div className="flex items-center justify-between">
                       <div className="text-sm font-bold text-white">{b.batch_number ?? b.id.slice(0, 8)}</div>
@@ -295,7 +295,7 @@ export default function PharmacyReceive() {
                 type="button"
                 disabled={busy || !form.pharmacy_license_no || !form.pharmacist_chamber_id || !form.sca_proof}
                 onClick={handleSubmit}
-                className="w-full rounded-2xl border border-emerald-300/40 bg-emerald-400/15 px-4 py-3 text-sm font-bold uppercase tracking-wider text-emerald-100 transition hover:bg-emerald-400/25 disabled:opacity-40"
+                className="w-full rounded-2xl border border-cyan-300/40 bg-cyan-300/15 px-4 py-3 text-sm font-bold uppercase tracking-wider text-cyan-100 transition hover:bg-cyan-300/25 disabled:opacity-40"
               >
                 {busy ? <Loader2 className="mx-auto h-4 w-4 animate-spin" /> : t("pharmacyReceive.submitButton", "Annahme bestätigen + signieren")}
               </button>

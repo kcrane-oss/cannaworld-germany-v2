@@ -104,9 +104,9 @@ export default function Overview() {
   return (
     <div className="space-y-7">
       <OnboardingStatusPanel />
-      <section className="relative overflow-hidden rounded-2xl border border-cyan-300/20 bg-gradient-to-br from-cyan-300/12 via-white/[0.045] to-emerald-300/10 p-6 shadow-[0_0_42px_rgba(34,211,238,0.08)] md:p-8">
+      <section className="relative overflow-hidden rounded-2xl border border-cyan-300/20 bg-gradient-to-br from-cyan-300/12 via-white/[0.045] to-white/[0.025] p-6 shadow-[0_0_42px_rgba(214,168,75,0.08)] md:p-8">
         <div className="absolute right-0 top-0 h-52 w-52 rounded-full bg-cyan-300/10 blur-3xl" />
-        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-2xl bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
+        <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-2xl bg-gradient-to-r from-cyan-300 via-sky-400 to-white" />
         <div className="relative flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-3xl">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">
@@ -152,7 +152,7 @@ export default function Overview() {
           const toneClass = TONE_CLASSES[tile.tone];
           const Body = (
             <div
-              className={`rounded-2xl border bg-gradient-to-br p-5 ring-1 transition hover:-translate-y-0.5 hover:shadow-[0_8_24px_rgba(34,211,238,0.1)] ${toneClass}`}
+              className={`rounded-2xl border bg-gradient-to-br p-5 ring-1 transition hover:-translate-y-0.5 hover:shadow-[0_8_24px_rgba(214,168,75,0.1)] ${toneClass}`}
             >
               <div className="mb-4 flex items-center justify-between">
                 <div className={`flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/15 ${toneClass}`}>
@@ -187,28 +187,28 @@ export default function Overview() {
             href="https://cannaworld-thailand.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-2xl border border-emerald-400/25 bg-emerald-400/5 p-4 text-sm text-emerald-100 transition hover:border-emerald-300/55 hover:bg-emerald-400/10"
+            className="rounded-2xl border border-gold/25 bg-gold/5 p-4 text-sm text-[#F0DCA8] transition hover:border-gold/55 hover:bg-gold/10"
           >
             <div className="font-bold">Gateway öffnen →</div>
-            <div className="text-xs text-emerald-100/70">Trade-Cases, Supplier-Stamm, Compliance-Operations</div>
+            <div className="text-xs text-[#F0DCA8]/70">Trade-Cases, Supplier-Stamm, Compliance-Operations</div>
           </a>
           <a
             href="https://cannaworld-marketplace.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-2xl border border-blue-400/25 bg-blue-400/5 p-4 text-sm text-blue-100 transition hover:border-blue-300/55 hover:bg-blue-400/10"
+            className="rounded-2xl border border-[#E8874A]/25 bg-[#E8874A]/5 p-4 text-sm text-[#F2B18D] transition hover:border-[#E8874A]/55 hover:bg-[#E8874A]/10"
           >
             <div className="font-bold">Marketplace öffnen →</div>
-            <div className="text-xs text-blue-100/70">Verifizierte Batches, Auctions, Sample Requests</div>
+            <div className="text-xs text-[#F2B18D]/70">Verifizierte Batches, Auctions, Sample Requests</div>
           </a>
           <a
             href="https://gmp-aicert.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-2xl border border-purple-400/25 bg-purple-400/5 p-4 text-sm text-purple-100 transition hover:border-purple-300/55 hover:bg-purple-400/10"
+            className="rounded-2xl border border-[#22D3EE]/25 bg-[#22D3EE]/5 p-4 text-sm text-[#8DE9F5] transition hover:border-[#22D3EE]/55 hover:bg-[#22D3EE]/10"
           >
             <div className="font-bold">AICert öffnen →</div>
-            <div className="text-xs text-purple-100/70">Audit Passport, ShinrAi Score, CAPA</div>
+            <div className="text-xs text-[#8DE9F5]/70">Audit Passport, ShinrAi Score, CAPA</div>
           </a>
         </div>
       </section>
