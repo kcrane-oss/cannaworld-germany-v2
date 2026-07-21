@@ -4,28 +4,6 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "installCommand": "npm install",
-  "redirects": [
-    {
-      "source": "/login",
-      "destination": "https://cannaworld-europe.com/login?lang=de",
-      "statusCode": 301
-    },
-    {
-      "source": "/request-access",
-      "destination": "https://cannaworld-europe.com/request-access?lang=de",
-      "statusCode": 301
-    },
-    {
-      "source": "/onboarding",
-      "destination": "https://cannaworld-europe.com/request-access?lang=de",
-      "statusCode": 301
-    },
-    {
-      "source": "/:path*",
-      "destination": "https://cannaworld-europe.com/?lang=de",
-      "statusCode": 301
-    }
-  ],
   "headers": [
     {
       "source": "/assets/(.*)",
