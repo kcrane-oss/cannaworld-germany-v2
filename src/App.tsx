@@ -86,7 +86,7 @@ import {
   X,
 } from "lucide-react";
 
-const logo = "/cannaworld-lockup.webp";
+const logo = "/cannaworld-mark.webp";
 
 type SupabaseClient = typeof import("./integrations/supabase/client")["supabase"];
 
@@ -139,7 +139,7 @@ const steps = [
   [Mail, "Import-Anfrage", "Bedarf, Rolle, Zielmenge, Zeithorizont und Ausgangslage erfassen.", "app.stepImportRequestTitle", "app.stepImportRequestText"],
   [ClipboardCheck, "Qualifizierung", "Prüfen, ob Apotheke, Großhandel, Importeur oder Herstellbetrieb in den Prozess fällt.", "app.stepQualificationTitle", "app.stepQualificationText"],
   [ShieldCheck, "Dokumentenprüfung", "EU-GMP/GDP/GACP, CoA, Batch-Dokumentation, QP-/Release-Pfad einordnen.", "app.stepDocumentReviewTitle", "app.stepDocumentReviewText"],
-  [PackageCheck, "Supply Matching", "Geeignete geprüfte Lieferpartner und Chargen über das CannaWorld-Ökosystem vorbereiten.", "app.stepSupplyMatchingTitle", "app.stepSupplyMatchingText"],
+  [PackageCheck, "Supply Matching", "Dokumentierte Lieferkandidaten und Chargen über das CannaWorld-Ökosystem für die weitere Prüfung vorbereiten.", "app.stepSupplyMatchingTitle", "app.stepSupplyMatchingText"],
 ] as const;
 
 const dashboardNav = [
@@ -167,7 +167,7 @@ const dashboardNav = [
   { key: "analytics", label: "Analytics", icon: BarChart3, path: "/dashboard/analytics" },
 ];
 
-const moduleData: Record<string, { title: string; eyebrow: string; description: string; stats: string[]; actions: string[]; color?: "cyan" | "blue" | "purple" | "emerald" }> = {
+const moduleData: Record<string, { title: string; eyebrow: string; description: string; stats: string[]; actions: string[]; color?: "cyan" | "blue" | "purple" }> = {
   overview: {
     eyebrow: "Germany Command Center",
     title: "Importer Dashboard",
@@ -178,8 +178,8 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
   marketplace: {
     eyebrow: "Qualified Supply",
     title: "Marketplace",
-    description: "Vorgeprüfte internationale Batches, Supplier-Profile und Dokumentenstände für deutsche B2B-Abnehmer.",
-    stats: ["EU-ready Batch Pool", "CoA / Batch Records", "Supplier Trust Score", "Sample Request Flow"],
+    description: "Nach Evidenzstatus eingeordnete internationale Lieferkandidaten, Supplier-Profile und Dokumentenstände für deutsche B2B-Abnehmer.",
+    stats: ["Readiness-tagged Batches", "CoA / Batch Records", "Supplier Evidence", "Sample Request Flow"],
     actions: ["Batch anfragen", "Supplier vergleichen", "Sample Request vorbereiten"],
     color: "blue",
   },
@@ -222,7 +222,7 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     eyebrow: "Apotheken-Workflow",
     title: "Apotheken-Import",
     description: "Zwei Pfade für den deutschen Markt: 'Managed Import' (Full-Service über das CannaWorld-Ökosystem) oder 'Direct Import' (Apotheke importiert selbst + QP Freigabe).",
-    stats: ["Managed Import Route", "Direct Import (Bester Deal)", "QP Release Integration", "GDP-konforme Lieferung"],
+    stats: ["Managed Import Route", "Direct Import Option", "QP Review Workflow", "GDP-facing Lieferdokumentation"],
     actions: ["Managed Import starten", "Direct Import Kalkulation", "QP-Freigabe anfragen"],
   },
   "trade-cases": {
@@ -259,7 +259,7 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     description: "Transportkette, GDP-Anforderungen, Export-/Importdokumente, Temperaturführung und Zollpunkte in einem Flow.",
     stats: ["GDP Lane", "Temp Control", "Export Docs", "Customs Pack"],
     actions: ["Lane planen", "Dokumente bündeln", "ETA aktualisieren"],
-    color: "emerald",
+    color: "cyan",
   },
   suppliers: {
     eyebrow: "Verified Network",
@@ -267,7 +267,7 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     description: "Supplier-Profile mit Lizenzstatus, Auditdaten, Cultivation Proof und Batch-Historie.",
     stats: ["Supplier Score", "Audit Passport", "License Evidence", "Batch History"],
     actions: ["Supplier prüfen", "Auditdaten öffnen", "Shortlist bauen"],
-    color: "emerald",
+    color: "cyan",
   },
   documents: {
     eyebrow: "Document Vault",
@@ -289,7 +289,7 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     description: "Bestands-, Quarantäne- und Release-Status für medizinische Cannabis-Chargen in der Lieferkette.",
     stats: ["Quarantine", "Released", "Reserved", "Rejected"],
     actions: ["Bestand ansehen", "Charge reservieren", "Status ändern"],
-    color: "emerald",
+    color: "cyan",
   },
   "audit-passport": {
     eyebrow: "Proof Layer",
@@ -310,9 +310,9 @@ const moduleData: Record<string, { title: string; eyebrow: string; description: 
     eyebrow: "Gateway Service Transfer",
     title: "Gateway Services for Germany",
     description: "Gateway-Angebote für die deutsche B2B-Rolle übersetzt: Intake, Qualifizierung, Dokumentenprüfung und Trade Matching — ohne eigenes Germany-Backend.",
-    stats: ["24 Service-Bausteine", "4 Service-Layer", "DE Intake", "Gateway Handoff"],
+    stats: ["Modularer Servicekatalog", "Kontrollierte Workflows", "DE Intake", "Gateway Handoff"],
     actions: ["Service auswählen", "Import-Fit prüfen", "Gateway-Handoff vorbereiten"],
-    color: "emerald",
+    color: "cyan",
   },
   settings: {
     eyebrow: "Workspace",
@@ -360,7 +360,7 @@ const serviceGroups = [
     title: "Trade & Logistics",
     subtitle: "Von qualifizierter Nachfrage zu qualifizierter Supply.",
     items: [
-      [Building2, "Supplier Qualification", "Nur vorgeprüfte Farmen, Hersteller und Partner in den DE-Funnel."],
+      [Building2, "Supplier Qualification", "Farmen, Hersteller und Partner nach dokumentiertem Evidenzstatus in den DE-Funnel einordnen."],
       [Stethoscope, "Lab / CoA Review", "Potenz, Kontamination, Methodik und Plausibilität verständlich prüfen."],
       [Truck, "GDP Logistics", "Transport-, Zoll- und Cold-Chain-Readiness für Deutschland abbilden."],
       [ClipboardCheck, "QP Release Support", "Realistisch einschätzen, ob ein Batch QP-fähig ist."],
@@ -383,24 +383,28 @@ const serviceGroups = [
 ] as const;
 
 function Badge({ children }: { children: React.ReactNode }) {
-  return <span className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-1.5 text-xs font-semibold text-cyan-300 shadow-[0_0_24px_rgba(34,211,238,0.12)]">{children}</span>;
+  return <span className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-1.5 text-xs font-semibold text-cyan-300 shadow-[0_0_24px_rgba(214,168,75,0.12)]">{children}</span>;
 }
 
 function LandingPage() {
   const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#071016] pt-8 text-[#f4f8fb] selection:bg-cyan-400/25">
+    <div className="cw-app-shell min-h-screen overflow-x-hidden bg-[#080C14] pt-8 text-[#EAF2FF] selection:bg-cyan-400/25">
       <UniverseBar current="germany" />
       <div className="pointer-events-none fixed inset-0 opacity-60">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.18),transparent_34%),radial-gradient(circle_at_75%_10%,rgba(34,197,94,0.14),transparent_28%),linear-gradient(180deg,#071016,#091018_48%,#071016)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(184,194,209,0.18),transparent_34%),radial-gradient(circle_at_75%_10%,rgba(214,168,75,0.10),transparent_28%),linear-gradient(180deg,#080C14,#121927_48%,#080C14)]" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_80%)]" />
       </div>
 
-      <nav className="fixed inset-x-0 top-8 z-50 border-b border-white/10 bg-[#071016]/78 backdrop-blur-2xl">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 md:px-8">
-          <Link to="/" className="flex items-center gap-3">
-            <img src={logo} alt="CannaWorld" className="h-12 w-auto object-contain" />
+      <nav className="fixed inset-x-0 top-8 z-50 border-b border-white/10 bg-[#080C14]/90 backdrop-blur-2xl">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:px-8">
+          <Link to="/" className="flex items-center gap-2.5">
+            <img src="/cannaworld-mark.png" alt="CannaWorld Germany" className="h-11 w-11 object-contain brightness-0 invert" />
+            <div className="hidden flex-col leading-none sm:flex">
+              <span className="text-base font-bold tracking-wide text-white">CANNAWORLD</span>
+              <span className="text-[9px] font-medium tracking-[0.25em] text-cyan-300">GERMANY</span>
+            </div>
           </Link>
           <div className="hidden items-center gap-6 text-sm font-medium text-white/60 md:flex">
             <a href="#proof" className="transition hover:text-white">{t("app.navProof", "Proof")}</a>
@@ -427,7 +431,7 @@ function LandingPage() {
         </div>
       </nav>
       {mobileMenuOpen && (
-        <div className="fixed inset-x-0 top-[calc(2rem+5rem)] z-40 border-b border-white/10 bg-[#071016]/95 backdrop-blur-2xl md:hidden">
+        <div className="fixed inset-x-0 top-[calc(2rem+4rem)] z-40 border-b border-white/10 bg-[#080C14]/95 backdrop-blur-2xl md:hidden">
           <div className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4">
             <a href="#proof" onClick={() => setMobileMenuOpen(false)} className="rounded-xl px-4 py-3 text-sm font-medium text-white/70 transition hover:bg-white/5 hover:text-white">{t("app.navProof", "Proof")}</a>
             <a href="#dashboard-preview" onClick={() => setMobileMenuOpen(false)} className="rounded-xl px-4 py-3 text-sm font-medium text-white/70 transition hover:bg-white/5 hover:text-white">{t("app.navDashboard", "Dashboard")}</a>
@@ -445,38 +449,41 @@ function LandingPage() {
             src="/cannaworld-mark.webp"
             alt=""
             aria-hidden="true"
-            className="pointer-events-none absolute -right-20 top-1/2 hidden h-[520px] w-auto -translate-y-1/2 select-none object-contain opacity-[0.08] lg:block"
+            className="pointer-events-none absolute -right-20 top-1/2 hidden h-[520px] w-auto -translate-y-1/2 select-none object-contain opacity-[0.045] lg:block"
           />
           <div className="space-y-8 text-center lg:text-left">
-            <picture className="mx-auto block lg:mx-0">
-              <source srcSet="/cannaworld-lockup.webp" type="image/webp" />
+            <div className="mx-auto flex w-fit items-center gap-3 lg:mx-0" aria-label="CannaWorld Germany">
               <img
-                src="/cannaworld-lockup.png"
-                alt="CannaWorld AI Cert Tech"
-                className="h-20 w-auto object-contain md:h-24 [filter:drop-shadow(0_0_24px_rgba(34,211,238,0.18))_invert(1)]"
-                fetchPriority="high"
+                src="/cannaworld-mark.webp"
+                alt="CannaWorld Germany"
+                className="h-16 w-16 object-contain [filter:drop-shadow(0_0_24px_rgba(214,168,75,0.18))_brightness(0)_invert(1)] md:h-20 md:w-20"
+                loading="eager"
                 decoding="async"
               />
-            </picture>
+              <div className="text-left leading-none">
+                <div className="text-xl font-black tracking-[0.06em] text-white md:text-2xl">CANNAWORLD</div>
+                <div className="mt-2 text-[10px] font-bold tracking-[0.34em] text-cyan-300 md:text-xs">GERMANY</div>
+              </div>
+            </div>
             <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
               <Badge>CannaWorld Germany</Badge>
-              <span className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-1.5 text-xs font-semibold text-emerald-300">{t("app.heroBadge", "B2B · Medizinisch · Reguliert")}</span>
+              <span className="rounded-full border border-white/15 bg-white/[0.045] px-4 py-1.5 text-xs font-semibold text-white/70">{t("app.heroBadge", "B2B · Medizinisch · Reguliert")}</span>
             </div>
 
             <div className="space-y-5">
               <h1 className="text-4xl font-extrabold leading-[0.95] tracking-[-0.045em] md:text-6xl xl:text-7xl">
                 {t("app.heroTitleLine1", "Deutscher Ansprechpartner für")}
-                <span className="block bg-gradient-to-r from-cyan-300 via-sky-300 to-emerald-300 bg-clip-text text-transparent drop-shadow-[0_0_24px_rgba(34,211,238,0.28)]">
+                <span className="block bg-gradient-to-r from-cyan-300 via-sky-300 to-white bg-clip-text text-transparent drop-shadow-[0_0_24px_rgba(214,168,75,0.28)]">
                   {t("app.heroTitleLine2", "medizinischen Cannabis-Import.")}
                 </span>
               </h1>
               <p className="mx-auto max-w-2xl text-lg leading-8 text-white/62 md:text-xl lg:mx-0">
-                {t("app.heroSubtitle", "Für Apotheken, Großhandel, Importeure und Herstellbetriebe, die geprüfte internationale Supply, belastbare Dokumentation und einen klaren EU-GMP/GDP/GACP-Pfad benötigen.")}
+                {t("app.heroSubtitle", "Für Apotheken, Großhandel, Importeure und Herstellbetriebe, die evidenzgeprüfte Lieferkandidaten, belastbare Dokumentation und einen klaren EU-GMP/GDP/GACP-Readiness-Pfad benötigen.")}
               </p>
             </div>
 
             <div className="flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
-              <Link to="/login" className="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-300 px-8 py-4 font-bold text-[#061016] shadow-[0_0_34px_rgba(34,211,238,0.25)] transition hover:-translate-y-0.5 hover:bg-cyan-200">
+              <Link to="/login" className="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-300 px-8 py-4 font-bold text-[#080C14] shadow-[0_0_34px_rgba(214,168,75,0.25)] transition hover:-translate-y-0.5 hover:bg-cyan-200">
                 {t("app.heroCtaPartnerAccess", "Partnerzugang öffnen")} <ArrowRight className="h-5 w-5" />
               </Link>
               <a href="mailto:info@cannaworld-germany.de?subject=CannaWorld Germany Import-Anfrage" className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-8 py-4 font-semibold text-white transition hover:border-cyan-300/50 hover:bg-white/10">
@@ -491,12 +498,15 @@ function LandingPage() {
                 </div>
               ))}
             </div>
+            <p className="max-w-2xl text-xs leading-5 text-white/45">
+              {t("app.claimBoundary", "CannaWorld strukturiert Evidenz und Readiness. Zertifizierung, Importgenehmigung, QP-Freigabe, Behördenentscheidung und Transaktion werden nicht garantiert.")}
+            </p>
           </div>
 
           <div className="relative">
             <div className="absolute -inset-8 rounded-2xl bg-cyan-400/10 blur-3xl" />
             <div className="relative overflow-hidden rounded-2xl border border-cyan-300/20 bg-white/[0.055] p-6 shadow-2xl shadow-cyan-500/10 backdrop-blur-xl md:p-8">
-              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
+              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyan-300 via-sky-400 to-white" />
               <div className="mb-8 flex items-center gap-4">
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-300 ring-1 ring-cyan-300/25">
                   <Stethoscope className="h-7 w-7" />
@@ -525,7 +535,7 @@ function LandingPage() {
           <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-5 text-center md:grid-cols-3 lg:grid-cols-6">
             {stats.map(([value, label, labelKey]) => (
               <div key={labelKey}>
-                <div className="text-2xl font-bold text-cyan-300 drop-shadow-[0_0_12px_rgba(34,211,238,0.24)] md:text-3xl">{value}</div>
+                <div className="text-2xl font-bold text-cyan-300 drop-shadow-[0_0_12px_rgba(214,168,75,0.24)] md:text-3xl">{value}</div>
                 <div className="mt-1 text-sm text-white/45">{t(labelKey, label)}</div>
               </div>
             ))}
@@ -540,7 +550,7 @@ function LandingPage() {
           </div>
           <div className="grid gap-5 md:grid-cols-3">
             {cards.map((card) => (
-              <div key={card.title} className="rounded-2xl border border-white/10 bg-white/[0.045] p-7 shadow-[0_0_30px_rgba(34,211,238,0.06)] backdrop-blur transition hover:border-cyan-300/30">
+              <div key={card.title} className="rounded-2xl border border-white/10 bg-white/[0.045] p-7 shadow-[0_0_30px_rgba(214,168,75,0.06)] backdrop-blur transition hover:border-cyan-300/30">
                 <card.icon className="mb-5 h-9 w-9 text-cyan-300" />
                 <h3 className="text-xl font-bold">{t(card.titleKey, card.title)}</h3>
                 <p className="mt-3 text-sm leading-6 text-white/56">{t(card.textKey, card.text)}</p>
@@ -558,7 +568,7 @@ function LandingPage() {
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               {dashboardNav.slice(1).map((item) => (
-                <Link key={item.key} to={item.path} className="group rounded-2xl border border-white/10 bg-[#0b121b]/80 p-5 backdrop-blur transition hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-cyan-300/10">
+                <Link key={item.key} to={item.path} className="group rounded-2xl border border-white/10 bg-[#121927]/80 p-5 backdrop-blur transition hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-cyan-300/10">
                   <item.icon className="mb-4 h-7 w-7 text-cyan-300" />
                   <div className="font-bold">{t(`app.nav.${item.key}`, item.label)}</div>
                   <div className="mt-2 text-sm leading-6 text-white/48">{t("app.dashboardPreviewOpenModule", "Zum Germany-Modul öffnen")}</div>
@@ -577,7 +587,7 @@ function LandingPage() {
           </div>
           <div className="grid gap-5 md:grid-cols-4">
             {steps.map(([Icon, title, text, titleKey, textKey], index) => (
-              <div key={title} className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0b121b]/80 p-6 backdrop-blur">
+              <div key={title} className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#121927]/80 p-6 backdrop-blur">
                 <div className="absolute right-5 top-4 text-5xl font-black text-cyan-300/10">0{index + 1}</div>
                 <Icon className="mb-5 h-8 w-8 text-cyan-300" />
                 <h3 className="font-bold">{t(titleKey, title)}</h3>
@@ -588,18 +598,18 @@ function LandingPage() {
         </section>
 
         <section id="kontakt" className="relative mx-auto max-w-5xl px-5 py-24 text-center md:px-8">
-          <div className="rounded-2xl border border-cyan-300/20 bg-white/[0.055] p-8 shadow-[0_0_40px_rgba(34,211,238,0.1)] backdrop-blur-xl md:p-12">
+          <div className="rounded-2xl border border-cyan-300/20 bg-white/[0.055] p-8 shadow-[0_0_40px_rgba(214,168,75,0.1)] backdrop-blur-xl md:p-12">
             <Sparkles className="mx-auto mb-5 h-10 w-10 text-cyan-300" />
             <h2 className="text-3xl font-extrabold md:text-5xl">{t("app.contactTitle", "Import-Anfrage stellen.")}</h2>
             <p className="mx-auto mt-4 max-w-2xl text-white/58">{t("app.contactSubtitle", "Kurze Qualifizierung für Apotheken, Großhändler, Importeure und QA-/QP-nahe Entscheider mit realem medizinischem Bedarf.")}</p>
             <div className="mx-auto mt-8 grid max-w-2xl gap-3 text-left text-sm text-white/62 sm:grid-cols-2">
-              {[[Database, t("app.contactFeatureSupply", "Geprüfte internationale Supply")], [BadgeCheck, t("app.contactFeatureDocumentation", "EU-GMP/GDP/GACP-Dokumentation")], [Network, t("app.contactFeatureImportReadiness", "Importfähigkeit & Release-Pfad")], [Sparkles, t("app.contactFeaturePreCheck", "Dokumenten-Vorprüfung")]].map(([Icon, label]) => (
+              {[[Database, t("app.contactFeatureSupply", "Evidenzgeprüfte Lieferkandidaten")], [BadgeCheck, t("app.contactFeatureDocumentation", "EU-GMP/GDP/GACP-Dokumentation")], [Network, t("app.contactFeatureImportReadiness", "Import-Readiness & Release-Pfad")], [Sparkles, t("app.contactFeaturePreCheck", "Dokumenten-Vorprüfung")]].map(([Icon, label]) => (
                 <div key={String(label)} className="flex gap-2 rounded-2xl border border-white/10 bg-black/20 p-4">
                   <Icon className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" /> {String(label)}
                 </div>
               ))}
             </div>
-            <a href="mailto:info@cannaworld-germany.de?subject=CannaWorld Germany Import-Anfrage" className="mt-9 inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-300 px-8 py-4 font-bold text-[#061016] shadow-[0_0_34px_rgba(34,211,238,0.24)] transition hover:bg-cyan-200">
+            <a href="mailto:info@cannaworld-germany.de?subject=CannaWorld Germany Import-Anfrage" className="mt-9 inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-300 px-8 py-4 font-bold text-[#080C14] shadow-[0_0_34px_rgba(214,168,75,0.24)] transition hover:bg-cyan-200">
               info@cannaworld-germany.de <ArrowRight className="h-5 w-5" />
             </a>
           </div>
@@ -610,7 +620,13 @@ function LandingPage() {
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <div className="grid gap-8 md:grid-cols-3">
             <div>
-              <div className="mb-3 font-bold text-white/50">CannaWorld Germany</div>
+              <div className="mb-4 flex items-center gap-2.5">
+                <img src="/cannaworld-mark.png" alt="" aria-hidden="true" className="h-8 w-8 object-contain brightness-0 invert" />
+                <div className="flex flex-col leading-none">
+                  <span className="font-bold tracking-wide text-white/70">CANNAWORLD</span>
+                  <span className="text-[9px] font-medium tracking-[0.25em] text-cyan-300">GERMANY</span>
+                </div>
+              </div>
               <p className="leading-6">B2B Compliance Intake · Berlin · Bangkok<br />© 2026 CannaWorld Germany</p>
             </div>
             <div>
@@ -630,7 +646,7 @@ function LandingPage() {
             </div>
           </div>
           <div className="mt-8 border-t border-white/5 pt-6 text-center text-white/20">
-            Kein Endkunden-Verkauf. Keine Therapieversprechen. Reine B2B-Compliance-Plattform nach AMG/BtMG.
+            Kein Endkunden-Verkauf. Keine Therapieversprechen. B2B-Workflow-Plattform; regulatorische Entscheidungen verbleiben bei den zuständigen Rollen und Behörden.
           </div>
         </div>
       </footer>
@@ -673,9 +689,9 @@ function GatewayServicesPreview() {
 
 function ImpressumPage() {
   return (
-    <div className="relative min-h-screen bg-[#071016] px-5 pb-16 pt-16 text-white overflow-x-hidden">
+    <div className="cw-app-shell relative min-h-screen bg-[#080C14] px-5 pb-16 pt-16 text-white overflow-x-hidden">
       <div className="pointer-events-none fixed inset-0 opacity-40">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.10),transparent_34%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(214,168,75,0.10),transparent_34%)]" />
       </div>
       <UniverseBar current="germany" />
       <div className="relative mx-auto max-w-3xl">
@@ -683,7 +699,7 @@ function ImpressumPage() {
           ← Zurück zur Startseite
         </Link>
         <div className="relative mt-8 rounded-2xl border border-white/10 bg-white/[0.045] p-8 backdrop-blur">
-          <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-2xl bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
+          <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-2xl bg-gradient-to-r from-cyan-300 via-sky-400 to-white" />
           <h1 className="text-3xl font-black tracking-tight">Impressum</h1>
           <p className="mt-2 text-sm text-white/45">Angaben gemäß § 5 TMG</p>
           <div className="mt-8 space-y-6 text-sm leading-7 text-white/70">
@@ -707,9 +723,9 @@ function ImpressumPage() {
 
 function DatenschutzPage() {
   return (
-    <div className="relative min-h-screen bg-[#071016] px-5 pb-16 pt-16 text-white overflow-x-hidden">
+    <div className="cw-app-shell relative min-h-screen bg-[#080C14] px-5 pb-16 pt-16 text-white overflow-x-hidden">
       <div className="pointer-events-none fixed inset-0 opacity-40">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.10),transparent_34%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(214,168,75,0.10),transparent_34%)]" />
       </div>
       <UniverseBar current="germany" />
       <div className="relative mx-auto max-w-3xl">
@@ -744,9 +760,9 @@ function DatenschutzPage() {
 
 function AgbPage() {
   return (
-    <div className="relative min-h-screen bg-[#071016] px-5 pb-16 pt-16 text-white overflow-x-hidden">
+    <div className="cw-app-shell relative min-h-screen bg-[#080C14] px-5 pb-16 pt-16 text-white overflow-x-hidden">
       <div className="pointer-events-none fixed inset-0 opacity-40">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.10),transparent_34%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(214,168,75,0.10),transparent_34%)]" />
       </div>
       <UniverseBar current="germany" />
       <div className="relative mx-auto max-w-3xl">
@@ -805,10 +821,10 @@ function LoginPage() {
   }
 
   return (
-    <div className="relative min-h-screen bg-[#071016] px-5 pb-10 pt-16 text-white overflow-x-hidden">
+    <div className="cw-app-shell relative min-h-screen bg-[#080C14] px-5 pb-10 pt-16 text-white overflow-x-hidden">
       {/* Dekorativer Hintergrund — gleich wie Landing */}
       <div className="pointer-events-none fixed inset-0 opacity-50">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.14),transparent_34%),radial-gradient(circle_at_75%_10%,rgba(34,197,94,0.10),transparent_28%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(214,168,75,0.14),transparent_34%),radial-gradient(circle_at_75%_10%,rgba(184,194,209,0.10),transparent_28%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_80%)]" />
       </div>
       <UniverseBar current="germany" />
@@ -816,14 +832,14 @@ function LoginPage() {
         src="/cannaworld-mark.webp"
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 right-0 h-[420px] w-auto select-none object-contain opacity-[0.09]"
+        className="pointer-events-none absolute bottom-0 right-0 h-[420px] w-auto select-none object-contain opacity-[0.035]"
       />
       <Link to="/" className="inline-flex items-center gap-3 text-sm font-semibold text-white/60 hover:text-white">
-        <img src={logo} alt="CannaWorld" className="h-8 w-auto" /> Zurück zur Landing
+        <img src={logo} alt="CannaWorld" className="h-8 w-auto brightness-0 invert" /> Zurück zur Landing
       </Link>
       <main className="mx-auto mt-8 max-w-md">
-        <form onSubmit={handleSubmit} className="relative overflow-hidden w-full rounded-2xl border border-cyan-300/20 bg-white/[0.055] p-7 shadow-[0_0_44px_rgba(34,211,238,0.11)] backdrop-blur-xl">
-          <div className="absolute inset-x-0 top-0 h-1 rounded-t-2xl bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
+        <form onSubmit={handleSubmit} className="relative overflow-hidden w-full rounded-2xl border border-cyan-300/20 bg-white/[0.055] p-7 shadow-[0_0_44px_rgba(214,168,75,0.11)] backdrop-blur-xl">
+          <div className="absolute inset-x-0 top-0 h-1 rounded-t-2xl bg-gradient-to-r from-cyan-300 via-sky-400 to-white" />
           <Badge>Protected Dashboard</Badge>
           <h1 className="mt-5 text-3xl font-black tracking-tight">CannaWorld Germany Login</h1>
           <p className="mt-3 text-sm leading-6 text-white/56">Das Dashboard ist nur für qualifizierte B2B-Partner, Import-/QA-Rollen und interne CannaWorld-Operatoren sichtbar.</p>
@@ -858,7 +874,7 @@ function LoginPage() {
             </a>
           </div>
           {error && <div className="mt-4 rounded-xl border border-red-300/20 bg-red-400/10 p-3 text-sm text-red-100">{error}</div>}
-          <button disabled={loading} className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-cyan-300 px-5 py-3 font-black text-[#061016] transition hover:bg-cyan-200 disabled:cursor-not-allowed disabled:opacity-60">
+          <button disabled={loading} className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-cyan-300 px-5 py-3 font-black text-[#080C14] transition hover:bg-cyan-200 disabled:cursor-not-allowed disabled:opacity-60">
             {loading ? "Prüfe Login…" : "Dashboard öffnen"} <ArrowRight className="h-4 w-4" />
           </button>
           <p className="mt-5 text-xs leading-5 text-white/45">
@@ -905,7 +921,7 @@ function ProtectedDashboard() {
 
   if (allowed === null) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center gap-3 bg-[#071016] text-sm font-semibold text-cyan-200">
+      <div className="cw-app-shell flex min-h-screen flex-col items-center justify-center gap-3 bg-[#080C14] text-sm font-semibold text-cyan-200">
         <Loader2 className="h-6 w-6 animate-spin text-cyan-300" />
         Prüfe Dashboard-Zugang…
       </div>
@@ -966,12 +982,12 @@ function DashboardLayout() {
   }
 
   return (
-    <div className="min-h-screen bg-[#071016] pt-8 text-white">
+    <div className="cw-app-shell min-h-screen bg-[#080C14] pt-8 text-white">
       <UniverseBar current="germany" />
       {open && <button aria-label="Close sidebar" className="fixed inset-0 z-40 bg-black/60 lg:hidden" onClick={() => setOpen(false)} />}
-      <aside className={`fixed bottom-0 left-0 top-8 z-50 w-72 border-r border-white/10 bg-[#09131d]/95 backdrop-blur-xl transition-transform lg:translate-x-0 ${open ? "translate-x-0" : "-translate-x-full"}`}>
+      <aside className={`fixed bottom-0 left-0 top-8 z-50 w-72 border-r border-white/10 bg-[#121927]/95 backdrop-blur-xl transition-transform lg:translate-x-0 ${open ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="flex h-20 items-center gap-3 border-b border-white/10 px-5">
-          <img src={logo} alt="CannaWorld" className="h-10 w-auto" />
+          <img src={logo} alt="CannaWorld" className="h-10 w-auto brightness-0 invert" />
           <div className="leading-none">
             <div className="text-sm font-black tracking-wide">CANNAWORLD</div>
             <div className="text-[10px] font-bold tracking-[0.28em] text-cyan-300">GERMANY</div>
@@ -1016,7 +1032,7 @@ function DashboardLayout() {
       </aside>
 
       <div className="lg:pl-72">
-        <header className="sticky top-8 z-30 flex h-20 items-center gap-4 border-b border-white/10 bg-[#071016]/82 px-5 backdrop-blur-xl lg:px-8">
+        <header className="sticky top-8 z-30 flex h-20 items-center gap-4 border-b border-white/10 bg-[#080C14]/82 px-5 backdrop-blur-xl lg:px-8">
           <button className="rounded-xl border border-white/10 p-2 text-white/70 hover:bg-white/10 lg:hidden" onClick={() => setOpen(true)}>
             <Menu className="h-5 w-5" />
           </button>
@@ -1027,7 +1043,7 @@ function DashboardLayout() {
           <div className="ml-auto hidden items-center gap-3 md:flex">
             <Link to="/" className="rounded-xl border border-white/10 px-4 py-2 text-sm font-semibold text-white/70 hover:bg-white/10">Landing</Link>
             <button onClick={handleSignOut} className="rounded-xl border border-white/10 px-4 py-2 text-sm font-semibold text-white/70 hover:bg-white/10">Logout</button>
-            <a href="mailto:info@cannaworld-germany.de?subject=CannaWorld Germany Import-Anfrage" className="rounded-xl bg-cyan-300 px-4 py-2 text-sm font-bold text-[#061016] hover:bg-cyan-200">{t("app.headerImportRequest", "Import-Anfrage")}</a>
+            <a href="mailto:info@cannaworld-germany.de?subject=CannaWorld Germany Import-Anfrage" className="rounded-xl bg-cyan-300 px-4 py-2 text-sm font-bold text-[#080C14] hover:bg-cyan-200">{t("app.headerImportRequest", "Import-Anfrage")}</a>
           </div>
         </header>
         <main className="p-5 lg:p-8">
@@ -1041,13 +1057,13 @@ function DashboardLayout() {
 
 const MODULE_COLORS = {
   cyan: {
-    header: "from-cyan-300/12 via-white/[0.045] to-emerald-300/10",
+    header: "from-cyan-300/12 via-white/[0.045] to-white/[0.025]",
     blur: "bg-cyan-300/10",
-    shadow: "shadow-[0_0_42px_rgba(34,211,238,0.08)]",
+    shadow: "shadow-[0_0_42px_rgba(214,168,75,0.08)]",
     border: "border-cyan-300/20",
     badge: "border-cyan-300/25 bg-cyan-300/10 text-cyan-200",
     statIcon: "bg-cyan-300/10 text-cyan-300 ring-cyan-300/20",
-    stripe: "from-cyan-300 via-sky-400 to-emerald-300",
+    stripe: "from-cyan-300 via-sky-400 to-white",
   },
   blue: {
     header: "from-blue-400/12 via-white/[0.045] to-blue-300/10",
@@ -1067,15 +1083,6 @@ const MODULE_COLORS = {
     statIcon: "bg-purple-400/10 text-purple-300 ring-purple-400/20",
     stripe: "from-purple-400 via-violet-400 to-blue-300",
   },
-  emerald: {
-    header: "from-emerald-300/12 via-white/[0.045] to-emerald-300/10",
-    blur: "bg-emerald-300/10",
-    shadow: "shadow-[0_0_42px_rgba(110,231,183,0.08)]",
-    border: "border-emerald-300/20",
-    badge: "border-emerald-300/25 bg-emerald-300/10 text-emerald-200",
-    statIcon: "bg-emerald-300/10 text-emerald-300 ring-emerald-300/20",
-    stripe: "from-emerald-300 via-teal-400 to-cyan-300",
-  },
 } as const;
 
 function DashboardModule({ moduleKey }: { moduleKey: string }) {
@@ -1093,7 +1100,7 @@ function DashboardModule({ moduleKey }: { moduleKey: string }) {
           src="/cannaworld-mark.webp"
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-4 right-4 h-40 w-auto select-none object-contain opacity-[0.09]"
+          className="pointer-events-none absolute -bottom-4 right-4 h-40 w-auto select-none object-contain opacity-[0.045]"
         />
         <div className="relative flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-3xl">
@@ -1262,9 +1269,9 @@ function RegisterPage() {
   }
 
   return (
-    <div className="relative min-h-screen bg-[#071016] px-5 pb-16 pt-16 text-white overflow-x-hidden">
+    <div className="cw-app-shell relative min-h-screen bg-[#080C14] px-5 pb-16 pt-16 text-white overflow-x-hidden">
       <div className="pointer-events-none fixed inset-0 opacity-50">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.14),transparent_34%),radial-gradient(circle_at_75%_10%,rgba(34,197,94,0.10),transparent_28%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(214,168,75,0.14),transparent_34%),radial-gradient(circle_at_75%_10%,rgba(184,194,209,0.10),transparent_28%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_80%)]" />
       </div>
       <UniverseBar current="germany" />
@@ -1272,10 +1279,10 @@ function RegisterPage() {
         src="/cannaworld-mark.webp"
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 right-0 h-[420px] w-auto select-none object-contain opacity-[0.09]"
+        className="pointer-events-none absolute bottom-0 right-0 h-[420px] w-auto select-none object-contain opacity-[0.035]"
       />
       <Link to="/" className="inline-flex items-center gap-3 text-sm font-semibold text-white/60 hover:text-white">
-        <img src={logo} alt="CannaWorld" className="h-8 w-auto" /> Zurück zur Landing
+        <img src={logo} alt="CannaWorld" className="h-8 w-auto brightness-0 invert" /> Zurück zur Landing
       </Link>
       <main className="mx-auto mt-10 max-w-2xl">
         {submitted ? (
@@ -1292,7 +1299,7 @@ function RegisterPage() {
               Sollte sich kein E-Mail-Programm geöffnet haben, schreiben Sie uns bitte direkt an info@cannaworld-germany.de.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <Link to="/" className="rounded-xl bg-cyan-300 px-5 py-2.5 text-sm font-black text-[#061016] transition hover:bg-cyan-200">
+              <Link to="/" className="rounded-xl bg-cyan-300 px-5 py-2.5 text-sm font-black text-[#080C14] transition hover:bg-cyan-200">
                 Zurück zur Startseite
               </Link>
               <button
@@ -1305,8 +1312,8 @@ function RegisterPage() {
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="relative overflow-hidden rounded-2xl border border-cyan-300/20 bg-white/[0.055] p-7 shadow-[0_0_44px_rgba(34,211,238,0.11)] backdrop-blur-xl">
-            <div className="absolute inset-x-0 top-0 h-1 rounded-t-2xl bg-gradient-to-r from-cyan-300 via-sky-400 to-emerald-300" />
+          <form onSubmit={handleSubmit} className="relative overflow-hidden rounded-2xl border border-cyan-300/20 bg-white/[0.055] p-7 shadow-[0_0_44px_rgba(214,168,75,0.11)] backdrop-blur-xl">
+            <div className="absolute inset-x-0 top-0 h-1 rounded-t-2xl bg-gradient-to-r from-cyan-300 via-sky-400 to-white" />
             <Badge>B2B-Qualifizierung</Badge>
             <h1 className="mt-5 text-3xl font-black tracking-tight">Zugang beantragen</h1>
             <p className="mt-3 text-sm leading-6 text-white/56">
@@ -1425,7 +1432,7 @@ function RegisterPage() {
 
             <button
               type="submit"
-              className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-cyan-300 px-5 py-3 font-black text-[#061016] transition hover:bg-cyan-200"
+              className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-cyan-300 px-5 py-3 font-black text-[#080C14] transition hover:bg-cyan-200"
             >
               Anfrage senden <ArrowRight className="h-4 w-4" />
             </button>

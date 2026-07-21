@@ -122,7 +122,7 @@ export default function Analytics() {
                   ))}
                 </Pie>
                 <Tooltip
-                  contentStyle={{ background: "#0b121b", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12 }}
+                  contentStyle={{ background: "#121927", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12 }}
                   itemStyle={{ color: "#e2e8f0" }}
                 />
                 <Legend wrapperStyle={{ fontSize: 11, color: "rgba(255,255,255,0.6)" }} />
@@ -145,7 +145,7 @@ export default function Analytics() {
                 <XAxis dataKey="status" stroke="rgba(255,255,255,0.4)" tick={{ fontSize: 11 }} />
                 <YAxis stroke="rgba(255,255,255,0.4)" tick={{ fontSize: 11 }} allowDecimals={false} />
                 <Tooltip
-                  contentStyle={{ background: "#0b121b", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12 }}
+                  contentStyle={{ background: "#121927", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12 }}
                   itemStyle={{ color: "#e2e8f0" }}
                   cursor={{ fill: "rgba(255,255,255,0.04)" }}
                 />

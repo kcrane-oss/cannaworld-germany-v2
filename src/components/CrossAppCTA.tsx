@@ -44,7 +44,7 @@ const TARGETS: Record<
     label: "Supplier-Stammdaten im Gateway öffnen",
     url: "https://cannaworld-thailand.com",
     icon: Globe,
-    tint: "emerald",
+    tint: "gold",
     rationale: "Supplier-Profile, Lizenzen und Audit-Historie werden im Gateway gepflegt.",
   },
   "trade-cases": {
@@ -52,7 +52,7 @@ const TARGETS: Record<
     label: "Trade-Case im Gateway Deal-Desk öffnen",
     url: "https://cannaworld-thailand.com",
     icon: Globe,
-    tint: "emerald",
+    tint: "gold",
     rationale: "Trade-Case-Workflows (Intake → QA/QP → Commercial Terms) sind im Gateway gemastert.",
   },
   regulatory: {
@@ -60,7 +60,7 @@ const TARGETS: Record<
     label: "EU-Portal für Regulatory öffnen",
     url: "https://cannaworld-europe.com",
     icon: Network,
-    tint: "emerald",
+    tint: "gold",
     rationale: "EU-weite Importpfade, BfArM-Annexpfade und QP-Netzwerk laufen über das Europe-Portal.",
   },
   analytics: {
@@ -76,32 +76,32 @@ const TARGETS: Record<
     label: "Managed Import im Gateway starten",
     url: "https://cannaworld-thailand.com",
     icon: Globe,
-    tint: "emerald",
+    tint: "gold",
     rationale: "Managed Import (Full-Service) wird über das Gateway-Operations-Backend abgewickelt.",
   },
 };
 
 const TINT_CLASSES: Record<string, { ring: string; bg: string; text: string; hoverBorder: string; iconBg: string }> = {
   blue: {
-    ring: "border-blue-400/25",
-    bg: "from-blue-300/10 via-white/[0.045] to-blue-400/5",
-    text: "text-blue-200",
-    hoverBorder: "hover:border-blue-300/55",
-    iconBg: "bg-blue-400/15 text-blue-300 ring-blue-300/25",
+    ring: "border-[#E8874A]/25",
+    bg: "from-[#E8874A]/10 via-white/[0.045] to-[#B8C2D1]/5",
+    text: "text-[#E8874A]",
+    hoverBorder: "hover:border-[#E8874A]/55",
+    iconBg: "bg-[#E8874A]/15 text-[#E8874A] ring-[#E8874A]/25",
   },
   purple: {
-    ring: "border-purple-400/25",
-    bg: "from-purple-300/10 via-white/[0.045] to-purple-400/5",
-    text: "text-purple-200",
-    hoverBorder: "hover:border-purple-300/55",
-    iconBg: "bg-purple-400/15 text-purple-300 ring-purple-300/25",
+    ring: "border-[#22D3EE]/25",
+    bg: "from-[#22D3EE]/10 via-white/[0.045] to-[#22D3EE]/5",
+    text: "text-[#22D3EE]",
+    hoverBorder: "hover:border-[#22D3EE]/55",
+    iconBg: "bg-[#22D3EE]/15 text-[#22D3EE] ring-[#22D3EE]/25",
   },
-  emerald: {
-    ring: "border-emerald-400/25",
-    bg: "from-emerald-300/10 via-white/[0.045] to-emerald-400/5",
-    text: "text-emerald-200",
-    hoverBorder: "hover:border-emerald-300/55",
-    iconBg: "bg-emerald-400/15 text-emerald-300 ring-emerald-300/25",
+  gold: {
+    ring: "border-gold/25",
+    bg: "from-gold/10 via-white/[0.045] to-platinum/5",
+    text: "text-gold",
+    hoverBorder: "hover:border-gold/55",
+    iconBg: "bg-gold/15 text-gold ring-gold/25",
   },
 };
 
@@ -112,12 +112,12 @@ interface CrossAppCTAProps {
 const CrossAppCTA = ({ moduleKey }: CrossAppCTAProps) => {
   const target = TARGETS[moduleKey];
   if (!target) return null;
-  const tint = TINT_CLASSES[target.tint] ?? TINT_CLASSES.emerald;
+  const tint = TINT_CLASSES[target.tint] ?? TINT_CLASSES.gold;
   const Icon = target.icon;
 
   return (
     <section
-      className={`relative overflow-hidden rounded-2xl border bg-gradient-to-br p-6 shadow-[0_0_28px_rgba(34,211,238,0.05)] backdrop-blur ${tint.ring} ${tint.bg} ${tint.hoverBorder} transition`}
+      className={`relative overflow-hidden rounded-2xl border bg-gradient-to-br p-6 shadow-[0_0_28px_rgba(214,168,75,0.05)] backdrop-blur ${tint.ring} ${tint.bg} ${tint.hoverBorder} transition`}
     >
       <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
         <div className="flex items-start gap-4">

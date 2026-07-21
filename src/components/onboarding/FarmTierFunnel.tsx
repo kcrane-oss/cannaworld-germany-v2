@@ -65,12 +65,12 @@ export function FarmTierFunnel({ producers, className }: Props) {
                 </span>
                 <span>
                   <span className="font-medium text-foreground">{stage.atOrBeyond}</span>
-                  {i > 0 && <span className="ml-2 text-emerald-400">{conversionPct}%</span>}
+                  {i > 0 && <span className="ml-2 text-primary">{conversionPct}%</span>}
                 </span>
               </div>
               <div className="h-2 bg-secondary rounded-full overflow-hidden">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-cyan-500/70 to-emerald-500/70 transition-all duration-500"
+                  className="h-full rounded-full bg-gradient-to-r from-cyan-500/70 to-sky-400/70 transition-all duration-500"
                   style={{ width: `${widthPct}%` }}
                 />
               </div>

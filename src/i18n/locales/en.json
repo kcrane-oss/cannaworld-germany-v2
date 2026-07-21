@@ -330,7 +330,7 @@
     "heroBadge": "B2B · Medical · Regulated",
     "heroTitleLine1": "Your German point of contact for",
     "heroTitleLine2": "medical cannabis import.",
-    "heroSubtitle": "For pharmacies, wholesalers, importers and manufacturers that need verified international supply, robust documentation and a clear EU-GMP/GDP/GACP pathway.",
+    "heroSubtitle": "For pharmacies, wholesalers, importers and manufacturers that need evidence-screened supply candidates, robust documentation and a clear EU-GMP/GDP/GACP readiness pathway.",
     "heroCtaPartnerAccess": "Open partner access",
     "heroCtaImportRequest": "Submit import request",
     "heroPillDocumentPath": "EU-GMP/GDP document pathway",
@@ -338,7 +338,8 @@
     "heroPillThailandGermany": "Thailand → Germany/EU",
     "intakeEyebrow": "Proof-of-Trust Intake",
     "intakeTitle": "For regulated market participants",
-    "intakeDisclaimer": "No dispensing to end consumers. No strain advertising. No therapeutic or healing claims. Strictly B2B / compliance / import intake."
+    "intakeDisclaimer": "No dispensing to end consumers. No strain advertising. No therapeutic or healing claims. Strictly B2B / compliance / import intake.",
+    "claimBoundary": "CannaWorld structures evidence and readiness. Certification, import approval, QP release, authority decisions and transactions are not guaranteed."
   },
   "analytics": {
     "heroDescription": "Snapshot of the German pipeline: Trade Cases, batches, supplier quality, inventory health. Deeper time-series, cohort analyses and ShinrAi scoring in the AICert analytics layer.",
