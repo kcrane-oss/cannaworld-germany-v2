@@ -457,7 +457,7 @@ function LandingPage() {
                 src="/cannaworld-mark.webp"
                 alt="CannaWorld Germany"
                 className="h-16 w-16 object-contain [filter:drop-shadow(0_0_24px_rgba(214,168,75,0.18))_brightness(0)_invert(1)] md:h-20 md:w-20"
-                fetchPriority="high"
+                loading="eager"
                 decoding="async"
               />
               <div className="text-left leading-none">
