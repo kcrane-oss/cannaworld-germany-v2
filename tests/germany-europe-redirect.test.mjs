@@ -1,40 +1,61 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const config = JSON.parse(
-  await readFile(new URL("../vercel.json", import.meta.url), "utf8"),
-);
+import middleware, { redirectTarget } from "../middleware.js";
 
 test("Germany permanently redirects every public path to the German Europe entry", () => {
-  const redirects = config.redirects ?? [];
-  const catchAll = redirects.at(-1);
+  const response = middleware(new Request("https://cannaworld-germany.de/any/path?utm_source=test"));
 
-  assert.deepEqual(catchAll, {
-    source: "/:path*",
-    destination: "https://cannaworld-europe.com/?lang=de",
-    statusCode: 301,
-  });
-
-  for (const redirect of redirects) {
-    assert.equal(redirect.statusCode, 301);
-    assert.match(redirect.destination, /^https:\/\/cannaworld-europe\.com\//);
-  }
+  assert.equal(response.status, 301);
+  assert.equal(response.headers.get("location"), "https://cannaworld-europe.com/?lang=de");
+  assert.equal(response.headers.get("referrer-policy"), "no-referrer");
 });
 
 test("login and access routes keep their intent", () => {
-  const bySource = new Map(config.redirects.map((redirect) => [redirect.source, redirect]));
-
   assert.equal(
-    bySource.get("/login")?.destination,
+    redirectTarget("/login"),
     "https://cannaworld-europe.com/login?lang=de",
   );
   assert.equal(
-    bySource.get("/request-access")?.destination,
+    redirectTarget("/register"),
     "https://cannaworld-europe.com/request-access?lang=de",
   );
   assert.equal(
-    bySource.get("/onboarding")?.destination,
+    redirectTarget("/request-access"),
     "https://cannaworld-europe.com/request-access?lang=de",
   );
+  assert.equal(
+    redirectTarget("/onboarding"),
+    "https://cannaworld-europe.com/request-access?lang=de",
+  );
+});
+
+test("German legal paths resolve to canonical CannaWorld legal documents", () => {
+  assert.equal(
+    redirectTarget("/impressum"),
+    "https://cannaworld-thailand.com/impressum?lang=de",
+  );
+  assert.equal(
+    redirectTarget("/datenschutz"),
+    "https://cannaworld-thailand.com/privacy?lang=de",
+  );
+  assert.equal(
+    redirectTarget("/agb"),
+    "https://cannaworld-thailand.com/terms?lang=de",
+  );
+});
+
+test("incoming query parameters, including tokens and language overrides, are discarded", () => {
+  const cases = [
+    ["/foo?utm_source=test", "https://cannaworld-europe.com/?lang=de"],
+    ["/foo?lang=en", "https://cannaworld-europe.com/?lang=de"],
+    ["/reset-password?token=sentinel", "https://cannaworld-europe.com/?lang=de"],
+    ["/login?next=%2Fdashboard&token=sentinel", "https://cannaworld-europe.com/login?lang=de"],
+  ];
+
+  for (const [path, expected] of cases) {
+    const response = middleware(new Request(`https://cannaworld-germany.de${path}`));
+    assert.equal(response.headers.get("location"), expected);
+    assert.equal(response.headers.get("location")?.includes("sentinel"), false);
+  }
 });
