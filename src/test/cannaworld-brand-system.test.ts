@@ -52,6 +52,7 @@ describe("CannaWorld family design contract", () => {
     expect(html).toContain('/cannaworld-mark.png');
     expect(vite).toContain('name: "CannaWorld Germany"');
     expect(vite).toContain('theme_color: "#080C14"');
+    expect(vite).toContain('lang: "de"');
     expect(html).not.toContain("AI Cert Tech");
     expect(html).not.toContain("cannaworld-aicerttech-logo");
     expect(vite).not.toContain("cannaworld-aicerttech-logo");

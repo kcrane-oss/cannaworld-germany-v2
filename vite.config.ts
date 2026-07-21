@@ -60,7 +60,8 @@ export default defineConfig(() => ({
       manifest: {
         name: "CannaWorld Germany",
         short_name: "CW Germany",
-        description: "German B2B medical cannabis import and compliance gateway",
+        description: "Deutsches B2B-Import-Gateway mit dokumentierten Compliance-Readiness-Workflows",
+        lang: "de",
         theme_color: "#080C14",
         background_color: "#080C14",
         display: "standalone",
