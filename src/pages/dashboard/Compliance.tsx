@@ -19,7 +19,7 @@ interface Framework {
 
 // Baseline matrix derived from EU-GMP Part I/II Annex 1+7+13, EU GDP guideline 2013/C 343/01,
 // and the WHO/CarePath GACP 2003 reference. Status is a default placeholder — the live
-// score lives in AICert's ShinrAi Engine.
+// score lives in AICert's CannaWorld Trust Index Engine.
 const FRAMEWORKS: Framework[] = [
   {
     key: "eu_gmp",
@@ -120,7 +120,7 @@ export default function Compliance() {
             </div>
             <h1 className="text-3xl font-black tracking-tight md:text-5xl">EU-GMP / GDP / GACP</h1>
             <p className="mt-4 max-w-2xl text-base leading-7 text-white/60">
-              Statische Default-Matrix als Diskussionsgrundlage. Der tatsächliche, live berechnete ShinrAi-Score
+              Statische Default-Matrix als Diskussionsgrundlage. Der tatsächlich live berechnete CannaWorld Trust Index
               kommt aus der AICert Audit-Engine — siehe CTA unten.
             </p>
           </div>

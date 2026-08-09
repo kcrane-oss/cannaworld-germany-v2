@@ -147,7 +147,7 @@ export function useExporterOnboarding() {
       const extraFields = [
         "facility_name", "facility_type", "total_area_sqm", "cultivation_area_sqm",
         "employee_count", "cleanroom_classes", "product_catalog", "batch_tracking_method",
-        "traceability_level", "shinrai_assessment", "shinrai_score", "shinrai_rating",
+        "traceability_level", "trust_index_assessment", "trust_index_score", "trust_index_rating",
         "submitted_at",
       ];
       for (const f of extraFields) {

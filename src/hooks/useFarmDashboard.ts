@@ -4,9 +4,9 @@ import { useAuth } from '@/hooks/useAuth';
 
 export interface FarmDashboardData {
   loading: boolean;
-  shinraiScore: number;
-  shinraiRating: string;
-  shinraiAxes: { key: string; label: string; score: number }[];
+  trustIndexScore: number;
+  trustIndexRating: string;
+  trustIndexAxes: { key: string; label: string; score: number }[];
   gaps: { critical: number; audit: number; structural: number; optimization: number };
   documents: { type: string; name: string; status: 'validated' | 'pending' | 'missing' }[];
   certPhase: number;
@@ -14,17 +14,17 @@ export interface FarmDashboardData {
   companyName: string;
 }
 
-interface ShinrAiAxis {
+interface TrustIndexAxis {
   score: number;
   answers: Record<string, any>;
 }
 
-interface ShinrAiAssessment {
-  cultivation?: ShinrAiAxis;
-  post_harvest?: ShinrAiAxis;
-  documentation?: ShinrAiAxis;
-  quality?: ShinrAiAxis;
-  personnel?: ShinrAiAxis;
+interface TrustIndexAssessment {
+  cultivation?: TrustIndexAxis;
+  post_harvest?: TrustIndexAxis;
+  documentation?: TrustIndexAxis;
+  quality?: TrustIndexAxis;
+  personnel?: TrustIndexAxis;
 }
 
 const AXIS_CONFIG = [
@@ -57,9 +57,9 @@ export const useFarmDashboard = () => {
   const { user } = useAuth();
   const [data, setData] = useState<FarmDashboardData>({
     loading: true,
-    shinraiScore: 0,
-    shinraiRating: 'INSUFFICIENT',
-    shinraiAxes: [],
+    trustIndexScore: 0,
+    trustIndexRating: 'INSUFFICIENT',
+    trustIndexAxes: [],
     gaps: { critical: 0, audit: 0, structural: 0, optimization: 0 },
     documents: [],
     certPhase: 1,
@@ -92,15 +92,15 @@ export const useFarmDashboard = () => {
 
         if (docsError) console.error('Error fetching documents:', docsError);
 
-        // 3. Process ShinrAi Assessment
-        const assessment = (onboarding.shinrai_assessment as unknown as ShinrAiAssessment) || {};
+        // 3. Process CannaWorld Trust Index Assessment
+        const assessment = (onboarding.trust_index_assessment as unknown as TrustIndexAssessment) || {};
         let totalScore = 0;
-        const axes: FarmDashboardData['shinraiAxes'] = [];
+        const axes: FarmDashboardData['trustIndexAxes'] = [];
         let criticalGaps = 0;
         let auditGaps = 0;
 
         AXIS_CONFIG.forEach(axis => {
-          const axisData = assessment[axis.key as keyof ShinrAiAssessment];
+          const axisData = assessment[axis.key as keyof TrustIndexAssessment];
           const score = axisData?.score || 0;
           
           totalScore += (score * axis.weight) / 100;
@@ -133,7 +133,7 @@ export const useFarmDashboard = () => {
         const completedSteps = onboarding.completed_steps || [];
         if (completedSteps.includes(1) && completedSteps.includes(2) && completedSteps.includes(3)) {
           certPhase = 2;
-          if (onboarding.shinrai_assessment) {
+          if (onboarding.trust_index_assessment) {
             certPhase = 2; // In real scenarios might be 3 if assessment is finished
           }
         }
@@ -151,9 +151,9 @@ export const useFarmDashboard = () => {
 
         setData({
           loading: false,
-          shinraiScore: Math.round(totalScore),
-          shinraiRating: getRating(totalScore),
-          shinraiAxes: axes,
+          trustIndexScore: Math.round(totalScore),
+          trustIndexRating: getRating(totalScore),
+          trustIndexAxes: axes,
           gaps: {
             critical: criticalGaps,
             audit: auditGaps,

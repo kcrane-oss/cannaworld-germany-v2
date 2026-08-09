@@ -1,6 +1,6 @@
 /**
  * Role-specific onboarding configurations.
- * Each role has its own step titles, document types, ShinrAi assessment axes, etc.
+ * Each role has its own step titles, document types, CannaWorld Trust Index assessment axes, etc.
  */
 
 export type OnboardingRole =
@@ -23,7 +23,7 @@ export interface DocumentConfig {
   accept?: string; // MIME types
 }
 
-export interface ShinraiAxis {
+export interface TrustIndexAxis {
   key: string;
   label: string; // i18n key
   weight: number;
@@ -45,7 +45,7 @@ export interface RoleConfig {
     needsNDA: boolean;
   }[];
   documents: DocumentConfig[];
-  shinraiAxes: ShinraiAxis[];
+  trustIndexAxes: TrustIndexAxis[];
   /** Fields for step 1 (company/entity profile) */
   profileFields: string[];
   /** Fields for step 2 (licensing & credentials) */
@@ -57,17 +57,17 @@ export interface RoleConfig {
 }
 
 // ──────────────────────────────────────────────
-// Shared ShinrAi question template
+// Shared CannaWorld Trust Index question template
 // ──────────────────────────────────────────────
 const q = (key: string, label: string) => ({
   key,
   label,
   options: [
-    { value: 0, label: "ob.shinrai.not_implemented" },
-    { value: 1, label: "ob.shinrai.planned" },
-    { value: 2, label: "ob.shinrai.partial" },
-    { value: 3, label: "ob.shinrai.implemented" },
-    { value: 4, label: "ob.shinrai.certified" },
+    { value: 0, label: "ob.trust_index.not_implemented" },
+    { value: 1, label: "ob.trust_index.planned" },
+    { value: 2, label: "ob.trust_index.partial" },
+    { value: 3, label: "ob.trust_index.implemented" },
+    { value: 4, label: "ob.trust_index.certified" },
   ],
 });
 
@@ -84,7 +84,7 @@ const exporterConfig: RoleConfig = {
     { num: 2, label: "ob.step_licensing", needsNDA: false },
     { num: 3, label: "ob.step_facility", needsNDA: true },
     { num: 4, label: "ob.step_products", needsNDA: true },
-    { num: 5, label: "ob.step_shinrai", needsNDA: true },
+    { num: 5, label: "ob.step_trust_index", needsNDA: true },
   ],
   documents: [
     { type: "company_registration", label: "ob.doc.company_reg", required: true, step: 1 },
@@ -105,73 +105,73 @@ const exporterConfig: RoleConfig = {
     { type: "stability_data", label: "ob.doc.stability_data", required: false, step: 4 },
     { type: "insurance", label: "ob.doc.insurance", required: false, step: 4 },
   ],
-  shinraiAxes: [
+  trustIndexAxes: [
     {
       key: "documentation",
-      label: "ob.shinrai.axis.documentation",
+      label: "ob.trust_index.axis.documentation",
       weight: 20,
       questions: [
-        q("doc_sop", "ob.shinrai.q.sop_current"),
-        q("doc_records", "ob.shinrai.q.batch_records"),
-        q("doc_digital", "ob.shinrai.q.digital_system"),
-        q("doc_archive", "ob.shinrai.q.archive_policy"),
-        q("doc_version", "ob.shinrai.q.version_control"),
+        q("doc_sop", "ob.trust_index.q.sop_current"),
+        q("doc_records", "ob.trust_index.q.batch_records"),
+        q("doc_digital", "ob.trust_index.q.digital_system"),
+        q("doc_archive", "ob.trust_index.q.archive_policy"),
+        q("doc_version", "ob.trust_index.q.version_control"),
       ],
     },
     {
       key: "facility",
-      label: "ob.shinrai.axis.facility",
+      label: "ob.trust_index.axis.facility",
       weight: 20,
       questions: [
-        q("fac_cleanroom", "ob.shinrai.q.cleanroom"),
-        q("fac_hvac", "ob.shinrai.q.hvac"),
-        q("fac_pest", "ob.shinrai.q.pest_control"),
-        q("fac_waste", "ob.shinrai.q.waste_management"),
-        q("fac_maintenance", "ob.shinrai.q.maintenance_plan"),
+        q("fac_cleanroom", "ob.trust_index.q.cleanroom"),
+        q("fac_hvac", "ob.trust_index.q.hvac"),
+        q("fac_pest", "ob.trust_index.q.pest_control"),
+        q("fac_waste", "ob.trust_index.q.waste_management"),
+        q("fac_maintenance", "ob.trust_index.q.maintenance_plan"),
       ],
     },
     {
       key: "staff",
-      label: "ob.shinrai.axis.staff",
+      label: "ob.trust_index.axis.staff",
       weight: 15,
       questions: [
-        q("staff_qp", "ob.shinrai.q.qualified_person"),
-        q("staff_training", "ob.shinrai.q.training_plan"),
-        q("staff_hygiene", "ob.shinrai.q.hygiene_program"),
-        q("staff_org", "ob.shinrai.q.org_chart"),
+        q("staff_qp", "ob.trust_index.q.qualified_person"),
+        q("staff_training", "ob.trust_index.q.training_plan"),
+        q("staff_hygiene", "ob.trust_index.q.hygiene_program"),
+        q("staff_org", "ob.trust_index.q.org_chart"),
       ],
     },
     {
       key: "supply_chain",
-      label: "ob.shinrai.axis.supply_chain",
+      label: "ob.trust_index.axis.supply_chain",
       weight: 20,
       questions: [
-        q("sc_traceability", "ob.shinrai.q.traceability"),
-        q("sc_cold_chain", "ob.shinrai.q.cold_chain"),
-        q("sc_transport", "ob.shinrai.q.transport_validation"),
-        q("sc_supplier", "ob.shinrai.q.supplier_qualification"),
-        q("sc_recall", "ob.shinrai.q.recall_procedure"),
+        q("sc_traceability", "ob.trust_index.q.traceability"),
+        q("sc_cold_chain", "ob.trust_index.q.cold_chain"),
+        q("sc_transport", "ob.trust_index.q.transport_validation"),
+        q("sc_supplier", "ob.trust_index.q.supplier_qualification"),
+        q("sc_recall", "ob.trust_index.q.recall_procedure"),
       ],
     },
     {
       key: "quality",
-      label: "ob.shinrai.axis.quality",
+      label: "ob.trust_index.axis.quality",
       weight: 15,
       questions: [
-        q("qa_capa", "ob.shinrai.q.capa_system"),
-        q("qa_deviation", "ob.shinrai.q.deviation_handling"),
-        q("qa_change", "ob.shinrai.q.change_control"),
-        q("qa_audit", "ob.shinrai.q.internal_audits"),
+        q("qa_capa", "ob.trust_index.q.capa_system"),
+        q("qa_deviation", "ob.trust_index.q.deviation_handling"),
+        q("qa_change", "ob.trust_index.q.change_control"),
+        q("qa_audit", "ob.trust_index.q.internal_audits"),
       ],
     },
     {
       key: "marketability",
-      label: "ob.shinrai.axis.marketability",
+      label: "ob.trust_index.axis.marketability",
       weight: 10,
       questions: [
-        q("mkt_target", "ob.shinrai.q.target_markets"),
-        q("mkt_regulatory", "ob.shinrai.q.regulatory_awareness"),
-        q("mkt_labeling", "ob.shinrai.q.labeling_compliance"),
+        q("mkt_target", "ob.trust_index.q.target_markets"),
+        q("mkt_regulatory", "ob.trust_index.q.regulatory_awareness"),
+        q("mkt_labeling", "ob.trust_index.q.labeling_compliance"),
       ],
     },
   ],
@@ -220,7 +220,7 @@ const importerConfig: RoleConfig = {
     { num: 2, label: "ob.step_licensing", needsNDA: false },
     { num: 3, label: "ob.step_operations", needsNDA: true },
     { num: 4, label: "ob.step_compliance", needsNDA: true },
-    { num: 5, label: "ob.step_shinrai", needsNDA: true },
+    { num: 5, label: "ob.step_trust_index", needsNDA: true },
   ],
   documents: [
     { type: "company_registration", label: "ob.doc.company_reg", required: true, step: 1 },
@@ -234,55 +234,55 @@ const importerConfig: RoleConfig = {
     { type: "capa_process", label: "ob.doc.capa_process", required: false, step: 4 },
     { type: "insurance", label: "ob.doc.insurance", required: true, step: 4 },
   ],
-  shinraiAxes: [
+  trustIndexAxes: [
     {
-      key: "documentation", label: "ob.shinrai.axis.documentation", weight: 20,
+      key: "documentation", label: "ob.trust_index.axis.documentation", weight: 20,
       questions: [
-        q("doc_sop", "ob.shinrai.q.sop_current"),
-        q("doc_records", "ob.shinrai.q.import_records"),
-        q("doc_digital", "ob.shinrai.q.digital_system"),
-        q("doc_regulatory", "ob.shinrai.q.regulatory_filing"),
+        q("doc_sop", "ob.trust_index.q.sop_current"),
+        q("doc_records", "ob.trust_index.q.import_records"),
+        q("doc_digital", "ob.trust_index.q.digital_system"),
+        q("doc_regulatory", "ob.trust_index.q.regulatory_filing"),
       ],
     },
     {
-      key: "facility", label: "ob.shinrai.axis.warehouse", weight: 20,
+      key: "facility", label: "ob.trust_index.axis.warehouse", weight: 20,
       questions: [
-        q("fac_gdp", "ob.shinrai.q.gdp_compliant"),
-        q("fac_cold", "ob.shinrai.q.cold_storage"),
-        q("fac_security", "ob.shinrai.q.security_system"),
-        q("fac_quarantine", "ob.shinrai.q.quarantine_area"),
+        q("fac_gdp", "ob.trust_index.q.gdp_compliant"),
+        q("fac_cold", "ob.trust_index.q.cold_storage"),
+        q("fac_security", "ob.trust_index.q.security_system"),
+        q("fac_quarantine", "ob.trust_index.q.quarantine_area"),
       ],
     },
     {
-      key: "staff", label: "ob.shinrai.axis.staff", weight: 15,
+      key: "staff", label: "ob.trust_index.axis.staff", weight: 15,
       questions: [
-        q("staff_rp", "ob.shinrai.q.responsible_person"),
-        q("staff_training", "ob.shinrai.q.training_plan"),
-        q("staff_compliance", "ob.shinrai.q.compliance_team"),
+        q("staff_rp", "ob.trust_index.q.responsible_person"),
+        q("staff_training", "ob.trust_index.q.training_plan"),
+        q("staff_compliance", "ob.trust_index.q.compliance_team"),
       ],
     },
     {
-      key: "supply_chain", label: "ob.shinrai.axis.supply_chain", weight: 20,
+      key: "supply_chain", label: "ob.trust_index.axis.supply_chain", weight: 20,
       questions: [
-        q("sc_vendor", "ob.shinrai.q.vendor_qualification"),
-        q("sc_traceability", "ob.shinrai.q.traceability"),
-        q("sc_recall", "ob.shinrai.q.recall_procedure"),
-        q("sc_returns", "ob.shinrai.q.returns_handling"),
+        q("sc_vendor", "ob.trust_index.q.vendor_qualification"),
+        q("sc_traceability", "ob.trust_index.q.traceability"),
+        q("sc_recall", "ob.trust_index.q.recall_procedure"),
+        q("sc_returns", "ob.trust_index.q.returns_handling"),
       ],
     },
     {
-      key: "quality", label: "ob.shinrai.axis.quality", weight: 15,
+      key: "quality", label: "ob.trust_index.axis.quality", weight: 15,
       questions: [
-        q("qa_capa", "ob.shinrai.q.capa_system"),
-        q("qa_complaints", "ob.shinrai.q.complaint_handling"),
-        q("qa_coa_verify", "ob.shinrai.q.coa_verification"),
+        q("qa_capa", "ob.trust_index.q.capa_system"),
+        q("qa_complaints", "ob.trust_index.q.complaint_handling"),
+        q("qa_coa_verify", "ob.trust_index.q.coa_verification"),
       ],
     },
     {
-      key: "marketability", label: "ob.shinrai.axis.marketability", weight: 10,
+      key: "marketability", label: "ob.trust_index.axis.marketability", weight: 10,
       questions: [
-        q("mkt_distribution", "ob.shinrai.q.distribution_network"),
-        q("mkt_regulatory", "ob.shinrai.q.regulatory_awareness"),
+        q("mkt_distribution", "ob.trust_index.q.distribution_network"),
+        q("mkt_regulatory", "ob.trust_index.q.regulatory_awareness"),
       ],
     },
   ],
@@ -320,37 +320,37 @@ const farmConfig: RoleConfig = {
     { type: "coa", label: "ob.doc.certificate_of_analysis", required: false, step: 2 },
     { type: "facility_photo", label: "ob.doc.facility_photos", required: false, step: 2 },
   ],
-  shinraiAxes: [
+  trustIndexAxes: [
     // ═══ QUICK-CHECK: 6 core questions instead of 30 ═══
     {
-      key: "cultivation", label: "ob.shinrai.axis.cultivation_excellence", weight: 25,
+      key: "cultivation", label: "ob.trust_index.axis.cultivation_excellence", weight: 25,
       questions: [
-        q("fac_gacp", "ob.shinrai.q.gacp_compliance"),
+        q("fac_gacp", "ob.trust_index.q.gacp_compliance"),
       ],
     },
     {
-      key: "post_harvest", label: "ob.shinrai.axis.post_harvest_integrity", weight: 25,
+      key: "post_harvest", label: "ob.trust_index.axis.post_harvest_integrity", weight: 25,
       questions: [
-        q("ph_drying", "ob.shinrai.q.validated_drying_18_22c_45_55rh"),
-        q("ph_storage", "ob.shinrai.q.gdp_storage_15_25c_60rh"),
+        q("ph_drying", "ob.trust_index.q.validated_drying_18_22c_45_55rh"),
+        q("ph_storage", "ob.trust_index.q.gdp_storage_15_25c_60rh"),
       ],
     },
     {
-      key: "documentation", label: "ob.shinrai.axis.alcoa_documentation", weight: 25,
+      key: "documentation", label: "ob.trust_index.axis.alcoa_documentation", weight: 25,
       questions: [
-        q("doc_batch_records", "ob.shinrai.q.complete_batch_records"),
+        q("doc_batch_records", "ob.trust_index.q.complete_batch_records"),
       ],
     },
     {
-      key: "quality_testing", label: "ob.shinrai.axis.quality_testing", weight: 15,
+      key: "quality_testing", label: "ob.trust_index.axis.quality_testing", weight: 15,
       questions: [
-        q("qa_lab_accredited", "ob.shinrai.q.iso17025_accredited_lab"),
+        q("qa_lab_accredited", "ob.trust_index.q.iso17025_accredited_lab"),
       ],
     },
     {
-      key: "personnel", label: "ob.shinrai.axis.personnel_training", weight: 10,
+      key: "personnel", label: "ob.trust_index.axis.personnel_training", weight: 10,
       questions: [
-        q("staff_trained", "ob.shinrai.q.gacp_gmp_basics_trained"),
+        q("staff_trained", "ob.trust_index.q.gacp_gmp_basics_trained"),
       ],
     },
   ],
@@ -376,7 +376,7 @@ const labConfig: RoleConfig = {
     { num: 2, label: "ob.step_accreditation", needsNDA: false },
     { num: 3, label: "ob.step_lab_capabilities", needsNDA: true },
     { num: 4, label: "ob.step_methods", needsNDA: true },
-    { num: 5, label: "ob.step_shinrai", needsNDA: true },
+    { num: 5, label: "ob.step_trust_index", needsNDA: true },
   ],
   documents: [
     { type: "company_registration", label: "ob.doc.company_reg", required: true, step: 1 },
@@ -388,13 +388,13 @@ const labConfig: RoleConfig = {
     { type: "proficiency_test", label: "ob.doc.proficiency_test", required: false, step: 4 },
     { type: "sample_coa", label: "ob.doc.sample_coa", required: true, step: 4 },
   ],
-  shinraiAxes: [
-    { key: "documentation", label: "ob.shinrai.axis.documentation", weight: 20, questions: [q("doc_sop", "ob.shinrai.q.sop_current"), q("doc_records", "ob.shinrai.q.test_records"), q("doc_lims", "ob.shinrai.q.lims_system")] },
-    { key: "facility", label: "ob.shinrai.axis.lab_facility", weight: 25, questions: [q("fac_iso", "ob.shinrai.q.iso17025_status"), q("fac_calibration", "ob.shinrai.q.calibration_program"), q("fac_environment", "ob.shinrai.q.lab_env_control"), q("fac_sample", "ob.shinrai.q.sample_handling")] },
-    { key: "staff", label: "ob.shinrai.axis.staff", weight: 15, questions: [q("staff_qualification", "ob.shinrai.q.analyst_qualification"), q("staff_training", "ob.shinrai.q.training_plan")] },
-    { key: "supply_chain", label: "ob.shinrai.axis.testing", weight: 20, questions: [q("test_cannabinoids", "ob.shinrai.q.cannabinoid_testing"), q("test_contaminants", "ob.shinrai.q.contaminant_testing"), q("test_micro", "ob.shinrai.q.micro_testing"), q("test_heavy_metals", "ob.shinrai.q.heavy_metal_testing")] },
-    { key: "quality", label: "ob.shinrai.axis.quality", weight: 15, questions: [q("qa_uncertainty", "ob.shinrai.q.measurement_uncertainty"), q("qa_proficiency", "ob.shinrai.q.proficiency_testing")] },
-    { key: "marketability", label: "ob.shinrai.axis.marketability", weight: 5, questions: [q("mkt_turnaround", "ob.shinrai.q.turnaround_time"), q("mkt_coverage", "ob.shinrai.q.geographic_coverage")] },
+  trustIndexAxes: [
+    { key: "documentation", label: "ob.trust_index.axis.documentation", weight: 20, questions: [q("doc_sop", "ob.trust_index.q.sop_current"), q("doc_records", "ob.trust_index.q.test_records"), q("doc_lims", "ob.trust_index.q.lims_system")] },
+    { key: "facility", label: "ob.trust_index.axis.lab_facility", weight: 25, questions: [q("fac_iso", "ob.trust_index.q.iso17025_status"), q("fac_calibration", "ob.trust_index.q.calibration_program"), q("fac_environment", "ob.trust_index.q.lab_env_control"), q("fac_sample", "ob.trust_index.q.sample_handling")] },
+    { key: "staff", label: "ob.trust_index.axis.staff", weight: 15, questions: [q("staff_qualification", "ob.trust_index.q.analyst_qualification"), q("staff_training", "ob.trust_index.q.training_plan")] },
+    { key: "supply_chain", label: "ob.trust_index.axis.testing", weight: 20, questions: [q("test_cannabinoids", "ob.trust_index.q.cannabinoid_testing"), q("test_contaminants", "ob.trust_index.q.contaminant_testing"), q("test_micro", "ob.trust_index.q.micro_testing"), q("test_heavy_metals", "ob.trust_index.q.heavy_metal_testing")] },
+    { key: "quality", label: "ob.trust_index.axis.quality", weight: 15, questions: [q("qa_uncertainty", "ob.trust_index.q.measurement_uncertainty"), q("qa_proficiency", "ob.trust_index.q.proficiency_testing")] },
+    { key: "marketability", label: "ob.trust_index.axis.marketability", weight: 5, questions: [q("mkt_turnaround", "ob.trust_index.q.turnaround_time"), q("mkt_coverage", "ob.trust_index.q.geographic_coverage")] },
   ],
   profileFields: ["company_name", "legal_form", "tax_id", "country", "address", "contact_person", "website"],
   licensingFields: ["iso17025_number", "accreditation_body", "accreditation_valid_until", "accredited_methods"],
@@ -415,7 +415,7 @@ const logisticsConfig: RoleConfig = {
     { num: 2, label: "ob.step_licensing", needsNDA: false },
     { num: 3, label: "ob.step_fleet", needsNDA: true },
     { num: 4, label: "ob.step_compliance", needsNDA: true },
-    { num: 5, label: "ob.step_shinrai", needsNDA: true },
+    { num: 5, label: "ob.step_trust_index", needsNDA: true },
   ],
   documents: [
     { type: "company_registration", label: "ob.doc.company_reg", required: true, step: 1 },
@@ -428,13 +428,13 @@ const logisticsConfig: RoleConfig = {
     { type: "insurance", label: "ob.doc.cargo_insurance", required: true, step: 4 },
     { type: "quality_manual", label: "ob.doc.quality_manual", required: false, step: 4 },
   ],
-  shinraiAxes: [
-    { key: "documentation", label: "ob.shinrai.axis.documentation", weight: 15, questions: [q("doc_sop", "ob.shinrai.q.sop_current"), q("doc_records", "ob.shinrai.q.shipment_records")] },
-    { key: "facility", label: "ob.shinrai.axis.fleet", weight: 25, questions: [q("fac_gdp", "ob.shinrai.q.gdp_vehicles"), q("fac_cold", "ob.shinrai.q.cold_chain"), q("fac_tracking", "ob.shinrai.q.gps_tracking"), q("fac_security", "ob.shinrai.q.cargo_security")] },
-    { key: "staff", label: "ob.shinrai.axis.staff", weight: 15, questions: [q("staff_training", "ob.shinrai.q.driver_training"), q("staff_background", "ob.shinrai.q.background_checks")] },
-    { key: "supply_chain", label: "ob.shinrai.axis.operations", weight: 25, questions: [q("sc_routing", "ob.shinrai.q.route_validation"), q("sc_handoff", "ob.shinrai.q.chain_of_custody"), q("sc_temperature", "ob.shinrai.q.temp_monitoring"), q("sc_customs", "ob.shinrai.q.customs_handling")] },
-    { key: "quality", label: "ob.shinrai.axis.quality", weight: 15, questions: [q("qa_deviation", "ob.shinrai.q.deviation_handling"), q("qa_incident", "ob.shinrai.q.incident_response")] },
-    { key: "marketability", label: "ob.shinrai.axis.marketability", weight: 5, questions: [q("mkt_coverage", "ob.shinrai.q.geographic_coverage"), q("mkt_capacity", "ob.shinrai.q.volume_capacity")] },
+  trustIndexAxes: [
+    { key: "documentation", label: "ob.trust_index.axis.documentation", weight: 15, questions: [q("doc_sop", "ob.trust_index.q.sop_current"), q("doc_records", "ob.trust_index.q.shipment_records")] },
+    { key: "facility", label: "ob.trust_index.axis.fleet", weight: 25, questions: [q("fac_gdp", "ob.trust_index.q.gdp_vehicles"), q("fac_cold", "ob.trust_index.q.cold_chain"), q("fac_tracking", "ob.trust_index.q.gps_tracking"), q("fac_security", "ob.trust_index.q.cargo_security")] },
+    { key: "staff", label: "ob.trust_index.axis.staff", weight: 15, questions: [q("staff_training", "ob.trust_index.q.driver_training"), q("staff_background", "ob.trust_index.q.background_checks")] },
+    { key: "supply_chain", label: "ob.trust_index.axis.operations", weight: 25, questions: [q("sc_routing", "ob.trust_index.q.route_validation"), q("sc_handoff", "ob.trust_index.q.chain_of_custody"), q("sc_temperature", "ob.trust_index.q.temp_monitoring"), q("sc_customs", "ob.trust_index.q.customs_handling")] },
+    { key: "quality", label: "ob.trust_index.axis.quality", weight: 15, questions: [q("qa_deviation", "ob.trust_index.q.deviation_handling"), q("qa_incident", "ob.trust_index.q.incident_response")] },
+    { key: "marketability", label: "ob.trust_index.axis.marketability", weight: 5, questions: [q("mkt_coverage", "ob.trust_index.q.geographic_coverage"), q("mkt_capacity", "ob.trust_index.q.volume_capacity")] },
   ],
   profileFields: ["company_name", "legal_form", "tax_id", "country", "address", "contact_person", "website"],
   licensingFields: ["carrier_license_number", "gdp_cert_number", "issuing_authority", "license_valid_until", "routes_covered"],
@@ -455,7 +455,7 @@ const auditorConfig: RoleConfig = {
     { num: 2, label: "ob.step_qualifications", needsNDA: false },
     { num: 3, label: "ob.step_experience", needsNDA: true },
     { num: 4, label: "ob.step_specialization", needsNDA: true },
-    { num: 5, label: "ob.step_shinrai", needsNDA: true },
+    { num: 5, label: "ob.step_trust_index", needsNDA: true },
   ],
   documents: [
     { type: "cv_resume", label: "ob.doc.cv", required: true, step: 1 },
@@ -466,13 +466,13 @@ const auditorConfig: RoleConfig = {
     { type: "audit_report_sample", label: "ob.doc.sample_report", required: true, step: 3 },
     { type: "reference_letter", label: "ob.doc.reference_letter", required: false, step: 3 },
   ],
-  shinraiAxes: [
-    { key: "documentation", label: "ob.shinrai.axis.methodology", weight: 20, questions: [q("doc_methodology", "ob.shinrai.q.audit_methodology"), q("doc_reporting", "ob.shinrai.q.report_quality")] },
-    { key: "facility", label: "ob.shinrai.axis.expertise", weight: 25, questions: [q("exp_gmp", "ob.shinrai.q.gmp_expertise"), q("exp_gacp", "ob.shinrai.q.gacp_expertise"), q("exp_cannabis", "ob.shinrai.q.cannabis_specific")] },
-    { key: "staff", label: "ob.shinrai.axis.credentials", weight: 25, questions: [q("cred_formal", "ob.shinrai.q.formal_qualification"), q("cred_cpd", "ob.shinrai.q.cpd_hours"), q("cred_language", "ob.shinrai.q.language_skills")] },
-    { key: "supply_chain", label: "ob.shinrai.axis.experience", weight: 15, questions: [q("exp_audits_yr", "ob.shinrai.q.audits_per_year"), q("exp_international", "ob.shinrai.q.international_exp")] },
-    { key: "quality", label: "ob.shinrai.axis.integrity", weight: 10, questions: [q("qa_independence", "ob.shinrai.q.independence"), q("qa_conflict", "ob.shinrai.q.conflict_policy")] },
-    { key: "marketability", label: "ob.shinrai.axis.availability", weight: 5, questions: [q("mkt_availability", "ob.shinrai.q.availability"), q("mkt_travel", "ob.shinrai.q.travel_readiness")] },
+  trustIndexAxes: [
+    { key: "documentation", label: "ob.trust_index.axis.methodology", weight: 20, questions: [q("doc_methodology", "ob.trust_index.q.audit_methodology"), q("doc_reporting", "ob.trust_index.q.report_quality")] },
+    { key: "facility", label: "ob.trust_index.axis.expertise", weight: 25, questions: [q("exp_gmp", "ob.trust_index.q.gmp_expertise"), q("exp_gacp", "ob.trust_index.q.gacp_expertise"), q("exp_cannabis", "ob.trust_index.q.cannabis_specific")] },
+    { key: "staff", label: "ob.trust_index.axis.credentials", weight: 25, questions: [q("cred_formal", "ob.trust_index.q.formal_qualification"), q("cred_cpd", "ob.trust_index.q.cpd_hours"), q("cred_language", "ob.trust_index.q.language_skills")] },
+    { key: "supply_chain", label: "ob.trust_index.axis.experience", weight: 15, questions: [q("exp_audits_yr", "ob.trust_index.q.audits_per_year"), q("exp_international", "ob.trust_index.q.international_exp")] },
+    { key: "quality", label: "ob.trust_index.axis.integrity", weight: 10, questions: [q("qa_independence", "ob.trust_index.q.independence"), q("qa_conflict", "ob.trust_index.q.conflict_policy")] },
+    { key: "marketability", label: "ob.trust_index.axis.availability", weight: 5, questions: [q("mkt_availability", "ob.trust_index.q.availability"), q("mkt_travel", "ob.trust_index.q.travel_readiness")] },
   ],
   profileFields: ["full_name", "nationality", "country", "address", "contact_email", "contact_phone", "website"],
   licensingFields: ["auditor_cert_number", "certifying_body", "cert_valid_until", "audit_standards"],
@@ -493,7 +493,7 @@ const inspectorConfig: RoleConfig = {
     { num: 2, label: "ob.step_authority", needsNDA: false },
     { num: 3, label: "ob.step_jurisdiction", needsNDA: true },
     { num: 4, label: "ob.step_capabilities", needsNDA: true },
-    { num: 5, label: "ob.step_shinrai", needsNDA: true },
+    { num: 5, label: "ob.step_trust_index", needsNDA: true },
   ],
   documents: [
     { type: "government_id", label: "ob.doc.gov_id", required: true, step: 1 },
@@ -502,13 +502,13 @@ const inspectorConfig: RoleConfig = {
     { type: "jurisdiction_proof", label: "ob.doc.jurisdiction_proof", required: true, step: 3 },
     { type: "inspection_manual", label: "ob.doc.inspection_manual", required: false, step: 4 },
   ],
-  shinraiAxes: [
-    { key: "documentation", label: "ob.shinrai.axis.methodology", weight: 20, questions: [q("doc_checklist", "ob.shinrai.q.inspection_checklist"), q("doc_reporting", "ob.shinrai.q.report_quality")] },
-    { key: "facility", label: "ob.shinrai.axis.authority", weight: 30, questions: [q("auth_mandate", "ob.shinrai.q.legal_mandate"), q("auth_scope", "ob.shinrai.q.inspection_scope"), q("auth_enforcement", "ob.shinrai.q.enforcement_power")] },
-    { key: "staff", label: "ob.shinrai.axis.credentials", weight: 20, questions: [q("cred_training", "ob.shinrai.q.inspector_training"), q("cred_specialization", "ob.shinrai.q.cannabis_specialization")] },
-    { key: "supply_chain", label: "ob.shinrai.axis.process", weight: 15, questions: [q("proc_frequency", "ob.shinrai.q.inspection_frequency"), q("proc_follow_up", "ob.shinrai.q.follow_up_process")] },
-    { key: "quality", label: "ob.shinrai.axis.integrity", weight: 10, questions: [q("qa_impartiality", "ob.shinrai.q.impartiality"), q("qa_confidentiality", "ob.shinrai.q.confidentiality")] },
-    { key: "marketability", label: "ob.shinrai.axis.coverage", weight: 5, questions: [q("mkt_jurisdictions", "ob.shinrai.q.jurisdictions_covered")] },
+  trustIndexAxes: [
+    { key: "documentation", label: "ob.trust_index.axis.methodology", weight: 20, questions: [q("doc_checklist", "ob.trust_index.q.inspection_checklist"), q("doc_reporting", "ob.trust_index.q.report_quality")] },
+    { key: "facility", label: "ob.trust_index.axis.authority", weight: 30, questions: [q("auth_mandate", "ob.trust_index.q.legal_mandate"), q("auth_scope", "ob.trust_index.q.inspection_scope"), q("auth_enforcement", "ob.trust_index.q.enforcement_power")] },
+    { key: "staff", label: "ob.trust_index.axis.credentials", weight: 20, questions: [q("cred_training", "ob.trust_index.q.inspector_training"), q("cred_specialization", "ob.trust_index.q.cannabis_specialization")] },
+    { key: "supply_chain", label: "ob.trust_index.axis.process", weight: 15, questions: [q("proc_frequency", "ob.trust_index.q.inspection_frequency"), q("proc_follow_up", "ob.trust_index.q.follow_up_process")] },
+    { key: "quality", label: "ob.trust_index.axis.integrity", weight: 10, questions: [q("qa_impartiality", "ob.trust_index.q.impartiality"), q("qa_confidentiality", "ob.trust_index.q.confidentiality")] },
+    { key: "marketability", label: "ob.trust_index.axis.coverage", weight: 5, questions: [q("mkt_jurisdictions", "ob.trust_index.q.jurisdictions_covered")] },
   ],
   profileFields: ["full_name", "nationality", "country", "authority_name", "contact_email", "contact_phone"],
   licensingFields: ["badge_number", "appointing_authority", "appointment_date", "jurisdiction_type"],
@@ -529,7 +529,7 @@ const shopConfig: RoleConfig = {
     { num: 2, label: "ob.step_licensing", needsNDA: false },
     { num: 3, label: "ob.step_store", needsNDA: true },
     { num: 4, label: "ob.step_compliance", needsNDA: true },
-    { num: 5, label: "ob.step_shinrai", needsNDA: true },
+    { num: 5, label: "ob.step_trust_index", needsNDA: true },
   ],
   documents: [
     { type: "company_registration", label: "ob.doc.company_reg", required: true, step: 1 },
@@ -541,13 +541,13 @@ const shopConfig: RoleConfig = {
     { type: "staff_training_records", label: "ob.doc.staff_training", required: false, step: 4 },
     { type: "insurance", label: "ob.doc.insurance", required: true, step: 4 },
   ],
-  shinraiAxes: [
-    { key: "documentation", label: "ob.shinrai.axis.documentation", weight: 15, questions: [q("doc_inventory", "ob.shinrai.q.inventory_system"), q("doc_records", "ob.shinrai.q.sales_records")] },
-    { key: "facility", label: "ob.shinrai.axis.store", weight: 25, questions: [q("fac_layout", "ob.shinrai.q.store_layout"), q("fac_storage", "ob.shinrai.q.storage_conditions"), q("fac_security", "ob.shinrai.q.security_system"), q("fac_access", "ob.shinrai.q.access_control")] },
-    { key: "staff", label: "ob.shinrai.axis.staff", weight: 20, questions: [q("staff_pharmacist", "ob.shinrai.q.pharmacist_present"), q("staff_training", "ob.shinrai.q.staff_trained"), q("staff_age_verify", "ob.shinrai.q.age_verification")] },
-    { key: "supply_chain", label: "ob.shinrai.axis.sourcing", weight: 15, questions: [q("sc_verified", "ob.shinrai.q.verified_suppliers"), q("sc_traceability", "ob.shinrai.q.product_traceability")] },
-    { key: "quality", label: "ob.shinrai.axis.quality", weight: 15, questions: [q("qa_recalls", "ob.shinrai.q.recall_procedure"), q("qa_complaints", "ob.shinrai.q.complaint_handling")] },
-    { key: "marketability", label: "ob.shinrai.axis.marketability", weight: 10, questions: [q("mkt_locations", "ob.shinrai.q.num_locations"), q("mkt_online", "ob.shinrai.q.online_presence")] },
+  trustIndexAxes: [
+    { key: "documentation", label: "ob.trust_index.axis.documentation", weight: 15, questions: [q("doc_inventory", "ob.trust_index.q.inventory_system"), q("doc_records", "ob.trust_index.q.sales_records")] },
+    { key: "facility", label: "ob.trust_index.axis.store", weight: 25, questions: [q("fac_layout", "ob.trust_index.q.store_layout"), q("fac_storage", "ob.trust_index.q.storage_conditions"), q("fac_security", "ob.trust_index.q.security_system"), q("fac_access", "ob.trust_index.q.access_control")] },
+    { key: "staff", label: "ob.trust_index.axis.staff", weight: 20, questions: [q("staff_pharmacist", "ob.trust_index.q.pharmacist_present"), q("staff_training", "ob.trust_index.q.staff_trained"), q("staff_age_verify", "ob.trust_index.q.age_verification")] },
+    { key: "supply_chain", label: "ob.trust_index.axis.sourcing", weight: 15, questions: [q("sc_verified", "ob.trust_index.q.verified_suppliers"), q("sc_traceability", "ob.trust_index.q.product_traceability")] },
+    { key: "quality", label: "ob.trust_index.axis.quality", weight: 15, questions: [q("qa_recalls", "ob.trust_index.q.recall_procedure"), q("qa_complaints", "ob.trust_index.q.complaint_handling")] },
+    { key: "marketability", label: "ob.trust_index.axis.marketability", weight: 10, questions: [q("mkt_locations", "ob.trust_index.q.num_locations"), q("mkt_online", "ob.trust_index.q.online_presence")] },
   ],
   profileFields: ["company_name", "legal_form", "tax_id", "country", "address", "contact_person", "website"],
   licensingFields: ["retail_license_number", "dispensary_permit_number", "issuing_authority", "license_valid_until"],
@@ -568,7 +568,7 @@ const pharmacyConfig: RoleConfig = {
     { num: 2, label: "ob.step_licensing", needsNDA: false },
     { num: 3, label: "ob.step_pharmacy_ops", needsNDA: true },
     { num: 4, label: "ob.step_compliance", needsNDA: true },
-    { num: 5, label: "ob.step_shinrai", needsNDA: true },
+    { num: 5, label: "ob.step_trust_index", needsNDA: true },
   ],
   documents: [
     { type: "company_registration", label: "ob.doc.company_reg", required: true, step: 1 },
@@ -581,13 +581,13 @@ const pharmacyConfig: RoleConfig = {
     { type: "quality_manual", label: "ob.doc.quality_manual", required: false, step: 4 },
     { type: "insurance", label: "ob.doc.insurance", required: true, step: 4 },
   ],
-  shinraiAxes: [
-    { key: "documentation", label: "ob.shinrai.axis.documentation", weight: 20, questions: [q("doc_prescription", "ob.shinrai.q.prescription_records"), q("doc_narcotics", "ob.shinrai.q.narcotics_ledger"), q("doc_sop", "ob.shinrai.q.sop_current")] },
-    { key: "facility", label: "ob.shinrai.axis.pharmacy", weight: 25, questions: [q("fac_safe", "ob.shinrai.q.narcotics_safe"), q("fac_storage", "ob.shinrai.q.storage_conditions"), q("fac_dispensing", "ob.shinrai.q.dispensing_area")] },
-    { key: "staff", label: "ob.shinrai.axis.staff", weight: 20, questions: [q("staff_pharmacist", "ob.shinrai.q.licensed_pharmacist"), q("staff_training", "ob.shinrai.q.cannabis_training"), q("staff_consultation", "ob.shinrai.q.patient_consultation")] },
-    { key: "supply_chain", label: "ob.shinrai.axis.supply_chain", weight: 15, questions: [q("sc_verified", "ob.shinrai.q.verified_suppliers"), q("sc_cold_chain", "ob.shinrai.q.cold_chain"), q("sc_returns", "ob.shinrai.q.returns_handling")] },
-    { key: "quality", label: "ob.shinrai.axis.quality", weight: 15, questions: [q("qa_adverse", "ob.shinrai.q.adverse_event_reporting"), q("qa_recalls", "ob.shinrai.q.recall_procedure")] },
-    { key: "marketability", label: "ob.shinrai.axis.marketability", weight: 5, questions: [q("mkt_patients", "ob.shinrai.q.patient_volume"), q("mkt_prescribers", "ob.shinrai.q.prescriber_network")] },
+  trustIndexAxes: [
+    { key: "documentation", label: "ob.trust_index.axis.documentation", weight: 20, questions: [q("doc_prescription", "ob.trust_index.q.prescription_records"), q("doc_narcotics", "ob.trust_index.q.narcotics_ledger"), q("doc_sop", "ob.trust_index.q.sop_current")] },
+    { key: "facility", label: "ob.trust_index.axis.pharmacy", weight: 25, questions: [q("fac_safe", "ob.trust_index.q.narcotics_safe"), q("fac_storage", "ob.trust_index.q.storage_conditions"), q("fac_dispensing", "ob.trust_index.q.dispensing_area")] },
+    { key: "staff", label: "ob.trust_index.axis.staff", weight: 20, questions: [q("staff_pharmacist", "ob.trust_index.q.licensed_pharmacist"), q("staff_training", "ob.trust_index.q.cannabis_training"), q("staff_consultation", "ob.trust_index.q.patient_consultation")] },
+    { key: "supply_chain", label: "ob.trust_index.axis.supply_chain", weight: 15, questions: [q("sc_verified", "ob.trust_index.q.verified_suppliers"), q("sc_cold_chain", "ob.trust_index.q.cold_chain"), q("sc_returns", "ob.trust_index.q.returns_handling")] },
+    { key: "quality", label: "ob.trust_index.axis.quality", weight: 15, questions: [q("qa_adverse", "ob.trust_index.q.adverse_event_reporting"), q("qa_recalls", "ob.trust_index.q.recall_procedure")] },
+    { key: "marketability", label: "ob.trust_index.axis.marketability", weight: 5, questions: [q("mkt_patients", "ob.trust_index.q.patient_volume"), q("mkt_prescribers", "ob.trust_index.q.prescriber_network")] },
   ],
   profileFields: ["company_name", "legal_form", "tax_id", "country", "address", "contact_person", "website"],
   licensingFields: ["pharmacy_license_number", "narcotics_permit_number", "lead_pharmacist_name", "pharmacist_registration", "license_valid_until"],
@@ -608,7 +608,7 @@ const traderConfig: RoleConfig = {
     { num: 2, label: "ob.step_licensing", needsNDA: false },
     { num: 3, label: "ob.step_trade_ops", needsNDA: true },
     { num: 4, label: "ob.step_compliance", needsNDA: true },
-    { num: 5, label: "ob.step_shinrai", needsNDA: true },
+    { num: 5, label: "ob.step_trust_index", needsNDA: true },
   ],
   documents: [
     { type: "company_registration", label: "ob.doc.company_reg", required: true, step: 1 },
@@ -619,13 +619,13 @@ const traderConfig: RoleConfig = {
     { type: "aml_policy", label: "ob.doc.aml_policy", required: true, step: 4 },
     { type: "insurance", label: "ob.doc.insurance", required: true, step: 4 },
   ],
-  shinraiAxes: [
-    { key: "documentation", label: "ob.shinrai.axis.documentation", weight: 20, questions: [q("doc_contracts", "ob.shinrai.q.contract_management"), q("doc_records", "ob.shinrai.q.trade_records"), q("doc_compliance", "ob.shinrai.q.compliance_docs")] },
-    { key: "facility", label: "ob.shinrai.axis.infrastructure", weight: 15, questions: [q("fac_office", "ob.shinrai.q.office_setup"), q("fac_systems", "ob.shinrai.q.trade_systems")] },
-    { key: "staff", label: "ob.shinrai.axis.staff", weight: 15, questions: [q("staff_compliance", "ob.shinrai.q.compliance_officer"), q("staff_experience", "ob.shinrai.q.trade_experience")] },
-    { key: "supply_chain", label: "ob.shinrai.axis.trade_ops", weight: 25, questions: [q("sc_sourcing", "ob.shinrai.q.sourcing_process"), q("sc_due_diligence", "ob.shinrai.q.due_diligence"), q("sc_payment", "ob.shinrai.q.payment_security"), q("sc_logistics", "ob.shinrai.q.logistics_management")] },
-    { key: "quality", label: "ob.shinrai.axis.quality", weight: 15, questions: [q("qa_product_verify", "ob.shinrai.q.product_verification"), q("qa_disputes", "ob.shinrai.q.dispute_resolution")] },
-    { key: "marketability", label: "ob.shinrai.axis.marketability", weight: 10, questions: [q("mkt_volume", "ob.shinrai.q.trade_volume"), q("mkt_markets", "ob.shinrai.q.markets_served"), q("mkt_reputation", "ob.shinrai.q.market_reputation")] },
+  trustIndexAxes: [
+    { key: "documentation", label: "ob.trust_index.axis.documentation", weight: 20, questions: [q("doc_contracts", "ob.trust_index.q.contract_management"), q("doc_records", "ob.trust_index.q.trade_records"), q("doc_compliance", "ob.trust_index.q.compliance_docs")] },
+    { key: "facility", label: "ob.trust_index.axis.infrastructure", weight: 15, questions: [q("fac_office", "ob.trust_index.q.office_setup"), q("fac_systems", "ob.trust_index.q.trade_systems")] },
+    { key: "staff", label: "ob.trust_index.axis.staff", weight: 15, questions: [q("staff_compliance", "ob.trust_index.q.compliance_officer"), q("staff_experience", "ob.trust_index.q.trade_experience")] },
+    { key: "supply_chain", label: "ob.trust_index.axis.trade_ops", weight: 25, questions: [q("sc_sourcing", "ob.trust_index.q.sourcing_process"), q("sc_due_diligence", "ob.trust_index.q.due_diligence"), q("sc_payment", "ob.trust_index.q.payment_security"), q("sc_logistics", "ob.trust_index.q.logistics_management")] },
+    { key: "quality", label: "ob.trust_index.axis.quality", weight: 15, questions: [q("qa_product_verify", "ob.trust_index.q.product_verification"), q("qa_disputes", "ob.trust_index.q.dispute_resolution")] },
+    { key: "marketability", label: "ob.trust_index.axis.marketability", weight: 10, questions: [q("mkt_volume", "ob.trust_index.q.trade_volume"), q("mkt_markets", "ob.trust_index.q.markets_served"), q("mkt_reputation", "ob.trust_index.q.market_reputation")] },
   ],
   profileFields: ["company_name", "legal_form", "tax_id", "country", "address", "contact_person", "website"],
   licensingFields: ["trade_license_number", "issuing_authority", "license_valid_until", "permitted_substances"],

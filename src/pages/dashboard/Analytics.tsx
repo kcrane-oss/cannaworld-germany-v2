@@ -62,7 +62,7 @@ export default function Analytics() {
             <p className="mt-4 max-w-2xl text-base leading-7 text-white/60">
               {t(
                 "analytics.heroDescription",
-                "Snapshot der deutschen Pipeline: Trade-Cases, Chargen, Supplier-Qualität, Inventar-Health. Tiefere Time-Series, Cohort-Analysen und ShinrAi-Scoring im AICert Analytics-Layer.",
+                "Snapshot der deutschen Pipeline: Trade-Cases, Chargen, Supplier-Qualität, Inventar-Health. Tiefere Time-Series, Cohort-Analysen und CannaWorld Trust Index-Scoring im AICert Analytics-Layer.",
               )}
             </p>
           </div>
