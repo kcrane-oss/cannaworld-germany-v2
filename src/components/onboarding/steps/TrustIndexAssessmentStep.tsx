@@ -4,8 +4,8 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ArrowLeft, Send, Shield, Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { OnboardingData } from "@/hooks/useRoleOnboarding";
-import type { RoleConfig, ShinraiAxis } from "../config/role-configs";
-import { ShinraiScoreRadar } from "../ShinraiScoreRadar";
+import type { RoleConfig, TrustIndexAxis } from "../config/role-configs";
+import { TrustIndexScoreRadar } from "../TrustIndexScoreRadar";
 
 interface Props {
   data: OnboardingData;
@@ -16,7 +16,7 @@ interface Props {
   saving: boolean;
 }
 
-function computeScore(axes: ShinraiAxis[], answers: Record<string, number>) {
+function computeScore(axes: TrustIndexAxis[], answers: Record<string, number>) {
   let totalWeighted = 0;
   let totalWeight = 0;
 
@@ -55,13 +55,13 @@ function computeScore(axes: ShinraiAxis[], answers: Record<string, number>) {
   return { axisScores, total, rating, tier };
 }
 
-export function ShinraiAssessmentStep({ data, roleConfig, onSave, onBack, onSubmit, saving }: Props) {
+export function TrustIndexAssessmentStep({ data, roleConfig, onSave, onBack, onSubmit, saving }: Props) {
   const { t } = useTranslation();
-  const axes = roleConfig.shinraiAxes;
+  const axes = roleConfig.trustIndexAxes;
 
   // Initialize answers from existing assessment
   const [answers, setAnswers] = useState<Record<string, number>>(() => {
-    const existing = data.shinrai_assessment || {};
+    const existing = data.trust_index_assessment || {};
     const init: Record<string, number> = {};
     Object.values(existing).forEach((axis: any) => {
       if (axis?.answers) {
@@ -97,9 +97,9 @@ export function ShinraiAssessmentStep({ data, roleConfig, onSave, onBack, onSubm
 
     const completed = data.completed_steps.includes(5) ? data.completed_steps : [...data.completed_steps, 5];
     await onSave({
-      shinrai_assessment: assessment,
-      shinrai_score: total,
-      shinrai_rating: rating,
+      trust_index_assessment: assessment,
+      trust_index_score: total,
+      trust_index_rating: rating,
       tier,
       completed_steps: completed,
     });
@@ -114,9 +114,9 @@ export function ShinraiAssessmentStep({ data, roleConfig, onSave, onBack, onSubm
           <Shield className="h-6 w-6 text-amber-500" />
         </div>
         <div>
-          <h2 className="text-xl font-semibold">{t("ob.shinrai_title", "ShinrAi Self-Assessment")}</h2>
+          <h2 className="text-xl font-semibold">{t("ob.trust_index_title", "CannaWorld Trust Index · READINESS Self-Assessment")}</h2>
           <p className="text-sm text-muted-foreground">
-            {t("ob.shinrai_desc", "Rate your current compliance readiness across all dimensions")}
+            {t("ob.trust_index_desc", "Rate your current compliance readiness across all dimensions")}
           </p>
         </div>
       </div>
@@ -131,7 +131,7 @@ export function ShinraiAssessmentStep({ data, roleConfig, onSave, onBack, onSubm
 
       {/* Live Radar */}
       {answeredCount > 0 && (
-        <ShinraiScoreRadar
+        <TrustIndexScoreRadar
           axes={axisScores.map((a) => ({ ...a, label: t(a.label, a.key) }))}
           totalScore={total}
           rating={rating}

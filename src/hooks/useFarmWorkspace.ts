@@ -57,7 +57,7 @@ export const useFarmWorkspace = () => {
       const postHarvest = (postHarvestRes.data || []) as any[];
       const audit = (auditRes.data || []) as any[];
 
-      const assessment = (onboarding?.shinrai_assessment || {}) as Record<string, any>;
+      const assessment = (onboarding?.trust_index_assessment || {}) as Record<string, any>;
       const axes: FarmAxisScore[] = AXES.map((axis) => {
         const raw = assessment[axis.key]?.score ?? assessment[axis.key] ?? (axis.key === 'quality' ? assessment.quality_testing?.score ?? assessment.quality_testing ?? 0 : 0);
         return { key: axis.key, label: axis.label, score: Number(raw || 0) };
@@ -81,7 +81,7 @@ export const useFarmWorkspace = () => {
 
       const timeline = buildFarmTimeline({
         completedSteps: onboarding?.completed_steps || [],
-        hasAssessment: !!onboarding?.shinrai_assessment,
+        hasAssessment: !!onboarding?.trust_index_assessment,
         facilityPlans: plans.length,
         documents,
       });

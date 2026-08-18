@@ -6,7 +6,7 @@ import { CompanyProfileStep } from "./steps/CompanyProfileStep";
 import { LicensingStep } from "./steps/LicensingStep";
 import { FacilityStep } from "./steps/FacilityStep";
 import { ServiceStep } from "./steps/ServiceStep";
-import { ShinraiAssessmentStep } from "./steps/ShinraiAssessmentStep";
+import { TrustIndexAssessmentStep } from "./steps/TrustIndexAssessmentStep";
 import { NDAGate } from "./NDAGate";
 import { Loader2, CheckCircle2, Clock, ShieldAlert, Sparkles, Wand2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -76,8 +76,8 @@ export function RoleOnboardingWizard({ role }: Props) {
         <h2 className="text-2xl font-bold">{t("ob.approved_title", "Verified & Approved")}</h2>
         <p className="text-muted-foreground">
           Tier: <strong className="text-foreground">{data.tier.toUpperCase()}</strong>
-          {data.shinrai_score !== null && (
-            <> · ShinrAi Score: <strong className="text-foreground">{data.shinrai_score}</strong></>
+          {data.trust_index_score !== null && (
+            <> · CannaWorld Trust Index: <strong className="text-foreground">{data.trust_index_score}</strong></>
           )}
         </p>
       </div>
@@ -217,7 +217,7 @@ export function RoleOnboardingWizard({ role }: Props) {
           />
         )}
 
-        {/* Streamlined 3-step flow (Farm etc.): Step 2 = Docs, Step 3 = ShinrAi */}
+        {/* Streamlined 3-step flow (Farm etc.): Step 2 = Docs, Step 3 = CannaWorld Trust Index */}
         {isStreamlined && step === 2 && (
           <LicensingStep
             data={data}
@@ -231,7 +231,7 @@ export function RoleOnboardingWizard({ role }: Props) {
         )}
 
         {isStreamlined && step === 3 && (
-          <ShinraiAssessmentStep
+          <TrustIndexAssessmentStep
             data={data}
             roleConfig={roleConfig}
             onSave={save}
@@ -291,7 +291,7 @@ export function RoleOnboardingWizard({ role }: Props) {
         )}
 
         {!isStreamlined && step === 5 && !showNDAGate && (
-          <ShinraiAssessmentStep
+          <TrustIndexAssessmentStep
             data={data}
             roleConfig={roleConfig}
             onSave={save}

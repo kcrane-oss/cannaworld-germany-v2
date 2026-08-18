@@ -33,7 +33,7 @@ export default function AuditPassport() {
             <p className="mt-4 max-w-2xl text-base leading-7 text-white/60">
               {t(
                 "auditPassport.heroDescription",
-                "Prüfbarer Vertrauenspass für Supplier, Facility, Batch und Dokumentenstand. Generiert und live berechnet im GMP-AICert AI-Audit-Stack (ShinrAi 6-Achsen-Score).",
+                "Nachweis-Snapshot für Supplier, Facility, Charge und Dokumentenstand. CannaWorld Trust Index fasst die vorhandenen Daten als READINESS-Hinweis zusammen; HUMAN REVIEW bleibt erforderlich.",
               )}
             </p>
           </div>

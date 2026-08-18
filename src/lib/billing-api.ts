@@ -89,7 +89,7 @@ export const PLANS = {
     features: [
       "Alles aus GMP",
       "Dedizierter Account Manager",
-      "ShinrAi Compliance Score",
+      "CannaWorld Trust Index · READINESS Signal",
       "Multi-Facility Management",
       "SLA & Priority Support",
       "Custom Integrationen (SAP, ERP)",

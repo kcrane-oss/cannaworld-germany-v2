@@ -208,7 +208,7 @@ export default function Overview() {
             className="rounded-2xl border border-[#22D3EE]/25 bg-[#22D3EE]/5 p-4 text-sm text-[#8DE9F5] transition hover:border-[#22D3EE]/55 hover:bg-[#22D3EE]/10"
           >
             <div className="font-bold">AICert öffnen →</div>
-            <div className="text-xs text-[#8DE9F5]/70">Audit Passport, ShinrAi Score, CAPA</div>
+            <div className="text-xs text-[#8DE9F5]/70">Audit Passport, CannaWorld Trust Index, CAPA</div>
           </a>
         </div>
       </section>

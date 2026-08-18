@@ -53,10 +53,10 @@ export interface OnboardingData {
   batch_tracking_method: string;
   traceability_level: string;
 
-  // Step 5: ShinrAi
-  shinrai_assessment: Record<string, any> | null;
-  shinrai_score: number | null;
-  shinrai_rating: string | null;
+  // Step 5: CannaWorld Trust Index
+  trust_index_assessment: Record<string, any> | null;
+  trust_index_score: number | null;
+  trust_index_rating: string | null;
 
   // NDA
   nda_accepted_at: string | null;
@@ -98,9 +98,9 @@ const EMPTY_ONBOARDING = (role: OnboardingRole): OnboardingData => ({
   product_catalog: [],
   batch_tracking_method: "",
   traceability_level: "",
-  shinrai_assessment: null,
-  shinrai_score: null,
-  shinrai_rating: null,
+  trust_index_assessment: null,
+  trust_index_score: null,
+  trust_index_rating: null,
   nda_accepted_at: null,
   role_data: {},
 });
@@ -189,9 +189,9 @@ export function useRoleOnboarding(role: OnboardingRole) {
           product_catalog: updated.product_catalog,
           batch_tracking_method: updated.batch_tracking_method,
           traceability_level: updated.traceability_level || null,
-          shinrai_assessment: updated.shinrai_assessment,
-          shinrai_score: updated.shinrai_score,
-          shinrai_rating: updated.shinrai_rating,
+          trust_index_assessment: updated.trust_index_assessment,
+          trust_index_score: updated.trust_index_score,
+          trust_index_rating: updated.trust_index_rating,
           role_data: updated.role_data,
         };
 

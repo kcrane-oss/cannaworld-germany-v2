@@ -66,8 +66,8 @@ export interface PreAuditReport {
 
 export function generatePreAuditReport(
   companyName: string,
-  shinraiScore: number,
-  shinraiRating: string,
+  trustIndexScore: number,
+  trustIndexRating: string,
   tier: string,
   assessment: Record<string, { answers: Record<string, number>; score: number }>,
 ): PreAuditReport {
@@ -232,7 +232,7 @@ export function generatePreAuditReport(
   }
 
   // Always add these structural gaps for score < 30
-  if (shinraiScore < 30) {
+  if (trustIndexScore < 30) {
     gaps.push(g(3, 'Structure: Organization',
       'No organizational chart with defined responsibilities',
       'GACP auditor needs to see who is responsible for what. Quality, Production, Storage must have named responsible persons.',
@@ -244,7 +244,7 @@ export function generatePreAuditReport(
     gaps.push(g(4, 'Optimization: Seed-to-Sale System',
       'No digital traceability system',
       'Paper-based is GACP-compliant but error-prone. Digital system reduces audit risk and speeds up EU import documentation.',
-      'Onboard to CannaWorld platform batch tracking module. Connects to ShinrAi for continuous compliance monitoring.',
+      'Onboard to CannaWorld batch tracking. CannaWorld Trust Index can summarize submitted evidence as a READINESS signal; responsible reviewers retain every compliance decision.',
       'low', '1-2 weeks',
       'GACP §10, EU-GMP Annex 11',
       false));
@@ -269,9 +269,9 @@ export function generatePreAuditReport(
   else if (blockingGaps >= 1) weeksEstimate = 8;
 
   // Executive summary
-  const summary = shinraiScore < 15
+  const summary = trustIndexScore < 15
     ? `${companyName} is at a very early stage of EU export readiness. ${criticalGaps} critical gaps identified that would result in immediate import rejection. The most urgent priorities are: establishing batch traceability, contracting an accredited lab, and implementing validated drying/storage processes. Without these fundamentals, no EU import permit application is possible. Estimated timeline to GACP audit-ready: ${weeksEstimate} weeks with dedicated effort.`
-    : shinraiScore < 30
+    : trustIndexScore < 30
     ? `${companyName} has basic operations but significant compliance gaps. ${criticalGaps} import-killing issues need immediate attention. Focus on documentation system and quality testing infrastructure.`
     : `${companyName} shows partial compliance readiness. ${blockingGaps} blocking gaps remain before EU export is viable.`;
 
@@ -284,8 +284,8 @@ export function generatePreAuditReport(
   return {
     company: companyName,
     date: new Date().toISOString().split('T')[0],
-    overall_score: shinraiScore,
-    rating: shinraiRating,
+    overall_score: trustIndexScore,
+    rating: trustIndexRating,
     tier,
     total_gaps: gaps.length,
     critical_gaps: criticalGaps,

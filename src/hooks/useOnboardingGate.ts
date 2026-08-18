@@ -15,7 +15,7 @@ export type GateStatus =
 export interface OnboardingGateResult {
   status: GateStatus;
   /** All onboarding entries for this user */
-  entries: { role: string; status: string; tier: string; shinrai_score: number | null }[];
+  entries: { role: string; status: string; tier: string; trust_index_score: number | null }[];
   /** Whether the user can access protected content */
   canAccess: boolean;
   /** Whether the user has at least one approved role */
@@ -51,7 +51,7 @@ export function useOnboardingGate(): OnboardingGateResult {
       setLoading(true);
       const { data: rows, error } = await (supabase as any)
         .from("exporter_onboarding")
-        .select("role, status, tier, shinrai_score")
+        .select("role, status, tier, trust_index_score")
         .eq("user_id", user.id);
 
       if (error) {
@@ -61,7 +61,7 @@ export function useOnboardingGate(): OnboardingGateResult {
         return;
       }
 
-      const all = (rows || []) as { role: string; status: string; tier: string; shinrai_score: number | null }[];
+      const all = (rows || []) as { role: string; status: string; tier: string; trust_index_score: number | null }[];
       setEntries(all);
 
       if (all.length === 0) {

@@ -39,7 +39,7 @@ const STROKE_COLORS: Record<string, string> = {
   insufficient: "rgba(239,68,68,0.8)",
 };
 
-export function ShinraiScoreRadar({ axes, totalScore, rating, size = 280, className }: Props) {
+export function TrustIndexScoreRadar({ axes, totalScore, rating, size = 280, className }: Props) {
   const cx = size / 2;
   const cy = size / 2;
   const maxR = size / 2 - 40;
@@ -80,7 +80,7 @@ export function ShinraiScoreRadar({ axes, totalScore, rating, size = 280, classN
           );
         })}
         <text x={cx} y={cy - 8} textAnchor="middle" className="fill-foreground text-2xl font-bold">{totalScore}</text>
-        <text x={cx} y={cy + 12} textAnchor="middle" className="fill-muted-foreground text-[10px]">ShinrAi</text>
+        <text x={cx} y={cy + 12} textAnchor="middle" className="fill-muted-foreground text-[10px]">CannaWorld Trust Index</text>
       </svg>
       <div className={cn("text-sm font-medium", ratingInfo.color)}>
         {ratingInfo.stars} {ratingInfo.label}
